@@ -795,68 +795,88 @@ ${harmatraContext}`;
   }
 
   async function triggerAskaaProtocol() {
-    const isId = getLang() === 'id';
-    const isAr = getLang() === 'ar';
-    
-    let currentPasscode = 'askaryy';
-    
-    // Attempt to load passcode from dynamic config if loaded
-    if (window.harmatraData && window.harmatraData.dbData && window.harmatraData.dbData.settings && window.harmatraData.dbData.settings.adminPasscode) {
-      currentPasscode = window.harmatraData.dbData.settings.adminPasscode;
-    } else if (window.HARMATRA_DATA && window.HARMATRA_DATA.settings && window.HARMATRA_DATA.settings.adminPasscode) {
-      currentPasscode = window.HARMATRA_DATA.settings.adminPasscode;
-    }
-
-    if (window.Swal) {
-      window.Swal.fire({
-        title: isAr ? 'أدخل رمز المرور للمشرف' : (isId ? 'Masukkan Passcode Admin' : 'Enter Admin Passcode'),
-        input: 'password',
-        inputPlaceholder: '••••••',
-        inputAttributes: {
-          autocapitalize: 'off',
-          autocorrect: 'off',
-          autocomplete: 'new-password'
-        },
-        background: '#0a0a0f',
-        color: '#ffffff',
-        confirmButtonColor: '#00ff88',
-        confirmButtonText: isAr ? 'دخول' : (isId ? 'Masuk' : 'Access'),
-        showCancelButton: true,
-        cancelButtonText: isAr ? 'إلغاء' : (isId ? 'Batal' : 'Cancel'),
-        customClass: {
-          popup: 'rounded-3xl border border-[#00ff88]/30 shadow-2xl backdrop-blur-md'
-        }
-      }).then((result) => {
-        if (result.isConfirmed) {
-          if (result.value === currentPasscode) {
-            startMatrixWelcomeEffect();
-          } else {
-            window.Swal.fire({
-              icon: 'error',
-              title: isAr ? 'تم رفض الوصول' : (isId ? 'Akses Ditolak' : 'Access Denied'),
-              text: isAr ? 'رمز المرور غير صحيح.' : (isId ? 'Passcode salah.' : 'Incorrect passcode.'),
-              background: '#0a0a0f',
-              color: '#ffffff',
-              confirmButtonColor: '#ef4444'
-            });
-          }
-        }
-      });
-    } else {
-      const p = prompt(isId ? "Masukkan Passcode Admin:" : "Enter Admin Passcode:");
-      if (p === currentPasscode) {
-        startMatrixWelcomeEffect();
-      } else if (p !== null) {
-        alert(isId ? "Passcode salah!" : "Incorrect passcode!");
+    runMatrixSequence(1, () => {
+      const isId = getLang() === 'id';
+      const isAr = getLang() === 'ar';
+      
+      let currentPasscode = 'askaryy';
+      if (window.harmatraData && window.harmatraData.dbData && window.harmatraData.dbData.settings && window.harmatraData.dbData.settings.adminPasscode) {
+        currentPasscode = window.harmatraData.dbData.settings.adminPasscode;
+      } else if (window.HARMATRA_DATA && window.HARMATRA_DATA.settings && window.HARMATRA_DATA.settings.adminPasscode) {
+        currentPasscode = window.HARMATRA_DATA.settings.adminPasscode;
       }
-    }
+
+      if (window.Swal) {
+        window.Swal.fire({
+          title: isAr ? 'أدخل رمز المرور للمشرف' : (isId ? 'Masukkan Passcode Admin' : 'Enter Admin Passcode'),
+          input: 'password',
+          inputPlaceholder: '••••••',
+          inputAttributes: {
+            autocapitalize: 'off',
+            autocorrect: 'off',
+            autocomplete: 'new-password'
+          },
+          background: '#0a0a0f',
+          color: '#ffffff',
+          confirmButtonColor: '#00ff88',
+          confirmButtonText: isAr ? 'دخول' : (isId ? 'Masuk' : 'Access'),
+          showCancelButton: true,
+          cancelButtonText: isAr ? 'إلغاء' : (isId ? 'Batal' : 'Cancel'),
+          customClass: {
+            container: 'swal-z-top',
+            popup: 'rounded-3xl border border-[#00ff88]/30 shadow-2xl backdrop-blur-md'
+          }
+        }).then((result) => {
+          if (result.isConfirmed) {
+            if (result.value === currentPasscode) {
+              runMatrixSequence(2, () => {
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+                window.location.href = isLocal ? 'backroom.html' : '/backroom';
+              });
+            } else {
+              cleanupMatrix();
+              window.Swal.fire({
+                icon: 'error',
+                title: isAr ? 'تم رفض الوصول' : (isId ? 'Akses Ditolak' : 'Access Denied'),
+                text: isAr ? 'رمز المرور غير صحيح.' : (isId ? 'Passcode salah.' : 'Incorrect passcode.'),
+                background: '#0a0a0f',
+                color: '#ffffff',
+                confirmButtonColor: '#ef4444'
+              });
+            }
+          } else {
+            cleanupMatrix();
+          }
+        });
+      } else {
+        const p = prompt(isId ? "Masukkan Passcode Admin:" : "Enter Admin Passcode:");
+        if (p === currentPasscode) {
+          runMatrixSequence(2, () => {
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+            window.location.href = isLocal ? 'backroom.html' : '/backroom';
+          });
+        } else {
+          cleanupMatrix();
+          if (p !== null) alert(isId ? "Passcode salah!" : "Incorrect passcode!");
+        }
+      }
+    });
   }
 
-  function startMatrixWelcomeEffect() {
+  function cleanupMatrix() {
+    document.getElementById('matrixGlitchStyles')?.remove();
+    document.getElementById('matrixCanvas')?.remove();
+    document.getElementById('matrixTextOverlay')?.remove();
+  }
+
+  function runMatrixSequence(phase, onComplete) {
+    cleanupMatrix();
+
     // 1. Glitch Styles
     const styleEl = document.createElement('style');
     styleEl.id = 'matrixGlitchStyles';
     styleEl.textContent = `
+      .swal-z-top { z-index: 10000000 !important; }
       @keyframes matrixGlitch {
         0% { transform: translate(0); text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); }
         20% { transform: translate(-2px, 2px); text-shadow: -2px 0 red, 2px 0 blue; }
@@ -865,61 +885,35 @@ ${harmatraContext}`;
         80% { transform: translate(2px, -2px); text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); }
         100% { transform: translate(0); text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); }
       }
-      .glitch-text {
-        animation: matrixGlitch 0.3s infinite;
-      }
+      .glitch-text { animation: matrixGlitch 0.3s infinite; }
       @keyframes matrixFlicker {
         0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; filter: brightness(1); }
         20%, 24%, 55% { opacity: 0.8; filter: brightness(1.2); }
       }
-      .flicker-overlay {
-        animation: matrixFlicker 2s infinite;
-      }
-      .terminal-prompt::after {
-        content: '_';
-        animation: blink 0.8s infinite;
-      }
-      @keyframes blink {
-        50% { opacity: 0; }
-      }
+      .flicker-overlay { animation: matrixFlicker 2s infinite; }
+      .terminal-prompt::after { content: '_'; animation: blink 0.8s infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
     `;
     document.head.appendChild(styleEl);
 
-    // 2. Setup Canvas Matrix Rain background
+    // 2. Setup Canvas
     const canvas = document.createElement('canvas');
     canvas.id = 'matrixCanvas';
     Object.assign(canvas.style, {
-      position: 'fixed',
-      top: '0',
-      left: '0',
-      width: '100vw',
-      height: '100vh',
-      zIndex: '999999',
-      backgroundColor: '#050505',
-      opacity: '0',
-      transition: 'opacity 1s ease',
-      pointerEvents: 'auto'
+      position: 'fixed', top: '0', left: '0', width: '100vw', height: '100vh',
+      zIndex: '999999', backgroundColor: '#050505', opacity: '0',
+      transition: 'opacity 1s ease', pointerEvents: 'auto'
     });
     document.body.appendChild(canvas);
 
     const overlay = document.createElement('div');
     overlay.id = 'matrixTextOverlay';
     Object.assign(overlay.style, {
-      position: 'fixed',
-      top: '0',
-      left: '0',
-      width: '100vw',
-      height: '100vh',
-      zIndex: '1000000',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      pointerEvents: 'none',
-      opacity: '0',
-      transition: 'opacity 1s ease',
-      backdropFilter: 'blur(10px)',
-      webkitBackdropFilter: 'blur(10px)'
+      position: 'fixed', top: '0', left: '0', width: '100vw', height: '100vh',
+      zIndex: '1000000', display: 'flex', flexDirection: 'column',
+      justifyContent: 'center', alignItems: 'center', pointerEvents: 'none',
+      opacity: '0', transition: 'opacity 1s ease',
+      backdropFilter: 'blur(10px)', webkitBackdropFilter: 'blur(10px)'
     });
 
     overlay.innerHTML = `
@@ -938,10 +932,7 @@ ${harmatraContext}`;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    const resizeHandler = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
+    const resizeHandler = () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; };
     window.addEventListener('resize', resizeHandler);
 
     const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもやゆよらりるれろわをんァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤユヨラリルレロワヲン'.split('');
@@ -949,29 +940,25 @@ ${harmatraContext}`;
     const columns = Math.floor(width / fontSize) + 1;
     const rainDrops = Array(columns).fill(1);
     
-    // Matrix Green rain colors
     const colors = ['#00ff88', '#00ee77', '#00dd66', '#ffffff'];
     const columnColors = Array(columns).fill(0).map(() => colors[Math.floor(Math.random() * colors.length)]);
 
+    let animationInterval;
     function drawMatrix() {
+      if (!document.body.contains(canvas)) {
+        clearInterval(animationInterval);
+        return;
+      }
       ctx.fillStyle = 'rgba(5, 5, 5, 0.08)';
       ctx.fillRect(0, 0, width, height);
-
       ctx.font = `${fontSize}px monospace`;
 
       for (let i = 0; i < rainDrops.length; i++) {
         const text = characters[Math.floor(Math.random() * characters.length)];
         const x = i * fontSize;
         const y = rainDrops[i] * fontSize;
-
-        if (Math.random() > 0.98) {
-          ctx.fillStyle = '#ffffff';
-        } else {
-          ctx.fillStyle = columnColors[i];
-        }
-
+        ctx.fillStyle = Math.random() > 0.98 ? '#ffffff' : columnColors[i];
         ctx.fillText(text, x, y);
-
         if (y > height && Math.random() > 0.975) {
           rainDrops[i] = 0;
           columnColors[i] = colors[Math.floor(Math.random() * colors.length)];
@@ -980,38 +967,41 @@ ${harmatraContext}`;
       }
     }
 
-    const animationInterval = setInterval(drawMatrix, 33);
+    animationInterval = setInterval(drawMatrix, 33);
 
     // 3. Boot Sequence Logs Typer
     const terminal = document.getElementById('bootTerminal');
-    const logs = [
+    const logs = phase === 1 ? [
       { text: "ACCESSING HARMATRA CORE...", style: "color: #00ff88;" },
-      { text: "INITIALIZING MATRIX SYSTEM...", style: "color: #00ff88;" },
-      { text: "VERIFYING ADMIN ACCESS...", style: "color: #00ff88;" },
+      { text: "SELAMAT DATANG MANG ATMIN", style: "color: #00ff88; font-size: 1.4rem; font-weight: bold; text-shadow: 0 0 15px rgba(0,255,136,0.8); margin-top: 0.5rem;" }
+    ] : [
+      { text: "VERIFYING DECRYPTION KEY...", style: "color: #00ff88;" },
       { text: "ACCESS GRANTED", style: "color: #00ffff; font-weight: bold; text-shadow: 0 0 10px rgba(0,255,255,0.8);" },
-      { text: "WELCOME MANG ATMIN", style: "color: #00ff88; font-size: 1.4rem; font-weight: bold; text-shadow: 0 0 15px rgba(0,255,136,0.8); margin-top: 0.5rem;" }
+      { text: "darcuupp", style: "color: #00ff88; font-size: 1.4rem; font-weight: bold; text-shadow: 0 0 15px rgba(0,255,136,0.8); margin-top: 0.5rem;" }
     ];
 
     let lineIndex = 0;
 
     function startNextLine() {
+      if (!document.body.contains(canvas)) return;
+
       if (lineIndex >= logs.length) {
-        // Redirection trigger
         setTimeout(() => {
-          canvas.style.transition = 'opacity 0.8s ease';
-          overlay.style.transition = 'opacity 0.8s ease';
-          canvas.style.opacity = '0';
-          overlay.style.opacity = '0';
-
-          setTimeout(() => {
-            clearInterval(animationInterval);
-            window.removeEventListener('resize', resizeHandler);
-            canvas.remove();
-            overlay.remove();
-
-            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
-            window.location.href = isLocal ? 'backroom.html' : '/backroom';
-          }, 800);
+          if (phase === 1) {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+              if (onComplete) onComplete();
+            }, 500);
+          } else {
+            canvas.style.transition = 'opacity 0.8s ease';
+            overlay.style.transition = 'opacity 0.8s ease';
+            canvas.style.opacity = '0';
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+              cleanupMatrix();
+              if (onComplete) onComplete();
+            }, 800);
+          }
         }, 1500);
         return;
       }
@@ -1020,8 +1010,8 @@ ${harmatraContext}`;
       const lineDiv = document.createElement('div');
       if (logInfo.style) lineDiv.style.cssText = logInfo.style;
       
-      // Special class on welcome text
-      if (lineIndex === 4) {
+      const isFinalText = (lineIndex === logs.length - 1);
+      if (isFinalText) {
         lineDiv.classList.add('glitch-text');
       } else {
         lineDiv.classList.add('terminal-prompt');
@@ -1032,17 +1022,16 @@ ${harmatraContext}`;
 
       let charIndex = 0;
       
-      // Sound effects trigger
-      if (lineIndex === 3) {
-        // Access granted sweep tone
+      if (phase === 2 && lineIndex === 1) {
         playSynthSound(400, 0.08, 'triangle', 0.05);
         setTimeout(() => playSynthSound(800, 0.2, 'sine', 0.05), 80);
-      } else if (lineIndex === 4) {
-        // Welcome tone
+      } else if (isFinalText) {
         playSynthSound(1000, 0.35, 'sine', 0.04);
       }
 
       function typeChar() {
+        if (!document.body.contains(canvas)) return;
+
         if (charIndex < logInfo.text.length) {
           lineDiv.textContent += logInfo.text.charAt(charIndex);
           charIndex++;
