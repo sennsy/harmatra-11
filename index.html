@@ -1,0 +1,3594 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>HARMATRA | Angkatan 11</title>
+
+  <meta name="description"
+    content="Website Resmi Angkatan 11 HARMATRA SMA 1. Wadah digital untuk melangkah bersama, merajut memori, dan menciptakan harmoni tak terlupakan.">
+
+
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="chat.css">
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+
+    tailwind.config = {
+
+      darkMode: 'class',
+
+      theme: {
+
+        extend: {
+
+          fontFamily: {
+
+            sans: ['Inter', 'sans-serif'],
+
+            display: ['Space Grotesk', 'sans-serif'],
+
+          },
+
+          colors: {
+
+            glow: '#e0e7ff',
+
+            accent: '#3b82f6',
+
+            darkbg: '#050505',
+
+          }
+
+        }
+
+      }
+
+    }
+
+  </script>
+
+  <style>
+    /* CSS Variables for Dual Theme */
+
+    :root {
+
+      --bg-color: #050505;
+
+      --text-main: #ffffff;
+
+      --text-muted: #a1a1aa;
+
+      --glass-bg: rgba(15, 15, 18, 0.85);
+
+      --glass-border: rgba(255, 255, 255, 0.06);
+
+      --orb-1: rgba(59, 130, 246, 0.08);
+
+      --orb-2: rgba(139, 92, 246, 0.08);
+
+      /* Dark Mode Cursor Ornament - Cinematic fantasy */
+      --ornament-border: rgba(139, 92, 246, 0.5);
+      --ornament-glow: rgba(59, 130, 246, 0.3);
+      --ornament-border-hover: rgba(168, 85, 247, 0.9);
+      --ornament-glow-hover: rgba(59, 130, 246, 0.6);
+    }
+
+    .theme-glow {
+
+      --bg-color: #f8fafc;
+
+      --text-main: #0f172a;
+
+      --text-muted: #64748b;
+
+      --glass-bg: rgba(255, 255, 255, 0.9);
+
+      --glass-border: rgba(0, 0, 0, 0.04);
+
+      --orb-1: rgba(59, 130, 246, 0.15);
+
+      --orb-2: rgba(168, 85, 247, 0.12);
+
+      /* Light Mode Cursor Ornament - Soft white / blue */
+      --ornament-border: rgba(96, 165, 250, 0.6);
+      --ornament-glow: rgba(96, 165, 250, 0.15);
+      --ornament-border-hover: rgba(59, 130, 246, 0.9);
+      --ornament-glow-hover: rgba(59, 130, 246, 0.4);
+    }
+
+    body {
+
+      background-color: var(--bg-color);
+
+      color: var(--text-main);
+
+      transition: background-color 0.8s ease, color 0.8s ease;
+
+      overflow-x: hidden;
+
+      -webkit-font-smoothing: antialiased;
+
+    }
+
+    /* Ambient Cinematic Orbs */
+
+    .ambient-orb {
+
+      position: absolute;
+
+      border-radius: 50%;
+
+      filter: blur(100px);
+
+      z-index: -1;
+
+      animation: float 20s infinite ease-in-out alternate;
+
+    }
+
+    .orb-1 {
+      background: var(--orb-1);
+      width: 60vw;
+      height: 60vw;
+      top: -10%;
+      left: -10%;
+    }
+
+    .orb-2 {
+      background: var(--orb-2);
+      width: 50vw;
+      height: 50vw;
+      bottom: 10%;
+      right: -10%;
+      animation-delay: -5s;
+    }
+
+    @keyframes float {
+
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(5%, 10%) scale(1.1);
+      }
+
+    }
+
+    /* Glassmorphism Utilities */
+
+    .glass {
+
+      background: var(--glass-bg);
+
+      backdrop-filter: blur(20px);
+
+      -webkit-backdrop-filter: blur(20px);
+
+      border: 1px solid var(--glass-border);
+
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+    }
+
+    .glass-card {
+
+      background: var(--glass-bg);
+
+      backdrop-filter: blur(16px);
+
+      border: 1px solid var(--glass-border);
+
+      border-radius: 24px;
+
+      box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.2);
+
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+    }
+
+    .glass-card:hover {
+
+      transform: translateY(-4px) scale(1.01);
+
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+
+      border-color: rgba(59, 130, 246, 0.25);
+
+    }
+
+
+
+    /* Cinematic Text Reveal */
+
+    .reveal-text {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
+
+
+
+    /* Hide scrollbar but keep functionality */
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(150, 150, 150, 0.3);
+      border-radius: 10px;
+    }
+
+    /* Quote Marquee */
+
+    .marquee-container {
+
+      display: flex;
+
+      overflow: hidden;
+
+      white-space: nowrap;
+
+      width: 100%;
+
+    }
+
+    .marquee-content {
+
+      display: flex;
+
+      animation: marquee 30s linear infinite;
+
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Music Visualizer */
+
+    .eq-bar {
+
+      width: 3px;
+      background: var(--text-main);
+      height: 10px;
+      border-radius: 2px;
+
+      animation: eq 1s ease-in-out infinite alternate;
+
+    }
+
+    .eq-bar:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .eq-bar:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes eq {
+      0% {
+        height: 4px;
+      }
+
+      100% {
+        height: 16px;
+      }
+    }
+
+    /* Masonry Grid */
+
+    .masonry {
+      columns: 1;
+      column-gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .masonry {
+        columns: 2;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .masonry {
+        columns: 3;
+      }
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Skeleton Loading */
+
+    .skeleton-box {
+
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.05) 75%);
+
+      background-size: 200% 100%;
+
+      animation: shimmer 1.5s infinite;
+
+    }
+
+    .theme-glow .skeleton-box {
+
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.05) 25%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.05) 75%);
+
+      background-size: 200% 100%;
+
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
+    /* Float slow animation for Spotlight card */
+    .animate-float-slow {
+      animation: float-slow 6s ease-in-out infinite;
+    }
+
+    @keyframes float-slow {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* Enhanced Member Card Animations */
+    #membersContainer .glass-card {
+      overflow: hidden;
+      position: relative;
+    }
+
+    #membersContainer .glass-card:hover {
+      box-shadow: 0 0 35px rgba(59, 130, 246, 0.3), 0 20px 40px rgba(0, 0, 0, 0.15);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+
+    #membersContainer .glass-card img {
+      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), filter 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    #membersContainer .glass-card:hover img {
+      transform: scale(1.08);
+    }
+
+    #membersContainer .glass-card .member-info {
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), background 0.5s ease;
+    }
+
+    #membersContainer .glass-card .member-name {
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    #membersContainer .glass-card .member-role {
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) 0.05s;
+    }
+
+    #membersContainer .glass-card .member-bio {
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1) 0.1s;
+    }
+
+    /* RTL Text Alignment (Layout stays LTR, only texts align RTL) */
+    .rtl-layout p,
+    .rtl-layout h1,
+    .rtl-layout h2,
+    .rtl-layout h3,
+    .rtl-layout h4,
+    .rtl-layout h5,
+    .rtl-layout h6,
+    .rtl-layout li,
+    .rtl-layout .chat-bubble,
+    .rtl-layout .chat-welcome-desc,
+    .rtl-layout .chat-welcome-title,
+    .rtl-layout #todayFact,
+    .rtl-layout #nextEventText,
+    .rtl-layout #spotlightName,
+    .rtl-layout #spotlightQuote,
+    .rtl-layout #lightboxName,
+    .rtl-layout #lightboxRole,
+    .rtl-layout #lightboxBio {
+      text-align: right;
+      direction: rtl;
+    }
+
+    /* Decorative Cursor Follow Ornament (NTE Inspired) */
+    @media (pointer: fine) {
+      .cursor-ornament {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 25px;
+        height: 25px;
+        border: 1px solid var(--ornament-border);
+        box-shadow: 0 0 15px var(--ornament-glow), inset 0 0 10px var(--ornament-glow);
+        transform: translate(-50%, -50%) rotate(45deg);
+        z-index: 999999;
+        pointer-events: none;
+        backdrop-filter: blur(1px);
+        -webkit-backdrop-filter: blur(1px);
+        transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), height 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+      }
+      
+      .cursor-ornament.hover {
+        width: 40px;
+        height: 40px;
+        border-color: var(--ornament-border-hover);
+        box-shadow: 0 0 25px var(--ornament-glow-hover), inset 0 0 15px var(--ornament-glow-hover);
+      }
+      
+      .cursor-ornament.click {
+        width: 20px;
+        height: 20px;
+        box-shadow: 0 0 35px var(--ornament-glow-hover), inset 0 0 20px var(--ornament-glow-hover);
+      }
+    }
+
+    @media (pointer: coarse) {
+      .cursor-ornament {
+        display: none !important;
+      }
+    }
+
+    /* ======================================================== */
+    /* PREMIUM CONTACT US STYLING (APPLE + GENSHIN INTEGRATION) */
+    /* ======================================================== */
+    
+    /* 1. Main Trigger Button in Footer */
+    .contact-trigger-btn {
+      position: relative;
+      background: rgba(20, 24, 33, 0.65);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1.5px solid rgba(234, 179, 8, 0.35); /* Elegant gold border by default to stand out */
+      color: #f59e0b; /* Amber/gold color text */
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), 
+                  0 0 15px rgba(234, 179, 8, 0.15),
+                  inset 0 0 10px rgba(234, 179, 8, 0.05);
+      animation: buttonBreath 3s infinite ease-in-out;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    /* Light Mode Button Overrides */
+    .theme-glow .contact-trigger-btn {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1.5px solid rgba(59, 130, 246, 0.4); /* Blue border for light mode */
+      color: #2563eb; /* Blue color text */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05), 
+                  0 0 15px rgba(59, 130, 246, 0.1),
+                  inset 0 0 10px rgba(59, 130, 246, 0.02);
+      animation: buttonBreathLight 3s infinite ease-in-out;
+    }
+    
+    @keyframes buttonBreath {
+      0%, 100% {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), 
+                    0 0 15px rgba(234, 179, 8, 0.15),
+                    inset 0 0 10px rgba(234, 179, 8, 0.05);
+        border-color: rgba(234, 179, 8, 0.35);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35), 
+                    0 0 25px rgba(234, 179, 8, 0.4),
+                    0 0 10px rgba(59, 130, 246, 0.2), /* dual accent pulse */
+                    inset 0 0 15px rgba(234, 179, 8, 0.1);
+        border-color: rgba(234, 179, 8, 0.7);
+        transform: scale(1.03); /* subtle heartbeat pulsing */
+      }
+    }
+    
+    @keyframes buttonBreathLight {
+      0%, 100% {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05), 
+                    0 0 15px rgba(59, 130, 246, 0.1),
+                    inset 0 0 10px rgba(59, 130, 246, 0.02);
+        border-color: rgba(59, 130, 246, 0.4);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 8px 30px rgba(59, 130, 246, 0.12), 
+                    0 0 25px rgba(59, 130, 246, 0.25),
+                    inset 0 0 15px rgba(59, 130, 246, 0.08);
+        border-color: rgba(59, 130, 246, 0.8);
+        transform: scale(1.03);
+      }
+    }
+    
+    /* Trigger Button Hover overrides animation */
+    .contact-trigger-btn:hover {
+      animation: none; /* stop breathing on hover to obey user cursor control */
+      transform: translateY(-3px) scale(1.06);
+      color: #ffffff;
+      border-color: #fbbf24;
+      background: rgba(20, 24, 33, 0.8);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4),
+                  0 0 30px rgba(234, 179, 8, 0.5),
+                  0 0 15px rgba(59, 130, 246, 0.3);
+    }
+    
+    .theme-glow .contact-trigger-btn:hover {
+      animation: none;
+      transform: translateY(-3px) scale(1.06);
+      color: #ffffff;
+      border-color: #2563eb;
+      background: #2563eb;
+      box-shadow: 0 15px 35px rgba(59, 130, 246, 0.25),
+                  0 0 30px rgba(59, 130, 246, 0.35);
+    }
+    
+    /* 2. Modal Base & Backdrop Blur */
+    #contactModal {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), backdrop-filter 0.5s ease;
+    }
+    
+    /* 3. Modal Glass Panel */
+    .contact-modal-glass {
+      position: relative;
+      background: rgba(15, 17, 23, 0.75);
+      backdrop-filter: blur(35px);
+      -webkit-backdrop-filter: blur(35px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 28px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6),
+                  0 0 40px rgba(59, 130, 246, 0.1), /* gentle blue ambiance */
+                  0 0 20px rgba(234, 179, 8, 0.05), /* gentle gold glow */
+                  inset 0 0 30px rgba(255, 255, 255, 0.02);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    
+    .theme-glow .contact-modal-glass {
+      background: rgba(255, 255, 255, 0.85);
+      border-color: rgba(59, 130, 246, 0.12);
+      box-shadow: 0 30px 70px rgba(15, 23, 42, 0.08),
+                  0 0 30px rgba(59, 130, 246, 0.05),
+                  inset 0 0 30px rgba(255, 255, 255, 0.6);
+    }
+    
+    /* Inner Decorative Frame (Genshin cinematic style) */
+    .contact-modal-inner-frame {
+      position: absolute;
+      inset: 12px;
+      border: 1px dashed rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      pointer-events: none;
+      transition: border-color 0.5s ease;
+      z-index: 1;
+    }
+    
+    .theme-glow .contact-modal-inner-frame {
+      border-color: rgba(59, 130, 246, 0.1);
+    }
+    
+    /* Corner Gold Bracket Ornaments (Genshin elegant details) */
+    .contact-modal-glass::before,
+    .contact-modal-glass::after,
+    .contact-modal-inner-frame::before,
+    .contact-modal-inner-frame::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid rgba(234, 179, 8, 0.35); /* Elegant gold highlight */
+      pointer-events: none;
+      z-index: 2;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    /* Top Left Outer Corner Bracket */
+    .contact-modal-glass::before {
+      top: 18px;
+      left: 18px;
+      border-right: none;
+      border-bottom: none;
+    }
+    
+    /* Bottom Right Outer Corner Bracket */
+    .contact-modal-glass::after {
+      bottom: 18px;
+      right: 18px;
+      border-left: none;
+      border-top: none;
+    }
+    
+    /* Top Right Inner Corner Bracket */
+    .contact-modal-inner-frame::before {
+      top: 6px;
+      right: 6px;
+      border-left: none;
+      border-bottom: none;
+    }
+    
+    /* Bottom Left Inner Corner Bracket */
+    .contact-modal-inner-frame::after {
+      bottom: 6px;
+      left: 6px;
+      border-right: none;
+      border-top: none;
+    }
+    
+    /* Hover Glow effect for the Modal Frame */
+    .contact-modal-glass:hover .contact-modal-inner-frame {
+      border-color: rgba(234, 179, 8, 0.15);
+    }
+    
+    .contact-modal-glass:hover::before,
+    .contact-modal-glass:hover::after,
+    .contact-modal-glass:hover .contact-modal-inner-frame::before,
+    .contact-modal-glass:hover .contact-modal-inner-frame::after {
+      border-color: rgba(234, 179, 8, 0.6);
+      box-shadow: 0 0 8px rgba(234, 179, 8, 0.2);
+    }
+    
+    /* 4. Frosted Glass Inputs */
+    .contact-input {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      border-radius: 14px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .theme-glow .contact-input {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.08);
+      color: #0f172a;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    
+    .contact-input::placeholder {
+      color: rgba(255, 255, 255, 0.25);
+    }
+    
+    .theme-glow .contact-input::placeholder {
+      color: rgba(0, 0, 0, 0.35);
+    }
+    
+    /* Input Focus State */
+    .contact-input:focus {
+      outline: none;
+      background: rgba(0, 0, 0, 0.45);
+      border-color: rgba(59, 130, 246, 0.4);
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.15),
+                  inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .theme-glow .contact-input:focus {
+      background: rgba(0, 0, 0, 0.01);
+      border-color: rgba(59, 130, 246, 0.4);
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.08),
+                  inset 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+    
+    /* Input Group Labels */
+    .contact-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      transition: color 0.4s ease;
+    }
+    
+    .theme-glow .contact-label {
+      color: rgba(15, 23, 42, 0.6);
+    }
+    
+    .group:focus-within .contact-label {
+      color: rgba(234, 179, 8, 0.9); /* Gold label focus highlighting */
+    }
+    
+    .theme-glow .group:focus-within .contact-label {
+      color: rgba(59, 130, 246, 0.9); /* Blue label focus highlighting for light mode */
+    }
+    
+    /* 5. Submit Button (Indigo-Purple-Blue elegant gradient + soft glow) */
+    .contact-submit-btn {
+      position: relative;
+      background: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
+      background-size: 200% auto;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2), 
+                  0 0 15px rgba(99, 102, 241, 0.1);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .contact-submit-btn:hover {
+      background-position: right center;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.35), 
+                  0 0 25px rgba(139, 92, 246, 0.25);
+    }
+    
+    .contact-submit-btn:active {
+      transform: translateY(-0.5px) scale(0.98);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    }
+    
+    /* Close Button Custom styling */
+    .contact-close-btn {
+      color: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .theme-glow .contact-close-btn {
+      color: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.06);
+    }
+    
+    .contact-close-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: rotate(90deg);
+    }
+    
+    .theme-glow .contact-close-btn:hover {
+      color: #0f172a;
+      background: rgba(0, 0, 0, 0.06);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    /* Inside Modal Opening Animations (Genshin Cinematic Entrance) */
+    #contactModal:not(.hidden) #contactModalContent {
+      animation: modalEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    #contactModal:not(.hidden) .contact-modal-inner-frame {
+      animation: frameEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    #contactModal:not(.hidden) .contact-modal-glass::before,
+    #contactModal:not(.hidden) .contact-modal-glass::after,
+    #contactModal:not(.hidden) .contact-modal-inner-frame::before,
+    #contactModal:not(.hidden) .contact-modal-inner-frame::after {
+      animation: bracketEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    #contactModal:not(.hidden) .contact-modal-glass h3 {
+      animation: elementEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+      opacity: 0;
+    }
+    
+    #contactModal:not(.hidden) .contact-modal-glass p {
+      animation: elementEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+      opacity: 0;
+    }
+    
+    #contactModal:not(.hidden) .contact-modal-glass .group {
+      animation: elementEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+    }
+    
+    #contactModal:not(.hidden) .contact-modal-glass .group:nth-of-type(1) {
+      animation-delay: 0.25s;
+    }
+    
+    #contactModal:not(.hidden) .contact-modal-glass .group:nth-of-type(2) {
+      animation-delay: 0.35s;
+    }
+    
+    #contactModal:not(.hidden) .contact-submit-btn {
+      animation: elementEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+      opacity: 0;
+    }
+    
+    @keyframes modalEntrance {
+      0% {
+        transform: scale(0.9) translateY(15px);
+      }
+      100% {
+        transform: scale(1) translateY(0);
+      }
+    }
+    
+    @keyframes frameEntrance {
+      0% {
+        inset: 25px;
+        opacity: 0;
+      }
+      100% {
+        inset: 12px;
+        opacity: 1;
+      }
+    }
+    
+    @keyframes bracketEntrance {
+      0% {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    @keyframes elementEntrance {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  <link rel="icon" type="image/png" href="./logo utama.png">
+
+</head>
+
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+
+  <!-- Decorative Cursor Follow Ornament -->
+  <div class="cursor-ornament" id="cursorOutline"></div>
+
+  <div class="fixed inset-0 pointer-events-none overflow-hidden">
+
+    <div class="ambient-orb orb-1"></div>
+
+    <div class="ambient-orb orb-2"></div>
+
+  </div>
+
+  <div
+    class="fixed bottom-6 left-6 z-50 glass rounded-full px-4 py-2 flex items-center gap-3 cursor-pointer hover:scale-105 transition-transform border border-white/10"
+    id="musicToggleBtn" onclick="toggleMusic()">
+
+    <div class="flex items-end gap-1 h-4 w-4" id="eqContainer" style="display:none;">
+
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+
+    </div>
+
+    <i class="fa-solid fa-play text-sm" id="playIcon"></i>
+
+    <span class="text-xs font-medium tracking-widest uppercase opacity-80" data-i18n="music">SUASANA SEKOLAH</span>
+
+    <audio id="bgm" loop>
+
+      <source src="./freesound_community-classroom-connected-18678.mp3" type="audio/mpeg">
+
+    </audio>
+
+  </div>
+
+  <nav class="fixed w-full top-0 z-50 transition-all duration-300 py-4" id="navbar" dir="ltr">
+
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+
+
+
+      <a href="#home"
+        class="font-display font-bold text-xl tracking-widest flex items-center gap-3 hover:opacity-80 transition-opacity">
+
+        <img src="./logo utama.png" alt="Logo Harmatra"
+          class="w-10 h-10 object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
+
+        HARMATRA
+
+      </a>
+
+
+
+      <div class="hidden md:flex gap-8 text-sm font-medium opacity-80 tracking-wide">
+
+        <a href="#quoteWall" class="hover:text-blue-400 transition-colors" data-i18n="nav_about">Cerita</a>
+
+        <a href="#members" class="hover:text-blue-400 transition-colors" data-i18n="nav_members">Anggota</a>
+
+        <a href="#timeline" class="hover:text-blue-400 transition-colors" data-i18n="nav_timeline">Perjalanan</a>
+
+        <a href="#gallery" class="hover:text-blue-400 transition-colors" data-i18n="nav_gallery">Galeri</a>
+
+      </div>
+
+      <div class="flex items-center gap-4">
+
+        <button onclick="toggleLang()"
+          class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/10 transition-colors font-display text-sm">
+
+          <span id="langText">ID</span>
+
+        </button>
+
+        <button onclick="toggleTheme()"
+          class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-white/10 transition-colors">
+
+          <i class="fa-solid fa-moon" id="themeIcon"></i>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+  <div id="mainLoader" class="min-h-screen flex items-center justify-center pt-20">
+
+    <div class="text-center">
+
+      <div class="w-16 h-16 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin mx-auto mb-6"></div>
+
+      <p class="font-display tracking-widest animate-pulse opacity-70">SYNCING DATA...</p>
+
+    </div>
+
+  </div>
+
+  <main id="mainApp" class="hidden">
+
+
+
+    <section class="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden" id="home">
+
+
+
+      <div class="absolute top-24 left-6 md:left-12 glass-card p-4 rounded-2xl z-10 max-w-xs animate-float-slow">
+
+        <div class="text-xs font-bold text-blue-400 mb-1 tracking-wider uppercase" id="realtimeDate">...</div>
+
+        <p class="text-sm opacity-90 mb-2 font-medium" id="todayFact">Membangun harmoni angkatan 11.</p>
+
+        <div class="bg-white/10 rounded-lg p-2 flex items-center gap-3">
+
+          <i class="fa-regular fa-calendar-check text-blue-400"></i>
+
+          <div>
+
+            <div class="text-[10px] uppercase tracking-wider opacity-70">Next Event</div>
+
+            <div class="text-xs font-bold" id="nextEventText">Class Meeting</div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div
+        class="absolute bottom-24 right-6 md:right-12 glass-card p-4 rounded-2xl z-10 max-w-xs flex items-center gap-4 group cursor-pointer"
+        onclick="scrollToMembers()">
+
+        <img src="https://via.placeholder.com/150" id="spotlightImg"
+          class="w-12 h-12 rounded-full object-cover border border-white/20 group-hover:scale-110 transition-transform">
+
+        <div>
+
+          <div class="text-[10px] uppercase tracking-wider opacity-70 text-blue-400" data-i18n="spotlight">Spotlight
+          </div>
+
+          <div class="text-sm font-bold" id="spotlightName">Harmatra</div>
+
+          <div class="text-xs opacity-70 truncate w-32" id="spotlightQuote">Loading...</div>
+
+        </div>
+
+      </div>
+
+      <div class="text-center z-10 max-w-4xl mx-auto gs-reveal">
+
+        <div
+          class="inline-block py-1 px-3 rounded-full glass text-xs font-medium tracking-widest mb-6 opacity-0 translate-y-4"
+          id="heroBadge">
+
+          GEN 11 • SMA 1
+
+        </div>
+
+        <h1
+          class="font-display text-6xl md:text-8xl font-bold tracking-tighter mb-6 leading-tight opacity-0 translate-y-8"
+          id="heroTitle">
+
+          Angkatan 11<br><span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">HARMATRA</span>
+
+        </h1>
+
+        <p class="text-lg md:text-xl opacity-0 translate-y-4 font-light max-w-2xl mx-auto" id="heroSub"
+          data-i18n="hero_sub">
+
+          Rumah digital angkatan kami. Melangkah bersama, merajut memori, dan menciptakan harmoni tak terlupakan.
+
+        </p>
+
+      </div>
+
+      <div
+        class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-50 animate-bounce">
+
+        <span class="text-[10px] tracking-widest uppercase mb-2">Scroll</span>
+
+        <div class="w-[1px] h-12 bg-gradient-to-b from-current to-transparent"></div>
+
+      </div>
+
+    </section>
+
+    <section class="py-24 px-6 max-w-7xl mx-auto relative z-10">
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+        <div class="glass-card p-8 text-center gs-up">
+
+          <div class="font-display text-4xl font-bold text-blue-400 mb-2 counter" data-target="29" id="statMembers">0
+          </div>
+
+          <div class="text-xs uppercase tracking-widest opacity-70" data-i18n="stat_members">Anggota</div>
+
+        </div>
+
+        <div class="glass-card p-8 text-center gs-up" style="transition-delay: 0.1s">
+
+          <div class="font-display text-4xl font-bold text-purple-400 mb-2 counter" data-target="10" id="statClass">0
+          </div>
+
+          <div class="text-xs uppercase tracking-widest opacity-70" data-i18n="stat_class">Kelas</div>
+
+        </div>
+
+        <div class="glass-card p-8 text-center gs-up" style="transition-delay: 0.2s">
+
+          <div class="font-display text-4xl font-bold text-blue-400 mb-2 counter" data-target="0" id="statEvent">0</div>
+
+          <div class="text-xs uppercase tracking-widest opacity-70" data-i18n="stat_events">Kegiatan</div>
+
+        </div>
+
+        <div class="glass-card p-8 text-center gs-up" style="transition-delay: 0.3s">
+
+          <div class="font-display text-4xl font-bold text-purple-400 mb-2">~</div>
+
+          <div class="text-xs uppercase tracking-widest opacity-70" data-i18n="stat_memories">Memori</div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="py-16 overflow-hidden border-y border-white/5 bg-black/20" id="quoteWall">
+
+      <div class="marquee-container">
+
+        <div class="marquee-content gap-12 px-6" id="quoteContainer"></div>
+
+        <div class="marquee-content gap-12 px-6" id="quoteContainer2" aria-hidden="true"></div>
+
+      </div>
+
+    </section>
+
+    <!-- Asal Usul Nama HARMATRA -->
+    <section class="py-24 px-6 max-w-5xl mx-auto relative z-10" id="meaning">
+      <div class="text-center mb-12 gs-up">
+        <h2 class="font-display text-4xl md:text-5xl font-bold mb-3" data-i18n="meaning_title">Asal Usul Nama HARMATRA
+        </h2>
+        <p class="opacity-70 text-base md:text-lg" data-i18n="meaning_subtitle">Sebuah nama yang dibangun dari makna,
+          kebersamaan, dan tujuan.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <!-- Card 1 -->
+        <div
+          class="glass-card p-6 rounded-2xl group hover:border-blue-500/30 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all duration-500 gs-stagger">
+          <h3
+            class="font-display text-3xl font-bold text-blue-400 mb-1 group-hover:scale-105 transition-transform duration-300 transform origin-left">
+            HAR</h3>
+          <div class="text-lg font-bold mb-2 tracking-wide" data-i18n="meaning_card1_title">Harmony</div>
+          <p class="text-sm opacity-70 leading-relaxed" data-i18n="meaning_card1_desc">Simbol harmoni dalam kebersamaan.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div
+          class="glass-card p-6 rounded-2xl group hover:border-purple-500/30 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)] transition-all duration-500 gs-stagger"
+          style="transition-delay: 0.1s;">
+          <h3
+            class="font-display text-3xl font-bold text-purple-400 mb-1 group-hover:scale-105 transition-transform duration-300 transform origin-left">
+            MA</h3>
+          <div class="text-lg font-bold mb-2 tracking-wide" data-i18n="meaning_card2_title">معًا (Ma’an)</div>
+          <p class="text-sm opacity-70 leading-relaxed" data-i18n="meaning_card2_desc">Artinya bersama-sama.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div
+          class="glass-card p-6 rounded-2xl group hover:border-emerald-500/30 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition-all duration-500 gs-stagger"
+          style="transition-delay: 0.2s;">
+          <h3
+            class="font-display text-3xl font-bold text-emerald-400 mb-1 group-hover:scale-105 transition-transform duration-300 transform origin-left">
+            TRA</h3>
+          <div class="text-lg font-bold mb-2 tracking-wide" data-i18n="meaning_card3_title">Tragen</div>
+          <p class="text-sm opacity-70 leading-relaxed" data-i18n="meaning_card3_desc">Artinya membawa harapan menuju
+            masa depan.</p>
+        </div>
+      </div>
+
+      <div class="max-w-2xl mx-auto text-center gs-up">
+        <p class="text-sm opacity-70 mb-3" data-i18n="meaning_closing_1">HARMATRA berarti:</p>
+        <h4
+          class="font-display text-xl md:text-2xl font-bold mb-4 tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-emerald-400">
+          Harmony — Ma’an — Tragen</h4>
+        <p class="text-base opacity-90 font-medium italic leading-relaxed" data-i18n="meaning_closing_2">Berjalan dalam
+          harmoni, bersama-sama membawa harapan menuju masa depan.</p>
+      </div>
+    </section>
+
+    <section class="py-40 px-6 max-w-5xl mx-auto relative" id="timeline">
+
+      <div class="text-center mb-20 gs-up">
+
+        <h2 class="font-display text-4xl md:text-5xl font-bold mb-4" data-i18n="title_timeline">Jejak Langkah</h2>
+
+        <p class="opacity-70" data-i18n="sub_timeline">Cerita yang kita ukir bersama sejak hari pertama.</p>
+
+      </div>
+
+      <div
+        class="absolute left-6 md:left-1/2 top-60 bottom-0 w-[2px] bg-gradient-to-b from-blue-500/50 via-purple-500/50 to-transparent transform md:-translate-x-1/2 rounded-full">
+      </div>
+
+      <div class="space-y-24" id="timelineContainer"></div>
+
+    </section>
+
+    <section class="py-40 px-6 max-w-7xl mx-auto" id="members">
+
+      <div class="flex flex-col md:flex-row justify-between items-end mb-16 gs-up">
+
+        <div>
+
+          <h2 class="font-display text-4xl md:text-5xl font-bold mb-4" data-i18n="title_members">Keluarga HARMATRA</h2>
+
+          <p class="opacity-70 max-w-md" data-i18n="sub_members">Kenali wajah-wajah di balik angkatan 11.</p>
+
+        </div>
+
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6" id="membersContainer"></div>
+
+    </section>
+
+    <section class="py-40 px-6 max-w-7xl mx-auto" id="gallery">
+
+      <div class="text-center mb-16 gs-up">
+
+        <h2 class="font-display text-4xl md:text-5xl font-bold mb-4" data-i18n="title_gallery">Galeri Memori</h2>
+
+        <p class="opacity-70" data-i18n="sub_gallery">Kumpulan momen yang tertangkap lensa.</p>
+
+      </div>
+
+      <div class="masonry" id="galleryContainer"></div>
+
+    </section>
+
+    <footer class="border-t border-white/10 pt-16 pb-8 px-6 mt-20 relative overflow-hidden">
+
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+
+        <div class="font-display font-bold text-2xl tracking-widest">HARMATRA</div>
+
+        <div class="flex gap-6">
+
+          <a href="https://instagram.com/harmatra_id" target="_blank"
+            class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-blue-500 hover:text-white transition-colors">
+
+            <i class="fa-brands fa-instagram text-xl"></i>
+
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- Hubungi Kami Button -->
+      <div class="flex justify-center mt-12 mb-4">
+        <button onclick="openContactModal()"
+          class="contact-trigger-btn px-8 py-3.5 rounded-xl text-sm font-semibold tracking-widest uppercase flex items-center gap-3"
+          data-i18n="contact_btn">
+          <i class="fa-regular fa-envelope text-base opacity-90"></i> <span data-i18n="contact_btn">Hubungi Kami</span>
+        </button>
+      </div>
+
+      <div class="text-center mt-8 text-xs opacity-50 uppercase tracking-widest">
+
+        © 2026 HARMATRA - Angkatan 11 SMA .
+
+      </div>
+
+      <footer class="text-center mt-4 mb-4">
+
+        <small class="text-muted opacity-30" data-i18n="footer_note">
+
+          official website of HARMATRA Class 11 - SMA 1. Crafted with ❤️ by the students, for the students. All data is
+          fictional and for demonstration purposes only.
+
+        </small>
+
+      </footer>
+
+    </footer>
+
+  </main>
+
+  <div id="lightbox"
+    class="fixed inset-0 z-[100] bg-black/95 hidden flex flex-col items-center justify-center opacity-0 transition-opacity duration-300"
+    onclick="closeLightboxOnBg(event)">
+
+    <button onclick="closeLightbox()"
+      class="absolute top-6 right-6 text-white hover:text-blue-400 text-5xl z-10">×</button>
+
+    <!-- Navigation Left -->
+    <button onclick="navigateLightbox(-1, event)"
+      class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full glass text-[var(--text-main)] hover:scale-110 hover:text-blue-500 transition-all flex items-center justify-center z-10 shadow-lg pointer-events-auto">
+      <i class="fa-solid fa-chevron-left text-lg md:text-2xl"></i>
+    </button>
+
+    <!-- Content Wrapper -->
+    <div
+      class="relative max-w-[80vw] md:max-w-[70vw] max-h-[85vh] flex flex-col items-center justify-center pointer-events-none">
+      <img id="lightboxImg" src=""
+        class="max-w-full max-h-[65vh] object-contain rounded-lg shadow-2xl transform transition-all duration-300 ease-out pointer-events-auto">
+
+      <!-- Caption Panel -->
+      <div id="lightboxCaption"
+        class="mt-4 glass p-5 rounded-2xl text-center max-w-xl hidden transition-all duration-300 transform translate-y-4 opacity-0 pointer-events-auto shadow-xl">
+        <h4 id="lightboxName" class="font-display text-2xl font-bold text-[var(--text-main)] mb-1"></h4>
+        <div id="lightboxFullName" class="text-sm md:text-base font-medium opacity-80 mb-2 hidden"></div>
+        <div id="lightboxRole" class="text-xs text-blue-500 font-semibold tracking-widest uppercase mb-2"></div>
+        <p id="lightboxBio" class="text-sm text-[var(--text-muted)] italic leading-relaxed"></p>
+      </div>
+    </div>
+
+    <!-- Instagram Link (Bottom Right) -->
+    <a id="lightboxIg" href="#" target="_blank"
+      class="absolute bottom-6 right-6 w-12 h-12 rounded-full glass flex items-center justify-center hover:bg-blue-500 hover:text-white transition-all shadow-lg hidden z-10 pointer-events-auto">
+      <i class="fa-brands fa-instagram text-2xl"></i>
+    </a>
+
+    <!-- Navigation Right -->
+    <button onclick="navigateLightbox(1, event)"
+      class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full glass text-[var(--text-main)] hover:scale-110 hover:text-blue-500 transition-all flex items-center justify-center z-10 shadow-lg pointer-events-auto">
+      <i class="fa-solid fa-chevron-right text-lg md:text-2xl"></i>
+    </button>
+
+  </div>
+
+  <div id="chatWidget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3" data-lenis-prevent>
+    <!-- Chat Window -->
+    <div id="chatWindow" class="chat-window-premium hidden">
+      <!-- Chat Header -->
+      <div class="chat-header-premium">
+        <div class="chat-header-info">
+          <div class="chat-avatar-container">
+            <img src="matra ai.png" alt="Matra AI Avatar" class="chat-avatar-img">
+            <span class="chat-avatar-status"></span>
+          </div>
+          <div>
+            <h4 class="chat-header-title">Matra AI</h4>
+            <div class="chat-header-subtitle">
+              <span class="chat-status-dot"></span>
+              <span id="chatStatusText">Online</span>
+            </div>
+          </div>
+        </div>
+        <div class="chat-header-actions">
+          <button id="clearChatBtn" title="Clear conversation" class="chat-header-btn">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+          <button id="closeChatBtn" title="Close chat" class="chat-header-btn">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Chat Body -->
+      <div id="chatBody" class="chat-body-premium">
+        <!-- Welcoming block -->
+        <div class="chat-welcome-container">
+          <div class="chat-welcome-logo">
+            <img src="./logo utama.png" alt="Harmatra Logo" class="w-10 h-10 object-contain">
+          </div>
+          <h5 class="chat-welcome-title">Halo, saya Matra AI</h5>
+          <p class="chat-welcome-desc">
+            Asisten cerdas Angkatan 11 HARMATRA. Tanyakan kepada saya tentang info kelas, data anggota, galeri memori,
+            atau perjalanan kami.
+          </p>
+
+          <div class="chat-suggestions-grid">
+            <button class="chat-suggestion-chip" data-prompt="Siapa saja anggota kelas?">
+              <i class="fa-solid fa-users text-blue-400"></i>
+              <span>Keluarga Harmatra</span>
+            </button>
+            <button class="chat-suggestion-chip" data-prompt="Tampilkan galeri memori kelas">
+              <i class="fa-solid fa-images text-purple-400"></i>
+              <span>Galeri Memori</span>
+            </button>
+            <button class="chat-suggestion-chip" data-prompt="Apa saja agenda perjalanan kita?">
+              <i class="fa-solid fa-route text-emerald-400"></i>
+              <span>Jejak Langkah</span>
+            </button>
+            <button class="chat-suggestion-chip" data-prompt="Siapa ketua kelas Harmatra?">
+              <i class="fa-solid fa-crown text-amber-400"></i>
+              <span>Ketua Kelas</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Chat messages container will append here -->
+        <div id="chatMessages" class="chat-messages-container" style="display: none;"></div>
+      </div>
+
+      <!-- Chat Input Area -->
+      <div class="chat-input-area-premium">
+        <div class="chat-input-container-row flex items-end gap-2 relative">
+          <div class="chat-input-wrapper flex-1">
+            <textarea id="chatInput" placeholder="Tanya Matra AI..." rows="1" maxlength="1000"
+              style="padding-right: 12px;"></textarea>
+          </div>
+          <button id="sendChatBtn" disabled class="chat-send-btn flex-shrink-0" title="Kirim Pesan"
+            style="position: static; width: 44px; height: 44px; margin-bottom: 2px;">
+            <i class="fa-solid fa-arrow-up"></i>
+          </button>
+        </div>
+        <div class="chat-footer-note">Press Enter to send, Shift + Enter for new line</div>
+      </div>
+    </div>
+
+    <!-- Toggle Button -->
+    <button id="chatToggleButton" class="chat-toggle-btn-premium" title="Tanya Matra AI"
+      style="width: 60px; height: 60px; padding: 0; border-radius: 50%; justify-content: center; align-items: center; display: flex;">
+      <div class="relative flex items-center justify-center w-full h-full">
+        <!-- Avatar & Dot Indicator -->
+        <div id="chatToggleAvatarWrapper"
+          class="relative w-full h-full flex items-center justify-center transition-all duration-300">
+          <img src="matra ai.png" class="w-full h-full object-cover rounded-full" id="chatToggleAvatar">
+          <span
+            class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-blue-500 rounded-full border-2 border-[var(--chat-bg)] shadow-[0_0_10px_rgba(59,130,246,0.8)] animate-pulse"
+            id="chatToggleDot"></span>
+        </div>
+        <!-- Close State: Cross icon -->
+        <i
+          class="fa-solid fa-xmark text-2xl chat-toggle-close-icon hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></i>
+      </div>
+    </button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+
+  <script>
+
+      (function () {
+
+        'use strict';
+
+        // ==========================================
+
+        // ⬇️ EDIT DATA KAMU SECARA MANUAL DI SINI ⬇️
+
+        // ==========================================
+
+        const localData = {
+
+          members: [
+
+            {
+
+              name: "hanan agak gilaa",
+
+              name_ar: "حنان",
+
+              full_name: "selain nawwaf",
+
+              role: "Ketua Kelas",
+
+              role_ar: "رئيس الصف",
+
+              bio_id: "Selalu siap membantu teman-teman.",
+
+              bio_en: "Always ready to help friends.",
+
+              bio_ar: "مستعد دائماً لمساعدة الأصدقاء.",
+
+              photo: "https://drive.google.com/file/d/1ZHYENi6Bnm0O4Z_X45HgQ1EMYl0sREOS/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "immszkyy",
+
+              name_ar: "immszkyy",
+
+              full_name: "IBRAHIM ZAKYY",
+
+              ig: "izmedtzz",
+
+              role: "sekretaris",
+
+              role_ar: "السكرتيرة",
+
+              bio_id: "Suka bermain basket di sore hari.",
+
+              bio_en: "Loves playing basketball in the afternoon.",
+
+              bio_ar: "يحب لعب كرة السلة في المساء.",
+
+              photo: "https://drive.google.com/file/d/1P3VlSXsJ65g7D7OaYZMrF1QoAC5XbHxk/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "kumis",
+
+              name_ar: "كوميس",
+
+              full_name: "selain nawwaf",
+
+              role: "mas ketuu",
+
+              role_ar: "أمين الصندوق",
+
+              bio_id: "Yang paling galak kalau nagih uang kas.",
+
+              bio_en: "The strictest when collecting class funds.",
+
+              bio_ar: "الأكثر صرامة عند جمع أموال الصف.",
+
+              photo: "https://drive.google.com/file/d/1G0KGl6SXrpnSNPWh5u_SIW41VMkl45C3/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "abil",
+
+              name_ar: "هابيل",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "mumin",
+
+              name_ar: "مؤمن",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "dipan",
+
+              name_ar: "ديبان",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "udin",
+
+              name_ar: "أودين",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "darma",
+
+              name_ar: "دارما",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "zakaria",
+
+              name_ar: "زكريا",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "tegar",
+
+              name_ar: "تيجار",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "daya",
+
+              name_ar: "دايا",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "faishol",
+
+              name_ar: "فيصل",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "memet",
+
+              name_ar: "ميميت",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "fajar",
+
+              name_ar: "فجر",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "tsabit",
+
+              name_ar: "ثابت",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "haidar",
+
+              name_ar: "حيدر",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "jedenn",
+
+              name_ar: "جيدين",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "haritsz",
+
+              name_ar: "حارث",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "dapi",
+
+              name_ar: "دافي",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "simbi",
+
+              name_ar: "سيمبي",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "yahya",
+
+              name_ar: "يحيى",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "muadz",
+
+              name_ar: "معاذ",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "rozan",
+
+              name_ar: "روزان",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "jarir",
+
+              name_ar: "جرير",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "maul",
+
+              name_ar: "مول",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "mail",
+
+              name_ar: "مايل",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "rehan",
+
+              name_ar: "ريحان",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "mustopa",
+
+              name_ar: "مصطفى",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+            {
+
+              name: "nawwaf",
+
+              name_ar: "أولترامان",
+
+              full_name: "selain nawwaf",
+
+              role: "siswa",
+
+              role_ar: "طالب",
+
+              bio_id: "isi dewek.",
+
+              bio_en: "yes or no?.",
+
+              bio_ar: "اكتبه بنفسك.",
+
+              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+
+            },
+
+          ],
+
+          timeline: [
+
+            {
+
+              date: "2025-07-15",
+
+              title_id: "MPLS Pertama",
+
+              title_en: "First Orientation",
+
+              title_ar: "التوجيه الأول",
+
+              desc_id: "Hari pertama kita saling mengenal.",
+
+              desc_en: "The first day we got to know each other.",
+
+              desc_ar: "اليوم الأول الذي تعارفنا فيه.",
+
+              photo: "https://drive.google.com/file/d/1BgfNYptDOop_BpHpgdPvK5lE2zr1LOVC/view?usp=drive_link"
+
+            },
+
+            {
+
+              date: "2026-07-06",
+
+              title_id: "bukber 2026",
+
+              title_en: "2026 Iftar Gathering",
+
+              title_ar: "إفطار جماعي ٢٠٢٦",
+
+              desc_id: "Hari pertama kita saling mengenal.",
+
+              desc_en: "The first day we got to know each other.",
+
+              desc_ar: "اليوم الأول الذي تعارفنا فيه.",
+
+              photo: "https://drive.google.com/file/d/1OkGgSyNbXlNfe7TgqYyekwXfrrjskmhA/view?usp=sharing"
+
+            },
+
+            {
+
+              date: "2025-08-17",
+
+              title_id: "Lomba Kemerdekaan",
+
+              title_en: "Independence Games",
+
+              title_ar: "ألعاب الاستقلال",
+
+              desc_id: "Menang juara 2 tarik tambang antar kelas.",
+
+              desc_en: "Won 2nd place in class tug of war.",
+
+              desc_ar: "الفوز بالمركز الثاني في لعبة شد الحبل بين الصفوف.",
+
+              photo: "https://lh3.googleusercontent.com/u/0/d/1ZCAubvtGec2iPfw7ybA0uiz-dvqLWyCa"
+
+            }
+
+          ],
+
+          gallery: [
+            {
+              url: "https://drive.google.com/file/d/1NDbauh0G9LjRVB09f_8oV-3nCRc-Z2Vf/view?usp=drive_link",
+              title_id: "Belajar Mandiri",
+              title_en: "Independent Study",
+              title_ar: "الدراسة الذاتية",
+              caption_id: "Momen Belajar Bersama di Kelas",
+              caption_en: "Learning Together in Class",
+              caption_ar: "لحظات الدراسة معاً في الصف"
+            },
+            {
+              url: "https://drive.google.com/file/d/119RjNKDfu8IttSIRhsACrUnxBkTZ2A-_/view?usp=sharing",
+              title_id: "Kerja Kelompok",
+              title_en: "Group Project",
+              title_ar: "العمل الجماعي",
+              caption_id: "Diskusi dan Kerja Kelompok",
+              caption_en: "Group Discussion and Teamwork",
+              caption_ar: "مناقشة جماعية وعمل جماعي"
+            },
+            {
+              url: "https://drive.google.com/file/d/1BgfNYptDOop_BpHpgdPvK5lE2zr1LOVC/view?usp=drive_link",
+              title_id: "Masa Orientasi (MPLS)",
+              title_en: "School Orientation (MPLS)",
+              title_ar: "توجيه الطلاب (MPLS)",
+              caption_id: "Keceriaan Selama Masa MPLS",
+              caption_en: "Fun Times During MPLS Orientation",
+              caption_ar: "أوقات ممتعة خلال فترة توجيه الطلاب"
+            },
+            {
+              url: "https://drive.google.com/file/d/1MxM15ADNXNDKrjG7gbJcaC_3BqFyKdtT/view?usp=sharing",
+              title_id: "Kebersamaan Harmatra",
+              title_en: "Harmatra Togetherness",
+              title_ar: "تضامن هارماترى",
+              caption_id: "Kebersamaan Anggota Harmatra",
+              caption_en: "Togetherness of Harmatra Family",
+              caption_ar: "تضامن عائلة هارماترى"
+            },
+            {
+              url: "https://drive.google.com/file/d/1HgHHEQ6Ty1nIQJPlTCA4nvYsKt7atlU-/view?usp=sharing",
+              title_id: "Senyum Persahabatan",
+              title_en: "Smiles of Friendship",
+              title_ar: "ابتسامات الصداقة",
+              caption_id: "Senyuman dan Tawa Bersama",
+              caption_en: "Smiles and Shared Laughter",
+              caption_ar: "ابتسامات وضحكات مشتركة"
+            },
+            {
+              url: "https://drive.google.com/file/d/1xiA_Lr8q5Fv-PP--QPLrcsZvDspLS_1M/view?usp=sharing",
+              title_id: "Momen Hangat",
+              title_en: "Warm Moments",
+              title_ar: "لحظات دافئة",
+              caption_id: "Momen Hangat Persahabatan",
+              caption_en: "Warm Moments of Friendship",
+              caption_ar: "لحظات الصداقة الدافئة"
+            },
+            {
+              url: "https://drive.google.com/file/d/1NRaPxxnpM64vayjoQiJ53dYdspDasOT6/view?usp=sharing",
+              title_id: "Menggapai Impian",
+              title_en: "Reaching Dreams",
+              title_ar: "الوصول إلى الأحلام",
+              caption_id: "Langkah Bersama Menggapai Impian",
+              caption_en: "Walking Together Towards Our Dreams",
+              caption_ar: "السير معاً نحو أحلامنا"
+            },
+            {
+              url: "https://drive.google.com/file/d/1pPAQCPD2E8CYvNcdJVLQLa5dJU1dDrbc/view?usp=sharing",
+              title_id: "Kompak Selalu",
+              title_en: "Always United",
+              title_ar: "متحدون دائماً",
+              caption_id: "Kompak dalam Setiap Kegiatan",
+              caption_en: "United in Every Activity",
+              caption_ar: "متحدون في كل نشاط"
+            },
+            {
+              url: "https://drive.google.com/file/d/1vg8EPI9Epany9JaLgyrNbj_kprjF8hLg/view?usp=sharing",
+              title_id: "Memori Sekolah",
+              title_en: "School Memories",
+              title_ar: "ذكريات المدرسة",
+              caption_id: "Kenangan Indah Masa Sekolah",
+              caption_en: "Beautiful School Memories",
+              caption_ar: "ذكريات المدرسة الجميلة"
+            }
+          ],
+
+          quotes: [
+
+            { text_id: "Kisah kita baru saja dimulai.", text_en: "Our story has just begun.", text_ar: "قصتنا بدأت للتو.", author: "Harmatra" },
+
+            { text_id: "Bukan sekadar kelas, tapi keluarga.", text_en: "Not just a class, but a family.", text_ar: "ليس مجرد صف، بل عائلة.", author: "Andi Saputra" }
+
+          ]
+
+        };
+
+        // ==========================================
+
+        // ⬆️ BATAS AKHIR EDIT DATA MANUAL ⬆️
+
+        // ==========================================
+
+        // --- Translations (JSON) ---
+
+        const translations = {
+
+          id: {
+
+            music: "SUASANA SEKOLAH",
+
+            nav_about: "Cerita", nav_members: "Anggota", nav_timeline: "Perjalanan", nav_gallery: "Galeri",
+
+            hero_sub: "Rumah digital angkatan kami. Melangkah bersama, merajut memori, dan menciptakan harmoni tak terlupakan.",
+
+            stat_members: "Anggota", stat_class: "Kelas", stat_events: "Kegiatan", stat_memories: "Memori",
+
+            meaning_title: "Asal Usul Nama HARMATRA", meaning_subtitle: "Sebuah nama yang dibangun dari makna, kebersamaan, dan tujuan.",
+            meaning_card1_title: "Harmony", meaning_card1_desc: "Simbol harmoni dalam kebersamaan.",
+            meaning_card2_title: "معًا (Ma’an)", meaning_card2_desc: "Artinya bersama-sama.",
+            meaning_card3_title: "Tragen", meaning_card3_desc: "Artinya membawa harapan menuju masa depan.",
+            meaning_closing_1: "HARMATRA berarti:", meaning_closing_2: "Berjalan dalam harmoni, bersama-sama membawa harapan menuju masa depan.",
+
+            title_timeline: "Jejak Langkah", sub_timeline: "Cerita yang kita ukir bersama sejak hari pertama.",
+
+            title_members: "Keluarga HARMATRA", sub_members: "Kenali wajah-wajah di balik angkatan 11.",
+
+            title_gallery: "Galeri Memori", sub_gallery: "Kumpulan momen yang tertangkap lensa.",
+
+            spotlight: "Sorotan Hari Ini",
+
+            footer_note: "Website resmi HARMATRA Angkatan 11 - SMA 1. Dibuat dengan ❤️ oleh siswa, untuk siswa. Semua data bersifat fiktif dan hanya untuk tujuan demonstrasi.",
+
+            contact_btn: "Hubungi Kami",
+            contact_title: "Hubungi Kami",
+            contact_desc: "Kirim pesan untuk HARMATRA",
+            contact_name: "Nama",
+            contact_name_ph: "Nama Anda",
+            contact_name_err: "Nama belum diisi",
+            contact_msg: "Pesan",
+            contact_msg_ph: "Tulis pesan Anda...",
+            contact_msg_err: "Pesan belum diisi",
+            contact_send: "Kirim Pesan"
+
+          },
+
+          en: {
+
+            music: "SCHOOL VIBES",
+
+            nav_about: "Story", nav_members: "Members", nav_timeline: "Journey", nav_gallery: "Gallery",
+
+            hero_sub: "Our digital home. Walking together, weaving memories, and creating unforgettable harmony.",
+
+            stat_members: "Members", stat_class: "Class", stat_events: "Events", stat_memories: "Memories",
+
+            meaning_title: "The Meaning Behind HARMATRA", meaning_subtitle: "A name built from meaning, togetherness, and purpose.",
+            meaning_card1_title: "Harmony", meaning_card1_desc: "Symbol of harmony in togetherness.",
+            meaning_card2_title: "معًا (Ma’an)", meaning_card2_desc: "Means together.",
+            meaning_card3_title: "Tragen", meaning_card3_desc: "Means carrying hope toward the future.",
+            meaning_closing_1: "HARMATRA means:", meaning_closing_2: "Walking in harmony, together carrying hope toward the future.",
+
+            title_timeline: "Our Journey", sub_timeline: "The stories we've carved together since day one.",
+
+            title_members: "HARMATRA Family", sub_members: "Meet the faces behind the 11th generation.",
+
+            title_gallery: "Memory Gallery", sub_gallery: "A collection of moments captured through the lens.",
+
+            spotlight: "Today's Spotlight",
+
+            footer_note: "Official website of HARMATRA Class 11 - SMA 1. Crafted with ❤️ by the students, for the students. All data is fictional and for demonstration purposes only.",
+
+            contact_btn: "Contact Us",
+            contact_title: "Contact Us",
+            contact_desc: "Send a message to HARMATRA",
+            contact_name: "Name",
+            contact_name_ph: "Your Name",
+            contact_name_err: "Name is required",
+            contact_msg: "Message",
+            contact_msg_ph: "Write your message...",
+            contact_msg_err: "Message is required",
+            contact_send: "Send Message"
+
+          },
+
+          ar: {
+
+            music: "أجواء المدرسة",
+
+            nav_about: "قصتنا", nav_members: "الأعضاء", nav_timeline: "رحلتنا", nav_gallery: "المعرض",
+
+            hero_sub: "البيت الرقمي لدفعتنا. نسير معاً، ننسج الذكريات، ونخلق انسجاماً لا يُنسى.",
+
+            stat_members: "الأعضاء", stat_class: "الصفوف", stat_events: "الأنشطة", stat_memories: "الذكريات",
+
+            meaning_title: "معنى اسم هرمترى", meaning_subtitle: "اسم مبني على المعنى، التكاتف، والهدف.",
+            meaning_card1_title: "Harmony", meaning_card1_desc: "رمز الانسجام في التكاتف.",
+            meaning_card2_title: "معًا (Ma’an)", meaning_card2_desc: "تعني معًا.",
+            meaning_card3_title: "Tragen", meaning_card3_desc: "تعني حمل الأمل نحو المستقبل.",
+            meaning_closing_1: "هرمترى تعني:", meaning_closing_2: "السير في انسجام، معًا نحمل الأمل نحو المستقبل.",
+
+            title_timeline: "خطواتنا", sub_timeline: "القصص التي سطرناها معاً منذ اليوم الأول.",
+
+            title_members: "عائلة هرمترى", sub_members: "تعرف على الوجوه التي تقف خلف الدفعة 11.",
+
+            title_gallery: "معرض الذكريات", sub_gallery: "مجموعة من اللحظات التي التقطتها العدسة.",
+
+            spotlight: "أبرز أضواء اليوم",
+
+            footer_note: "الموقع الرسمي لدفعة 11 هرمترى - المدرسة الثانوية الأولى. تم تصميمه بـ ❤️ من قبل الطلاب ولأجل الطلاب. جميع البيانات خيالية ولأغراض العرض فقط.",
+
+            contact_btn: "اتصل بنا",
+            contact_title: "اتصل بنا",
+            contact_desc: "أرسل رسالة إلى هرمترى",
+            contact_name: "الاسم",
+            contact_name_ph: "اسمك",
+            contact_name_err: "الاسم مطلوب",
+            contact_msg: "الرسالة",
+            contact_msg_ph: "اكتب رسالتك...",
+            contact_msg_err: "الرسالة مطلوبة",
+            contact_send: "إرسال الرسالة"
+
+          }
+
+        };
+
+        // --- State ---
+
+        let dbData = localData;
+        window.HARMATRA_DATA = localData;
+
+        let currentLang = 'id';
+
+        let isDark = false;
+
+        let isPlaying = false;
+
+        let spotlightInterval;
+
+        let currentSpotlightMember = null;
+
+        // --- Helpers ---
+
+        function escapeHTML(str) {
+
+          if (!str) return '';
+
+          var div = document.createElement('div');
+
+          div.appendChild(document.createTextNode(String(str)));
+
+          return div.innerHTML;
+
+        }
+
+        function safeDate(val) {
+
+          if (!val) return '-';
+
+          try {
+
+            let locale = 'en-US';
+
+            if (currentLang === 'id') locale = 'id-ID';
+
+            else if (currentLang === 'ar') locale = 'ar-SA';
+
+            return new Date(val).toLocaleDateString(locale, { day: 'numeric', month: 'short', year: 'numeric' });
+
+          } catch (e) { return '-'; }
+
+        }
+
+        function translateNumbers(numStr) {
+
+          if (currentLang !== 'ar') return numStr;
+
+          const arabicZero = 0x660; // unicode for '٠'
+
+          return String(numStr).replace(/[0-9]/g, (d) => String.fromCharCode(arabicZero + parseInt(d)));
+
+        }
+
+        // FUNGSI PERBAIKAN: Konversi Otomatis Link Google Drive via lh3.googleusercontent.com
+
+        function convertDriveLink(url) {
+
+          if (!url) return './logo utama.png';
+
+          if (url.includes('drive.google.com')) {
+
+            const match = url.match(/\/d\/([^/]+)/);
+
+            if (match && match[1]) {
+
+              // FORMAT TERBARU: Mengekstrak gambar menggunakan server image asli Google
+
+              return `https://lh3.googleusercontent.com/d/${match[1]}`;
+
+            }
+
+          }
+
+          return url;
+
+        }
+
+        // --- Initialization ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+          initTheme();
+
+          initLenis();
+
+          startRealtimeClock();
+
+          loadData();
+
+        });
+
+        // --- Data Loading & Rendering ---
+
+        function loadData() {
+
+          setTimeout(() => {
+
+            document.getElementById('mainLoader').classList.add('hidden');
+
+            document.getElementById('mainApp').classList.remove('hidden');
+
+
+
+            renderAll();
+
+            initGSAP();
+
+            startSpotlightHook();
+
+          }, 1000);
+
+        }
+
+        function renderAll() {
+
+          applyTranslation();
+
+          renderStats();
+
+          renderTimeline();
+
+          renderMembers();
+
+          renderGallery();
+
+          renderQuotes();
+
+          refreshSpotlightText();
+
+        }
+
+        function renderStats() {
+          document.getElementById('statMembers').setAttribute('data-target', dbData.members.length);
+          document.getElementById('statEvent').setAttribute('data-target', dbData.timeline.length);
+
+          const counters = document.querySelectorAll('.counter');
+          counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            let animFrameId = null;
+
+            const runCounter = () => {
+              const startTime = performance.now();
+              const duration = 1500; // 1.5 seconds (1500ms)
+
+              const updateCount = (currentTime) => {
+                const elapsedTime = currentTime - startTime;
+                const progress = Math.min(elapsedTime / duration, 1);
+                const easedProgress = progress * (2 - progress); // smooth ease-out
+                const currentCount = Math.round(easedProgress * target);
+
+                counter.innerText = translateNumbers(currentCount);
+
+                if (progress < 1) {
+                  animFrameId = requestAnimationFrame(updateCount);
+                } else {
+                  counter.innerText = translateNumbers(target);
+                }
+              };
+
+              if (animFrameId) cancelAnimationFrame(animFrameId);
+              animFrameId = requestAnimationFrame(updateCount);
+            };
+
+            if (counter._observer) {
+              counter._observer.disconnect();
+            }
+
+            const obs = new IntersectionObserver((entries) => {
+              if (entries[0].isIntersecting) {
+                runCounter();
+              } else {
+                counter.innerText = "0";
+              }
+            });
+
+            obs.observe(counter);
+            counter._observer = obs;
+          });
+        }
+
+        function renderTimeline() {
+
+          const container = document.getElementById('timelineContainer');
+
+          container.innerHTML = '';
+
+          dbData.timeline.forEach((item, index) => {
+
+            const isLeft = index % 2 === 0;
+
+            let title = item.title_en;
+
+            let desc = item.desc_en;
+
+            if (currentLang === 'id') {
+
+              title = item.title_id;
+
+              desc = item.desc_id;
+
+            } else if (currentLang === 'ar') {
+
+              title = item.title_ar || item.title_en;
+
+              desc = item.desc_ar || item.desc_en;
+
+            }
+
+
+
+            let html = `
+
+            <div class="relative flex items-center justify-between md:justify-normal gs-up timeline-item group">
+
+              <div class="hidden md:block md:w-1/2 ${isLeft ? 'pr-12 text-right' : 'pl-12 order-2'}">
+
+                ${isLeft ? buildTimelineCard(item, title, desc) : ''}
+
+              </div>
+
+              
+
+              <div class="absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-blue-500 border-4 border-[var(--bg-color)] transform -translate-x-1.5 md:-translate-x-1/2 z-10 shadow-[0_0_15px_rgba(59,130,246,0.6)] group-hover:scale-150 transition-transform duration-300"></div>
+
+              
+
+              <div class="w-full pl-8 md:pl-0 md:w-1/2 ${!isLeft ? 'md:pl-12 text-left' : 'hidden md:block order-1'}">
+
+                ${!isLeft || window.innerWidth < 768 ? buildTimelineCard(item, title, desc) : ''}
+
+              </div>
+
+            </div>
+
+          `;
+
+            container.innerHTML += html;
+
+          });
+
+        }
+
+        function buildTimelineCard(item, title, desc) {
+
+          const photoUrl = item.photo ? convertDriveLink(item.photo) : null;
+
+          return `
+
+          <div class="glass-card p-6 relative overflow-hidden group">
+
+            ${photoUrl ? `<img src="${escapeHTML(photoUrl)}" class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-30 transition-opacity duration-500">` : ''}
+
+            <div class="relative z-10">
+
+              <div class="text-sm text-blue-400 font-bold mb-2 tracking-wider">${safeDate(item.date)}</div>
+
+              <h3 class="font-display text-2xl font-bold mb-2">${escapeHTML(title)}</h3>
+
+              <p class="opacity-80 text-sm leading-relaxed">${escapeHTML(desc)}</p>
+
+            </div>
+
+          </div>
+
+        `;
+
+        }
+
+        function renderMembers() {
+
+          const container = document.getElementById('membersContainer');
+
+          container.innerHTML = '';
+
+          dbData.members.forEach((m, i) => {
+
+            let name = m.name;
+
+            let role = m.role;
+
+            let bio = m.bio_en;
+
+            if (currentLang === 'id') {
+
+              bio = m.bio_id;
+
+            } else if (currentLang === 'ar') {
+
+              name = m.name_ar || m.name;
+
+              role = m.role_ar || m.role;
+
+              bio = m.bio_ar || m.bio_en;
+
+            }
+
+            const photo = convertDriveLink(m.photo);
+
+
+
+            container.innerHTML += `
+
+            <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer gs-stagger relative" style="aspect-ratio: 3/4;" onclick="openLightbox('members', ${i})">
+
+              <img src="${escapeHTML(photo)}" onerror="this.src='https://via.placeholder.com/300x400?text=Error'" class="w-full h-full object-cover grayscale group-hover:grayscale-0">
+
+              <div class="member-info absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent flex flex-col justify-end p-5 translate-y-6 group-hover:translate-y-0">
+
+                <div class="member-name font-display font-bold text-lg text-white transform translate-y-2 group-hover:translate-y-0">${escapeHTML(name)}</div>
+
+                <div class="member-role text-xs text-blue-300 font-medium tracking-widest mb-2 transform translate-y-2 group-hover:translate-y-0">${escapeHTML(role)}</div>
+
+                <p class="member-bio text-xs text-white/70 opacity-0 group-hover:opacity-100 line-clamp-2 transform translate-y-4 group-hover:translate-y-0">${escapeHTML(bio)}</p>
+
+              </div>
+
+            </div>
+
+          `;
+
+          });
+
+        }
+
+        function renderGallery() {
+          const container = document.getElementById('galleryContainer');
+          container.innerHTML = '';
+
+          dbData.gallery.forEach((img, i) => {
+            const photoUrl = convertDriveLink(img.url);
+
+            container.innerHTML += `
+            <div class="masonry-item rounded-xl overflow-hidden gs-up relative group cursor-pointer" onclick="openLightbox('gallery', ${i})">
+              <div class="w-full overflow-hidden" style="aspect-ratio:16/9;">
+                <img src="${escapeHTML(photoUrl)}" onerror="this.src='https://via.placeholder.com/600?text=Error'" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+              </div>
+              <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <i class="fa-solid fa-expand text-white text-2xl drop-shadow-lg"></i>
+              </div>
+            </div>
+          `;
+          });
+        }
+
+        function renderQuotes() {
+
+          const c1 = document.getElementById('quoteContainer');
+
+          const c2 = document.getElementById('quoteContainer2');
+
+          let html = '';
+
+          dbData.quotes.forEach(q => {
+
+            let text = q.text_en;
+
+            if (currentLang === 'id') {
+
+              text = q.text_id;
+
+            } else if (currentLang === 'ar') {
+
+              text = q.text_ar || q.text_en;
+
+            }
+
+            html += `
+
+            <div class="glass-card px-8 py-6 rounded-2xl min-w-[300px] flex-shrink-0">
+
+              <i class="fa-solid fa-quote-left text-blue-500/50 text-2xl mb-3 block"></i>
+
+              <p class="font-display font-medium text-lg mb-4">"${escapeHTML(text)}"</p>
+
+              <div class="text-xs uppercase tracking-widest opacity-60">— ${escapeHTML(q.author)}</div>
+
+            </div>
+
+          `;
+
+          });
+
+          c1.innerHTML = html;
+
+          c2.innerHTML = html;
+
+        }
+
+        // --- LIGHTBOX FULLSCREEN LOGIC ---
+
+        let currentLightboxType = '';
+        let currentLightboxIndex = -1;
+
+        window.openLightbox = function (type, index) {
+          currentLightboxType = type;
+          currentLightboxIndex = index;
+
+          const lbImg = document.getElementById('lightboxImg');
+          lbImg.classList.add('opacity-0', 'scale-95');
+          lbImg.classList.remove('scale-100');
+
+          updateLightboxContent();
+
+          const lb = document.getElementById('lightbox');
+          lb.classList.remove('hidden');
+          void lb.offsetWidth;
+          lb.classList.remove('opacity-0');
+
+          setTimeout(() => {
+            lbImg.classList.remove('opacity-0', 'scale-95');
+            lbImg.classList.add('scale-100');
+          }, 50);
+        };
+
+        function updateLightboxContent() {
+          const lbImg = document.getElementById('lightboxImg');
+          const caption = document.getElementById('lightboxCaption');
+          const lbName = document.getElementById('lightboxName');
+          const lbRole = document.getElementById('lightboxRole');
+          const lbBio = document.getElementById('lightboxBio');
+
+          if (currentLightboxType === 'members') {
+            const m = dbData.members[currentLightboxIndex];
+            const src = convertDriveLink(m.photo);
+            lbImg.src = src;
+
+            let name = m.name;
+            let fullName = m.full_name || '';
+            let role = m.role;
+            let bioText = m.bio_en;
+
+            if (currentLang === 'id') {
+              bioText = m.bio_id;
+            } else if (currentLang === 'ar') {
+              name = m.name_ar || m.name;
+              role = m.role_ar || m.role;
+              bioText = m.bio_ar || m.bio_en;
+            }
+
+            const lbFullName = document.getElementById('lightboxFullName');
+            lbName.innerText = name;
+
+            if (fullName) {
+              lbFullName.innerText = fullName;
+              lbFullName.classList.remove('hidden');
+            } else {
+              lbFullName.classList.add('hidden');
+            }
+
+            lbRole.innerText = role;
+            lbBio.innerText = bioText ? `"${bioText}"` : '';
+
+            caption.classList.remove('hidden');
+            void caption.offsetWidth;
+            caption.classList.remove('opacity-0', 'translate-y-4');
+            caption.classList.add('opacity-100', 'translate-y-0');
+          } else if (currentLightboxType === 'gallery') {
+            const img = dbData.gallery[currentLightboxIndex];
+            const src = convertDriveLink(img.url);
+            lbImg.src = src;
+
+            let titleText = img.title_en || '';
+            let captionText = img.caption_en || '';
+            if (currentLang === 'id') {
+              titleText = img.title_id || '';
+              captionText = img.caption_id || '';
+            } else if (currentLang === 'ar') {
+              titleText = img.title_ar || img.title_en || '';
+              captionText = img.caption_ar || img.caption_en || '';
+            }
+
+            lbName.innerText = titleText;
+            const lbFullName = document.getElementById('lightboxFullName');
+            if (lbFullName) lbFullName.classList.add('hidden');
+            lbRole.innerText = '';
+            lbBio.innerText = captionText ? `"${captionText}"` : '';
+
+            if (titleText || captionText) {
+              caption.classList.remove('hidden');
+              void caption.offsetWidth;
+              caption.classList.remove('opacity-0', 'translate-y-4');
+              caption.classList.add('opacity-100', 'translate-y-0');
+            } else {
+              caption.classList.add('hidden');
+            }
+          }
+        }
+
+        window.navigateLightbox = function (direction, event) {
+          if (event) event.stopPropagation();
+
+          let listLength = 0;
+          if (currentLightboxType === 'members') {
+            listLength = dbData.members.length;
+          } else if (currentLightboxType === 'gallery') {
+            listLength = dbData.gallery.length;
+          }
+
+          if (listLength === 0) return;
+
+          const lbImg = document.getElementById('lightboxImg');
+          const caption = document.getElementById('lightboxCaption');
+
+          // Fade and scale out
+          lbImg.classList.add('opacity-0', 'scale-95');
+          lbImg.classList.remove('scale-100');
+          if (caption) {
+            caption.classList.add('opacity-0', 'translate-y-4');
+            caption.classList.remove('opacity-100', 'translate-y-0');
+          }
+
+          setTimeout(() => {
+            currentLightboxIndex = (currentLightboxIndex + direction + listLength) % listLength;
+
+            const lbName = document.getElementById('lightboxName');
+            const lbRole = document.getElementById('lightboxRole');
+            const lbBio = document.getElementById('lightboxBio');
+
+            if (currentLightboxType === 'members') {
+              const m = dbData.members[currentLightboxIndex];
+              lbImg.src = convertDriveLink(m.photo);
+
+              let name = m.name;
+              let fullName = m.full_name || '';
+              let role = m.role;
+              let bioText = m.bio_en;
+
+              if (currentLang === 'id') {
+                bioText = m.bio_id;
+              } else if (currentLang === 'ar') {
+                name = m.name_ar || m.name;
+                role = m.role_ar || m.role;
+                bioText = m.bio_ar || m.bio_en;
+              }
+
+              const lbFullName = document.getElementById('lightboxFullName');
+              const lbIg = document.getElementById('lightboxIg');
+              lbName.innerText = name;
+              if (fullName) {
+                lbFullName.innerText = fullName;
+                lbFullName.classList.remove('hidden');
+              } else {
+                lbFullName.classList.add('hidden');
+              }
+              lbRole.innerText = role;
+              lbBio.innerText = bioText ? `"${bioText}"` : '';
+
+              if (lbIg) {
+                const igLink = m.ig || "https://instagram.com/harmatra_id";
+                lbIg.href = igLink.startsWith('http') ? igLink : `https://instagram.com/${igLink.replace('@', '')}`;
+                lbIg.classList.remove('hidden');
+              }
+
+              caption.classList.remove('hidden');
+            } else {
+              const img = dbData.gallery[currentLightboxIndex];
+              lbImg.src = convertDriveLink(img.url);
+
+              let titleText = img.title_en || '';
+              let captionText = img.caption_en || '';
+              if (currentLang === 'id') {
+                titleText = img.title_id || '';
+                captionText = img.caption_id || '';
+              } else if (currentLang === 'ar') {
+                titleText = img.title_ar || img.title_en || '';
+                captionText = img.caption_ar || img.caption_en || '';
+              }
+
+              lbName.innerText = titleText;
+              const lbFullName = document.getElementById('lightboxFullName');
+              const lbIg = document.getElementById('lightboxIg');
+              if (lbFullName) lbFullName.classList.add('hidden');
+              if (lbIg) lbIg.classList.add('hidden');
+              lbRole.innerText = '';
+              lbBio.innerText = captionText ? `"${captionText}"` : '';
+
+              if (titleText || captionText) {
+                caption.classList.remove('hidden');
+              } else {
+                caption.classList.add('hidden');
+              }
+            }
+
+            // Fade and scale back in
+            setTimeout(() => {
+              lbImg.classList.remove('opacity-0', 'scale-95');
+              lbImg.classList.add('scale-100');
+
+              let hasCaption = false;
+              if (currentLightboxType === 'members') {
+                hasCaption = true;
+              } else if (currentLightboxType === 'gallery') {
+                const img = dbData.gallery[currentLightboxIndex];
+                if (img.title_en || img.title_id || img.title_ar || img.caption_en || img.caption_id || img.caption_ar) {
+                  hasCaption = true;
+                }
+              }
+
+              if (hasCaption) {
+                caption.classList.remove('opacity-0', 'translate-y-4');
+                caption.classList.add('opacity-100', 'translate-y-0');
+              }
+            }, 50);
+          }, 150);
+        };
+
+        window.closeLightbox = function () {
+          const lb = document.getElementById('lightbox');
+          const lbImg = document.getElementById('lightboxImg');
+          const caption = document.getElementById('lightboxCaption');
+
+          lb.classList.add('opacity-0');
+          lbImg.classList.remove('scale-100');
+          lbImg.classList.add('scale-95');
+
+          if (caption) {
+            caption.classList.add('opacity-0', 'translate-y-4');
+            caption.classList.remove('opacity-100', 'translate-y-0');
+          }
+
+          setTimeout(() => lb.classList.add('hidden'), 300);
+        };
+
+        window.closeLightboxOnBg = function (e) {
+          if (e.target === e.currentTarget) {
+            closeLightbox();
+          }
+        };
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', (e) => {
+          const lb = document.getElementById('lightbox');
+          if (lb && !lb.classList.contains('hidden')) {
+            if (e.key === 'ArrowLeft') {
+              navigateLightbox(-1);
+            } else if (e.key === 'ArrowRight') {
+              navigateLightbox(1);
+            } else if (e.key === 'Escape') {
+              closeLightbox();
+            }
+          }
+        });
+
+
+
+
+
+        // --- Hooks & Features ---
+
+        function refreshSpotlightText() {
+          if (!currentSpotlightMember) return;
+          const name = document.getElementById('spotlightName');
+          const quote = document.getElementById('spotlightQuote');
+          if (!name || !quote) return;
+
+          let displayName = currentSpotlightMember.name;
+          let bioText = currentSpotlightMember.bio_en;
+
+          if (currentLang === 'id') {
+            bioText = currentSpotlightMember.bio_id;
+          } else if (currentLang === 'ar') {
+            displayName = currentSpotlightMember.name_ar || currentSpotlightMember.name;
+            bioText = currentSpotlightMember.bio_ar || currentSpotlightMember.bio_en;
+          }
+
+          name.innerText = displayName;
+          quote.innerText = bioText;
+        }
+
+        function startSpotlightHook() {
+
+          if (spotlightInterval) clearInterval(spotlightInterval);
+
+          const updateSpotlight = () => {
+
+            if (!dbData.members.length) return;
+
+            const random = dbData.members[Math.floor(Math.random() * dbData.members.length)];
+            currentSpotlightMember = random;
+
+            const img = document.getElementById('spotlightImg');
+            const name = document.getElementById('spotlightName');
+            const quote = document.getElementById('spotlightQuote');
+
+            if (img && name && quote) {
+              img.style.opacity = 0; name.style.opacity = 0; quote.style.opacity = 0;
+
+              setTimeout(() => {
+                img.src = convertDriveLink(random.photo) || 'https://via.placeholder.com/150';
+                refreshSpotlightText();
+                img.style.opacity = 1; name.style.opacity = 1; quote.style.opacity = 1;
+              }, 300);
+            }
+
+          };
+
+          updateSpotlight();
+
+          spotlightInterval = setInterval(updateSpotlight, 8000);
+
+        }
+
+        function startRealtimeClock() {
+
+          const dEl = document.getElementById('realtimeDate');
+
+          const updateClock = () => {
+
+            const now = new Date();
+
+            let locale = 'en-US';
+            if (currentLang === 'id') locale = 'id-ID';
+            else if (currentLang === 'ar') locale = 'ar-SA';
+
+            dEl.innerText = now.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'short' });
+
+          };
+
+          updateClock();
+
+          setInterval(updateClock, 1000);
+
+        }
+
+        // --- Interactions ---
+
+        window.toggleLang = function () {
+
+          if (currentLang === 'id') {
+            currentLang = 'en';
+          } else if (currentLang === 'en') {
+            currentLang = 'ar';
+          } else {
+            currentLang = 'id';
+          }
+
+          document.getElementById('langText').innerText = currentLang.toUpperCase();
+
+          renderAll();
+
+        };
+
+        function applyTranslation() {
+
+          const dict = translations[currentLang];
+
+          document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (dict[key]) el.innerText = dict[key];
+          });
+
+          document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (dict[key]) el.placeholder = dict[key];
+          });
+
+          // Handle RTL layout for Arabic
+          if (currentLang === 'ar') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.documentElement.classList.add('rtl-layout');
+          } else {
+            document.documentElement.removeAttribute('dir');
+            document.documentElement.classList.remove('rtl-layout');
+          }
+
+        }
+
+        window.toggleTheme = function () {
+
+          isDark = !isDark;
+
+          document.body.classList.toggle('theme-glow', !isDark);
+
+          document.getElementById('themeIcon').className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+
+        };
+
+        function initTheme() {
+
+          isDark = false;
+
+          document.body.classList.add('theme-glow');
+
+          document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+
+        }
+
+        window.toggleMusic = function () {
+
+          const audio = document.getElementById('bgm');
+
+          const icon = document.getElementById('playIcon');
+
+          const eq = document.getElementById('eqContainer');
+
+          if (isPlaying) {
+
+            audio.pause();
+
+            icon.className = 'fa-solid fa-play text-sm';
+
+            eq.style.display = 'none';
+
+          } else {
+
+            audio.play().catch(e => console.log("Audio play blocked by browser"));
+
+            icon.className = 'fa-solid fa-pause text-sm';
+
+            eq.style.display = 'flex';
+
+          }
+
+          isPlaying = !isPlaying;
+
+        };
+
+        window.scrollToMembers = function () {
+
+          document.getElementById('members').scrollIntoView({ behavior: 'smooth' });
+
+        };
+
+        // --- Cinematic Animations ---
+
+        function initLenis() {
+
+          const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+
+          function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+
+          requestAnimationFrame(raf);
+
+        }
+
+        function initGSAP() {
+
+          gsap.registerPlugin(ScrollTrigger);
+
+
+
+          const tl = gsap.timeline();
+
+          tl.to('#heroBadge', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
+
+            .to('#heroTitle', { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }, "-=0.8")
+
+            .to('#heroSub', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, "-=0.8");
+
+          gsap.utils.toArray('.gs-up').forEach(elem => {
+
+            gsap.fromTo(elem,
+
+              { opacity: 0, y: 50 },
+
+              { scrollTrigger: { trigger: elem, start: "top 85%" }, opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+
+            );
+
+          });
+
+          ScrollTrigger.batch('.gs-stagger', {
+
+            onEnter: batch => gsap.fromTo(batch, { opacity: 0, y: 30 }, { opacity: 1, y: 0, stagger: 0.1, duration: 0.8, ease: "power3.out" }),
+
+            start: "top 90%"
+
+          });
+
+          window.addEventListener('scroll', () => {
+
+            const nav = document.getElementById('navbar');
+
+            if (window.scrollY > 50) {
+
+              nav.classList.add('glass', 'shadow-lg');
+
+              nav.classList.remove('py-4'); nav.classList.add('py-2');
+
+            } else {
+
+              nav.classList.remove('glass', 'shadow-lg');
+
+              nav.classList.add('py-4'); nav.classList.remove('py-2');
+
+            }
+
+          });
+
+        }
+
+        // Expose internal data for the external chat system
+        window.harmatraData = {
+          get dbData() { return dbData; },
+          get currentLang() { return currentLang; },
+          convertDriveLink,
+          safeDate
+        };
+
+      })();
+
+  </script>
+
+  <!-- Contact Modal & Logic -->
+  <div id="contactModal"
+    class="fixed inset-0 z-[110] bg-black/60 backdrop-blur-md hidden flex-col items-center justify-center opacity-0 transition-opacity duration-500"
+    onclick="closeContactModalOnBg(event)">
+
+    <!-- Modal Content -->
+    <div
+      class="contact-modal-glass w-[90%] max-w-md p-8 transform scale-95 transition-all duration-500 relative pointer-events-auto"
+      id="contactModalContent">
+
+      <!-- Inner Decorative Frame & Brackets -->
+      <div class="contact-modal-inner-frame"></div>
+
+      <!-- Close Button -->
+      <button onclick="closeContactModal()"
+        class="contact-close-btn absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full z-10"
+        aria-label="Close modal">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <!-- Header (Genshin subtle details + Apple clean typography) -->
+      <div class="relative z-10">
+        <h3
+          class="font-display text-2xl font-bold mb-1.5 text-center tracking-wide"
+          data-i18n="contact_title">
+          Hubungi Kami
+        </h3>
+        <p class="text-xs text-center text-gray-400 mb-8 font-light" data-i18n="contact_desc">
+          Kirim pesan untuk HARMATRA
+        </p>
+      </div>
+
+      <div class="space-y-5 relative z-10">
+        <!-- Input Nama -->
+        <div class="relative group">
+          <label class="contact-label block mb-1.5 ml-1"
+            data-i18n="contact_name">Nama</label>
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-white/30 group-focus-within:text-yellow-500/80 transition-colors">
+              <i class="fa-regular fa-user text-sm"></i>
+            </div>
+            <input type="text" id="contactName" placeholder="Nama Anda" data-i18n-placeholder="contact_name_ph"
+              class="contact-input w-full pl-11 pr-4 py-3 text-sm">
+          </div>
+          <span id="contactNameError" class="text-red-400 text-xs hidden ml-2 mt-1.5 font-medium tracking-wide"
+            data-i18n="contact_name_err">Nama belum diisi</span>
+        </div>
+
+        <!-- Input Pesan -->
+        <div class="relative group">
+          <label class="contact-label block mb-1.5 ml-1"
+            data-i18n="contact_msg">Pesan</label>
+          <div class="relative">
+            <div
+              class="absolute top-3.5 left-4 pointer-events-none text-white/30 group-focus-within:text-yellow-500/80 transition-colors">
+              <i class="fa-regular fa-comment-dots text-sm"></i>
+            </div>
+            <textarea id="contactMessage" rows="4" placeholder="Tulis pesan Anda..."
+              data-i18n-placeholder="contact_msg_ph"
+              class="contact-input w-full pl-11 pr-4 py-3 text-sm resize-none"></textarea>
+          </div>
+          <span id="contactMessageError" class="text-red-400 text-xs hidden ml-2 mt-1.5 font-medium tracking-wide"
+            data-i18n="contact_msg_err">Pesan belum diisi</span>
+        </div>
+
+        <!-- Submit Button -->
+        <button onclick="sendContactEmail()"
+          class="contact-submit-btn w-full mt-6 py-3.5 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-paper-plane text-xs"></i> <span data-i18n="contact_send">Kirim Pesan</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const contactModal = document.getElementById('contactModal');
+    const contactModalContent = document.getElementById('contactModalContent');
+    const contactName = document.getElementById('contactName');
+    const contactMessage = document.getElementById('contactMessage');
+    const nameError = document.getElementById('contactNameError');
+    const messageError = document.getElementById('contactMessageError');
+
+    function openContactModal() {
+      // Clear previous inputs
+      contactName.value = '';
+      contactMessage.value = '';
+      nameError.classList.add('hidden');
+      messageError.classList.add('hidden');
+
+      contactModal.classList.remove('hidden');
+      contactModal.classList.add('flex');
+
+      // trigger reflow
+      void contactModal.offsetWidth;
+
+      contactModal.classList.remove('opacity-0');
+      contactModalContent.classList.remove('scale-95');
+      contactModalContent.classList.add('scale-100');
+    }
+
+    function closeContactModal() {
+      contactModal.classList.add('opacity-0');
+      contactModalContent.classList.remove('scale-100');
+      contactModalContent.classList.add('scale-95');
+
+      setTimeout(() => {
+        contactModal.classList.add('hidden');
+        contactModal.classList.remove('flex');
+      }, 500);
+    }
+
+    function closeContactModalOnBg(e) {
+      if (e.target === contactModal) {
+        closeContactModal();
+      }
+    }
+
+    function sendContactEmail() {
+      let isValid = true;
+      const nameVal = contactName.value.trim();
+      const msgVal = contactMessage.value.trim();
+
+      if (!nameVal) {
+        nameError.classList.remove('hidden');
+        isValid = false;
+      } else {
+        nameError.classList.add('hidden');
+      }
+
+      if (!msgVal) {
+        messageError.classList.remove('hidden');
+        isValid = false;
+      } else {
+        messageError.classList.add('hidden');
+      }
+
+      if (!isValid) return;
+
+      closeContactModal();
+
+      // Show SweetAlert2 loading state
+      Swal.fire({
+        title: currentLang === 'id' ? 'Mengirim...' : (currentLang === 'ar' ? 'جاري الإرسال...' : 'Sending...'),
+        html: currentLang === 'id' ? 'Menghubungkan ke server...' : (currentLang === 'ar' ? 'الاتصال بالخادم...' : 'Connecting to server...'),
+        allowOutsideClick: false,
+        background: document.body.classList.contains('theme-glow') ? 'rgba(255, 255, 255, 0.9)' : 'rgba(15, 17, 23, 0.9)',
+        color: document.body.classList.contains('theme-glow') ? '#0f172a' : '#ffffff',
+        backdrop: 'rgba(0,0,0,0.4)',
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
+      // ID Formspree Anda. Daftarkan email izemsempay@gmail.com di formspree.io untuk mendapatkan ID Form.
+      // Ganti 'YOUR_FORMSPREE_ID' dengan ID form Anda (contoh: 'xanygqzw').
+      const formspreeId = "YOUR_FORMSPREE_ID";
+
+      if (formspreeId === "YOUR_FORMSPREE_ID") {
+        // Mode Simulasi (Fallback jika ID belum diisi)
+        setTimeout(() => {
+          showSuccessAlert(nameVal);
+          console.warn("Formspree ID belum dikonfigurasi. Pesan saat ini disimulasikan berhasil terkirim. Untuk menerima email asli ke izemsempay@gmail.com, silakan ganti nilai formspreeId di index.html.");
+        }, 1500);
+      } else {
+        // Pengiriman Asli menggunakan Formspree
+        fetch(`https://formspree.io/f/${formspreeId}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({
+            name: nameVal,
+            message: msgVal
+          })
+        })
+        .then(response => {
+          if (response.ok) {
+            showSuccessAlert(nameVal);
+          } else {
+            showErrorAlert();
+          }
+        })
+        .catch(error => {
+          console.error("Formspree Error:", error);
+          showErrorAlert();
+        });
+      }
+    }
+
+    function showSuccessAlert(name) {
+      let successTitle = "Pesan Terkirim!";
+      let successText = `Terima kasih, ${name}. Pesan Anda telah kami terima.`;
+      if (currentLang === 'en') {
+        successTitle = "Message Sent!";
+        successText = `Thank you, ${name}. Your message has been received.`;
+      } else if (currentLang === 'ar') {
+        successTitle = "تم إرسال الرسالة!";
+        successText = `شكراً لك، ${name}. تم استلام رسالتك بنجاح.`;
+      }
+
+      Swal.fire({
+        icon: 'success',
+        title: successTitle,
+        text: successText,
+        background: document.body.classList.contains('theme-glow') ? 'rgba(255, 255, 255, 0.95)' : 'rgba(15, 17, 23, 0.95)',
+        color: document.body.classList.contains('theme-glow') ? '#0f172a' : '#ffffff',
+        confirmButtonColor: '#3b82f6',
+        confirmButtonText: 'OK',
+        customClass: {
+          popup: 'rounded-3xl border border-white/10 shadow-2xl backdrop-blur-md'
+        }
+      });
+    }
+
+    function showErrorAlert() {
+      let errorTitle = "Gagal Mengirim!";
+      let errorText = "Terjadi kesalahan saat mengirim pesan. Silakan coba beberapa saat lagi.";
+      if (currentLang === 'en') {
+        errorTitle = "Failed to Send!";
+        errorText = "An error occurred while sending your message. Please try again later.";
+      } else if (currentLang === 'ar') {
+        errorTitle = "فشل الإرسال!";
+        errorText = "حدث خطأ أثناء إرسال رسالتك. يرجى المحاولة مرة أخرى لاحقاً.";
+      }
+
+      Swal.fire({
+        icon: 'error',
+        title: errorTitle,
+        text: errorText,
+        background: document.body.classList.contains('theme-glow') ? 'rgba(255, 255, 255, 0.95)' : 'rgba(15, 17, 23, 0.95)',
+        color: document.body.classList.contains('theme-glow') ? '#0f172a' : '#ffffff',
+        confirmButtonColor: '#ef4444',
+        confirmButtonText: 'OK',
+        customClass: {
+          popup: 'rounded-3xl border border-white/10 shadow-2xl backdrop-blur-md'
+        }
+      });
+    }
+  </script>
+
+  <script>
+    // Decorative Cursor Ornament Logic (NTE Inspired)
+    if (window.matchMedia("(pointer: fine)").matches) {
+      const cursorOutline = document.getElementById("cursorOutline");
+
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let outlineX = window.innerWidth / 2;
+      let outlineY = window.innerHeight / 2;
+      let rotation = 45;
+      let isHovering = false;
+
+      window.addEventListener("mousemove", function (e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      window.addEventListener("mousedown", () => {
+        if (cursorOutline) cursorOutline.classList.add("click");
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (cursorOutline) cursorOutline.classList.remove("click");
+      });
+
+      function animateCursor() {
+        let distX = mouseX - outlineX;
+        let distY = mouseY - outlineY;
+
+        outlineX += distX * 0.12; // Smoother delay
+        outlineY += distY * 0.12;
+        
+        // Continuous rotation (faster on hover)
+        rotation += (isHovering ? 1.5 : 0.4);
+
+        if (cursorOutline) {
+          cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%) rotate(${rotation}deg)`;
+        }
+
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      function addCursorHoverEffects() {
+        document.querySelectorAll('a, button, input, textarea, .glass-card, [onclick], select, #chatToggleButton').forEach(el => {
+          if (!el.dataset.cursorHoverAttached) {
+            el.dataset.cursorHoverAttached = "true";
+            el.addEventListener('mouseenter', () => {
+              isHovering = true;
+              if (cursorOutline) cursorOutline.classList.add('hover');
+            });
+            el.addEventListener('mouseleave', () => {
+              isHovering = false;
+              if (cursorOutline) cursorOutline.classList.remove('hover');
+            });
+          }
+        });
+      }
+
+      addCursorHoverEffects();
+      setInterval(addCursorHoverEffects, 1000); // Re-attach for dynamic content
+    }
+  </script>
+
+  <script src="chat.js" defer></script>
+
+</body>
+
+</html>

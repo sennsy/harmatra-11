@@ -1,0 +1,778 @@
+/**
+ * PREMIUM AI CHAT SYSTEM FOR HARMATRA
+ * Rebuilt from scratch with clean architecture, responsive layout, smooth UX,
+ * and realistic AI behavior.
+ */
+
+(function () {
+  'use strict';
+
+  // Constants
+  const STORAGE_KEY = 'harmatra_premium_chat_history';
+  const GEMINI_API_KEY = "AQ.Ab8RN6L-4Rhxtv0kHg_nOVef9NXzg2--QN3ysKPVzZ_-aC23mA";
+  const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+
+  // State Management
+  const state = {
+    isOpen: false,
+    isTyping: false,
+    messages: []
+  };
+
+  // UI Element Cache
+  let elements = {};
+
+  // Initialize Chat Component
+  function init() {
+    cacheElements();
+    if (!elements.chatWidget) return;
+
+    bindEvents();
+    loadHistory();
+    updateUIState();
+    
+    // Set initial language strings
+    updateChatLanguage();
+    
+    // Hook language toggle function to refresh chat language dynamically
+    if (typeof window.toggleLang === 'function') {
+      const originalToggleLang = window.toggleLang;
+      window.toggleLang = function () {
+        originalToggleLang();
+        updateChatLanguage();
+      };
+    }
+    
+    // Fallback event listener on language button
+    const langBtn = document.querySelector('button[onclick="toggleLang()"]');
+    if (langBtn) {
+      langBtn.addEventListener('click', () => {
+        setTimeout(updateChatLanguage, 10);
+      });
+    }
+  }
+
+  // Cache DOM references
+  function cacheElements() {
+    elements = {
+      chatWidget: document.getElementById('chatWidget'),
+      chatWindow: document.getElementById('chatWindow'),
+      chatBody: document.getElementById('chatBody'),
+      chatMessages: document.getElementById('chatMessages'),
+      chatInput: document.getElementById('chatInput'),
+      sendChatBtn: document.getElementById('sendChatBtn'),
+      chatToggleButton: document.getElementById('chatToggleButton'),
+      chatToggleAvatarWrapper: document.getElementById('chatToggleAvatarWrapper'),
+      chatToggleCloseIcon: document.querySelector('.chat-toggle-close-icon'),
+      chatToggleDot: document.querySelector('.chat-toggle-dot'),
+      clearChatBtn: document.getElementById('clearChatBtn'),
+      closeChatBtn: document.getElementById('closeChatBtn'),
+      chatStatusText: document.getElementById('chatStatusText'),
+      chatStatusDot: document.querySelector('.chat-status-dot'),
+      welcomeContainer: document.querySelector('.chat-welcome-container')
+    };
+  }
+
+  // Bind event listeners
+  function bindEvents() {
+    // Open/Close toggle
+    elements.chatToggleButton.addEventListener('click', toggleChat);
+    elements.closeChatBtn.addEventListener('click', () => toggleChat(false));
+
+    // Clear history
+    elements.clearChatBtn.addEventListener('click', confirmClearChat);
+
+    // Textarea input adjustments
+    elements.chatInput.addEventListener('input', handleInput);
+    elements.chatInput.addEventListener('keydown', handleKeyDown);
+
+    // Send click
+    elements.sendChatBtn.addEventListener('click', handleSend);
+
+    // Suggestion chips delegation
+    elements.chatBody.addEventListener('click', handleSuggestionClick);
+  }
+
+  // Get current language from parent site
+  function getLang() {
+    if (window.harmatraData && window.harmatraData.currentLang) {
+      return window.harmatraData.currentLang;
+    }
+    return 'id'; // default
+  }
+
+  // Update all chat widget strings dynamically based on selected language
+  function updateChatLanguage() {
+    const lang = getLang();
+    const isId = lang === 'id';
+    const isAr = lang === 'ar';
+
+    // 1. Update Welcome container content
+    const welcomeTitle = elements.welcomeContainer.querySelector('.chat-welcome-title');
+    const welcomeDesc = elements.welcomeContainer.querySelector('.chat-welcome-desc');
+    if (welcomeTitle) {
+      welcomeTitle.textContent = isId ? 'Halo, saya Matra AI' : (isAr ? 'مرحباً، أنا Matra AI' : 'Hello, I am Matra AI');
+    }
+    if (welcomeDesc) {
+      welcomeDesc.textContent = isId 
+        ? 'Asisten cerdas Angkatan 11 HARMATRA. Tanyakan kepada saya tentang info kelas, data anggota, galeri memori, atau perjalanan kami.'
+        : (isAr 
+          ? 'المساعد الذكي للدفعة 11 هارماترى. اسألني عن معلومات الصف، بيانات الأعضاء، معرض الذكريات، أو رحلتنا.'
+          : 'The smart assistant of HARMATRA 11th Gen. Ask me about class info, member data, memory gallery, or our journey.');
+    }
+
+    // Update Suggestion Chips
+    const suggestionsGrid = elements.welcomeContainer.querySelector('.chat-suggestions-grid');
+    if (suggestionsGrid) {
+      const chipsData = [
+        {
+          icon: 'fa-users text-blue-400',
+          id: { prompt: 'Siapa saja anggota kelas?', label: 'Keluarga Harmatra' },
+          en: { prompt: 'Who are the class members?', label: 'Harmatra Family' },
+          ar: { prompt: 'من هم أعضاء الصف؟', label: 'عائلة هارماترى' }
+        },
+        {
+          icon: 'fa-images text-purple-400',
+          id: { prompt: 'Tampilkan galeri memori kelas', label: 'Galeri Memori' },
+          en: { prompt: 'Show class memory gallery', label: 'Memory Gallery' },
+          ar: { prompt: 'عرض معرض الصور', label: 'معرض الذكريات' }
+        },
+        {
+          icon: 'fa-route text-emerald-400',
+          id: { prompt: 'Apa saja agenda perjalanan kita?', label: 'Jejak Langkah' },
+          en: { prompt: 'What is our journey itinerary?', label: 'Our Journey' },
+          ar: { prompt: 'ما هي أجندة رحلتنا؟', label: 'رحلتنا' }
+        },
+        {
+          icon: 'fa-crown text-amber-400',
+          id: { prompt: 'Siapa ketua kelas Harmatra?', label: 'Ketua Kelas' },
+          en: { prompt: 'Who is the class president of Harmatra?', label: 'Class President' },
+          ar: { prompt: 'من هو رئيس الصف؟', label: 'رئيس الصف' }
+        }
+      ];
+
+      suggestionsGrid.innerHTML = chipsData.map(chip => {
+        const localized = chip[lang] || chip.id;
+        return `
+          <button class="chat-suggestion-chip" data-prompt="${escapeHTML(localized.prompt)}">
+            <i class="fa-solid ${chip.icon}"></i>
+            <span>${escapeHTML(localized.label)}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    // 2. Update Input Area
+    if (elements.chatInput) {
+      elements.chatInput.placeholder = isId ? 'Tanya Matra AI...' : (isAr ? 'اسأل Matra AI...' : 'Ask Matra AI anything...');
+      if (isAr) {
+        elements.chatInput.style.textAlign = 'right';
+        elements.chatInput.style.direction = 'rtl';
+      } else {
+        elements.chatInput.style.textAlign = '';
+        elements.chatInput.style.direction = '';
+      }
+    }
+
+    const footerNote = elements.chatWidget.querySelector('.chat-footer-note');
+    if (footerNote) {
+      footerNote.textContent = isId 
+        ? 'Tekan Enter untuk mengirim, Shift + Enter untuk baris baru' 
+        : (isAr 
+          ? 'اضغط Enter للإرسال، Shift + Enter لسطر جديد' 
+          : 'Press Enter to send, Shift + Enter for new line');
+    }
+
+    // 3. Update Header Status
+    if (elements.chatStatusText) {
+      if (state.isTyping) {
+        elements.chatStatusText.textContent = isId ? 'Sedang mengetik...' : (isAr ? 'يكتب الآن...' : 'Typing...');
+      } else {
+        elements.chatStatusText.textContent = isAr ? 'متصل' : 'Online';
+      }
+    }
+
+    // 4. Update rendered messages labels & actions
+    const userLabels = elements.chatMessages.querySelectorAll('.chat-entry.user .chat-bubble-info span');
+    userLabels.forEach(lbl => {
+      lbl.textContent = isId ? 'Anda' : (isAr ? 'أنت' : 'You');
+    });
+
+    const copyBtnLabels = elements.chatMessages.querySelectorAll('.copy-btn span');
+    copyBtnLabels.forEach(lbl => {
+      lbl.textContent = isId ? 'Salin' : (isAr ? 'نسخ' : 'Copy');
+    });
+  }
+
+  // Formatting parser: converts Markdown-like syntax to HTML safely
+  function formatMessage(text) {
+    if (!text) return '';
+
+    // Simple HTML escape for XSS protection
+    let html = text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+
+    // Markdown bold: **text** -> <strong>text</strong>
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-[var(--chat-text-main)]">$1</strong>');
+
+    // Bullet points: lines starting with "- " or "* " -> <ul><li>
+    const lines = html.split('\n');
+    let inList = false;
+    let listHTML = [];
+
+    for (let line of lines) {
+      const trimmed = line.trim();
+      if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+        if (!inList) {
+          listHTML.push('<ul class="list-disc pl-5 my-2 space-y-1">');
+          inList = true;
+        }
+        // Remove the bullet and wrap in <li>
+        listHTML.push(`<li class="text-sm leading-relaxed">${trimmed.substring(2)}</li>`);
+      } else {
+        if (inList) {
+          listHTML.push('</ul>');
+          inList = false;
+        }
+        listHTML.push(line);
+      }
+    }
+
+    if (inList) {
+      listHTML.push('</ul>');
+    }
+
+    // Join with linebreaks
+    return listHTML.join('\n').replace(/\n/g, '<br>');
+  }
+
+  // Open / Close chat window with animations
+  function toggleChat(forceState) {
+    const nextState = typeof forceState === 'boolean' ? forceState : !state.isOpen;
+    if (nextState === state.isOpen) return;
+
+    state.isOpen = nextState;
+
+    if (state.isOpen) {
+      elements.chatWindow.classList.remove('hidden');
+      // Force layout recalc before removing transition classes
+      void elements.chatWindow.offsetWidth;
+      elements.chatWindow.classList.add('active');
+      elements.chatToggleButton.classList.add('active');
+      
+      // Hide the entire avatar wrapper (which includes the blue dot) when open
+      if (elements.chatToggleAvatarWrapper) elements.chatToggleAvatarWrapper.classList.add('hidden', 'scale-0', 'opacity-0');
+      if (elements.chatToggleCloseIcon) elements.chatToggleCloseIcon.classList.remove('hidden');
+
+      // Focus input (on desktop only to avoid virtual keyboard pops on mobile load)
+      if (window.innerWidth > 480) {
+        setTimeout(() => elements.chatInput.focus(), 100);
+      }
+
+      scrollToBottom(true);
+    } else {
+      elements.chatWindow.classList.add('hidden');
+      elements.chatToggleButton.classList.remove('active');
+
+      if (elements.chatToggleAvatarWrapper) elements.chatToggleAvatarWrapper.classList.remove('hidden', 'scale-0', 'opacity-0');
+      if (elements.chatToggleCloseIcon) elements.chatToggleCloseIcon.classList.add('hidden');
+    }
+  }
+
+  // Handle auto-resize of textarea on user typing
+  function handleInput() {
+    const textarea = elements.chatInput;
+    textarea.style.height = 'auto';
+    const newHeight = Math.min(textarea.scrollHeight - 6, 120);
+    textarea.style.height = `${newHeight}px`;
+
+    // Toggle disabled state of send button
+    elements.sendChatBtn.disabled = !textarea.value.trim() || state.isTyping;
+  }
+
+  // Handle Enter to send, Shift+Enter for new line
+  function handleKeyDown(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  }
+
+  // Suggestion chips handler
+  function handleSuggestionClick(e) {
+    const chip = e.target.closest('.chat-suggestion-chip');
+    if (!chip) return;
+
+    const prompt = chip.dataset.prompt;
+    if (prompt) {
+      sendUserMessage(prompt);
+    }
+  }
+
+  // Core messaging flow
+  async function handleSend() {
+    const text = elements.chatInput.value.trim();
+    if (!text || state.isTyping) return;
+
+    sendUserMessage(text);
+  }
+
+  function sendUserMessage(text) {
+    // Clear input
+    elements.chatInput.value = '';
+    handleInput();
+
+    // Add user message to state and UI
+    const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const userMessage = { role: 'user', content: text, time: timeStr };
+    state.messages.push(userMessage);
+
+    // Save and render
+    saveHistory();
+    renderMessage(userMessage);
+    hideWelcomeIfNeeded();
+    scrollToBottom(true);
+
+    // Simulate AI thinking and response
+    triggerAIResponse(text);
+  }
+
+  // Handle AI typing simulation
+  async function triggerAIResponse(userPrompt) {
+    // 6. LOADING STATE
+    const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const botMessage = { role: 'assistant', content: 'Matra AI sedang berpikir...', time: timeStr };
+    state.messages.push(botMessage);
+
+    const messageId = renderMessage(botMessage, true);
+    const container = document.getElementById(messageId);
+    const bubbleElement = container ? container.querySelector('.chat-bubble.bot') : null;
+
+    // 7. AUTO SCROLL
+    if (elements.chatBody) elements.chatBody.scrollTop = elements.chatBody.scrollHeight;
+
+    state.isTyping = true;
+    elements.sendChatBtn.disabled = true;
+    elements.chatInput.disabled = true;
+
+    let rawReply = "";
+    const lowerPrompt = userPrompt.toLowerCase();
+    
+    // 4. HYBRID AI LOGIC: Check Local Data
+    const harmatra = window.harmatraData || {};
+    const members = harmatra.dbData ? harmatra.dbData.members : [];
+    let localFound = false;
+
+    if (/anggota|member|siapa ketua|siapa sekretaris|timeline|event|gallery|quote|harmatra/i.test(lowerPrompt)) {
+        if (/siapa ketua/i.test(lowerPrompt)) {
+            rawReply = "Ketua kelas HARMATRA Angkatan 11 adalah Hanan. Ia memimpin kelas kami dengan penuh dedikasi!";
+            localFound = true;
+        } else if (/siapa sekretaris/i.test(lowerPrompt)) {
+            rawReply = "Sekretaris kelas HARMATRA adalah immszkyy.";
+            localFound = true;
+        } else if (/anggota|member/i.test(lowerPrompt)) {
+            rawReply = `Total anggota HARMATRA adalah ${members.length || 29} orang. Semuanya memiliki karakteristik unik yang membuat suasana kelas kami sangat harmonis!`;
+            localFound = true;
+        } else if (/timeline|event/i.test(lowerPrompt)) {
+            rawReply = "Kami memiliki banyak event penting! Mulai dari MPLS, Lomba Kemerdekaan, hingga acara Bukber 2026. Kamu bisa melihat linimasa lengkap di bagian Jejak Langkah di website ini.";
+            localFound = true;
+        } else if (/gallery|quote/i.test(lowerPrompt)) {
+            rawReply = "Banyak momen indah yang diabadikan di Galeri Memori. Silakan gulir ke bawah di halaman utama untuk melihatnya!";
+            localFound = true;
+        } else if (/harmatra/i.test(lowerPrompt)) {
+            rawReply = "HARMATRA adalah nama kebanggaan dari Angkatan 11. Nama ini melambangkan Harmoni dan komitmen kami untuk merajut memori tak terlupakan bersama.";
+            localFound = true;
+        }
+    }
+
+    if (!localFound) {
+      try {
+        rawReply = await fetchAIResponse(userPrompt);
+      } catch (error) {
+        console.error("AI Response Error:", error);
+        // 9. SAFE ERROR HANDLING
+        rawReply = "Maaf, Matra AI sedang mengalami gangguan koneksi. Coba lagi sebentar ya.";
+      }
+    }
+
+    if (!bubbleElement) return;
+
+    // Update the message in state and UI
+    botMessage.content = rawReply;
+    bubbleElement.innerHTML = formatMessage(rawReply);
+    
+    if (elements.chatBody) elements.chatBody.scrollTop = elements.chatBody.scrollHeight;
+
+    if (document.getElementById(messageId)) {
+        addBotActions(messageId, rawReply);
+    }
+
+    // Finish streaming
+    state.isTyping = false;
+    elements.chatInput.disabled = false;
+    
+    // Auto focus on desktop after bot replies if window is open
+    if (window.innerWidth > 480 && state.isOpen) {
+      elements.chatInput.focus();
+    }
+    handleInput(); 
+    
+    saveHistory();
+    scrollToBottom(true);
+  }
+
+  // Toggle visual typing state in header & body
+  function toggleTyping(isTyping) {
+    state.isTyping = isTyping;
+    elements.sendChatBtn.disabled = isTyping || !elements.chatInput.value.trim();
+    elements.chatInput.disabled = isTyping;
+
+    if (isTyping) {
+      elements.chatStatusText.textContent = getLang() === 'id' ? 'Sedang mengetik...' : (getLang() === 'ar' ? 'يكتب الآن...' : 'Typing...');
+      elements.chatStatusDot.classList.add('typing');
+      appendTypingIndicator();
+    } else {
+      elements.chatStatusText.textContent = getLang() === 'ar' ? 'متصل' : 'Online';
+      elements.chatStatusDot.classList.remove('typing');
+      removeTypingIndicator();
+    }
+  }
+
+  // Bouncing 3-dot typing UI insertion
+  function appendTypingIndicator() {
+    removeTypingIndicator(); // Ensure no duplicates
+    const typingHTML = `
+      <div id="chatTypingIndicator" class="chat-typing-bubble">
+        <div class="chat-typing-dots">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    `;
+    elements.chatMessages.insertAdjacentHTML('beforeend', typingHTML);
+    scrollToBottom();
+  }
+
+  // Remove typing indicator
+  function removeTypingIndicator() {
+    const indicator = document.getElementById('chatTypingIndicator');
+    if (indicator) indicator.remove();
+  }
+
+  // Scroll to bottom helper with customizable smooth behavior
+  function scrollToBottom(force = false) {
+    const chatBody = elements.chatBody;
+    const scrollHeight = chatBody.scrollHeight;
+    
+    if (force) {
+      chatBody.scrollTop = scrollHeight;
+    } else {
+      chatBody.scrollTo({
+        top: scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  // Hide or show the welcome container based on message list state
+  function hideWelcomeIfNeeded() {
+    if (state.messages.length > 0) {
+      elements.welcomeContainer.style.display = 'none';
+      elements.chatMessages.style.display = 'flex';
+    } else {
+      elements.welcomeContainer.style.display = 'flex';
+      elements.chatMessages.style.display = 'none';
+    }
+  }
+
+  // Render a message block to the container
+  function renderMessage(msg, isStreaming = false) {
+    const isUser = msg.role === 'user';
+    const messageId = msg.id || `msg-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+    if (!msg.id) msg.id = messageId;
+
+    const actionsHTML = (!isUser && !isStreaming) ? `
+          <div class="chat-bot-actions">
+            <button class="chat-bubble-action-btn copy-btn" data-clipboard="${escapeHTML(msg.content)}">
+              <i class="fa-regular fa-copy"></i>
+              <span>${getLang() === 'id' ? 'Salin' : (getLang() === 'ar' ? 'نسخ' : 'Copy')}</span>
+            </button>
+          </div>
+    ` : ((!isUser && isStreaming) ? `<div class="chat-bot-actions-container"></div>` : '');
+
+    const messageHTML = `
+      <div class="chat-entry ${isUser ? 'user' : 'bot'}" id="${messageId}">
+        <div class="chat-bubble-info">
+          <span>${isUser ? (getLang() === 'id' ? 'Anda' : (getLang() === 'ar' ? 'أنت' : 'You')) : 'Matra AI'}</span>
+        </div>
+        <div class="chat-bubble ${isUser ? 'user' : 'bot'}">${isUser ? escapeHTML(msg.content) : formatMessage(msg.content)}</div>
+        <div class="chat-bubble-time">${msg.time}</div>
+        ${actionsHTML}
+      </div>
+    `;
+
+    elements.chatMessages.insertAdjacentHTML('beforeend', messageHTML);
+
+    if (!isUser && !isStreaming) {
+      bindCopyAction(messageId, msg.content);
+    }
+    
+    return messageId;
+  }
+  
+  function bindCopyAction(messageId, content) {
+      const container = document.getElementById(messageId);
+      if (!container) return;
+      const copyBtn = container.querySelector('.copy-btn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => copyToClipboard(copyBtn, content));
+      }
+  }
+
+  function addBotActions(messageId, content) {
+      const container = document.getElementById(messageId);
+      if (!container) return;
+      const actionsContainer = container.querySelector('.chat-bot-actions-container');
+      if (actionsContainer) {
+          actionsContainer.outerHTML = `
+          <div class="chat-bot-actions">
+            <button class="chat-bubble-action-btn copy-btn" data-clipboard="${escapeHTML(content)}">
+              <i class="fa-regular fa-copy"></i>
+              <span>${getLang() === 'id' ? 'Salin' : (getLang() === 'ar' ? 'نسخ' : 'Copy')}</span>
+            </button>
+          </div>
+          `;
+          bindCopyAction(messageId, content);
+      }
+  }
+
+  // Clipboard copy API with button status toggle
+  function copyToClipboard(button, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      const label = button.querySelector('span');
+      const icon = button.querySelector('i');
+      
+      const originalLabel = label.textContent;
+      const originalIconClass = icon.className;
+
+      label.textContent = getLang() === 'id' ? 'Tersalin!' : (getLang() === 'ar' ? 'تم النسخ!' : 'Copied!');
+      icon.className = 'fa-solid fa-check text-green-400';
+
+      setTimeout(() => {
+        label.textContent = originalLabel;
+        icon.className = originalIconClass;
+      }, 2000);
+    }).catch(err => {
+      console.error('Failed to copy text: ', err);
+    });
+  }
+
+  // Simple HTML escaping helper
+  function escapeHTML(str) {
+    if (!str) return '';
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  // Confirm and clear chat history (using SweetAlert2 if available)
+  function confirmClearChat() {
+    const isId = getLang() === 'id';
+    const isAr = getLang() === 'ar';
+    
+    if (window.Swal) {
+      window.Swal.fire({
+        title: isAr ? 'مسح الذاكرة' : (isId ? 'Hapus Memori' : 'Clear Memory'),
+        html: isAr 
+          ? 'هل أنت متأكد أنك تريد مسح جميع سجلات المحادثة؟'
+          : (isId 
+            ? 'Tindakan ini akan menghapus seluruh riwayat obrolan Anda dengan Matra AI secara permanen.'
+            : 'This action will permanently delete your entire conversation history with Matra AI.'),
+        icon: 'warning',
+        iconColor: '#a855f7',
+        showCancelButton: true,
+        confirmButtonText: isAr ? 'مسح' : (isId ? 'Hapus' : 'Clear'),
+        cancelButtonText: isAr ? 'إلغاء' : (isId ? 'Batal' : 'Cancel'),
+        buttonsStyling: false,
+        customClass: {
+          popup: 'matra-alert-popup',
+          title: 'matra-alert-title',
+          htmlContainer: 'matra-alert-html',
+          confirmButton: 'matra-alert-confirm',
+          cancelButton: 'matra-alert-cancel'
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          clearChatHistory();
+        }
+      });
+    } else {
+      // Fallback if Swal is not loaded yet
+      const confirmMsg = isAr 
+        ? 'هل أنت متأكد أنك تريد حذف جميع الرسائل؟' 
+        : (isId ? 'Apakah Anda yakin ingin menghapus semua pesan?' : 'Are you sure you want to clear all messages?');
+      if (confirm(confirmMsg)) {
+        clearChatHistory();
+      }
+    }
+  }
+
+  function clearChatHistory() {
+    state.messages = [];
+    localStorage.removeItem(STORAGE_KEY);
+    elements.chatMessages.innerHTML = '';
+    
+    // Reset typing state if interrupted
+    state.isTyping = false;
+    elements.chatInput.disabled = false;
+    elements.sendChatBtn.disabled = !elements.chatInput.value.trim();
+    elements.chatStatusText.textContent = getLang() === 'ar' ? 'متصل' : 'Online';
+    elements.chatStatusDot.classList.remove('typing');
+    removeTypingIndicator();
+    
+    hideWelcomeIfNeeded();
+    
+    // Add glowing dot again since history cleared
+    if (elements.chatToggleDot) {
+      elements.chatToggleDot.style.display = 'block';
+    }
+  }
+
+  // LocalStorage Caching persistence
+  function saveHistory() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.messages.slice(-40)));
+  }
+
+  function loadHistory() {
+    const cached = localStorage.getItem(STORAGE_KEY);
+    if (cached) {
+      try {
+        state.messages = JSON.parse(cached) || [];
+      } catch (e) {
+        state.messages = [];
+      }
+    }
+
+    elements.chatMessages.innerHTML = '';
+    state.messages.forEach(renderMessage);
+    hideWelcomeIfNeeded();
+    scrollToBottom(true);
+  }
+
+  // Sync visual updates based on local theme / layout constraints
+  function updateUIState() {
+    // Hide status glow notification dot if there are messages
+    if (state.messages.length > 0 && elements.chatToggleDot) {
+      elements.chatToggleDot.style.display = 'none';
+    }
+  }
+
+  // ==========================================
+  // INTELLECTUAL RESPONSE GENERATOR
+  // ==========================================
+  
+  async function fetchAIResponse(userPrompt) {
+    if (!GEMINI_API_KEY || GEMINI_API_KEY === "YOUR_GEMINI_API_KEY_HERE" || GEMINI_API_KEY === "PASTE_YOUR_KEY_HERE") {
+       throw new Error("API Key is missing.");
+    }
+
+    // 5. GET HARMATRA DATA (if available)
+    let harmatraContext = "";
+    if (window.HARMATRA_DATA) {
+      const db = window.HARMATRA_DATA;
+      harmatraContext = `
+[HARMATRA DATABASE]
+Total Members: ${db.members ? db.members.length : 0}
+Members Data: ${JSON.stringify(db.members || [])}
+Timeline Events: ${JSON.stringify(db.timeline || [])}
+Total Gallery Items: ${db.gallery ? db.gallery.length : 0}
+Quotes: ${JSON.stringify(db.quotes || [])}
+[END OF DATABASE]
+`;
+    }
+
+    // 6. SYSTEM PROMPT FOR GEMINI
+    const systemInstruction = `You are MATRA AI.
+Official intelligent assistant of HARMATRA generation 11.
+
+You are not a simple chatbot. You feel like a real AI assistant inside the Harmatra website.
+
+Your behavior:
+- smart, natural, modern, helpful, warm, responsive, human-like.
+- Answer Indonesian naturally.
+
+CRITICAL INSTRUCTION:
+You have direct access to the HARMATRA DATABASE below.
+Use this data to answer questions about Harmatra accurately and dynamically.
+For example:
+- If asked "siapa ketua kelas?", search the Members Data for role "Ketua Kelas" and answer naturally (e.g., "Hanan saat ini tercatat sebagai Ketua Kelas HARMATRA.").
+- If asked "berapa anggota Harmatra?", reply with the Total Members (e.g., "Saat ini HARMATRA memiliki 29 anggota.").
+- If asked about a specific person (e.g., "siapa Immszkyy?"), search by name, full_name, or nickname, and state their role and bio.
+- If asked "kegiatan apa saja?", summarize the Timeline Events.
+- If asked "berapa galeri?", answer using the Gallery Items count.
+
+If the requested data is truly not found in the HARMATRA DATABASE, reply naturally:
+“Maaf, aku belum menemukan data itu di arsip HARMATRA.”
+
+Never make up data about Harmatra members or events that are not in the database.
+
+Outside Harmatra questions:
+act like smart AI (school help, study help, writing, ideas, motivation, productivity).
+Never say “I am demo” or robotic answers. Stay as MATRA AI.
+
+${harmatraContext}`;
+
+    const contents = [];
+    
+    // 8. CHAT HISTORY
+    for (let msg of state.messages) {
+      if (msg.role === 'user') {
+         contents.push({ role: 'user', parts: [{ text: msg.content }] });
+      } else if (msg.role === 'assistant' && msg.content !== 'Matra AI sedang berpikir...') {
+         contents.push({ role: 'model', parts: [{ text: msg.content }] });
+      }
+    }
+    
+    // Inject system prompt into the first message
+    if (contents.length > 0) {
+       contents[0].parts[0].text = `System: ${systemInstruction}\n\n${contents[0].parts[0].text}`;
+    } else {
+       contents.push({ role: 'user', parts: [{ text: `System: ${systemInstruction}\n\n${userPrompt}` }]});
+    }
+
+    const requestBody = { contents };
+
+    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(requestBody)
+    });
+
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    
+    if (data.candidates && data.candidates.length > 0) {
+      return data.candidates[0].content.parts[0].text;
+    }
+    
+    throw new Error("Empty response from Gemini.");
+  }
+
+  // Load chat on page DOM Ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // Expose toggleChat to global window object for HTML inline references or other hooks
+  window.toggleChat = toggleChat;
+
+})();
