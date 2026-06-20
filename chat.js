@@ -284,6 +284,12 @@
   // Handle auto-resize of textarea on user typing
   function handleInput() {
     const textarea = elements.chatInput;
+    if (textarea && textarea.value.trim().toLowerCase() === 'askaa') {
+      textarea.value = '';
+      toggleChat(false);
+      triggerAskaaProtocol();
+      return;
+    }
     textarea.style.height = 'auto';
     const newHeight = Math.min(textarea.scrollHeight - 6, 120);
     textarea.style.height = `${newHeight}px`;
@@ -320,6 +326,13 @@
   }
 
   function sendUserMessage(text) {
+    if (text.trim().toLowerCase() === 'askaa') {
+      elements.chatInput.value = '';
+      handleInput();
+      toggleChat(false);
+      triggerAskaaProtocol();
+      return;
+    }
     // Clear input
     elements.chatInput.value = '';
     handleInput();
@@ -763,6 +776,294 @@ ${harmatraContext}`;
     }
     
     throw new Error("Empty response from Gemini.");
+  }
+
+  function playSynthSound(freq, duration, type = 'sine', volume = 0.04) {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+      osc.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch(e) {}
+  }
+
+  async function triggerAskaaProtocol() {
+    const isId = getLang() === 'id';
+    const isAr = getLang() === 'ar';
+    
+    let currentPasscode = 'askaryy';
+    
+    // Attempt to load passcode from dynamic config if loaded
+    if (window.harmatraData && window.harmatraData.dbData && window.harmatraData.dbData.settings && window.harmatraData.dbData.settings.adminPasscode) {
+      currentPasscode = window.harmatraData.dbData.settings.adminPasscode;
+    } else if (window.HARMATRA_DATA && window.HARMATRA_DATA.settings && window.HARMATRA_DATA.settings.adminPasscode) {
+      currentPasscode = window.HARMATRA_DATA.settings.adminPasscode;
+    }
+
+    if (window.Swal) {
+      window.Swal.fire({
+        title: isAr ? 'أدخل رمز المرور للمشرف' : (isId ? 'Masukkan Passcode Admin' : 'Enter Admin Passcode'),
+        input: 'password',
+        inputPlaceholder: '••••••',
+        inputAttributes: {
+          autocapitalize: 'off',
+          autocorrect: 'off',
+          autocomplete: 'new-password'
+        },
+        background: '#0a0a0f',
+        color: '#ffffff',
+        confirmButtonColor: '#00ff88',
+        confirmButtonText: isAr ? 'دخول' : (isId ? 'Masuk' : 'Access'),
+        showCancelButton: true,
+        cancelButtonText: isAr ? 'إلغاء' : (isId ? 'Batal' : 'Cancel'),
+        customClass: {
+          popup: 'rounded-3xl border border-[#00ff88]/30 shadow-2xl backdrop-blur-md'
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          if (result.value === currentPasscode) {
+            startMatrixWelcomeEffect();
+          } else {
+            window.Swal.fire({
+              icon: 'error',
+              title: isAr ? 'تم رفض الوصول' : (isId ? 'Akses Ditolak' : 'Access Denied'),
+              text: isAr ? 'رمز المرور غير صحيح.' : (isId ? 'Passcode salah.' : 'Incorrect passcode.'),
+              background: '#0a0a0f',
+              color: '#ffffff',
+              confirmButtonColor: '#ef4444'
+            });
+          }
+        }
+      });
+    } else {
+      const p = prompt(isId ? "Masukkan Passcode Admin:" : "Enter Admin Passcode:");
+      if (p === currentPasscode) {
+        startMatrixWelcomeEffect();
+      } else if (p !== null) {
+        alert(isId ? "Passcode salah!" : "Incorrect passcode!");
+      }
+    }
+  }
+
+  function startMatrixWelcomeEffect() {
+    // 1. Glitch Styles
+    const styleEl = document.createElement('style');
+    styleEl.id = 'matrixGlitchStyles';
+    styleEl.textContent = `
+      @keyframes matrixGlitch {
+        0% { transform: translate(0); text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); }
+        20% { transform: translate(-2px, 2px); text-shadow: -2px 0 red, 2px 0 blue; }
+        40% { transform: translate(-2px, -2px); text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); }
+        60% { transform: translate(2px, 2px); text-shadow: 2px -2px red, -2px 2px blue; }
+        80% { transform: translate(2px, -2px); text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); }
+        100% { transform: translate(0); text-shadow: 0 0 10px rgba(0, 255, 136, 0.8); }
+      }
+      .glitch-text {
+        animation: matrixGlitch 0.3s infinite;
+      }
+      @keyframes matrixFlicker {
+        0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; filter: brightness(1); }
+        20%, 24%, 55% { opacity: 0.8; filter: brightness(1.2); }
+      }
+      .flicker-overlay {
+        animation: matrixFlicker 2s infinite;
+      }
+      .terminal-prompt::after {
+        content: '_';
+        animation: blink 0.8s infinite;
+      }
+      @keyframes blink {
+        50% { opacity: 0; }
+      }
+    `;
+    document.head.appendChild(styleEl);
+
+    // 2. Setup Canvas Matrix Rain background
+    const canvas = document.createElement('canvas');
+    canvas.id = 'matrixCanvas';
+    Object.assign(canvas.style, {
+      position: 'fixed',
+      top: '0',
+      left: '0',
+      width: '100vw',
+      height: '100vh',
+      zIndex: '999999',
+      backgroundColor: '#050505',
+      opacity: '0',
+      transition: 'opacity 1s ease',
+      pointerEvents: 'auto'
+    });
+    document.body.appendChild(canvas);
+
+    const overlay = document.createElement('div');
+    overlay.id = 'matrixTextOverlay';
+    Object.assign(overlay.style, {
+      position: 'fixed',
+      top: '0',
+      left: '0',
+      width: '100vw',
+      height: '100vh',
+      zIndex: '1000000',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      pointerEvents: 'none',
+      opacity: '0',
+      transition: 'opacity 1s ease',
+      backdropFilter: 'blur(10px)',
+      webkitBackdropFilter: 'blur(10px)'
+    });
+
+    overlay.innerHTML = `
+      <div class="flicker-overlay" style="width: 90%; max-width: 600px; padding: 2rem; background: rgba(5,5,5,0.9); border: 1px solid #00ff88; border-radius: 1rem; box-shadow: 0 0 30px rgba(0, 255, 136, 0.25); font-family: monospace; font-size: 1.05rem; line-height: 1.8; color: #00ff88;">
+        <div id="bootTerminal" style="text-align: left; height: 200px; overflow-y: auto; white-space: pre-wrap;"></div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+
+    setTimeout(() => {
+      canvas.style.opacity = '1';
+      overlay.style.opacity = '1';
+    }, 50);
+
+    const ctx = canvas.getContext('2d');
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    const resizeHandler = () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', resizeHandler);
+
+    const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもやゆよらりるれろわをんァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤユヨラリルレロワヲン'.split('');
+    const fontSize = 16;
+    const columns = Math.floor(width / fontSize) + 1;
+    const rainDrops = Array(columns).fill(1);
+    
+    // Matrix Green rain colors
+    const colors = ['#00ff88', '#00ee77', '#00dd66', '#ffffff'];
+    const columnColors = Array(columns).fill(0).map(() => colors[Math.floor(Math.random() * colors.length)]);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(5, 5, 5, 0.08)';
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.font = `${fontSize}px monospace`;
+
+      for (let i = 0; i < rainDrops.length; i++) {
+        const text = characters[Math.floor(Math.random() * characters.length)];
+        const x = i * fontSize;
+        const y = rainDrops[i] * fontSize;
+
+        if (Math.random() > 0.98) {
+          ctx.fillStyle = '#ffffff';
+        } else {
+          ctx.fillStyle = columnColors[i];
+        }
+
+        ctx.fillText(text, x, y);
+
+        if (y > height && Math.random() > 0.975) {
+          rainDrops[i] = 0;
+          columnColors[i] = colors[Math.floor(Math.random() * colors.length)];
+        }
+        rainDrops[i]++;
+      }
+    }
+
+    const animationInterval = setInterval(drawMatrix, 33);
+
+    // 3. Boot Sequence Logs Typer
+    const terminal = document.getElementById('bootTerminal');
+    const logs = [
+      { text: "ACCESSING HARMATRA CORE...", style: "color: #00ff88;" },
+      { text: "INITIALIZING MATRIX SYSTEM...", style: "color: #00ff88;" },
+      { text: "VERIFYING ADMIN ACCESS...", style: "color: #00ff88;" },
+      { text: "ACCESS GRANTED", style: "color: #00ffff; font-weight: bold; text-shadow: 0 0 10px rgba(0,255,255,0.8);" },
+      { text: "WELCOME MANG ATMIN", style: "color: #00ff88; font-size: 1.4rem; font-weight: bold; text-shadow: 0 0 15px rgba(0,255,136,0.8); margin-top: 0.5rem;" }
+    ];
+
+    let lineIndex = 0;
+
+    function startNextLine() {
+      if (lineIndex >= logs.length) {
+        // Redirection trigger
+        setTimeout(() => {
+          canvas.style.transition = 'opacity 0.8s ease';
+          overlay.style.transition = 'opacity 0.8s ease';
+          canvas.style.opacity = '0';
+          overlay.style.opacity = '0';
+
+          setTimeout(() => {
+            clearInterval(animationInterval);
+            window.removeEventListener('resize', resizeHandler);
+            canvas.remove();
+            overlay.remove();
+
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+            window.location.href = isLocal ? 'backroom.html' : '/backroom';
+          }, 800);
+        }, 1500);
+        return;
+      }
+
+      const logInfo = logs[lineIndex];
+      const lineDiv = document.createElement('div');
+      if (logInfo.style) lineDiv.style.cssText = logInfo.style;
+      
+      // Special class on welcome text
+      if (lineIndex === 4) {
+        lineDiv.classList.add('glitch-text');
+      } else {
+        lineDiv.classList.add('terminal-prompt');
+      }
+
+      terminal.appendChild(lineDiv);
+      terminal.scrollTop = terminal.scrollHeight;
+
+      let charIndex = 0;
+      
+      // Sound effects trigger
+      if (lineIndex === 3) {
+        // Access granted sweep tone
+        playSynthSound(400, 0.08, 'triangle', 0.05);
+        setTimeout(() => playSynthSound(800, 0.2, 'sine', 0.05), 80);
+      } else if (lineIndex === 4) {
+        // Welcome tone
+        playSynthSound(1000, 0.35, 'sine', 0.04);
+      }
+
+      function typeChar() {
+        if (charIndex < logInfo.text.length) {
+          lineDiv.textContent += logInfo.text.charAt(charIndex);
+          charIndex++;
+          
+          // Audio keystroke synth
+          if (lineIndex < 3) {
+            playSynthSound(Math.random() * 300 + 400, 0.02, 'sine', 0.02);
+          }
+          
+          setTimeout(typeChar, 40);
+        } else {
+          lineDiv.classList.remove('terminal-prompt');
+          lineIndex++;
+          setTimeout(startNextLine, 250);
+        }
+      }
+
+      typeChar();
+    }
+
+    setTimeout(startNextLine, 400);
   }
 
   // Load chat on page DOM Ready

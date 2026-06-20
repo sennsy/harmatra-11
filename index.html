@@ -32,7 +32,7 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
 
     tailwind.config = {
@@ -472,6 +472,36 @@
       .cursor-ornament {
         display: none !important;
       }
+
+      .touch-trail-particle {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 16px;
+        height: 16px;
+        border: 1px solid var(--ornament-border);
+        box-shadow: 0 0 10px var(--ornament-glow), inset 0 0 5px var(--ornament-glow);
+        transform-origin: center;
+        z-index: 999998;
+        pointer-events: none;
+        will-change: transform, opacity;
+        border-radius: 2px;
+      }
+
+      .touch-ripple {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 40px;
+        height: 40px;
+        border: 1.5px solid var(--ornament-glow-hover);
+        border-radius: 50%;
+        opacity: 1;
+        z-index: 999997;
+        pointer-events: none;
+        will-change: transform, opacity;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease-out;
+      }
     }
 
     /* ======================================================== */
@@ -898,6 +928,46 @@
         transform: translateY(0);
       }
     }
+
+    /* Spotlight Focus Animations */
+    .spotlight-active-card {
+      animation: spotlight-pulse 3s infinite alternate;
+      border-color: rgba(0, 255, 136, 0.6) !important;
+      box-shadow: 0 0 30px rgba(0, 255, 136, 0.3), inset 0 0 20px rgba(0, 255, 136, 0.1) !important;
+      transform: scale(1.05) !important;
+      z-index: 10;
+    }
+
+    @keyframes spotlight-pulse {
+      0% {
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.2), inset 0 0 10px rgba(0, 255, 136, 0.1);
+      }
+
+      100% {
+        box-shadow: 0 0 40px rgba(0, 255, 136, 0.5), inset 0 0 20px rgba(0, 255, 136, 0.2);
+      }
+    }
+
+    .spotlight-badge-container {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      animation: badge-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes badge-pop {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, 10px) scale(0.8);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+      }
+    }
   </style>
 
   <link rel="icon" type="image/png" href="./logo utama.png">
@@ -1036,21 +1106,31 @@
       </div>
 
       <div
-        class="absolute bottom-24 right-6 md:right-12 glass-card p-4 rounded-2xl z-10 max-w-xs flex items-center gap-4 group cursor-pointer"
-        onclick="scrollToMembers()">
+        class="absolute bottom-24 right-6 md:right-12 glass-card p-4 rounded-2xl z-10 max-w-xs flex flex-col gap-3 group animate-float-slow">
 
-        <img src="https://via.placeholder.com/150" id="spotlightImg"
-          class="w-12 h-12 rounded-full object-cover border border-white/20 group-hover:scale-110 transition-transform">
+        <div class="flex items-center gap-4 cursor-pointer" onclick="focusSpotlightMember()">
+          <img src="https://via.placeholder.com/150" id="spotlightImg"
+            class="w-12 h-12 rounded-full object-cover border border-white/20 group-hover:scale-110 transition-transform">
 
-        <div>
-
-          <div class="text-[10px] uppercase tracking-wider opacity-70 text-blue-400" data-i18n="spotlight">Spotlight
+          <div>
+            <div class="text-[10px] uppercase tracking-wider opacity-70 text-blue-400 flex items-center gap-1"
+              data-i18n="spotlight">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span> Spotlight
+            </div>
+            <div class="text-sm font-bold" id="spotlightName">Harmatra</div>
+            <div class="text-xs opacity-70 truncate w-32" id="spotlightQuote">Loading...</div>
           </div>
+        </div>
 
-          <div class="text-sm font-bold" id="spotlightName">Harmatra</div>
-
-          <div class="text-xs opacity-70 truncate w-32" id="spotlightQuote">Loading...</div>
-
+        <div class="flex gap-2 border-t border-white/10 pt-3">
+          <button onclick="focusSpotlightMember()"
+            class="flex-1 text-[10px] font-semibold bg-white/5 hover:bg-white/10 transition-colors py-1.5 rounded-lg flex items-center justify-center gap-1 text-blue-300">
+            <i class="fa-solid fa-crosshairs"></i> View Profile
+          </button>
+          <button onclick="openSpotlightProfileDirect()"
+            class="flex-1 text-[10px] font-semibold bg-blue-600/20 hover:bg-blue-600/40 transition-colors py-1.5 rounded-lg flex items-center justify-center gap-1 text-blue-200">
+            <i class="fa-solid fa-id-card"></i> Full Profile
+          </button>
         </div>
 
       </div>
@@ -2400,6 +2480,12 @@
 
         let dbData = localData;
         window.HARMATRA_DATA = localData;
+        window.harmatraData = {
+          get currentLang() { return currentLang; },
+          set currentLang(val) { currentLang = val; },
+          get translations() { return translations; },
+          get dbData() { return dbData; }
+        };
 
         let currentLang = 'id';
 
@@ -2489,28 +2575,71 @@
 
           loadData();
 
+          // Preview listener for Backroom CMS
+          window.addEventListener('message', (event) => {
+            if (event.data && event.data.type === 'HARMATRA_PREVIEW_DATA') {
+              console.log("Preview data received from Backroom CMS");
+              const previewData = event.data.data;
+              if (previewData.members) dbData.members = previewData.members;
+              if (previewData.timeline) dbData.timeline = previewData.timeline;
+              if (previewData.gallery) dbData.gallery = previewData.gallery;
+              if (previewData.quotes) dbData.quotes = previewData.quotes;
+              if (previewData.translations) {
+                Object.keys(previewData.translations).forEach(lang => {
+                  if (translations[lang]) {
+                    Object.assign(translations[lang], previewData.translations[lang]);
+                  } else {
+                    translations[lang] = previewData.translations[lang];
+                  }
+                });
+              }
+              renderAll();
+            }
+          });
+
         });
 
-        // --- Data Loading & Rendering ---
-
         function loadData() {
+          fetch('data.json')
+            .then(res => {
+              if (!res.ok) throw new Error('Not OK');
+              return res.json();
+            })
+            .then(data => {
+              console.log("Centralized data.json successfully loaded.");
+              if (data.members) dbData.members = data.members;
+              if (data.timeline) dbData.timeline = data.timeline;
+              if (data.gallery) dbData.gallery = data.gallery;
+              if (data.quotes) dbData.quotes = data.quotes;
+              if (data.translations) {
+                Object.keys(data.translations).forEach(lang => {
+                  if (translations[lang]) {
+                    Object.assign(translations[lang], data.translations[lang]);
+                  } else {
+                    translations[lang] = data.translations[lang];
+                  }
+                });
+              }
+              if (data.settings) {
+                dbData.settings = data.settings;
+              }
+              window.HARMATRA_DATA = dbData;
+            })
+            .catch(err => {
+              console.warn("Using fallback localData:", err);
+            })
+            .finally(() => {
+              setTimeout(() => {
+                const loader = document.getElementById('mainLoader');
+                const app = document.getElementById('mainApp');
+                if (loader) loader.classList.add('hidden');
+                if (app) app.classList.remove('hidden');
 
-          setTimeout(() => {
-
-            document.getElementById('mainLoader').classList.add('hidden');
-
-            document.getElementById('mainApp').classList.remove('hidden');
-
-
-
-            renderAll();
-
-            initGSAP();
-
-            startSpotlightHook();
-
-          }, 1000);
-
+                renderAll();
+                initGSAP();
+                startSpotlightHook();
+              }, 1000);
+            });
         }
 
         function renderAll() {
@@ -2677,23 +2806,25 @@
           dbData.members.forEach((m, i) => {
 
             let name = m.name;
-
             let role = m.role;
-
             let bio = m.bio_en;
 
             if (currentLang === 'id') {
-
               bio = m.bio_id;
-
             } else if (currentLang === 'ar') {
-
               name = m.name_ar || m.name;
-
               role = m.role_ar || m.role;
-
               bio = m.bio_ar || m.bio_en;
-
+            } else if (currentLang === 'en') {
+              if (role.toLowerCase().includes('ketua')) {
+                role = "Class President";
+              } else if (role.toLowerCase().includes('sekretaris')) {
+                role = "Secretary";
+              } else if (role.toLowerCase().includes('mas ketuu')) {
+                role = "Vice President";
+              } else if (role.toLowerCase() === 'siswa') {
+                role = "Student";
+              }
             }
 
             const photo = convertDriveLink(m.photo);
@@ -2702,7 +2833,7 @@
 
             container.innerHTML += `
 
-            <div class="glass-card rounded-2xl overflow-hidden group cursor-pointer gs-stagger relative" style="aspect-ratio: 3/4;" onclick="openLightbox('members', ${i})">
+            <div id="member-card-${m.id}" data-id="${m.id}" class="glass-card member-card rounded-2xl overflow-hidden group cursor-pointer gs-stagger relative" style="aspect-ratio: 3/4;" onclick="openLightbox('members', ${i})">
 
               <img src="${escapeHTML(photo)}" onerror="this.src='https://via.placeholder.com/300x400?text=Error'" class="w-full h-full object-cover grayscale group-hover:grayscale-0">
 
@@ -3218,9 +3349,58 @@
         };
 
         window.scrollToMembers = function () {
+          document.getElementById('members').scrollIntoView({ behavior: 'smooth' });
+        };
+
+        window.focusSpotlightMember = function () {
+          if (!currentSpotlightMember) return;
 
           document.getElementById('members').scrollIntoView({ behavior: 'smooth' });
 
+          setTimeout(() => {
+            const specificCard = document.getElementById(`member-card-${currentSpotlightMember.id}`);
+            let targetCard = specificCard;
+
+            if (!targetCard) {
+              const memberCards = document.querySelectorAll('.member-card');
+              memberCards.forEach(card => {
+                const nameEl = card.querySelector('.member-name');
+                if (nameEl && nameEl.textContent.trim() === currentSpotlightMember.name) {
+                  targetCard = card;
+                }
+              });
+            }
+
+            if (targetCard) {
+              targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              targetCard.classList.add('spotlight-active-card');
+
+              const badgeContainer = document.createElement('div');
+              badgeContainer.className = 'spotlight-badge-container';
+              badgeContainer.innerHTML = `
+                <div class="glass py-1 px-3 rounded-full text-[10px] font-bold text-white flex items-center gap-1.5 shadow-[0_0_15px_rgba(0,255,136,0.5)] border border-green-400/30">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+                  <span class="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">⭐ Today's Spotlight</span>
+                </div>
+              `;
+              targetCard.appendChild(badgeContainer);
+
+              setTimeout(() => {
+                targetCard.classList.remove('spotlight-active-card');
+                if (badgeContainer.parentNode) {
+                  badgeContainer.parentNode.removeChild(badgeContainer);
+                }
+              }, 5000);
+            }
+          }, 600);
+        };
+
+        window.openSpotlightProfileDirect = function () {
+          if (!currentSpotlightMember) return;
+          const index = dbData.members.findIndex(m => m.id === currentSpotlightMember.id);
+          if (index !== -1) {
+            openLightbox('members', index);
+          }
         };
 
         // --- Cinematic Animations ---
@@ -3318,7 +3498,7 @@
 
       <!-- Close Button -->
       <button onclick="closeContactModal()"
-        class="contact-close-btn absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full z-10"
+        class="contact-close-btn absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full z-[100] cursor-pointer"
         aria-label="Close modal">
         <i class="fa-solid fa-xmark text-sm"></i>
       </button>
@@ -3347,6 +3527,21 @@
           </div>
           <span id="contactNameError" class="text-red-400 text-xs hidden ml-2 mt-1.5 font-medium tracking-wide"
             data-i18n="contact_name_err">Nama belum diisi</span>
+        </div>
+
+        <!-- Input Email -->
+        <div class="relative group mb-4">
+          <label class="contact-label block mb-1.5 ml-1" data-i18n="contact_email">Email</label>
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-white/30 group-focus-within:text-yellow-500/80 transition-colors">
+              <i class="fa-regular fa-envelope text-sm"></i>
+            </div>
+            <input type="email" id="contactEmail" placeholder="email@contoh.com"
+              data-i18n-placeholder="contact_email_ph" class="contact-input w-full pl-11 pr-4 py-3 text-sm">
+          </div>
+          <span id="contactEmailError" class="text-red-400 text-xs hidden ml-2 mt-1.5 font-medium tracking-wide"
+            data-i18n="contact_email_err">Email tidak valid</span>
         </div>
 
         <!-- Input Pesan -->
@@ -3378,15 +3573,19 @@
     const contactModal = document.getElementById('contactModal');
     const contactModalContent = document.getElementById('contactModalContent');
     const contactName = document.getElementById('contactName');
+    const contactEmail = document.getElementById('contactEmail');
     const contactMessage = document.getElementById('contactMessage');
     const nameError = document.getElementById('contactNameError');
+    const emailError = document.getElementById('contactEmailError');
     const messageError = document.getElementById('contactMessageError');
 
     function openContactModal() {
       // Clear previous inputs
       contactName.value = '';
+      if (contactEmail) contactEmail.value = '';
       contactMessage.value = '';
       nameError.classList.add('hidden');
+      if (emailError) emailError.classList.add('hidden');
       messageError.classList.add('hidden');
 
       contactModal.classList.remove('hidden');
@@ -3420,6 +3619,7 @@
     function sendContactEmail() {
       let isValid = true;
       const nameVal = contactName.value.trim();
+      const emailVal = contactEmail ? contactEmail.value.trim() : '';
       const msgVal = contactMessage.value.trim();
 
       if (!nameVal) {
@@ -3427,6 +3627,13 @@
         isValid = false;
       } else {
         nameError.classList.add('hidden');
+      }
+
+      if (contactEmail && !emailVal.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        emailError.classList.remove('hidden');
+        isValid = false;
+      } else if (emailError) {
+        emailError.classList.add('hidden');
       }
 
       if (!msgVal) {
@@ -3437,6 +3644,21 @@
       }
 
       if (!isValid) return;
+
+      // Rate limiting: 30 seconds cooldown
+      const lastSent = localStorage.getItem('harmatra_last_email_sent');
+      const now = Date.now();
+      if (lastSent && now - parseInt(lastSent) < 30000) {
+        Swal.fire({
+          icon: 'warning',
+          title: currentLang === 'id' ? 'Tunggu Sebentar' : (currentLang === 'ar' ? 'انتظر لحظة' : 'Wait a Moment'),
+          text: currentLang === 'id' ? 'Harap tunggu 30 detik sebelum mengirim pesan lagi.' : (currentLang === 'ar' ? 'يرجى الانتظار 30 ثانية قبل إرسال رسالة أخرى.' : 'Please wait 30 seconds before sending another message.'),
+          background: document.body.classList.contains('theme-glow') ? 'rgba(255, 255, 255, 0.95)' : 'rgba(15, 17, 23, 0.95)',
+          color: document.body.classList.contains('theme-glow') ? '#0f172a' : '#ffffff',
+          confirmButtonColor: '#3b82f6'
+        });
+        return;
+      }
 
       closeContactModal();
 
@@ -3453,41 +3675,41 @@
         }
       });
 
-      // ID Formspree Anda. Daftarkan email izemsempay@gmail.com di formspree.io untuk mendapatkan ID Form.
-      // Ganti 'YOUR_FORMSPREE_ID' dengan ID form Anda (contoh: 'xanygqzw').
-      const formspreeId = "YOUR_FORMSPREE_ID";
+      // Get EmailJS config from dbData
+      const emailCfg = dbData.settings?.emailjs || {
+        serviceId: "service_harmatra",
+        templateId: "template_contact",
+        publicKey: "public_key_here"
+      };
 
-      if (formspreeId === "YOUR_FORMSPREE_ID") {
-        // Mode Simulasi (Fallback jika ID belum diisi)
+      // Ensure EmailJS is loaded
+      if (typeof emailjs === 'undefined') {
         setTimeout(() => {
           showSuccessAlert(nameVal);
-          console.warn("Formspree ID belum dikonfigurasi. Pesan saat ini disimulasikan berhasil terkirim. Untuk menerima email asli ke izemsempay@gmail.com, silakan ganti nilai formspreeId di index.html.");
+          localStorage.setItem('harmatra_last_email_sent', Date.now().toString());
+          console.warn("EmailJS SDK not loaded. Simulating success.");
         }, 1500);
-      } else {
-        // Pengiriman Asli menggunakan Formspree
-        fetch(`https://formspree.io/f/${formspreeId}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify({
-            name: nameVal,
-            message: msgVal
-          })
-        })
-          .then(response => {
-            if (response.ok) {
-              showSuccessAlert(nameVal);
-            } else {
-              showErrorAlert();
-            }
-          })
-          .catch(error => {
-            console.error("Formspree Error:", error);
-            showErrorAlert();
-          });
+        return;
       }
+
+      emailjs.init(emailCfg.publicKey);
+
+      const templateParams = {
+        from_name: nameVal,
+        reply_to: emailVal,
+        message: msgVal,
+        to_email: dbData.settings?.contactEmail || "izemsempay@gmail.com",
+        subject: dbData.settings?.contactSubject || "New Message from HARMATRA Website"
+      };
+
+      emailjs.send(emailCfg.serviceId, emailCfg.templateId, templateParams)
+        .then(() => {
+          localStorage.setItem('harmatra_last_email_sent', Date.now().toString());
+          showSuccessAlert(nameVal);
+        }, (error) => {
+          console.error("EmailJS Error:", error);
+          showErrorAlert();
+        });
     }
 
     function showSuccessAlert(name) {
@@ -3499,6 +3721,12 @@
       } else if (currentLang === 'ar') {
         successTitle = "تم إرسال الرسالة!";
         successText = `شكراً لك، ${name}. تم استلام رسالتك بنجاح.`;
+      }
+
+      // Check if custom text configured by admin
+      if (dbData.settings?.contactSuccess) {
+        successTitle = currentLang === 'id' ? "Berhasil" : (currentLang === 'ar' ? "نجاح" : "Message Sent Successfully");
+        successText = dbData.settings.contactSuccess.replace('{{name}}', name);
       }
 
       Swal.fire({
@@ -3524,6 +3752,12 @@
       } else if (currentLang === 'ar') {
         errorTitle = "فشل الإرسال!";
         errorText = "حدث خطأ أثناء إرسال رسالتك. يرجى المحاولة مرة أخرى لاحقاً.";
+      }
+
+      // Check if custom error text configured by admin
+      if (dbData.settings?.contactError) {
+        errorTitle = currentLang === 'id' ? "Gagal" : (currentLang === 'ar' ? "فشل" : "Message Failed");
+        errorText = dbData.settings.contactError;
       }
 
       Swal.fire({
@@ -3602,6 +3836,84 @@
 
       addCursorHoverEffects();
       setInterval(addCursorHoverEffects, 1000); // Re-attach for dynamic content
+    } else {
+      // Mobile Touch Swipe Trail Effect
+      const trailPool = [];
+      const MAX_PARTICLES = 30;
+      let particleIdx = 0;
+
+      for (let i = 0; i < MAX_PARTICLES; i++) {
+        const p = document.createElement('div');
+        p.className = 'touch-trail-particle';
+        p.style.opacity = '0';
+        p.style.display = 'none';
+        document.body.appendChild(p);
+        trailPool.push({ el: p, active: false, x: 0, y: 0, life: 0, rot: 0 });
+      }
+
+      let lastSpawnTime = 0;
+
+      window.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+
+        const ripple = document.createElement('div');
+        ripple.className = 'touch-ripple';
+        ripple.style.transform = `translate3d(${touch.clientX}px, ${touch.clientY}px, 0) translate(-50%, -50%) scale(0.5)`;
+        document.body.appendChild(ripple);
+
+        // trigger animation
+        requestAnimationFrame(() => {
+          ripple.style.transform = `translate3d(${touch.clientX}px, ${touch.clientY}px, 0) translate(-50%, -50%) scale(1.5)`;
+          ripple.style.opacity = '0';
+        });
+
+        setTimeout(() => {
+          if (ripple.parentNode) ripple.parentNode.removeChild(ripple);
+        }, 600);
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (e) => {
+        const now = performance.now();
+        if (now - lastSpawnTime < 16) return; // throttle to roughly 60fps
+        lastSpawnTime = now;
+
+        const touch = e.touches[0];
+        const pObj = trailPool[particleIdx];
+
+        pObj.active = true;
+        pObj.x = touch.clientX;
+        pObj.y = touch.clientY;
+        pObj.life = 1.0;
+        pObj.rot = Math.random() * 90;
+
+        const el = pObj.el;
+        el.style.display = 'block';
+        el.style.opacity = '1';
+        el.style.transform = `translate3d(${pObj.x}px, ${pObj.y}px, 0) translate(-50%, -50%) rotate(${pObj.rot}deg) scale(1)`;
+
+        particleIdx = (particleIdx + 1) % MAX_PARTICLES;
+      }, { passive: true });
+
+      function animateTrail() {
+        for (let i = 0; i < MAX_PARTICLES; i++) {
+          const pObj = trailPool[i];
+          if (!pObj.active) continue;
+
+          pObj.life -= 0.02; // fade out over ~50 frames
+          pObj.rot += 1.5;   // continuous rotation
+
+          if (pObj.life <= 0) {
+            pObj.active = false;
+            pObj.el.style.display = 'none';
+          } else {
+            pObj.el.style.opacity = pObj.life.toFixed(2);
+            pObj.el.style.transform = `translate3d(${pObj.x}px, ${pObj.y}px, 0) translate(-50%, -50%) rotate(${pObj.rot}deg) scale(${0.2 + pObj.life * 0.8})`;
+          }
+        }
+        requestAnimationFrame(animateTrail);
+      }
+
+      animateTrail();
     }
   </script>
 

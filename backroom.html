@@ -1,0 +1,2719 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HARMATRA CORE | Administrative Matrix</title>
+  
+  <link rel="icon" type="image/png" href="./logo utama.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    :root {
+      --bg-color: #050505;
+      --text-main: #00ff88;
+      --text-muted: #00aa66;
+      --text-dim: #006633;
+      --glass-bg: rgba(5, 5, 7, 0.92);
+      --glass-border: rgba(0, 255, 136, 0.25);
+      
+      /* Neon Core Colors */
+      --accent-green: #00ff88;
+      --accent-cyan: #00ffff;
+      --accent-purple: #8b5cf6;
+      --accent-glow: rgba(0, 255, 136, 0.15);
+      
+      --success: #00ff88;
+      --error: #ef4444;
+      --card-bg: rgba(7, 7, 10, 0.85);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: monospace; /* Cyberpunk monospace theme */
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Monospace Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 255, 136, 0.02);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 255, 136, 0.15);
+      border-radius: 4px;
+      border: 1px solid rgba(0, 255, 136, 0.1);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 255, 136, 0.35);
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    /* Subtlest Matrix Rain Canvas for background */
+    #bgMatrixCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.14; /* Keep text highly readable */
+      pointer-events: none;
+    }
+
+    /* Glitch lock screen overlay */
+    #lockScreen {
+      position: fixed;
+      inset: 0;
+      background: #030303;
+      z-index: 9999999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+      backdrop-filter: blur(15px);
+    }
+    #lockScreen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .lock-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      padding: 3rem;
+      border-radius: 1.5rem;
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+      box-shadow: 0 0 35px rgba(0, 255, 136, 0.15);
+      position: relative;
+    }
+    
+    @keyframes textGlitch {
+      0% { text-shadow: 0 0 5px rgba(0, 255, 136, 0.8); }
+      50% { text-shadow: -2px 0 #00ffff, 2px 0 #8b5cf6; }
+      100% { text-shadow: 0 0 5px rgba(0, 255, 136, 0.8); }
+    }
+    .lock-title {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+      animation: textGlitch 1s infinite;
+      color: #ffffff;
+    }
+    .lock-sub {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+    }
+    .lock-input-group {
+      margin-bottom: 1.5rem;
+    }
+    .lock-input {
+      width: 100%;
+      padding: 0.9rem 1.25rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--glass-border);
+      background: rgba(0,0,0,0.6);
+      color: var(--accent-green);
+      font-size: 1.1rem;
+      text-align: center;
+      letter-spacing: 5px;
+      outline: none;
+      box-shadow: inset 0 0 10px rgba(0,255,136,0.1);
+    }
+    .lock-input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0,255,136,0.15);
+    }
+    .lock-btn {
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--accent-green);
+      background: rgba(0, 255, 136, 0.05);
+      color: var(--accent-green);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 2px;
+      box-shadow: 0 0 10px rgba(0, 255, 136, 0.1);
+    }
+    .lock-btn:hover {
+      background: var(--accent-green);
+      color: #030303;
+      box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
+    }
+
+    /* Cyber Dashboard Sidebar */
+    #sidebar {
+      width: 290px;
+      background: rgba(4, 4, 6, 0.95);
+      border-right: 1px solid var(--glass-border);
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.25rem;
+      z-index: 100;
+      box-shadow: 10px 0 30px rgba(0,0,0,0.8);
+    }
+    #mainContent {
+      margin-left: 290px;
+      flex: 1;
+      padding: 2rem 2.5rem 8rem 2.5rem;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,255,136,0.15);
+      padding-bottom: 1.25rem;
+    }
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      filter: drop-shadow(0 0 8px var(--accent-green));
+    }
+    .brand-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #ffffff;
+      text-shadow: 0 0 10px var(--accent-green);
+    }
+
+    /* Secure Navigation Modules */
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .nav-item button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.8rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+    .nav-item.active button, .nav-item button:hover {
+      color: #ffffff;
+      background: rgba(0, 255, 136, 0.04);
+      border-color: rgba(0, 255, 136, 0.15);
+      text-shadow: 0 0 5px var(--accent-green);
+    }
+    .nav-item.active button {
+      background: rgba(0, 255, 136, 0.1);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.15), inset 0 0 8px rgba(0,255,136,0.05);
+    }
+    .nav-item button i {
+      font-size: 0.95rem;
+      width: 20px;
+    }
+
+    /* Embedded CLI Console (Easter Egg) */
+    .cli-widget {
+      background: rgba(0,0,0,0.8);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      margin-top: 1.5rem;
+      box-shadow: inset 0 0 10px rgba(0,255,136,0.05);
+    }
+    .cli-prompt {
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .cli-input-container {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(0, 255, 136, 0.1);
+      border-radius: 0.4rem;
+      padding: 0.25rem 0.5rem;
+    }
+    .cli-input {
+      background: transparent;
+      border: none;
+      color: var(--accent-green);
+      font-size: 0.75rem;
+      outline: none;
+      flex: 1;
+      width: 100%;
+    }
+    
+    /* Connection widgets */
+    .widget-box {
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(0,255,136,0.1);
+      border-radius: 0.75rem;
+      padding: 0.85rem;
+      margin-top: auto;
+      font-size: 0.75rem;
+    }
+    .widget-title {
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .status-led {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+      background-color: var(--error);
+      box-shadow: 0 0 5px var(--error);
+    }
+    .status-led.active {
+      background-color: var(--success);
+      box-shadow: 0 0 8px var(--success);
+      animation: ledBlink 1.5s infinite alternate;
+    }
+
+    /* Glass + Matrix Hybrid Control Panel Cards */
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .glass-card:hover {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+    }
+
+    /* Glowing corner bracket elements */
+    .card-corner {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-color: var(--accent-green);
+      border-style: solid;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    .corner-tl { top: -1px; left: -1px; border-width: 1.5px 0 0 1.5px; }
+    .corner-tr { top: -1px; right: -1px; border-width: 1.5px 1.5px 0 0; }
+    .corner-bl { bottom: -1px; left: -1px; border-width: 0 0 1.5px 1.5px; }
+    .corner-br { bottom: -1px; right: -1px; border-width: 0 1.5px 1.5px 0; }
+    
+    .glass-card:hover .card-corner {
+      border-color: var(--accent-cyan);
+      width: 12px;
+      height: 12px;
+    }
+
+    /* Hover scanline gradient sweep */
+    .glass-card::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(0, 255, 136, 0.04), transparent);
+      pointer-events: none;
+      transition: top 0.7s ease-out;
+    }
+    .glass-card:hover::after {
+      top: 100%;
+    }
+
+    /* Content view wrapper */
+    .cms-view {
+      display: none;
+      animation: tabFadeIn 0.3s ease forwards;
+    }
+    .cms-view.active {
+      display: block;
+    }
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: scale(0.99) translateY(4px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Dashboard grids */
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 1024px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Stats Card layout */
+    .stat-card {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 1.25rem;
+    }
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      background: rgba(0,255,136,0.03);
+      border: 1px solid rgba(0,255,136,0.15);
+      color: var(--accent-green);
+    }
+    .stat-card:nth-child(2) .stat-icon { color: var(--accent-purple); border-color: rgba(139,92,246,0.2); }
+    .stat-card:nth-child(3) .stat-icon { color: var(--accent-cyan); border-color: rgba(0,255,255,0.2); }
+    .stat-card:nth-child(4) .stat-icon { color: #f59e0b; border-color: rgba(245,158,11,0.2); }
+    
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    /* General forms elements styling */
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--accent-green);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+    .form-control {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      background: rgba(0,0,0,0.6);
+      color: #ffffff;
+      outline: none;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+    }
+    .form-control:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 10px rgba(0,255,255,0.15);
+    }
+    textarea.form-control {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 0.7rem 1.25rem;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      background: rgba(0, 255, 136, 0.03);
+      color: var(--accent-green);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      background: rgba(0, 255, 136, 0.08);
+      border-color: var(--accent-green);
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+    }
+    .btn-primary {
+      background: rgba(0, 255, 255, 0.08);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+    .btn-primary:hover {
+      background: var(--accent-cyan);
+      color: #030303;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    }
+    .btn-success {
+      background: rgba(0, 255, 136, 0.1);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+    .btn-success:hover {
+      background: var(--accent-green);
+      color: #030303;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    }
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.08);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: var(--error);
+    }
+    .btn-danger:hover {
+      background: var(--error);
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+    }
+    .btn-sm {
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.4rem;
+      font-size: 0.75rem;
+    }
+    .btn-icon {
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      justify-content: center;
+    }
+
+    /* Live console Terminal Panel */
+    #liveTerminalLogPanel {
+      background: #020204;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      font-family: monospace;
+      color: var(--accent-green);
+      font-size: 0.8rem;
+      line-height: 1.5;
+      height: 180px;
+      overflow-y: auto;
+      box-shadow: inset 0 0 15px rgba(0,255,136,0.05);
+    }
+    .log-line {
+      margin-bottom: 0.25rem;
+    }
+    .log-line.success { color: var(--accent-cyan); }
+    .log-line.error { color: var(--error); }
+    .log-line.info { color: #f59e0b; }
+
+    /* Collection List items */
+    .collection-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+    .data-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .data-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.25rem;
+      border-radius: 0.75rem;
+      background: rgba(5,5,7,0.7);
+      border: 1px solid rgba(0,255,136,0.12);
+      transition: all 0.3s ease;
+    }
+    .data-item:hover {
+      border-color: var(--accent-green);
+      background: rgba(5,5,7,0.9);
+      box-shadow: 0 0 10px rgba(0, 255, 136, 0.05);
+    }
+    .data-info {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex: 1;
+      min-width: 0;
+    }
+    .data-preview-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 0.4rem;
+      object-fit: cover;
+      border: 1px solid rgba(0,255,136,0.15);
+    }
+    .data-details {
+      min-width: 0;
+    }
+    .data-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #ffffff;
+      margin-bottom: 0.2rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .data-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .data-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-left: 1.25rem;
+    }
+
+    /* Modal box wrapper overrides */
+    .cms-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+    .cms-modal.active {
+      display: flex;
+      animation: modalFade 0.25s ease forwards;
+    }
+    .modal-content {
+      background: #030305;
+      border: 1px solid var(--accent-green);
+      width: 100%;
+      max-width: 650px;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 0 35px rgba(0, 255, 136, 0.2);
+    }
+    .modal-header {
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid rgba(0, 255, 136, 0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-body {
+      padding: 1.5rem 2rem;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+    .modal-footer {
+      padding: 1.25rem 2rem;
+      border-top: 1px solid rgba(0, 255, 136, 0.15);
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      background: rgba(0,0,0,0.3);
+    }
+
+    /* Settings categories */
+    .settings-group-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      margin: 1.5rem 0 0.8rem 0;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+      padding-bottom: 0.4rem;
+    }
+
+    /* Live Preview frame */
+    #previewOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 999999;
+      display: none;
+      flex-direction: column;
+    }
+    #previewOverlay.active {
+      display: flex;
+    }
+    .preview-header {
+      padding: 0.9rem 2rem;
+      background: #050508;
+      border-bottom: 1px solid rgba(0,255,136,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .preview-iframe {
+      flex: 1;
+      border: none;
+      background: #000;
+    }
+
+    /* Save Deployment Bar */
+    #deploymentBar {
+      position: fixed;
+      bottom: 0;
+      left: 290px;
+      right: 0;
+      background: rgba(3, 3, 5, 0.95);
+      border-top: 1px solid var(--glass-border);
+      padding: 1.1rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 99;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #f59e0b;
+    }
+    .status-dot.synced {
+      background: var(--success);
+      box-shadow: 0 0 6px var(--success);
+    }
+    .status-dot.deploying {
+      background: var(--accent-cyan);
+      box-shadow: 0 0 8px var(--accent-cyan);
+      animation: pulse 1s infinite alternate;
+    }
+    @keyframes pulse {
+      from { transform: scale(1); opacity: 0.6; }
+      to { transform: scale(1.2); opacity: 1; }
+    }
+
+    .tab-lang-btn {
+      padding: 0.3rem 0.8rem;
+      border-radius: 0.3rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      border: 1px solid rgba(0,255,136,0.2);
+      background: transparent;
+      color: var(--text-muted);
+    }
+    .tab-lang-btn.active {
+      background: var(--accent-green);
+      color: #000000;
+      border-color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    /* Connection Display indicator labels */
+    .con-info-label {
+      opacity: 0.65;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Matrix rain canvas background -->
+  <canvas id="bgMatrixCanvas"></canvas>
+
+  <!-- PASSWORD PROTECTED CONSOLE LOCK -->
+  <div id="lockScreen">
+    <div class="lock-card">
+      <h2 class="lock-title">RESTRICTED ZONE</h2>
+      <p class="lock-sub">SECURE MATRIX ADMINISTRATIVE PORTAL</p>
+      <div class="lock-input-group">
+        <input type="password" id="passcodeInput" class="lock-input" placeholder="••••••" maxlength="20" autofocus>
+      </div>
+      <button onclick="verifyPasscode()" class="lock-btn">DECRYPT_ACCESS()</button>
+    </div>
+  </div>
+
+  <!-- NAVIGATION SIDEBAR -->
+  <aside id="sidebar">
+    <a href="/" class="brand">
+      <img src="./logo utama.png" class="brand-logo" alt="Logo">
+      <span class="brand-name">HARMATRA_CORE</span>
+    </a>
+    
+    <nav class="nav-list">
+      <li class="nav-item active" data-tab="dashboard">
+        <button onclick="switchTab('dashboard')"><i class="fa-solid fa-chart-line"></i> CORE_DATA.SYS</button>
+      </li>
+      <li class="nav-item" data-tab="members">
+        <button onclick="switchTab('members')"><i class="fa-solid fa-users"></i> MEMBERS.DAT</button>
+      </li>
+      <li class="nav-item" data-tab="timeline">
+        <button onclick="switchTab('timeline')"><i class="fa-solid fa-route"></i> TIMELINE.DAT</button>
+      </li>
+      <li class="nav-item" data-tab="gallery">
+        <button onclick="switchTab('gallery')"><i class="fa-solid fa-images"></i> GALLERY.DAT</button>
+      </li>
+      <li class="nav-item" data-tab="quotes">
+        <button onclick="switchTab('quotes')"><i class="fa-solid fa-quote-left"></i> QUOTES.DAT</button>
+      </li>
+      <li class="nav-item" data-tab="spotlight">
+        <button onclick="switchTab('spotlight')"><i class="fa-solid fa-crosshairs"></i> SPOTLIGHT.CFG</button>
+      </li>
+      <li class="nav-item" data-tab="settings">
+        <button onclick="switchTab('settings')"><i class="fa-solid fa-sliders"></i> SETTINGS.JSON</button>
+      </li>
+      <li class="nav-item" data-tab="connection">
+        <button onclick="switchTab('connection')"><i class="fa-solid fa-link"></i> DEPLOYMENT.EXE</button>
+      </li>
+    </nav>
+
+    <!-- Embedded CLI console shell (Easter Egg) -->
+    <div class="cli-widget">
+      <div class="cli-prompt">
+        <i class="fa-solid fa-terminal"></i>
+        <span>atmin@harmatra-core:~$</span>
+      </div>
+      <div class="cli-input-container">
+        <input type="text" id="cliInputField" class="cli-input" placeholder="Type help..." autocomplete="off">
+      </div>
+    </div>
+
+    <!-- Connection Widget -->
+    <div class="widget-box" style="margin-top: 1rem;">
+      <div class="widget-title">
+        <span>GIT_CONNECTION</span>
+        <span id="githubIndicator" class="status-led"></span>
+      </div>
+      <div id="repoNameDisplay" style="color:var(--text-muted); font-size:0.7rem; font-family:monospace; word-break:break-all;">Not Connected</div>
+    </div>
+  </aside>
+
+  <!-- MAIN WORKSPACE -->
+  <main id="mainContent">
+    
+    <!-- HEADER -->
+    <header class="content-header">
+      <div>
+        <h2 id="currentTabTitle" class="page-title" style="font-family:'Space Grotesk', sans-serif; text-shadow:0 0 10px var(--accent-green);">HARMATRA CORE SYSTEM</h2>
+        <p style="color:var(--text-muted); font-size:0.8rem; margin-top:0.25rem;">Administrative Control Matrix</p>
+      </div>
+      
+      <div class="meta-clock">
+        <i class="fa-solid fa-terminal"></i>
+        <span id="backroomClock">...</span>
+      </div>
+    </header>
+
+    <!-- TAB: DASHBOARD -->
+    <section id="tab-dashboard" class="cms-view active">
+      <div class="grid-4">
+        <div class="glass-card stat-card">
+          <div class="card-corner corner-tl"></div>
+          <div class="card-corner corner-tr"></div>
+          <div class="card-corner corner-bl"></div>
+          <div class="card-corner corner-br"></div>
+          <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+          <div>
+            <div id="statCountMembers" class="stat-value">0</div>
+            <div class="stat-label">MEMBERS.DAT</div>
+          </div>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="card-corner corner-tl"></div>
+          <div class="card-corner corner-tr"></div>
+          <div class="card-corner corner-bl"></div>
+          <div class="card-corner corner-br"></div>
+          <div class="stat-icon"><i class="fa-solid fa-route"></i></div>
+          <div>
+            <div id="statCountTimeline" class="stat-value">0</div>
+            <div class="stat-label">TIMELINE.DAT</div>
+          </div>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="card-corner corner-tl"></div>
+          <div class="card-corner corner-tr"></div>
+          <div class="card-corner corner-bl"></div>
+          <div class="card-corner corner-br"></div>
+          <div class="stat-icon"><i class="fa-solid fa-images"></i></div>
+          <div>
+            <div id="statCountGallery" class="stat-value">0</div>
+            <div class="stat-label">GALLERY.DAT</div>
+          </div>
+        </div>
+        <div class="glass-card stat-card">
+          <div class="card-corner corner-tl"></div>
+          <div class="card-corner corner-tr"></div>
+          <div class="card-corner corner-bl"></div>
+          <div class="card-corner corner-br"></div>
+          <div class="stat-icon"><i class="fa-solid fa-quote-left"></i></div>
+          <div>
+            <div id="statCountQuotes" class="stat-value">0</div>
+            <div class="stat-label">QUOTES.DAT</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Deploy Info status card -->
+        <div class="glass-card">
+          <div class="card-corner corner-tl"></div>
+          <div class="card-corner corner-tr"></div>
+          <div class="card-corner corner-bl"></div>
+          <div class="card-corner corner-br"></div>
+          <h3 class="font-display text-base font-bold mb-4 flex items-center gap-2" style="color:var(--accent-cyan);">
+            <i class="fa-solid fa-network-wired"></i> SYSTEM NODE CONFIG
+          </h3>
+          <div style="display:flex; flex-direction:column; gap:1rem; font-size:0.8rem;">
+            <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(0,255,136,0.1); padding-bottom:0.5rem;">
+              <span class="con-info-label">DEPLOY_NODE</span>
+              <strong id="deployEnvText">Standalone Console</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(0,255,136,0.1); padding-bottom:0.5rem;">
+              <span class="con-info-label">TARGET_BRANCH</span>
+              <strong id="deployBranchText">-</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(0,255,136,0.1); padding-bottom:0.5rem;">
+              <span class="con-info-label">LAST_SAVED_HASH</span>
+              <strong id="deployLastCommitText" style="color:var(--accent-cyan);">None</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding-top:0.25rem;">
+              <span class="con-info-label">NETLIFY_NODE_BADGE</span>
+              <span id="netlifyBadgeWrapper">
+                <span style="color:var(--text-muted); font-size:0.75rem;">Site ID Required</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CLI Console activity log card -->
+        <div class="glass-card">
+          <div class="card-corner corner-tl"></div>
+          <div class="card-corner corner-tr"></div>
+          <div class="card-corner corner-bl"></div>
+          <div class="card-corner corner-br"></div>
+          <h3 class="font-display text-base font-bold mb-4 flex items-center gap-2" style="color:var(--accent-purple);">
+            <i class="fa-solid fa-terminal"></i> LIVE LOG TERMINAL
+          </h3>
+          <div id="liveTerminalLogPanel">
+            <div class="log-line">[SYS_INIT] Core engine initialized successfully.</div>
+            <div class="log-line">[SYS_READY] Safe connection parameters buffered.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB: MEMBERS -->
+    <section id="tab-members" class="cms-view">
+      <div class="collection-header">
+        <span style="color:var(--text-muted); font-size:0.8rem;" id="membersListCount">Total records: 0</span>
+        <button onclick="openAddMemberModal()" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> ADD RECORD</button>
+      </div>
+      <div id="membersListContainer" class="data-list"></div>
+    </section>
+
+    <!-- TAB: TIMELINE -->
+    <section id="tab-timeline" class="cms-view">
+      <div class="collection-header">
+        <span style="color:var(--text-muted); font-size:0.8rem;" id="timelineListCount">Total records: 0</span>
+        <button onclick="openAddTimelineModal()" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> ADD MILESTONE</button>
+      </div>
+      <div id="timelineListContainer" class="data-list"></div>
+    </section>
+
+    <!-- TAB: GALLERY -->
+    <section id="tab-gallery" class="cms-view">
+      <div class="collection-header">
+        <span style="color:var(--text-muted); font-size:0.8rem;" id="galleryListCount">Total records: 0</span>
+        <button onclick="openAddGalleryModal()" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> ADD RECORD</button>
+      </div>
+      <div id="galleryListContainer" class="data-list"></div>
+    </section>
+
+    <!-- TAB: QUOTES -->
+    <section id="tab-quotes" class="cms-view">
+      <div class="collection-header">
+        <span style="color:var(--text-muted); font-size:0.8rem;" id="quotesListCount">Total records: 0</span>
+        <button onclick="openAddQuoteModal()" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> ADD QUOTE</button>
+      </div>
+      <div id="quotesListContainer" class="data-list"></div>
+    </section>
+
+    <!-- TAB: SPOTLIGHT -->
+    <section id="tab-spotlight" class="cms-view">
+      <div class="glass-card mb-4">
+        <div class="card-corner corner-tl"></div>
+        <div class="card-corner corner-tr"></div>
+        <div class="card-corner corner-bl"></div>
+        <div class="card-corner corner-br"></div>
+        
+        <h3 class="font-display text-base font-bold mb-4" style="color:var(--accent-green);"><i class="fa-solid fa-crosshairs"></i> CONFIG: SPOTLIGHT.CFG</h3>
+        
+        <form id="spotlightForm" onsubmit="saveSpotlightConfig(event)">
+          <div class="form-group">
+            <label class="form-label">Spotlight Mode</label>
+            <select id="cfgSpotlightMode" class="form-control" onchange="toggleSpotlightFixed()">
+              <option value="daily">Daily Rotation (Deterministic)</option>
+              <option value="weekly">Weekly Rotation (Deterministic)</option>
+              <option value="monthly">Monthly Rotation (Deterministic)</option>
+              <option value="fixed">Fixed Member</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="cfgSpotlightFixedGroup" style="display:none;">
+            <label class="form-label">Select Fixed Member</label>
+            <select id="cfgSpotlightFixedMember" class="form-control">
+              <option value="">-- Select Member --</option>
+            </select>
+          </div>
+
+          <div style="margin-top:2rem; display:flex; justify-content:flex-end;">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> BUFFER_CHANGES()</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- TAB: SETTINGS -->
+    <section id="tab-settings" class="cms-view">
+      <div class="glass-card">
+        <div class="card-corner corner-tl"></div>
+        <div class="card-corner corner-tr"></div>
+        <div class="card-corner corner-bl"></div>
+        <div class="card-corner corner-br"></div>
+        
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+          <h3 class="font-display text-base font-bold" style="color:var(--accent-green);"><i class="fa-solid fa-sliders"></i> CONFIG: SETTINGS.JSON</h3>
+          <div style="display:flex; gap:0.5rem;" id="settingsLangTabs">
+            <button class="tab-lang-btn active" onclick="switchSettingsLang('id')">ID</button>
+            <button class="tab-lang-btn" onclick="switchSettingsLang('en')">EN</button>
+            <button class="tab-lang-btn" onclick="switchSettingsLang('ar')">AR</button>
+          </div>
+        </div>
+
+        <form id="settingsForm" onsubmit="saveTranslations(event)">
+          <div class="settings-group-title">Hero Section Parameters</div>
+          <div class="form-group">
+            <label class="form-label">hero_subtext</label>
+            <textarea id="set_hero_sub" class="form-control" rows="2"></textarea>
+          </div>
+
+          <div class="settings-group-title">Dynamic Section Titles</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">title_timeline</label>
+              <input type="text" id="set_title_timeline" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">sub_timeline</label>
+              <input type="text" id="set_sub_timeline" class="form-control">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">title_members</label>
+              <input type="text" id="set_title_members" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">sub_members</label>
+              <input type="text" id="set_sub_members" class="form-control">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">title_gallery</label>
+              <input type="text" id="set_title_gallery" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">sub_gallery</label>
+              <input type="text" id="set_sub_gallery" class="form-control">
+            </div>
+          </div>
+
+          <div class="settings-group-title">Asal Usul Nama (HARMATRA Description)</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">meaning_title</label>
+              <input type="text" id="set_meaning_title" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">meaning_subtitle</label>
+              <input type="text" id="set_meaning_subtitle" class="form-control">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">meaning_card1_title</label>
+              <input type="text" id="set_meaning_card1_title" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">meaning_card1_desc</label>
+              <input type="text" id="set_meaning_card1_desc" class="form-control">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">meaning_card2_title</label>
+              <input type="text" id="set_meaning_card2_title" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">meaning_card2_desc</label>
+              <input type="text" id="set_meaning_card2_desc" class="form-control">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">meaning_card3_title</label>
+              <input type="text" id="set_meaning_card3_title" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">meaning_card3_desc</label>
+              <input type="text" id="set_meaning_card3_desc" class="form-control">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">meaning_closing_1</label>
+              <input type="text" id="set_meaning_closing_1" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">meaning_closing_2</label>
+              <input type="text" id="set_meaning_closing_2" class="form-control">
+            </div>
+          </div>
+
+          <div class="settings-group-title">Audio BGM Label</div>
+          <div class="form-group">
+            <label class="form-label">BGM Label Toggle Text</label>
+            <input type="text" id="set_music" class="form-control">
+          </div>
+
+          <div class="settings-group-title">Contact Portal Settings</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">contact_button_text</label>
+              <input type="text" id="set_contact_btn" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">contact_modal_title</label>
+              <input type="text" id="set_contact_title" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">contact_modal_desc</label>
+            <textarea id="set_contact_desc" class="form-control" rows="2"></textarea>
+          </div>
+
+          <div class="settings-group-title">Footer Specifications</div>
+          <div class="form-group">
+            <label class="form-label">footer_notes_notice</label>
+            <textarea id="set_footer_note" class="form-control" rows="2"></textarea>
+          </div>
+
+          <div class="settings-group-title">System Gate Passcode</div>
+          <div class="form-group">
+            <label class="form-label">admin_access_passcode</label>
+            <input type="text" id="set_passcode" class="form-control" placeholder="askaryy" style="max-width:300px;">
+          </div>
+
+          <div class="settings-group-title">Contact Form & EmailJS Configuration</div>
+          <div class="form-group">
+            <label class="form-label">Recipient Email (Contact Form Dest)</label>
+            <input type="email" id="set_contact_email" class="form-control" placeholder="izemsempay@gmail.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Subject</label>
+            <input type="text" id="set_contact_subject" class="form-control" placeholder="New Message from HARMATRA Website">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Success Message (Use {{name}} for sender name)</label>
+            <textarea id="set_contact_success" class="form-control" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Error Message</label>
+            <textarea id="set_contact_error" class="form-control" rows="2"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">EmailJS Service ID</label>
+              <input type="text" id="set_emailjs_service" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">EmailJS Template ID</label>
+              <input type="text" id="set_emailjs_template" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">EmailJS Public Key</label>
+            <input type="text" id="set_emailjs_public" class="form-control">
+          </div>
+
+          <div style="margin-top:2rem; display:flex; justify-content:flex-end;">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> BUFFER_CHANGES()</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- TAB: CONNECTION -->
+    <section id="tab-connection" class="cms-view">
+      <div class="glass-card" style="max-width:650px; margin:0 auto;">
+        <div class="card-corner corner-tl"></div>
+        <div class="card-corner corner-tr"></div>
+        <div class="card-corner corner-bl"></div>
+        <div class="card-corner corner-br"></div>
+        <h3 class="font-display text-base font-bold mb-6" style="color:var(--accent-purple);"><i class="fa-solid fa-key"></i> SECURE DEPLOYMENT PARAMETERS</h3>
+        
+        <form id="connectionForm" onsubmit="saveConnectionConfig(event)">
+          <div class="form-group">
+            <label class="form-label">github_repository_owner</label>
+            <input type="text" id="git_owner" class="form-control" placeholder="e.g. your-github-name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">github_repository_name</label>
+            <input type="text" id="git_repo" class="form-control" placeholder="e.g. harmatra-web" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">target_branch</label>
+            <input type="text" id="git_branch" class="form-control" placeholder="main" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">github_personal_access_token (pat)</label>
+            <input type="password" id="git_token" class="form-control" placeholder="ghp_••••••••••••••••••••••••••••••••••••" required>
+          </div>
+          <div class="form-group" style="margin-top:2rem; border-top:1px solid rgba(0,255,136,0.15); padding-top:1.5rem;">
+            <label class="form-label">netlify_api_site_id</label>
+            <input type="text" id="netlify_site_id" class="form-control" placeholder="e.g. a1b2c3d4-e5f6-7a8b-9c0d-123456789abc">
+          </div>
+
+          <div style="margin-top:2rem; display:flex; justify-content:space-between;">
+            <button type="button" onclick="clearConnectionConfig()" class="btn btn-danger btn-sm">PURGE_CREDENTIALS()</button>
+            <div style="display:flex; gap:1rem;">
+              <button type="button" onclick="testGitConnection()" class="btn btn-sm"><i class="fa-solid fa-network-wired"></i> TEST_LINK()</button>
+              <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-check"></i> SAVE_PARAMS()</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- DEPLOYMENT STICKY BOTTOM CONTROL PANEL -->
+  <div id="deploymentBar">
+    <div style="display:flex; align-items:center; gap:2rem;">
+      <div class="status-badge">
+        <span id="deployStatusDot" class="status-dot synced"></span>
+        <span id="deployStatusLabel" style="color:var(--text-main); font-weight:700;">SYSTEM_SYNCED</span>
+      </div>
+      <div style="font-size:0.75rem; border-left:1px solid rgba(0,255,136,0.2); padding-left:1.5rem; color:var(--text-muted);" id="pendingChangesText">
+        Memory core is synced with files.
+      </div>
+    </div>
+    
+    <div style="display:flex; gap:1rem;">
+      <button onclick="openLivePreview()" class="btn"><i class="fa-solid fa-eye"></i> SYSTEM_PREVIEW()</button>
+      <button onclick="triggerDeployment()" class="btn btn-success" id="btnSaveDeploy"><i class="fa-solid fa-circle-arrow-up"></i> DEPLOY_CHANGES()</button>
+    </div>
+  </div>
+
+  <!-- IFRAME PREVIEW MODULE -->
+  <div id="previewOverlay">
+    <div class="preview-header">
+      <h3 class="font-display font-bold text-base" style="color:var(--accent-cyan);"><i class="fa-solid fa-display"></i> live_preview_monitor.exe</h3>
+      <div style="display:flex; gap:1rem; align-items:center;">
+        <span style="font-size:0.75rem; color:var(--text-muted);">Sync active via window.postMessage channel</span>
+        <button onclick="closeLivePreview()" class="btn btn-danger btn-sm">TERMINATE_PREVIEW()</button>
+      </div>
+    </div>
+    <iframe id="previewFrame" class="preview-iframe" src="index.html"></iframe>
+  </div>
+
+  <!-- DAT EDITORS MODALS -->
+  <!-- MODAL: ADD/EDIT MEMBER -->
+  <div id="memberModal" class="cms-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="memberModalTitle" class="font-display text-base font-bold">EDIT_RECORD: MEMBERS.DAT</h4>
+        <button onclick="closeModal('memberModal')" style="background:transparent; border:none; color:#ffffff; font-size:1.5rem; cursor:pointer;">×</button>
+      </div>
+      <form id="memberForm" onsubmit="saveMember(event)">
+        <div class="modal-body">
+          <input type="hidden" id="member_index">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Name (ID/EN)</label>
+              <input type="text" id="member_name" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Name (AR)</label>
+              <input type="text" id="member_name_ar" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Full Name Tag</label>
+            <input type="text" id="member_full_name" class="form-control">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Role (ID/EN)</label>
+              <input type="text" id="member_role" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Role (AR)</label>
+              <input type="text" id="member_role_ar" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">IG handle (no @)</label>
+            <input type="text" id="member_ig" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Google Drive Photo Path</label>
+            <input type="url" id="member_photo" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">bio_indonesian</label>
+            <textarea id="member_bio_id" class="form-control" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">bio_english</label>
+            <textarea id="member_bio_en" class="form-control" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">bio_arabic</label>
+            <textarea id="member_bio_ar" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('memberModal')" class="btn btn-sm">ABORT()</button>
+          <button type="submit" class="btn btn-primary btn-sm">WRITE_RECORD()</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD/EDIT TIMELINE -->
+  <div id="timelineModal" class="cms-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="timelineModalTitle" class="font-display text-base font-bold">EDIT_RECORD: TIMELINE.DAT</h4>
+        <button onclick="closeModal('timelineModal')" style="background:transparent; border:none; color:#ffffff; font-size:1.5rem; cursor:pointer;">×</button>
+      </div>
+      <form id="timelineForm" onsubmit="saveTimeline(event)">
+        <div class="modal-body">
+          <input type="hidden" id="timeline_index">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Date String</label>
+              <input type="date" id="timeline_date" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Photo Path / Image URL</label>
+              <input type="url" id="timeline_photo" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Title (ID)</label>
+            <input type="text" id="timeline_title_id" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Title (EN)</label>
+            <input type="text" id="timeline_title_en" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Title (AR)</label>
+            <input type="text" id="timeline_title_ar" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">desc_indonesian</label>
+            <textarea id="timeline_desc_id" class="form-control" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">desc_english</label>
+            <textarea id="timeline_desc_en" class="form-control" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">desc_arabic</label>
+            <textarea id="timeline_desc_ar" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('timelineModal')" class="btn btn-sm">ABORT()</button>
+          <button type="submit" class="btn btn-primary btn-sm">WRITE_RECORD()</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD/EDIT GALLERY -->
+  <div id="galleryModal" class="cms-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="galleryModalTitle" class="font-display text-base font-bold">EDIT_RECORD: GALLERY.DAT</h4>
+        <button onclick="closeModal('galleryModal')" style="background:transparent; border:none; color:#ffffff; font-size:1.5rem; cursor:pointer;">×</button>
+      </div>
+      <form id="galleryForm" onsubmit="saveGallery(event)">
+        <div class="modal-body">
+          <input type="hidden" id="gallery_index">
+          <div class="form-group">
+            <label class="form-label">Photo Source URL</label>
+            <input type="url" id="gallery_url" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Title (ID)</label>
+            <input type="text" id="gallery_title_id" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Title (EN)</label>
+            <input type="text" id="gallery_title_en" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Title (AR)</label>
+            <input type="text" id="gallery_title_ar" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">caption_id</label>
+            <input type="text" id="gallery_caption_id" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">caption_en</label>
+            <input type="text" id="gallery_caption_en" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">caption_ar</label>
+            <input type="text" id="gallery_caption_ar" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('galleryModal')" class="btn btn-sm">ABORT()</button>
+          <button type="submit" class="btn btn-primary btn-sm">WRITE_RECORD()</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD/EDIT QUOTE -->
+  <div id="quoteModal" class="cms-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="quoteModalTitle" class="font-display text-base font-bold">EDIT_RECORD: QUOTES.DAT</h4>
+        <button onclick="closeModal('quoteModal')" style="background:transparent; border:none; color:#ffffff; font-size:1.5rem; cursor:pointer;">×</button>
+      </div>
+      <form id="quoteForm" onsubmit="saveQuote(event)">
+        <div class="modal-body">
+          <input type="hidden" id="quote_index">
+          <div class="form-group">
+            <label class="form-label">Quote String (ID)</label>
+            <textarea id="quote_text_id" class="form-control" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Quote String (EN)</label>
+            <textarea id="quote_text_en" class="form-control" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Quote String (AR)</label>
+            <textarea id="quote_text_ar" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">quote_author</label>
+            <input type="text" id="quote_author" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('quoteModal')" class="btn btn-sm">ABORT()</button>
+          <button type="submit" class="btn btn-primary btn-sm">WRITE_RECORD()</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: DEPLOYMENT STATUS SHELL -->
+  <div id="deployModal" class="cms-modal">
+    <div class="modal-content" style="max-width:550px; border-color:var(--accent-cyan); box-shadow:0 0 30px rgba(0,255,255,0.2);">
+      <div class="modal-header" style="border-color:rgba(0,255,255,0.2);">
+        <h4 class="font-display text-base font-bold" style="color:var(--accent-cyan);"><i class="fa-solid fa-server"></i> DEPLOYMENT.EXE IN PROGRESS</h4>
+      </div>
+      <div class="modal-body">
+        <div id="deployProgressWrapper">
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem; font-size:0.85rem; color:var(--accent-cyan);">
+            <span id="deployStepLabel" style="font-weight:700;">CONNECTING TO GITHUB...</span>
+            <span id="deployPercentLabel">0%</span>
+          </div>
+          <div style="width:100%; height:6px; background:rgba(0,255,255,0.05); border-radius:3px; overflow:hidden; border:1px solid rgba(0,255,255,0.15); margin-bottom:1rem;">
+            <div id="deployProgressBar" style="width:0%; height:100%; background:linear-gradient(90deg, var(--accent-cyan), var(--accent-green)); transition:width 0.4s ease-out;"></div>
+          </div>
+        </div>
+        
+        <div id="deployConsole" style="background:#020204; border:1px solid rgba(0,255,255,0.2); padding:1rem; border-radius:0.5rem; height:180px; overflow-y:auto; font-size:0.75rem; color:var(--accent-cyan); font-family:monospace; line-height:1.5;">
+          <div>[EXEC] Initiating github deploy push command...</div>
+        </div>
+      </div>
+      <div class="modal-footer" style="border-color:rgba(0,255,255,0.2);">
+        <button type="button" id="btnCancelDeploy" onclick="closeModal('deployModal')" class="btn btn-danger btn-sm" style="display:none;">TERMINATE()</button>
+        <button type="button" id="btnFinishedDeploy" onclick="location.reload()" class="btn btn-success btn-sm" style="display:none;">REBOOT_CONSOLE()</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // State
+    let websiteData = null;
+    let fallbackUsed = false;
+    let hasPendingChanges = false;
+    let activeSettingsLang = 'id';
+
+    // Local Storage keys
+    const CREDENTIALS_KEY = 'harmatra_backroom_credentials';
+    const SESSION_AUTH_KEY = 'harmatra_backroom_authorized';
+
+    // Synth trigger
+    function playBeep(freq, duration, type = 'sine', volume = 0.03) {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
+    }
+
+    // Google Drive URL Formatter
+    function getPhotoPreview(url) {
+      if (!url) return './logo utama.png';
+      if (url.includes('drive.google.com')) {
+        const match = url.match(/\/d\/([^/]+)/);
+        if (match && match[1]) {
+          return `https://lh3.googleusercontent.com/d/${match[1]}`;
+        }
+      }
+      return url;
+    }
+
+    function escapeHTML(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Auth validation on load
+    window.onload = function() {
+      // Background matrix rain setup
+      initMatrixBackground();
+
+      // Clock
+      setInterval(() => {
+        const now = new Date();
+        document.getElementById('backroomClock').innerText = `SYS_TIME: ${now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'})}`;
+      }, 1000);
+
+      // Check session auth
+      if (sessionStorage.getItem(SESSION_AUTH_KEY) === 'true') {
+        document.getElementById('lockScreen').classList.add('hidden');
+        initCMS();
+      }
+
+      // Enter key listener on passcode input
+      document.getElementById('passcodeInput').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') verifyPasscode();
+      });
+
+      // Easter egg CLI prompt logic
+      document.getElementById('cliInputField').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          handleCliCommand(this.value.trim());
+          this.value = '';
+        }
+      });
+    };
+
+    // Subtle matrix rain behind Backroom
+    function initMatrixBackground() {
+      const canvas = document.getElementById('bgMatrixCanvas');
+      const ctx = canvas.getContext('2d');
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const chars = '0123456789HARMATRAMEMORYTIMELINEGALLERYANGKATANMAANTRAGENHARMONY'.split('');
+      const font = 14;
+      const cols = Math.floor(width / font) + 1;
+      const drops = Array(cols).fill(1);
+
+      function draw() {
+        ctx.fillStyle = 'rgba(5, 5, 5, 0.06)';
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.font = `${font}px monospace`;
+        ctx.fillStyle = '#00ff88';
+
+        for (let i = 0; i < drops.length; i++) {
+          const char = chars[Math.floor(Math.random() * chars.length)];
+          const x = i * font;
+          const y = drops[i] * font;
+
+          ctx.fillText(char, x, y);
+
+          if (y > height && Math.random() > 0.985) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }
+      setInterval(draw, 45);
+    }
+
+    // Unlock verify
+    function verifyPasscode() {
+      const input = document.getElementById('passcodeInput').value;
+      
+      fetch('data.json')
+        .then(res => res.json())
+        .then(data => {
+          let coreCode = 'askaryy';
+          if (data.settings && data.settings.adminPasscode) {
+            coreCode = data.settings.adminPasscode;
+          }
+          validateAndOpen(input, coreCode);
+        })
+        .catch(() => {
+          validateAndOpen(input, 'askaryy'); // fallback
+        });
+    }
+
+    function validateAndOpen(input, correctCode) {
+      if (input === correctCode) {
+        // Tech chime beep
+        playBeep(440, 0.08, 'triangle', 0.04);
+        setTimeout(() => playBeep(880, 0.16, 'sine', 0.04), 80);
+
+        sessionStorage.setItem(SESSION_AUTH_KEY, 'true');
+        document.getElementById('lockScreen').classList.add('hidden');
+        initCMS();
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'ACCESS RESTRICTED',
+          text: 'INCORRECT DECRYPTION DECRYPT_PASSCODE()',
+          background: '#07070a',
+          color: '#00ff88',
+          confirmButtonColor: '#ef4444',
+          customClass: { popup: 'border border-[#ef4444]' }
+        });
+      }
+    }
+
+    // CMS Initialization
+    function initCMS() {
+      loadConnectionConfig();
+      fetchCMSData();
+    }
+
+    // Load connection keys from localStorage
+    function loadConnectionConfig() {
+      const raw = localStorage.getItem(CREDENTIALS_KEY);
+      if (raw) {
+        try {
+          const cred = JSON.parse(raw);
+          document.getElementById('git_owner').value = cred.owner || '';
+          document.getElementById('git_repo').value = cred.repo || '';
+          document.getElementById('git_branch').value = cred.branch || 'main';
+          document.getElementById('git_token').value = cred.token || '';
+          document.getElementById('netlify_site_id').value = cred.netlifySiteId || '';
+          
+          updateConnectionStatusDisplay(true, cred.owner + '/' + cred.repo);
+          updateNetlifyBadge(cred.netlifySiteId);
+        } catch (e) {
+          updateConnectionStatusDisplay(false);
+        }
+      } else {
+        updateConnectionStatusDisplay(false);
+      }
+    }
+
+    function updateConnectionStatusDisplay(connected, repoName = '') {
+      const ind = document.getElementById('githubIndicator');
+      const text = document.getElementById('repoNameDisplay');
+      if (connected) {
+        ind.className = 'status-led active';
+        text.innerText = repoName;
+        document.getElementById('deployEnvText').innerText = 'LINKED_NODE';
+        document.getElementById('deployBranchText').innerText = document.getElementById('git_branch').value || 'main';
+      } else {
+        ind.className = 'status-led';
+        text.innerText = 'OFFLINE_STANDALONE';
+        document.getElementById('deployEnvText').innerText = 'Local Sandbox';
+        document.getElementById('deployBranchText').innerText = 'LOCAL';
+      }
+    }
+
+    function updateNetlifyBadge(siteId) {
+      const wrapper = document.getElementById('netlifyBadgeWrapper');
+      if (siteId) {
+        wrapper.innerHTML = `<img src="https://api.netlify.com/api/v1/badges/${siteId}/deploy-status" alt="Netlify Status" style="max-height: 18px; filter: hue-rotate(60deg) saturate(1.5);">`;
+      } else {
+        wrapper.innerHTML = `<span style="color:var(--text-muted); font-size:0.75rem;">Site ID Required</span>`;
+      }
+    }
+
+    // Save Connection settings
+    function saveConnectionConfig(e) {
+      if (e) e.preventDefault();
+      const config = {
+        owner: document.getElementById('git_owner').value.trim(),
+        repo: document.getElementById('git_repo').value.trim(),
+        branch: document.getElementById('git_branch').value.trim(),
+        token: document.getElementById('git_token').value.trim(),
+        netlifySiteId: document.getElementById('netlify_site_id').value.trim()
+      };
+
+      localStorage.setItem(CREDENTIALS_KEY, JSON.stringify(config));
+      Swal.fire({
+        icon: 'success',
+        title: 'PARAMS SAVED',
+        text: 'Connection credentials mapped to browser config block.',
+        background: '#07070a',
+        color: '#00ff88',
+        confirmButtonColor: '#00ff88',
+        customClass: { popup: 'border border-[#00ff88]/30' }
+      });
+      loadConnectionConfig();
+      logTerminal('SYS_PARAM', 'Configuration credentials block successfully rewritten.');
+    }
+
+    // Clear config
+    function clearConnectionConfig() {
+      localStorage.removeItem(CREDENTIALS_KEY);
+      document.getElementById('connectionForm').reset();
+      updateConnectionStatusDisplay(false);
+      updateNetlifyBadge('');
+      Swal.fire({
+        icon: 'info',
+        title: 'CREDENTIALS PURGED',
+        text: 'Credentials removed from sandbox storage.',
+        background: '#07070a',
+        color: '#00ff88',
+        confirmButtonColor: '#00ff88',
+        customClass: { popup: 'border border-[#00ff88]/30' }
+      });
+      logTerminal('SYS_PARAM', 'Credentials block purged from browser cache.', 'info');
+    }
+
+    // Test Git Connection
+    async function testGitConnection() {
+      const owner = document.getElementById('git_owner').value.trim();
+      const repo = document.getElementById('git_repo').value.trim();
+      const branch = document.getElementById('git_branch').value.trim() || 'main';
+      const token = document.getElementById('git_token').value.trim();
+
+      if (!owner || !repo || !token) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'FIELDS UNMAPPED',
+          text: 'Requires Owner, Repository name, and authorization PAT token.',
+          background: '#07070a',
+          color: '#00ff88',
+          confirmButtonColor: '#00ff88',
+          customClass: { popup: 'border border-[#00ff88]/30' }
+        });
+        return;
+      }
+
+      Swal.fire({
+        title: 'Pinging Git Repository node...',
+        allowOutsideClick: false,
+        background: '#07070a',
+        color: '#00ff88',
+        didOpen: () => Swal.showLoading()
+      });
+
+      try {
+        const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/branches/${branch}`, {
+          headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+
+        if (response.ok) {
+          Swal.fire({
+            icon: 'success',
+            title: 'HANDSHAKE LINKED',
+            text: `Connection verified on branch '${branch}'.`,
+            background: '#07070a',
+            color: '#00ff88',
+            confirmButtonColor: '#00ff88',
+            customClass: { popup: 'border border-[#00ff88]/30' }
+          });
+          logTerminal('GIT_TEST', `Handshake connection verified for repository ${owner}/${repo}`);
+        } else {
+          const errData = await response.json();
+          throw new Error(errData.message || 'Verification failed');
+        }
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'HANDSHAKE FAILED',
+          text: err.message || 'Link failed. Check parameters and token scopes.',
+          background: '#07070a',
+          color: '#ef4444',
+          confirmButtonColor: '#ef4444',
+          customClass: { popup: 'border border-[#ef4444]' }
+        });
+        logTerminal('GIT_TEST', `Link failed: ${err.message}`, 'error');
+      }
+    }
+
+    // Fetch site data from data.json
+    function fetchCMSData() {
+      fetch('data.json')
+        .then(res => {
+          if (!res.ok) throw new Error('data.json unmapped');
+          return res.json();
+        })
+        .then(data => {
+          websiteData = data;
+          logTerminal('MEM_LOAD', 'Centralized memory block successfully mapped from data.json.');
+          renderCMSLayout();
+        })
+        .catch(err => {
+          console.warn("CMS error loading data.json:", err);
+          websiteData = {
+            members: [],
+            timeline: [],
+            gallery: [],
+            quotes: [],
+            translations: { id: {}, en: {}, ar: {} },
+            settings: { adminPasscode: 'askaryy' }
+          };
+          fallbackUsed = true;
+          logTerminal('MEM_LOAD', 'Empty data schema initialized. File data.json not found.', 'info');
+          renderCMSLayout();
+        });
+    }
+
+    // Logging activities in Console Logger
+    function logTerminal(module, message, type = 'success') {
+      const consoleEl = document.getElementById('liveTerminalLogPanel');
+      if (!consoleEl) return;
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      
+      let lineClass = 'log-line';
+      if (type === 'error') lineClass = 'log-line error';
+      else if (type === 'info') lineClass = 'log-line info';
+
+      const line = document.createElement('div');
+      line.className = lineClass;
+      line.innerHTML = `[${timeStr}] [${module.toUpperCase()}] ${escapeHTML(message)}`;
+      consoleEl.appendChild(line);
+      consoleEl.scrollTop = consoleEl.scrollHeight;
+
+      // Synth feedback click
+      playBeep(700, 0.015, 'sine', 0.015);
+    }
+
+    // Interactive CLI Commands console shell (Easter Egg)
+    function handleCliCommand(cmdText) {
+      if (!cmdText) return;
+      const logBox = document.getElementById('liveTerminalLogPanel');
+      
+      // Echo the command
+      const echoLine = document.createElement('div');
+      echoLine.className = 'log-line info';
+      echoLine.innerText = `guest@harmatra-core:~$ ${cmdText}`;
+      logBox.appendChild(echoLine);
+
+      const cmd = cmdText.toLowerCase();
+
+      if (cmd === 'help') {
+        logTerminal('SHELL', 'Supported system instructions: help, root, archive, harmatra, admin, clear');
+      } else if (cmd === 'clear') {
+        logBox.innerHTML = '';
+        logTerminal('SHELL', 'Shell console logs wiped.');
+      } else if (cmd === 'root') {
+        const ascii = `
+██╗  ██╗ █████╗ ██████╗ ███╗   ███╗ █████╗ ████████╗██████╗  █████╗ 
+██║  ██║██╔══██╗██╔══██╗████╗ ████║██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗
+███████║███████║██████╔╝██╔████╔██║███████║   ██║   ██████╔╝███████║
+██╔══██║██╔══██║██╔══██╗██║╚██╔╝██║██╔══██║   ██║   ██╔══██╗██╔══██║
+██║  ██║██║  ██║██║  ██║██║ ╚═╝ ██║██║  ██║   ██║   ██║  ██║██║  ██║
+╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝
+------------------------- HARMATRA CORE OS v11.0 -------------------------
+CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
+        const wrap = document.createElement('pre');
+        wrap.style.cssText = 'color:#00ff88; font-size:0.7rem; line-height:1.25; margin:0.5rem 0; font-family:monospace;';
+        wrap.textContent = ascii;
+        logBox.appendChild(wrap);
+        logBox.scrollTop = logBox.scrollHeight;
+        playBeep(900, 0.2, 'triangle', 0.03);
+      } else if (cmd === 'archive') {
+        logTerminal('SHELL', `PARSED FILE COUNTS: MEMBERS.DAT=${websiteData.members.length}, TIMELINE.DAT=${websiteData.timeline.length}, GALLERY.DAT=${websiteData.gallery.length}, QUOTES.DAT=${websiteData.quotes.length}`);
+      } else if (cmd === 'harmatra') {
+        logTerminal('SHELL', '=== FOUNDERS SYSTEM REGISTRY ===\n- hanan agak gilaa (Ketua)\n- immszkyy (Sekretaris)\n- kumis (Treasurer)\n- harmatra generation 11 crew.');
+      } else if (cmd === 'admin') {
+        logTerminal('SHELL', 'RUNNING SYSTEM HARDWARE DIAGNOSTICS...');
+        setTimeout(() => logTerminal('SHELL', '-> Checking local port allocations... [PASS]'), 150);
+        setTimeout(() => logTerminal('SHELL', '-> Validating sha256 checksums... [PASS]'), 300);
+        setTimeout(() => logTerminal('SHELL', '-> Pinging github API nodes... [PASS]'), 450);
+        setTimeout(() => logTerminal('SHELL', '-> DIAGNOSTICS COMPLETED. NO KERNEL DEFECTS FOUND.'), 600);
+        setTimeout(() => playBeep(1200, 0.1, 'sine', 0.03), 600);
+      } else {
+        logTerminal('SHELL', `Command unmapped: '${cmdText}'. Enter 'help' for instructions.`, 'error');
+      }
+    }
+
+    // Switch Tabs helper
+    function switchTab(tabId) {
+      document.querySelectorAll('.nav-item').forEach(el => {
+        el.classList.remove('active');
+        if (el.dataset.tab === tabId) el.classList.add('active');
+      });
+      document.querySelectorAll('.cms-view').forEach(el => {
+        el.classList.remove('active');
+      });
+      document.getElementById(`tab-${tabId}`).classList.add('active');
+      
+      const titles = {
+        dashboard: "CORE_DATA.SYS",
+        members: "MEMBERS.DAT",
+        timeline: "TIMELINE.DAT",
+        gallery: "GALLERY.DAT",
+        quotes: "QUOTES.DAT",
+        settings: "SETTINGS.JSON",
+        connection: "DEPLOYMENT.EXE"
+      };
+      document.getElementById('currentTabTitle').innerText = titles[tabId] || "Backroom CMS";
+      
+      logTerminal('SYS_NAV', `Switched workspace module mapping to: ${titles[tabId]}`);
+    }
+
+    // Set Change pending state
+    function setChangesPending(pending = true) {
+      hasPendingChanges = pending;
+      const dot = document.getElementById('deployStatusDot');
+      const label = document.getElementById('deployStatusLabel');
+      const changesText = document.getElementById('pendingChangesText');
+      if (pending) {
+        dot.className = 'status-dot';
+        dot.style.background = '#00ffff';
+        dot.style.boxShadow = '0 0 6px #00ffff';
+        label.innerText = 'CHANGES_BUFFERED';
+        label.style.color = '#00ffff';
+        changesText.innerText = 'Memory edits uncommitted. Run DEPLOY_CHANGES() to publish.';
+      } else {
+        dot.className = 'status-dot synced';
+        dot.style.background = '';
+        dot.style.boxShadow = '';
+        label.innerText = 'SYSTEM_SYNCED';
+        label.style.color = '';
+        changesText.innerText = 'Memory core is synced with files.';
+      }
+    }
+
+    // Render layouts
+    function renderCMSLayout() {
+      document.getElementById('statCountMembers').innerText = websiteData.members ? websiteData.members.length : 0;
+      document.getElementById('statCountTimeline').innerText = websiteData.timeline ? websiteData.timeline.length : 0;
+      document.getElementById('statCountGallery').innerText = websiteData.gallery ? websiteData.gallery.length : 0;
+      document.getElementById('statCountQuotes').innerText = websiteData.quotes ? websiteData.quotes.length : 0;
+
+      renderMembersList();
+      renderTimelineList();
+      renderGalleryList();
+      renderQuotesList();
+      loadTranslationsIntoForm();
+      renderSpotlightConfig();
+    }
+
+    // Close Modal helper
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+    }
+
+    // ==========================================
+    // MEMBERS CRUD
+    // ==========================================
+    function renderMembersList() {
+      const container = document.getElementById('membersListContainer');
+      const list = websiteData.members || [];
+      document.getElementById('membersListCount').innerText = `Total records parsed: ${list.length}`;
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `<div style="text-align:center; color:var(--text-dim); padding:3rem 0;">MEMBERS.DAT currently empty. Click Add Record.</div>`;
+        return;
+      }
+
+      list.forEach((m, idx) => {
+        const card = document.createElement('div');
+        card.className = 'data-item';
+        card.innerHTML = `
+          <div class="data-info">
+            <img src="${getPhotoPreview(m.photo)}" onerror="this.src='./logo utama.png'" class="data-preview-img">
+            <div class="data-details">
+              <div class="data-title">${escapeHTML(m.name)} <span style="font-weight:normal; font-size:0.75rem; color:var(--text-dim);">(@${m.ig || 'unmapped'})</span></div>
+              <div class="data-sub">ROLE: ${escapeHTML(m.role)} // FILE: ${escapeHTML(m.full_name || 'Generic')}</div>
+            </div>
+          </div>
+          <div class="data-actions">
+            <button onclick="reorderCollection('members', ${idx}, -1)" class="btn btn-icon btn-sm" title="Move Up"><i class="fa-solid fa-arrow-up"></i></button>
+            <button onclick="reorderCollection('members', ${idx}, 1)" class="btn btn-icon btn-sm" title="Move Down"><i class="fa-solid fa-arrow-down"></i></button>
+            <button onclick="openEditMemberModal(${idx})" class="btn btn-icon btn-sm" style="color:var(--accent-cyan);" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="deleteFromCollection('members', ${idx})" class="btn btn-icon btn-sm btn-danger" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openAddMemberModal() {
+      document.getElementById('memberForm').reset();
+      document.getElementById('member_index').value = '';
+      document.getElementById('memberModalTitle').innerText = 'ADD RECORD: MEMBERS.DAT';
+      document.getElementById('memberModal').classList.add('active');
+    }
+
+    function openEditMemberModal(idx) {
+      const m = websiteData.members[idx];
+      document.getElementById('member_index').value = idx;
+      document.getElementById('member_name').value = m.name || '';
+      document.getElementById('member_name_ar').value = m.name_ar || '';
+      document.getElementById('member_full_name').value = m.full_name || '';
+      document.getElementById('member_role').value = m.role || '';
+      document.getElementById('member_role_ar').value = m.role_ar || '';
+      document.getElementById('member_ig').value = m.ig || '';
+      document.getElementById('member_photo').value = m.photo || '';
+      document.getElementById('member_bio_id').value = m.bio_id || '';
+      document.getElementById('member_bio_en').value = m.bio_en || '';
+      document.getElementById('member_bio_ar').value = m.bio_ar || '';
+      
+      document.getElementById('memberModalTitle').innerText = 'EDIT RECORD: MEMBERS.DAT';
+      document.getElementById('memberModal').classList.add('active');
+    }
+
+    function saveMember(e) {
+      e.preventDefault();
+      const idx = document.getElementById('member_index').value;
+      const member = {
+        name: document.getElementById('member_name').value.trim(),
+        name_ar: document.getElementById('member_name_ar').value.trim(),
+        full_name: document.getElementById('member_full_name').value.trim(),
+        role: document.getElementById('member_role').value.trim(),
+        role_ar: document.getElementById('member_role_ar').value.trim(),
+        ig: document.getElementById('member_ig').value.trim(),
+        photo: document.getElementById('member_photo').value.trim(),
+        bio_id: document.getElementById('member_bio_id').value.trim(),
+        bio_en: document.getElementById('member_bio_en').value.trim(),
+        bio_ar: document.getElementById('member_bio_ar').value.trim()
+      };
+
+      if (!websiteData.members) websiteData.members = [];
+
+      if (idx === '') {
+        websiteData.members.push(member);
+        logTerminal('Members', `Appended new member record: ${member.name}`);
+      } else {
+        websiteData.members[parseInt(idx)] = member;
+        logTerminal('Members', `Rewrote member record slot ${idx}: ${member.name}`);
+      }
+
+      closeModal('memberModal');
+      setChangesPending(true);
+      renderCMSLayout();
+    }
+
+
+    // ==========================================
+    // TIMELINE CRUD
+    // ==========================================
+    function renderTimelineList() {
+      const container = document.getElementById('timelineListContainer');
+      const list = websiteData.timeline || [];
+      document.getElementById('timelineListCount').innerText = `Total records parsed: ${list.length}`;
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `<div style="text-align:center; color:var(--text-dim); padding:3rem 0;">TIMELINE.DAT currently empty. Click Add Milestone.</div>`;
+        return;
+      }
+
+      list.forEach((t, idx) => {
+        const card = document.createElement('div');
+        card.className = 'data-item';
+        card.innerHTML = `
+          <div class="data-info">
+            <img src="${getPhotoPreview(t.photo)}" onerror="this.src='./logo utama.png'" class="data-preview-img">
+            <div class="data-details">
+              <div class="data-title">${escapeHTML(t.title_id)} <span style="font-weight:normal; font-size:0.75rem; color:var(--text-dim);">(${t.date})</span></div>
+              <div class="data-sub">${escapeHTML(t.desc_id)}</div>
+            </div>
+          </div>
+          <div class="data-actions">
+            <button onclick="reorderCollection('timeline', ${idx}, -1)" class="btn btn-icon btn-sm" title="Move Up"><i class="fa-solid fa-arrow-up"></i></button>
+            <button onclick="reorderCollection('timeline', ${idx}, 1)" class="btn btn-icon btn-sm" title="Move Down"><i class="fa-solid fa-arrow-down"></i></button>
+            <button onclick="openEditTimelineModal(${idx})" class="btn btn-icon btn-sm" style="color:var(--accent-cyan);" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="deleteFromCollection('timeline', ${idx})" class="btn btn-icon btn-sm btn-danger" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openAddTimelineModal() {
+      document.getElementById('timelineForm').reset();
+      document.getElementById('timeline_index').value = '';
+      document.getElementById('timelineModalTitle').innerText = 'ADD RECORD: TIMELINE.DAT';
+      document.getElementById('timelineModal').classList.add('active');
+    }
+
+    function openEditTimelineModal(idx) {
+      const t = websiteData.timeline[idx];
+      document.getElementById('timeline_index').value = idx;
+      document.getElementById('timeline_date').value = t.date || '';
+      document.getElementById('timeline_photo').value = t.photo || '';
+      document.getElementById('timeline_title_id').value = t.title_id || '';
+      document.getElementById('timeline_title_en').value = t.title_en || '';
+      document.getElementById('timeline_title_ar').value = t.title_ar || '';
+      document.getElementById('timeline_desc_id').value = t.desc_id || '';
+      document.getElementById('timeline_desc_en').value = t.desc_en || '';
+      document.getElementById('timeline_desc_ar').value = t.desc_ar || '';
+      
+      document.getElementById('timelineModalTitle').innerText = 'EDIT RECORD: TIMELINE.DAT';
+      document.getElementById('timelineModal').classList.add('active');
+    }
+
+    function saveTimeline(e) {
+      e.preventDefault();
+      const idx = document.getElementById('timeline_index').value;
+      const event = {
+        date: document.getElementById('timeline_date').value,
+        photo: document.getElementById('timeline_photo').value.trim(),
+        title_id: document.getElementById('timeline_title_id').value.trim(),
+        title_en: document.getElementById('timeline_title_en').value.trim(),
+        title_ar: document.getElementById('timeline_title_ar').value.trim(),
+        desc_id: document.getElementById('timeline_desc_id').value.trim(),
+        desc_en: document.getElementById('timeline_desc_en').value.trim(),
+        desc_ar: document.getElementById('timeline_desc_ar').value.trim()
+      };
+
+      if (!websiteData.timeline) websiteData.timeline = [];
+
+      if (idx === '') {
+        websiteData.timeline.push(event);
+        logTerminal('Timeline', `Appended new event milestone: ${event.title_id}`);
+      } else {
+        websiteData.timeline[parseInt(idx)] = event;
+        logTerminal('Timeline', `Rewrote milestone event slot ${idx}: ${event.title_id}`);
+      }
+
+      closeModal('timelineModal');
+      setChangesPending(true);
+      renderCMSLayout();
+    }
+
+
+    // ==========================================
+    // GALLERY CRUD
+    // ==========================================
+    function renderGalleryList() {
+      const container = document.getElementById('galleryListContainer');
+      const list = websiteData.gallery || [];
+      document.getElementById('galleryListCount').innerText = `Total records parsed: ${list.length}`;
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `<div style="text-align:center; color:var(--text-dim); padding:3rem 0;">GALLERY.DAT currently empty. Click Add Record.</div>`;
+        return;
+      }
+
+      list.forEach((img, idx) => {
+        const card = document.createElement('div');
+        card.className = 'data-item';
+        card.innerHTML = `
+          <div class="data-info">
+            <img src="${getPhotoPreview(img.url)}" onerror="this.src='./logo utama.png'" class="data-preview-img">
+            <div class="data-details">
+              <div class="data-title">${escapeHTML(img.title_id || 'unnamed_image.png')}</div>
+              <div class="data-sub">${escapeHTML(img.caption_id || '')}</div>
+            </div>
+          </div>
+          <div class="data-actions">
+            <button onclick="reorderCollection('gallery', ${idx}, -1)" class="btn btn-icon btn-sm" title="Move Up"><i class="fa-solid fa-arrow-up"></i></button>
+            <button onclick="reorderCollection('gallery', ${idx}, 1)" class="btn btn-icon btn-sm" title="Move Down"><i class="fa-solid fa-arrow-down"></i></button>
+            <button onclick="openEditGalleryModal(${idx})" class="btn btn-icon btn-sm" style="color:var(--accent-cyan);" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="deleteFromCollection('gallery', ${idx})" class="btn btn-icon btn-sm btn-danger" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openAddGalleryModal() {
+      document.getElementById('galleryForm').reset();
+      document.getElementById('gallery_index').value = '';
+      document.getElementById('galleryModalTitle').innerText = 'ADD RECORD: GALLERY.DAT';
+      document.getElementById('galleryModal').classList.add('active');
+    }
+
+    function openEditGalleryModal(idx) {
+      const img = websiteData.gallery[idx];
+      document.getElementById('gallery_index').value = idx;
+      document.getElementById('gallery_url').value = img.url || '';
+      document.getElementById('gallery_title_id').value = img.title_id || '';
+      document.getElementById('gallery_title_en').value = img.title_en || '';
+      document.getElementById('gallery_title_ar').value = img.title_ar || '';
+      document.getElementById('gallery_caption_id').value = img.caption_id || '';
+      document.getElementById('gallery_caption_en').value = img.caption_en || '';
+      document.getElementById('gallery_caption_ar').value = img.caption_ar || '';
+      
+      document.getElementById('galleryModalTitle').innerText = 'EDIT RECORD: GALLERY.DAT';
+      document.getElementById('galleryModal').classList.add('active');
+    }
+
+    function saveGallery(e) {
+      e.preventDefault();
+      const idx = document.getElementById('gallery_index').value;
+      const img = {
+        url: document.getElementById('gallery_url').value.trim(),
+        title_id: document.getElementById('gallery_title_id').value.trim(),
+        title_en: document.getElementById('gallery_title_en').value.trim(),
+        title_ar: document.getElementById('gallery_title_ar').value.trim(),
+        caption_id: document.getElementById('gallery_caption_id').value.trim(),
+        caption_en: document.getElementById('gallery_caption_en').value.trim(),
+        caption_ar: document.getElementById('gallery_caption_ar').value.trim()
+      };
+
+      if (!websiteData.gallery) websiteData.gallery = [];
+
+      if (idx === '') {
+        websiteData.gallery.push(img);
+        logTerminal('Gallery', `Appended new gallery record: ${img.title_id}`);
+      } else {
+        websiteData.gallery[parseInt(idx)] = img;
+        logTerminal('Gallery', `Rewrote gallery record slot ${idx}: ${img.title_id}`);
+      }
+
+      closeModal('galleryModal');
+      setChangesPending(true);
+      renderCMSLayout();
+    }
+
+
+    // ==========================================
+    // QUOTES CRUD
+    // ==========================================
+    function renderQuotesList() {
+      const container = document.getElementById('quotesListContainer');
+      const list = websiteData.quotes || [];
+      document.getElementById('quotesListCount').innerText = `Total records parsed: ${list.length}`;
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `<div style="text-align:center; color:var(--text-dim); padding:3rem 0;">QUOTES.DAT currently empty. Click Add Quote.</div>`;
+        return;
+      }
+
+      list.forEach((q, idx) => {
+        const card = document.createElement('div');
+        card.className = 'data-item';
+        card.innerHTML = `
+          <div class="data-info">
+            <div class="data-details">
+              <div class="data-title">"${escapeHTML(q.text_id)}"</div>
+              <div class="data-sub">AUTHOR: ${escapeHTML(q.author)}</div>
+            </div>
+          </div>
+          <div class="data-actions">
+            <button onclick="reorderCollection('quotes', ${idx}, -1)" class="btn btn-icon btn-sm" title="Move Up"><i class="fa-solid fa-arrow-up"></i></button>
+            <button onclick="reorderCollection('quotes', ${idx}, 1)" class="btn btn-icon btn-sm" title="Move Down"><i class="fa-solid fa-arrow-down"></i></button>
+            <button onclick="openEditQuoteModal(${idx})" class="btn btn-icon btn-sm" style="color:var(--accent-cyan);" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="deleteFromCollection('quotes', ${idx})" class="btn btn-icon btn-sm btn-danger" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openAddQuoteModal() {
+      document.getElementById('quoteForm').reset();
+      document.getElementById('quote_index').value = '';
+      document.getElementById('quoteModalTitle').innerText = 'ADD RECORD: QUOTES.DAT';
+      document.getElementById('quoteModal').classList.add('active');
+    }
+
+    function openEditQuoteModal(idx) {
+      const q = websiteData.quotes[idx];
+      document.getElementById('quote_index').value = idx;
+      document.getElementById('quote_text_id').value = q.text_id || '';
+      document.getElementById('quote_text_en').value = q.text_en || '';
+      document.getElementById('quote_text_ar').value = q.text_ar || '';
+      document.getElementById('quote_author').value = q.author || '';
+      
+      document.getElementById('quoteModalTitle').innerText = 'EDIT RECORD: QUOTES.DAT';
+      document.getElementById('quoteModal').classList.add('active');
+    }
+
+    function saveQuote(e) {
+      e.preventDefault();
+      const idx = document.getElementById('quote_index').value;
+      const quote = {
+        text_id: document.getElementById('quote_text_id').value.trim(),
+        text_en: document.getElementById('quote_text_en').value.trim(),
+        text_ar: document.getElementById('quote_text_ar').value.trim(),
+        author: document.getElementById('quote_author').value.trim()
+      };
+
+      if (!websiteData.quotes) websiteData.quotes = [];
+
+      if (idx === '') {
+        websiteData.quotes.push(quote);
+        logTerminal('Quotes', `Appended new quote: ${quote.author}`);
+      } else {
+        websiteData.quotes[parseInt(idx)] = quote;
+        logTerminal('Quotes', `Rewrote quote record slot ${idx}: ${quote.author}`);
+      }
+
+      closeModal('quoteModal');
+      setChangesPending(true);
+      renderCMSLayout();
+    }
+
+
+    // ==========================================
+    // REORDER & DELETIONS
+    // ==========================================
+    function reorderCollection(collectionKey, idx, direction) {
+      const list = websiteData[collectionKey];
+      const targetIdx = idx + direction;
+      
+      if (targetIdx < 0 || targetIdx >= list.length) return;
+      
+      const temp = list[idx];
+      list[idx] = list[targetIdx];
+      list[targetIdx] = temp;
+      
+      logTerminal('Reorder', `Modified offset index for slot ${idx} to ${targetIdx} in ${collectionKey}.dat`);
+      setChangesPending(true);
+      renderCMSLayout();
+    }
+
+    function deleteFromCollection(collectionKey, idx) {
+      const list = websiteData[collectionKey] || [];
+      const name = list[idx].name || list[idx].title_id || list[idx].author || 'Item';
+      
+      Swal.fire({
+        title: 'DELETE RECORD DETECTED',
+        text: `Proceed to drop record "${name}" from ${collectionKey}.dat?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#00ff88',
+        confirmButtonText: 'Yes, Drop',
+        background: '#07070a',
+        color: '#00ff88',
+        customClass: { popup: 'border border-[#ef4444]' }
+      }).then(result => {
+        if (result.isConfirmed) {
+          list.splice(idx, 1);
+          logTerminal('Delete', `Dropped record: ${name} from ${collectionKey}.dat`, 'error');
+          setChangesPending(true);
+          renderCMSLayout();
+        }
+      });
+    }
+
+    // ==========================================
+    // SETTINGS TRANSLATION
+    // ==========================================
+    function switchSettingsLang(lang) {
+      activeSettingsLang = lang;
+      document.querySelectorAll('#settingsLangTabs button').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.innerText.toLowerCase() === lang) btn.classList.add('active');
+      });
+      loadTranslationsIntoForm();
+    }
+
+    function loadTranslationsIntoForm() {
+      const trans = websiteData.translations || { id: {}, en: {}, ar: {} };
+      const langTrans = trans[activeSettingsLang] || {};
+      
+      const fields = [
+        'hero_sub', 'title_timeline', 'sub_timeline', 'title_members', 'sub_members',
+        'title_gallery', 'sub_gallery', 'meaning_title', 'meaning_subtitle',
+        'meaning_card1_title', 'meaning_card1_desc', 'meaning_card2_title', 'meaning_card2_desc',
+        'meaning_card3_title', 'meaning_card3_desc', 'meaning_closing_1', 'meaning_closing_2',
+        'music', 'contact_btn', 'contact_title', 'contact_desc', 'footer_note'
+      ];
+
+      fields.forEach(f => {
+        const el = document.getElementById(`set_${f}`);
+        if (el) el.value = langTrans[f] || '';
+      });
+
+      document.getElementById('set_passcode').value = (websiteData.settings && websiteData.settings.adminPasscode) ? websiteData.settings.adminPasscode : 'askaryy';
+      
+      const emailjsCfg = (websiteData.settings && websiteData.settings.emailjs) ? websiteData.settings.emailjs : {
+        serviceId: '', templateId: '', publicKey: ''
+      };
+      
+      document.getElementById('set_contact_email').value = (websiteData.settings && websiteData.settings.contactEmail) ? websiteData.settings.contactEmail : 'izemsempay@gmail.com';
+      document.getElementById('set_contact_subject').value = (websiteData.settings && websiteData.settings.contactSubject) ? websiteData.settings.contactSubject : 'New Message from HARMATRA Website';
+      document.getElementById('set_contact_success').value = (websiteData.settings && websiteData.settings.contactSuccess) ? websiteData.settings.contactSuccess : 'Thank you for contacting HARMATRA. Your message has been delivered successfully.';
+      document.getElementById('set_contact_error').value = (websiteData.settings && websiteData.settings.contactError) ? websiteData.settings.contactError : 'Unable to send your message. Please try again later.';
+
+      document.getElementById('set_emailjs_service').value = emailjsCfg.serviceId;
+      document.getElementById('set_emailjs_template').value = emailjsCfg.templateId;
+      document.getElementById('set_emailjs_public').value = emailjsCfg.publicKey;
+    }
+
+    function saveTranslations(e) {
+      e.preventDefault();
+      if (!websiteData.translations) websiteData.translations = { id: {}, en: {}, ar: {} };
+      if (!websiteData.translations[activeSettingsLang]) websiteData.translations[activeSettingsLang] = {};
+      
+      const langTrans = websiteData.translations[activeSettingsLang];
+      
+      const fields = [
+        'hero_sub', 'title_timeline', 'sub_timeline', 'title_members', 'sub_members',
+        'title_gallery', 'sub_gallery', 'meaning_title', 'meaning_subtitle',
+        'meaning_card1_title', 'meaning_card1_desc', 'meaning_card2_title', 'meaning_card2_desc',
+        'meaning_card3_title', 'meaning_card3_desc', 'meaning_closing_1', 'meaning_closing_2',
+        'music', 'contact_btn', 'contact_title', 'contact_desc', 'footer_note'
+      ];
+
+      fields.forEach(f => {
+        const el = document.getElementById(`set_${f}`);
+        if (el) langTrans[f] = el.value.trim();
+      });
+
+      if (!websiteData.settings) websiteData.settings = {};
+      websiteData.settings.adminPasscode = document.getElementById('set_passcode').value.trim() || 'askaryy';
+      websiteData.settings.contactEmail = document.getElementById('set_contact_email').value.trim() || 'izemsempay@gmail.com';
+      websiteData.settings.contactSubject = document.getElementById('set_contact_subject').value.trim() || 'New Message from HARMATRA Website';
+      websiteData.settings.contactSuccess = document.getElementById('set_contact_success').value.trim() || 'Thank you for contacting HARMATRA. Your message has been delivered successfully.';
+      websiteData.settings.contactError = document.getElementById('set_contact_error').value.trim() || 'Unable to send your message. Please try again later.';
+      websiteData.settings.emailjs = {
+        serviceId: document.getElementById('set_emailjs_service').value.trim(),
+        templateId: document.getElementById('set_emailjs_template').value.trim(),
+        publicKey: document.getElementById('set_emailjs_public').value.trim()
+      };
+
+      logTerminal('Settings', `Buffered edits to configuration properties block: translations.${activeSettingsLang}`);
+      setChangesPending(true);
+
+      Swal.fire({
+        icon: 'success',
+        title: 'CHANGES BUFFERED',
+        text: `Buffered edits to settings.json [${activeSettingsLang.toUpperCase()}]. Run DEPLOY_CHANGES() to push.`,
+        background: '#07070a',
+        color: '#00ff88',
+        confirmButtonColor: '#00ff88',
+        customClass: { popup: 'border border-[#00ff88]/30' }
+      });
+    }
+
+    // ==========================================
+    // SPOTLIGHT.CFG CONFIG
+    // ==========================================
+    function renderSpotlightConfig() {
+      const select = document.getElementById('cfgSpotlightFixedMember');
+      select.innerHTML = '<option value="">-- Select Member --</option>';
+      if (websiteData.members) {
+        websiteData.members.forEach(m => {
+          const opt = document.createElement('option');
+          opt.value = m.id;
+          opt.innerText = m.name;
+          select.appendChild(opt);
+        });
+      }
+
+      if (!websiteData.settings) websiteData.settings = {};
+      if (!websiteData.settings.spotlight) {
+        websiteData.settings.spotlight = { mode: 'daily', fixed_id: null };
+      }
+
+      document.getElementById('cfgSpotlightMode').value = websiteData.settings.spotlight.mode || 'daily';
+      if (websiteData.settings.spotlight.mode === 'fixed') {
+        document.getElementById('cfgSpotlightFixedMember').value = websiteData.settings.spotlight.fixed_id || '';
+      }
+      toggleSpotlightFixed();
+    }
+
+    function toggleSpotlightFixed() {
+      const mode = document.getElementById('cfgSpotlightMode').value;
+      document.getElementById('cfgSpotlightFixedGroup').style.display = mode === 'fixed' ? 'block' : 'none';
+    }
+
+    function saveSpotlightConfig(e) {
+      e.preventDefault();
+      if (!websiteData.settings) websiteData.settings = {};
+      if (!websiteData.settings.spotlight) websiteData.settings.spotlight = {};
+
+      const mode = document.getElementById('cfgSpotlightMode').value;
+      const fixedId = document.getElementById('cfgSpotlightFixedMember').value;
+
+      websiteData.settings.spotlight.mode = mode;
+      if (mode === 'fixed') {
+        websiteData.settings.spotlight.fixed_id = fixedId;
+      }
+
+      logTerminal('Spotlight', `Buffered new rotation mode: ${mode}`);
+      setChangesPending(true);
+
+      Swal.fire({
+        icon: 'success',
+        title: 'CHANGES BUFFERED',
+        text: 'Buffered edits to SPOTLIGHT.CFG. Run DEPLOY_CHANGES() to push.',
+        background: '#07070a',
+        color: '#00ff88',
+        confirmButtonColor: '#00ff88',
+        customClass: { popup: 'border border-[#00ff88]/30' }
+      });
+    }
+
+    // ==========================================
+    // LIVE PREVIEW MODS
+    // ==========================================
+    function openLivePreview() {
+      const overlay = document.getElementById('previewOverlay');
+      overlay.classList.add('active');
+      setTimeout(syncIframePreviewData, 1000);
+    }
+
+    function closeLivePreview() {
+      document.getElementById('previewOverlay').classList.remove('active');
+    }
+
+    function syncIframePreviewData() {
+      const iframe = document.getElementById('previewFrame');
+      if (iframe && iframe.contentWindow) {
+        logTerminal('Preview', 'Pushing runtime memory map synchronization to preview frame window.');
+        iframe.contentWindow.postMessage({
+          type: 'HARMATRA_PREVIEW_DATA',
+          data: websiteData
+        }, '*');
+      }
+    }
+
+
+    // ==========================================
+    // GITHUB DEPLOYMENT PIPELINE
+    // ==========================================
+    function logDeployConsole(msg, type = '') {
+      const consoleEl = document.getElementById('deployConsole');
+      if (!consoleEl) return;
+      const line = document.createElement('div');
+      let cssText = 'margin-bottom:0.25rem;';
+      if (type === 'success') cssText += 'color:var(--success);';
+      else if (type === 'error') cssText += 'color:var(--error);';
+      else if (type === 'info') cssText += 'color:var(--accent-cyan);';
+      
+      line.style.cssText = cssText;
+      line.innerText = `[${new Date().toLocaleTimeString()}] ${msg}`;
+      consoleEl.appendChild(line);
+      consoleEl.scrollTop = consoleEl.scrollHeight;
+    }
+
+    function updateDeployProgress(stepLabel, percentage, barWidth) {
+      document.getElementById('deployStepLabel').innerText = stepLabel;
+      document.getElementById('deployPercentLabel').innerText = `${percentage}%`;
+      document.getElementById('deployProgressBar').style.width = `${barWidth}%`;
+    }
+
+    async function triggerDeployment() {
+      const credsRaw = localStorage.getItem(CREDENTIALS_KEY);
+      if (!credsRaw) {
+        Swal.fire({
+          icon: 'error',
+          title: 'GIT ACCESS UNMAPPED',
+          text: 'GitHub credentials unmapped. Configure Deployment credentials first.',
+          background: '#07070a',
+          color: '#ef4444',
+          confirmButtonColor: '#ef4444',
+          customClass: { popup: 'border border-[#ef4444]' }
+        });
+        switchTab('connection');
+        return;
+      }
+
+      const cred = JSON.parse(credsRaw);
+      if (!cred.owner || !cred.repo || !cred.token) {
+        Swal.fire({
+          icon: 'error',
+          title: 'ACCESS PARAMS INVALID',
+          text: 'Handshake credentials variables unmapped.',
+          background: '#07070a',
+          color: '#ef4444',
+          confirmButtonColor: '#ef4444',
+          customClass: { popup: 'border border-[#ef4444]' }
+        });
+        switchTab('connection');
+        return;
+      }
+
+      const { value: commitMsg } = await Swal.fire({
+        title: 'INITIATING DEPLOYMENT.EXE',
+        input: 'text',
+        inputLabel: 'COMMIT LOG MESSAGE',
+        inputValue: 'chore(cms): compile binary database updates',
+        inputPlaceholder: 'Enter commit note summary',
+        showCancelButton: true,
+        background: '#07070a',
+        color: '#00ff88',
+        confirmButtonColor: '#00ff88',
+        cancelButtonColor: '#ef4444',
+        customClass: { popup: 'border border-[#00ff88]/30' }
+      });
+
+      if (commitMsg === undefined) return; // User cancel
+
+      const modal = document.getElementById('deployModal');
+      modal.classList.add('active');
+      document.getElementById('deployConsole').innerHTML = '';
+      
+      logDeployConsole('Initializing Matrix build loader...', 'info');
+      updateDeployProgress('CONNECTING TO GITHUB API...', 15, 15);
+
+      try {
+        const owner = cred.owner;
+        const repo = cred.repo;
+        const branch = cred.branch || 'main';
+        const token = cred.token;
+        const filepath = 'data.json';
+
+        logDeployConsole(`Connecting to repos/${owner}/${repo}/contents/${filepath} ...`);
+        updateDeployProgress('UPLOADING BINARY DATA.JSON...', 35, 35);
+        
+        let previousSha = null;
+        const fileResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filepath}?ref=${branch}`, {
+          headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+
+        if (fileResponse.ok) {
+          const fileData = await fileResponse.json();
+          previousSha = fileData.sha;
+          logDeployConsole(`SHA checksum parsed: ${previousSha}. Preparing file compile.`, 'success');
+        } else if (fileResponse.status === 404) {
+          logDeployConsole('No file checksum matched. Compiling fresh data.json database.', 'info');
+        } else {
+          const errData = await fileResponse.json();
+          throw new Error(`Checksum fetch failure: ${errData.message}`);
+        }
+
+        updateDeployProgress('COMMITTING CHANGES...', 65, 65);
+        logDeployConsole('Assembling UTF-8 memory block to base64 binary package...');
+        
+        const jsonContent = JSON.stringify(websiteData, null, 2);
+        const utf8Bytes = new TextEncoder().encode(jsonContent);
+        const binString = Array.from(utf8Bytes, (byte) => String.fromCharCode(byte)).join("");
+        const b64Content = btoa(binString);
+
+        logDeployConsole(`Uploading data.json commit payload to git-node branch: [${branch}]`);
+        const putResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filepath}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify({
+            message: commitMsg.trim() || 'chore(cms): compile data.json database',
+            content: b64Content,
+            branch: branch,
+            sha: previousSha || undefined
+          })
+        });
+
+        if (!putResponse.ok) {
+          const errData = await putResponse.json();
+          throw new Error(`Git commit execution failed: ${errData.message}`);
+        }
+
+        const commitResult = await putResponse.json();
+        const shortSha = commitResult.commit.sha.substring(0, 7);
+        logDeployConsole(`PUSHING CHANGES... [SUCCESS] Hash payload committed: ${shortSha}`, 'success');
+        document.getElementById('deployLastCommitText').innerText = shortSha;
+
+        updateDeployProgress('TRIGGERING NETLIFY BUILD...', 85, 85);
+        logDeployConsole('Commit successfully pushed. Sending webhook trigger to Netlify build nodes...');
+        
+        setTimeout(() => {
+          updateDeployProgress('DEPLOYMENT SUCCESSFUL [STATUS 200]', 100, 100);
+          logDeployConsole('Netlify build sequence successfully queued!', 'success');
+          logDeployConsole('DEPLOYMENT PIPELINE COMPLETED SUCCESSFULLY.', 'success');
+          document.getElementById('btnFinishedDeploy').style.display = 'inline-flex';
+          setChangesPending(false);
+          logTerminal('Deploy', `Successfully compiled and deployed database commit ${shortSha} to node branch '${branch}'.`);
+          updateNetlifyBadge(cred.netlifySiteId);
+        }, 1500);
+
+      } catch (err) {
+        logDeployConsole(`ERROR PIPELINE INTERRUPTED: ${err.message}`, 'error');
+        updateDeployProgress('DEPLOYMENT INTERRUPTED', 100, 100);
+        document.getElementById('deployProgressBar').style.backgroundColor = 'var(--error)';
+        document.getElementById('btnCancelDeploy').style.display = 'inline-flex';
+        logTerminal('Deploy', `Handshake deployment execution failed: ${err.message}`, 'error');
+      }
+    }
+  </script>
+
+</body>
+</html>
