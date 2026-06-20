@@ -477,6 +477,12 @@
       "text_en": "Not just a class, but a family.",
       "text_ar": "ليس مجرد صف، بل عائلة.",
       "author": "Andi Saputra"
+    },
+    {
+      "text_id": "jika hujan turun",
+      "text_en": "rain",
+      "text_ar": "mator",
+      "author": "immm"
     }
   ],
   "translations": {
@@ -605,7 +611,11 @@
     "adminPasscode": "askaryy",
     "githubOwner": "",
     "githubRepo": "",
-    "githubBranch": "main"
+    "githubBranch": "main",
+    "spotlight": {
+      "mode": "daily",
+      "fixed_id": null
+    }
   },
   "spotlight": {
     "spotlightMemberId": "hanan-agak-gilaa",
