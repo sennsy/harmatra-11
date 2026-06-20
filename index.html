@@ -1378,6 +1378,10 @@
 
     </footer>
 
+    <!-- Typing Signature Bar -->
+    <div id="typingSignatureContainer" class="w-full text-center py-6 pb-12 flex justify-center items-center font-display tracking-widest text-sm md:text-base opacity-70 transition-opacity duration-300 hover:opacity-100">
+      <span id="typingSignatureText" class="text-[var(--text-main)]"></span><span id="typingSignatureCursor" class="animate-pulse inline-block w-[2px] h-[1em] bg-[var(--text-main)] ml-1 align-middle"></span>
+    </div>
   </main>
 
   <div id="lightbox"
@@ -2471,7 +2475,20 @@
             contact_send: "إرسال الرسالة"
 
           }
-
+          },
+          typingSignature: {
+            enabled: true,
+            loop: true,
+            typeSpeed: 50,
+            deleteSpeed: 30,
+            pauseDuration: 2000,
+            messages: [
+              "A digital home for HARMATRA.",
+              "Preserving memories beyond graduation.",
+              "Every story deserves to be remembered.",
+              "Crafted with passion and purpose."
+            ]
+          }
         };
 
         // --- State ---
@@ -2636,6 +2653,7 @@
                 renderAll();
                 initGSAP();
                 startSpotlightHook();
+                startTypingSignature();
               }, 1000);
             });
         }
@@ -3196,6 +3214,69 @@
 
           name.innerText = displayName;
           quote.innerText = bioText;
+        }
+
+        // Typing Signature Logic
+        let typingTimeoutId = null;
+        function startTypingSignature() {
+          const config = dbData.typingSignature;
+          const container = document.getElementById('typingSignatureContainer');
+          const textEl = document.getElementById('typingSignatureText');
+          const cursorEl = document.getElementById('typingSignatureCursor');
+
+          if (!config || !config.enabled || !config.messages || config.messages.length === 0) {
+            if (container) container.style.display = 'none';
+            return;
+          }
+
+          if (container) container.style.display = 'flex';
+          
+          let messageIndex = 0;
+          let charIndex = 0;
+          let isDeleting = false;
+          let currentMessage = config.messages[messageIndex];
+
+          function type() {
+            clearTimeout(typingTimeoutId);
+            currentMessage = config.messages[messageIndex];
+
+            if (isDeleting) {
+              textEl.innerText = currentMessage.substring(0, charIndex - 1);
+              charIndex--;
+            } else {
+              textEl.innerText = currentMessage.substring(0, charIndex + 1);
+              charIndex++;
+            }
+
+            let typeSpeed = config.typeSpeed || 50;
+            if (isDeleting) {
+              typeSpeed = config.deleteSpeed || 30;
+            }
+
+            // Natural typing speed variation
+            if (!isDeleting) {
+              typeSpeed += Math.random() * 30 - 15;
+            }
+
+            if (!isDeleting && charIndex === currentMessage.length) {
+              // Word is complete
+              if (!config.loop && messageIndex === config.messages.length - 1) {
+                cursorEl.style.animation = 'pulse 2s infinite';
+                return; // Stop here if no loop
+              }
+              typeSpeed = config.pauseDuration || 2000;
+              isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+              isDeleting = false;
+              messageIndex = (messageIndex + 1) % config.messages.length;
+              typeSpeed = 500; // Pause before typing next string
+            }
+
+            typingTimeoutId = setTimeout(type, typeSpeed);
+          }
+
+          // Initialize
+          type();
         }
 
         function startSpotlightHook() {

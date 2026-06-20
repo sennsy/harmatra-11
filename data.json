@@ -622,5 +622,18 @@
     "spotlightEnabled": true,
     "spotlightSchedule": "daily",
     "lastSpotlightChange": "2026-06-21T01:23:44Z"
+  },
+  "typingSignature": {
+    "enabled": true,
+    "loop": true,
+    "typeSpeed": 50,
+    "deleteSpeed": 30,
+    "pauseDuration": 2000,
+    "messages": [
+      "A digital home for HARMATRA.",
+      "Preserving memories beyond graduation.",
+      "Every story deserves to be remembered.",
+      "Crafted with passion and purpose."
+    ]
   }
 }

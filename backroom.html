@@ -796,6 +796,9 @@
       <li class="nav-item" data-tab="quotes">
         <button onclick="switchTab('quotes')"><i class="fa-solid fa-quote-left"></i> QUOTES.DAT</button>
       </li>
+      <li class="nav-item" data-tab="typing">
+        <button onclick="switchTab('typing')"><i class="fa-solid fa-keyboard"></i> TYPING.DAT</button>
+      </li>
       <li class="nav-item" data-tab="spotlight">
         <button onclick="switchTab('spotlight')"><i class="fa-solid fa-crosshairs"></i> SPOTLIGHT.CFG</button>
       </li>
@@ -976,6 +979,68 @@
         <button onclick="openAddQuoteModal()" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> ADD QUOTE</button>
       </div>
       <div id="quotesListContainer" class="data-list"></div>
+    </section>
+
+    <!-- TAB: TYPING -->
+    <section id="tab-typing" class="cms-view">
+      <div class="card">
+        <h3 class="card-title"><i class="fa-solid fa-keyboard" style="color:var(--accent-purple);"></i> TYPING SIGNATURE SETTINGS</h3>
+        
+        <div class="form-group" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:15px; margin-bottom:15px;">
+          <div>
+            <label style="margin-bottom:0; color:var(--text-main);">Enable Typing Signature</label>
+            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:5px;">Show the typing signature below the footer.</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="cfgTypingEnabled">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="form-group" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:15px; margin-bottom:15px;">
+          <div>
+            <label style="margin-bottom:0; color:var(--text-main);">Loop Continuously</label>
+            <div style="font-size:0.8rem; color:var(--text-muted); margin-top:5px;">Restart from the first message after finishing.</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="cfgTypingLoop">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 25px;">
+          <div class="form-group">
+            <label>Type Speed (ms)</label>
+            <input type="number" id="cfgTypingSpeed" class="cms-input" min="10" max="500" value="50">
+          </div>
+          <div class="form-group">
+            <label>Delete Speed (ms)</label>
+            <input type="number" id="cfgTypingDelete" class="cms-input" min="10" max="500" value="30">
+          </div>
+          <div class="form-group">
+            <label>Pause Duration (ms)</label>
+            <input type="number" id="cfgTypingPause" class="cms-input" min="500" max="10000" value="2000">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Real-Time Preview</label>
+          <div id="typingPreviewContainer" style="padding:20px; background:var(--bg-card); border:1px dashed var(--border-color); border-radius:8px; text-align:center; min-height:80px; display:flex; align-items:center; justify-content:center;">
+             <span id="typingPreviewText" style="color:var(--text-main); font-family:'Space Grotesk', sans-serif; font-size:14px; letter-spacing:0.1em; opacity:0.8;"></span><span id="typingPreviewCursor" style="display:inline-block; width:2px; height:1em; background:var(--text-main); margin-left:4px; animation:pulse 1s infinite;"></span>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+           <button onclick="saveTypingConfig(event)" class="btn btn-primary"><i class="fa-solid fa-save"></i> SAVE CONFIG</button>
+        </div>
+
+      </div>
+
+      <div class="collection-header">
+        <span style="color:var(--text-muted); font-size:0.8rem;" id="typingMessagesCount">Total messages: 0</span>
+        <button onclick="openAddTypingMessageModal()" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> ADD MESSAGE</button>
+      </div>
+      <div id="typingMessagesListContainer" class="data-list" style="margin-bottom: 30px;"></div>
     </section>
 
     <!-- TAB: SPOTLIGHT -->
@@ -1461,6 +1526,28 @@
         </div>
         <div class="modal-footer">
           <button type="button" onclick="closeModal('quoteModal')" class="btn btn-sm">ABORT()</button>
+          <button type="submit" class="btn btn-primary btn-sm">WRITE_RECORD()</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="typingMessageModal" class="cms-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="typingMessageModalTitle" class="font-display text-base font-bold">EDIT_RECORD: TYPING.DAT</h4>
+        <button onclick="closeModal('typingMessageModal')" style="background:transparent; border:none; color:#ffffff; font-size:1.5rem; cursor:pointer;">×</button>
+      </div>
+      <form id="typingMessageForm" onsubmit="saveTypingMessage(event)">
+        <div class="modal-body">
+          <input type="hidden" id="typing_message_index">
+          <div class="form-group">
+            <label class="form-label">Message String</label>
+            <textarea id="typing_message_text" class="form-control" required rows="3"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('typingMessageModal')" class="btn btn-sm">ABORT()</button>
           <button type="submit" class="btn btn-primary btn-sm">WRITE_RECORD()</button>
         </div>
       </form>
@@ -1977,6 +2064,7 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       renderQuotesList();
       loadTranslationsIntoForm();
       renderSpotlightConfig();
+      renderTypingSettings();
     }
 
     // Close Modal helper
@@ -2330,6 +2418,178 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       closeModal('quoteModal');
       setChangesPending(true);
       renderCMSLayout();
+    }
+
+    // ==========================================
+    // TYPING SIGNATURE SETTINGS
+    // ==========================================
+    let previewTypingTimeoutId = null;
+
+    function renderTypingSettings() {
+      if (!websiteData.typingSignature) {
+        websiteData.typingSignature = {
+          enabled: true, loop: true, typeSpeed: 50, deleteSpeed: 30, pauseDuration: 2000, messages: []
+        };
+      }
+      const config = websiteData.typingSignature;
+      document.getElementById('cfgTypingEnabled').checked = config.enabled;
+      document.getElementById('cfgTypingLoop').checked = config.loop;
+      document.getElementById('cfgTypingSpeed').value = config.typeSpeed || 50;
+      document.getElementById('cfgTypingDelete').value = config.deleteSpeed || 30;
+      document.getElementById('cfgTypingPause').value = config.pauseDuration || 2000;
+
+      renderTypingMessagesList();
+      startTypingPreview();
+    }
+
+    function renderTypingMessagesList() {
+      const container = document.getElementById('typingMessagesListContainer');
+      const list = websiteData.typingSignature.messages || [];
+      document.getElementById('typingMessagesCount').innerText = `Total messages: ${list.length}`;
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `<div style="text-align:center; color:var(--text-dim); padding:3rem 0;">No typing messages found. Click Add Message.</div>`;
+        return;
+      }
+
+      list.forEach((msg, idx) => {
+        const card = document.createElement('div');
+        card.className = 'data-item';
+        card.innerHTML = `
+          <div class="data-info">
+            <div class="data-title">"${escapeHTML(msg)}"</div>
+          </div>
+          <div class="data-actions">
+            <button onclick="reorderTypingMessage(${idx}, -1)" class="btn btn-icon btn-sm" title="Move Up"><i class="fa-solid fa-arrow-up"></i></button>
+            <button onclick="reorderTypingMessage(${idx}, 1)" class="btn btn-icon btn-sm" title="Move Down"><i class="fa-solid fa-arrow-down"></i></button>
+            <button onclick="openEditTypingMessageModal(${idx})" class="btn btn-icon btn-sm" style="color:var(--accent-cyan);" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="deleteTypingMessage(${idx})" class="btn btn-icon btn-sm btn-danger" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function reorderTypingMessage(idx, direction) {
+      const targetIdx = idx + direction;
+      if (targetIdx < 0 || targetIdx >= websiteData.typingSignature.messages.length) return;
+      const temp = websiteData.typingSignature.messages[idx];
+      websiteData.typingSignature.messages[idx] = websiteData.typingSignature.messages[targetIdx];
+      websiteData.typingSignature.messages[targetIdx] = temp;
+      setChangesPending(true);
+      renderTypingSettings();
+    }
+
+    function deleteTypingMessage(idx) {
+      websiteData.typingSignature.messages.splice(idx, 1);
+      setChangesPending(true);
+      renderTypingSettings();
+    }
+
+    function openAddTypingMessageModal() {
+      document.getElementById('typingMessageForm').reset();
+      document.getElementById('typing_message_index').value = '';
+      document.getElementById('typingMessageModalTitle').innerText = 'ADD RECORD: TYPING.DAT';
+      document.getElementById('typingMessageModal').classList.add('active');
+    }
+
+    function openEditTypingMessageModal(idx) {
+      document.getElementById('typing_message_index').value = idx;
+      document.getElementById('typing_message_text').value = websiteData.typingSignature.messages[idx];
+      document.getElementById('typingMessageModalTitle').innerText = 'EDIT RECORD: TYPING.DAT';
+      document.getElementById('typingMessageModal').classList.add('active');
+    }
+
+    function saveTypingMessage(e) {
+      e.preventDefault();
+      const idx = document.getElementById('typing_message_index').value;
+      const msg = document.getElementById('typing_message_text').value.trim();
+      
+      if (!websiteData.typingSignature.messages) websiteData.typingSignature.messages = [];
+      
+      if (idx === '') {
+        websiteData.typingSignature.messages.push(msg);
+      } else {
+        websiteData.typingSignature.messages[parseInt(idx)] = msg;
+      }
+      
+      closeModal('typingMessageModal');
+      setChangesPending(true);
+      renderTypingSettings();
+    }
+
+    function saveTypingConfig(e) {
+      e.preventDefault();
+      websiteData.typingSignature.enabled = document.getElementById('cfgTypingEnabled').checked;
+      websiteData.typingSignature.loop = document.getElementById('cfgTypingLoop').checked;
+      websiteData.typingSignature.typeSpeed = parseInt(document.getElementById('cfgTypingSpeed').value) || 50;
+      websiteData.typingSignature.deleteSpeed = parseInt(document.getElementById('cfgTypingDelete').value) || 30;
+      websiteData.typingSignature.pauseDuration = parseInt(document.getElementById('cfgTypingPause').value) || 2000;
+      
+      logTerminal('Typing', 'Buffered new Typing Signature configuration');
+      setChangesPending(true);
+      renderTypingSettings();
+
+      Swal.fire({
+        icon: 'success',
+        title: 'CONFIG SAVED',
+        text: 'Typing configuration updated.',
+        background: '#07070a',
+        color: '#00ff88',
+        confirmButtonColor: '#00ff88',
+        customClass: { popup: 'border border-[#00ff88]/30' }
+      });
+    }
+
+    function startTypingPreview() {
+      clearTimeout(previewTypingTimeoutId);
+      const config = websiteData.typingSignature;
+      const textEl = document.getElementById('typingPreviewText');
+      const cursorEl = document.getElementById('typingPreviewCursor');
+      
+      if (!config.enabled || !config.messages || config.messages.length === 0) {
+        textEl.innerText = '[TYPING DISABLED OR EMPTY]';
+        cursorEl.style.display = 'none';
+        return;
+      }
+      cursorEl.style.display = 'inline-block';
+
+      let messageIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      let currentMessage = config.messages[messageIndex];
+
+      function typePreview() {
+        clearTimeout(previewTypingTimeoutId);
+        if (!websiteData.typingSignature || !websiteData.typingSignature.messages || websiteData.typingSignature.messages.length === 0) return;
+        
+        currentMessage = websiteData.typingSignature.messages[messageIndex % websiteData.typingSignature.messages.length];
+        
+        if (isDeleting) {
+          textEl.innerText = currentMessage.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          textEl.innerText = currentMessage.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        let speed = websiteData.typingSignature.typeSpeed || 50;
+        if (isDeleting) speed = websiteData.typingSignature.deleteSpeed || 30;
+
+        if (!isDeleting && charIndex === currentMessage.length) {
+          if (!websiteData.typingSignature.loop && messageIndex === websiteData.typingSignature.messages.length - 1) return;
+          speed = websiteData.typingSignature.pauseDuration || 2000;
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          messageIndex++;
+          speed = 500;
+        }
+
+        previewTypingTimeoutId = setTimeout(typePreview, speed);
+      }
+      typePreview();
     }
 
 
