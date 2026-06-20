@@ -50,6 +50,9 @@
         setTimeout(updateChatLanguage, 10);
       });
     }
+
+    // Initialize draggable feature
+    setupDraggableWidget();
   }
 
   // Cache DOM references
@@ -91,6 +94,153 @@
 
     // Suggestion chips delegation
     elements.chatBody.addEventListener('click', handleSuggestionClick);
+  }
+
+  // Setup draggable floating window logic
+  function setupDraggableWidget() {
+    const widget = elements.chatWidget;
+    const header = document.querySelector('.chat-header-premium');
+    const toggleBtn = elements.chatToggleButton;
+
+    let isDragging = false;
+    let currentX = 0;
+    let currentY = 0;
+    let initialX = 0;
+    let initialY = 0;
+    let xOffset = parseFloat(localStorage.getItem('matra_ai_pos_x')) || 0;
+    let yOffset = parseFloat(localStorage.getItem('matra_ai_pos_y')) || 0;
+
+    // Apply saved offset initially
+    setTranslate(xOffset, yOffset, widget);
+
+    if (header) {
+      header.style.cursor = 'grab';
+      header.style.touchAction = 'none';
+    }
+    if (toggleBtn) {
+      toggleBtn.style.cursor = 'grab';
+      toggleBtn.style.touchAction = 'none';
+    }
+
+    function dragStart(e) {
+      // Prevent drag if interacting with inner elements like buttons or input
+      if (e.target.closest('.chat-header-actions') || 
+          e.target.closest('#chatBody') || 
+          e.target.closest('.chat-input-area-premium')) {
+        return;
+      }
+      
+      // Allow drag only from header or toggle button
+      if (!e.target.closest('.chat-header-premium') && !e.target.closest('#chatToggleButton')) {
+        return;
+      }
+
+      if (e.type === 'touchstart') {
+        initialX = e.touches[0].clientX - xOffset;
+        initialY = e.touches[0].clientY - yOffset;
+      } else {
+        initialX = e.clientX - xOffset;
+        initialY = e.clientY - yOffset;
+      }
+
+      isDragging = true;
+      if (header) header.style.cursor = 'grabbing';
+      if (toggleBtn) toggleBtn.style.cursor = 'grabbing';
+    }
+
+    function dragEnd(e) {
+      if (!isDragging) return;
+      
+      initialX = currentX;
+      initialY = currentY;
+      isDragging = false;
+
+      if (header) header.style.cursor = 'grab';
+      if (toggleBtn) toggleBtn.style.cursor = 'grab';
+
+      // Snap to boundaries
+      snapToBoundaries();
+
+      // Save position
+      localStorage.setItem('matra_ai_pos_x', xOffset);
+      localStorage.setItem('matra_ai_pos_y', yOffset);
+    }
+
+    function drag(e) {
+      if (isDragging) {
+        e.preventDefault(); // Prevent scroll while dragging
+
+        if (e.type === 'touchmove') {
+          currentX = e.touches[0].clientX - initialX;
+          currentY = e.touches[0].clientY - initialY;
+        } else {
+          currentX = e.clientX - initialX;
+          currentY = e.clientY - initialY;
+        }
+
+        xOffset = currentX;
+        yOffset = currentY;
+
+        requestAnimationFrame(() => setTranslate(currentX, currentY, widget));
+      }
+    }
+
+    function setTranslate(xPos, yPos, el) {
+      el.style.transform = \`translate3d(\${xPos}px, \${yPos}px, 0)\`;
+    }
+
+    function snapToBoundaries() {
+      const rect = widget.getBoundingClientRect();
+      const viewportW = window.innerWidth;
+      const viewportH = window.innerHeight;
+
+      let adjustedX = xOffset;
+      let adjustedY = yOffset;
+
+      // Ensure widget stays partially visible within viewport
+      // If widget goes too far left
+      if (rect.left < 0) {
+        adjustedX -= rect.left - 10;
+      }
+      // If widget goes too far right
+      if (rect.right > viewportW) {
+        adjustedX -= (rect.right - viewportW + 10);
+      }
+      // If widget goes too far top
+      if (rect.top < 0) {
+        adjustedY -= rect.top - 10;
+      }
+      // If widget goes too far bottom
+      if (rect.bottom > viewportH) {
+        adjustedY -= (rect.bottom - viewportH + 10);
+      }
+
+      if (adjustedX !== xOffset || adjustedY !== yOffset) {
+        xOffset = adjustedX;
+        yOffset = adjustedY;
+        widget.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)';
+        setTranslate(xOffset, yOffset, widget);
+        
+        setTimeout(() => {
+          widget.style.transition = ''; // Remove transition after snap completes
+        }, 300);
+      }
+    }
+
+    // Bind global events for move and end so drag isn't lost if cursor leaves element fast
+    widget.addEventListener('touchstart', dragStart, { passive: false });
+    window.addEventListener('touchend', dragEnd);
+    window.addEventListener('touchmove', drag, { passive: false });
+
+    widget.addEventListener('mousedown', dragStart);
+    window.addEventListener('mouseup', dragEnd);
+    window.addEventListener('mousemove', drag);
+    
+    // Check boundaries on resize
+    window.addEventListener('resize', snapToBoundaries);
+    
+    // Also bind to window object so toggleChat can call snapToBoundaries when size changes
+    window.matraAiSnapBoundaries = snapToBoundaries;
   }
 
   // Get current language from parent site
@@ -278,6 +428,11 @@
 
       if (elements.chatToggleAvatarWrapper) elements.chatToggleAvatarWrapper.classList.remove('hidden', 'scale-0', 'opacity-0');
       if (elements.chatToggleCloseIcon) elements.chatToggleCloseIcon.classList.add('hidden');
+    }
+
+    // Ensure it doesn't overflow screen after size changes
+    if (window.matraAiSnapBoundaries) {
+      setTimeout(window.matraAiSnapBoundaries, 50);
     }
   }
 
