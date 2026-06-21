@@ -79,8 +79,16 @@
   // Bind event listeners
   function bindEvents() {
     // Open/Close toggle
-    elements.chatToggleButton.addEventListener('click', toggleChat);
-    elements.closeChatBtn.addEventListener('click', () => toggleChat(false));
+    elements.chatToggleButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleChat();
+    });
+    elements.closeChatBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleChat(false);
+    });
 
     // Clear history
     elements.clearChatBtn.addEventListener('click', confirmClearChat);
@@ -186,7 +194,7 @@
     }
 
     function setTranslate(xPos, yPos, el) {
-      el.style.transform = \`translate3d(\${xPos}px, \${yPos}px, 0)\`;
+      el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
     }
 
     function snapToBoundaries() {
@@ -400,6 +408,8 @@
 
   // Open / Close chat window with animations
   function toggleChat(forceState) {
+    if (!elements.chatWindow || !elements.chatToggleButton) return;
+
     const nextState = typeof forceState === 'boolean' ? forceState : !state.isOpen;
     if (nextState === state.isOpen) return;
 
@@ -407,9 +417,13 @@
 
     if (state.isOpen) {
       elements.chatWindow.classList.remove('hidden');
+      elements.chatWindow.classList.add('active');
+      elements.chatWindow.style.visibility = 'visible';
+      elements.chatWindow.style.opacity = '1';
+      elements.chatWindow.style.pointerEvents = 'auto';
+
       // Force layout recalc before removing transition classes
       void elements.chatWindow.offsetWidth;
-      elements.chatWindow.classList.add('active');
       elements.chatToggleButton.classList.add('active');
       
       // Hide the entire avatar wrapper (which includes the blue dot) when open
@@ -424,6 +438,10 @@
       scrollToBottom(true);
     } else {
       elements.chatWindow.classList.add('hidden');
+      elements.chatWindow.classList.remove('active');
+      elements.chatWindow.style.visibility = '';
+      elements.chatWindow.style.opacity = '';
+      elements.chatWindow.style.pointerEvents = '';
       elements.chatToggleButton.classList.remove('active');
 
       if (elements.chatToggleAvatarWrapper) elements.chatToggleAvatarWrapper.classList.remove('hidden', 'scale-0', 'opacity-0');
@@ -510,8 +528,10 @@
   // Handle AI typing simulation
   async function triggerAIResponse(userPrompt) {
     // 6. LOADING STATE
+    const lang = getLang();
     const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const botMessage = { role: 'assistant', content: 'Matra AI sedang berpikir...', time: timeStr };
+    const loadingText = lang === 'ar' ? 'Matra AI يفكر...' : (lang === 'en' ? 'Matra AI is thinking...' : 'Matra AI sedang berpikir...');
+    const botMessage = { role: 'assistant', content: loadingText, time: timeStr };
     state.messages.push(botMessage);
 
     const messageId = renderMessage(botMessage, true);
@@ -533,24 +553,49 @@
     const members = harmatra.dbData ? harmatra.dbData.members : [];
     let localFound = false;
 
-    if (/anggota|member|siapa ketua|siapa sekretaris|timeline|event|gallery|quote|harmatra/i.test(lowerPrompt)) {
-        if (/siapa ketua/i.test(lowerPrompt)) {
-            rawReply = "Ketua kelas HARMATRA Angkatan 11 adalah Hanan. Ia memimpin kelas kami dengan penuh dedikasi!";
+    if (/anggota|member|siapa ketua|siapa sekretaris|timeline|event|gallery|quote|harmatra|who is|who are|members|class president/i.test(lowerPrompt)) {
+        const lang = getLang();
+        if (/siapa ketua|ketua kelas|class president|who is.*president|رئيس الفصل/i.test(lowerPrompt)) {
+            rawReply = lang === 'ar'
+              ? 'رئيس فصل هارماترا الدفعة 11 هو هانان. يقود فصلنا بتفانٍ كامل!'
+              : (lang === 'en'
+              ? 'The class president of HARMATRA Class 11 is Hanan. They lead our class with full dedication!'
+              : 'Ketua kelas HARMATRA Angkatan 11 adalah Hanan. Ia memimpin kelas kami dengan penuh dedikasi!');
             localFound = true;
-        } else if (/siapa sekretaris/i.test(lowerPrompt)) {
-            rawReply = "Sekretaris kelas HARMATRA adalah immszkyy.";
+        } else if (/siapa sekretaris|secretary|أمين السر/i.test(lowerPrompt)) {
+            rawReply = lang === 'ar'
+              ? 'سكرتير فصل هارماترا هو Immszkyy.'
+              : (lang === 'en'
+              ? 'The secretary of HARMATRA class is Immszkyy.'
+              : 'Sekretaris kelas HARMATRA adalah Immszkyy.');
             localFound = true;
-        } else if (/anggota|member/i.test(lowerPrompt)) {
-            rawReply = `Total anggota HARMATRA adalah ${members.length || 29} orang. Semuanya memiliki karakteristik unik yang membuat suasana kelas kami sangat harmonis!`;
+        } else if (/anggota|member|members|أعضاء/i.test(lowerPrompt)) {
+            rawReply = lang === 'ar'
+              ? `إجمالي أعضاء هارماترا هو ${members.length || 29} عضواً. لكل منهم شخصية فريدة تجعل جو فصلنا متناغماً جداً!`
+              : (lang === 'en'
+              ? `HARMATRA has a total of ${members.length || 29} members. Each has unique traits that make our class atmosphere very harmonious!`
+              : `Total anggota HARMATRA adalah ${members.length || 29} orang. Semuanya memiliki karakteristik unik yang membuat suasana kelas kami sangat harmonis!`);
             localFound = true;
-        } else if (/timeline|event/i.test(lowerPrompt)) {
-            rawReply = "Kami memiliki banyak event penting! Mulai dari MPLS, Lomba Kemerdekaan, hingga acara Bukber 2026. Kamu bisa melihat linimasa lengkap di bagian Jejak Langkah di website ini.";
+        } else if (/timeline|event|events|أحداث|جدول/i.test(lowerPrompt)) {
+            rawReply = lang === 'ar'
+              ? 'لدينا الكثير من الأحداث المهمة! من استقبال الطلاب الجدد إلى مسابقة الاستقلال وإفطار 2026. يمكنك الاطلاع على الجدول الزمني الكامل في قسم "مسيرتنا" في الموقع.'
+              : (lang === 'en'
+              ? 'We have many important events! From MPLS, Independence Competition, to the 2026 Bukber event. You can see the full timeline in the "Our Journey" section of this website.'
+              : 'Kami memiliki banyak event penting! Mulai dari MPLS, Lomba Kemerdekaan, hingga acara Bukber 2026. Kamu bisa melihat linimasa lengkap di bagian Jejak Langkah di website ini.');
             localFound = true;
-        } else if (/gallery|quote/i.test(lowerPrompt)) {
-            rawReply = "Banyak momen indah yang diabadikan di Galeri Memori. Silakan gulir ke bawah di halaman utama untuk melihatnya!";
+        } else if (/gallery|galeri|معرض/i.test(lowerPrompt)) {
+            rawReply = lang === 'ar'
+              ? 'تم توثيق الكثير من اللحظات الجميلة في معرض الذكريات. مرر للأسفل في الصفحة الرئيسية لمشاهدتها!'
+              : (lang === 'en'
+              ? 'Many beautiful moments have been captured in the Memory Gallery. Scroll down the main page to see them!'
+              : 'Banyak momen indah yang diabadikan di Galeri Memori. Silakan gulir ke bawah di halaman utama untuk melihatnya!');
             localFound = true;
         } else if (/harmatra/i.test(lowerPrompt)) {
-            rawReply = "HARMATRA adalah nama kebanggaan dari Angkatan 11. Nama ini melambangkan Harmoni dan komitmen kami untuk merajut memori tak terlupakan bersama.";
+            rawReply = lang === 'ar'
+              ? 'هارماترا هو اسم الدفعة 11 الفخور. يرمز هذا الاسم إلى الانسجام والتزامنا بحياكة ذكريات لا تُنسى معاً.'
+              : (lang === 'en'
+              ? 'HARMATRA is the proud name of Class 11. The name symbolizes Harmony and our commitment to weaving unforgettable memories together.'
+              : 'HARMATRA adalah nama kebanggaan dari Angkatan 11. Nama ini melambangkan Harmoni dan komitmen kami untuk merajut memori tak terlupakan bersama.');
             localFound = true;
         }
     }
@@ -560,8 +605,13 @@
         rawReply = await fetchAIResponse(userPrompt);
       } catch (error) {
         console.error("AI Response Error:", error);
-        // 9. SAFE ERROR HANDLING
-        rawReply = "Maaf, Matra AI sedang mengalami gangguan koneksi. Coba lagi sebentar ya.";
+        const lang = getLang();
+        // 9. SAFE ERROR HANDLING (multilingual)
+        rawReply = lang === 'ar'
+          ? 'عذراً، Matra AI يواجه مشكلة في الاتصال. حاول مرة أخرى بعد قليل.'
+          : (lang === 'en'
+          ? 'Sorry, Matra AI is experiencing a connection issue. Error: ' + error.message
+          : 'Maaf, Matra AI sedang mengalami gangguan koneksi. Error: ' + error.message);
       }
     }
 
@@ -863,7 +913,14 @@ Quotes: ${JSON.stringify(db.quotes || [])}
 `;
     }
 
-    // 6. SYSTEM PROMPT FOR GEMINI
+    // 6. SYSTEM PROMPT FOR GEMINI — Language Aware
+    const lang = getLang();
+    const langInstruction = lang === 'ar'
+      ? 'CRITICAL LANGUAGE RULE: You MUST respond ONLY in Arabic (العربية). Every single word must be in Arabic. Never mix with Indonesian or English. Even if the question is in another language, respond in Arabic.'
+      : (lang === 'en'
+      ? 'CRITICAL LANGUAGE RULE: You MUST respond ONLY in English. Every single word must be in English. Never mix with Indonesian or Arabic. Even if the question is in another language, respond in English.'
+      : 'CRITICAL LANGUAGE RULE: Kamu HARUS merespons HANYA dalam Bahasa Indonesia. Setiap kata harus dalam Bahasa Indonesia. Jangan campur dengan bahasa lain.');
+
     const systemInstruction = `You are MATRA AI.
 Official intelligent assistant of HARMATRA generation 11.
 
@@ -871,18 +928,13 @@ You are not a simple chatbot. You feel like a real AI assistant inside the Harma
 
 Your behavior:
 - smart, natural, modern, helpful, warm, responsive, human-like.
-- Answer Indonesian naturally.
+
+${langInstruction}
 
 CRITICAL INSTRUCTION:
 You have direct access to the HARMATRA DATABASE below.
 Use this data to answer questions about Harmatra accurately and dynamically.
 For example:
-- If asked "siapa ketua kelas?", search the Members Data for role "Ketua Kelas" and answer naturally (e.g., "Hanan saat ini tercatat sebagai Ketua Kelas HARMATRA.").
-- If asked "berapa anggota Harmatra?", reply with the Total Members (e.g., "Saat ini HARMATRA memiliki 29 anggota.").
-- If asked about a specific person (e.g., "siapa Immszkyy?"), search by name, full_name, or nickname, and state their role and bio.
-- If asked "kegiatan apa saja?", summarize the Timeline Events.
-- If asked "berapa galeri?", answer using the Gallery Items count.
-
 If the requested data is truly not found in the HARMATRA DATABASE, reply naturally:
 “Maaf, aku belum menemukan data itu di arsip HARMATRA.”
 
@@ -896,11 +948,12 @@ ${harmatraContext}`;
 
     const contents = [];
     
-    // 8. CHAT HISTORY
+    // 8. CHAT HISTORY — exclude any loading placeholder messages
+    const loadingPhrases = ['Matra AI sedang berpikir...', 'Matra AI is thinking...', 'Matra AI يفكر...'];
     for (let msg of state.messages) {
       if (msg.role === 'user') {
          contents.push({ role: 'user', parts: [{ text: msg.content }] });
-      } else if (msg.role === 'assistant' && msg.content !== 'Matra AI sedang berpikir...') {
+      } else if (msg.role === 'assistant' && !loadingPhrases.includes(msg.content)) {
          contents.push({ role: 'model', parts: [{ text: msg.content }] });
       }
     }
@@ -921,7 +974,8 @@ ${harmatraContext}`;
     });
 
     if (!response.ok) {
-      throw new Error(`API Error: ${response.statusText}`);
+      const errText = await response.text();
+      throw new Error(`Status ${response.status} - ${errText}`);
     }
 
     const data = await response.json();

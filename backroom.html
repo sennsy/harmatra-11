@@ -799,6 +799,9 @@
       <li class="nav-item" data-tab="typing">
         <button onclick="switchTab('typing')"><i class="fa-solid fa-keyboard"></i> TYPING.DAT</button>
       </li>
+      <li class="nav-item" data-tab="mediahub">
+        <button onclick="switchTab('mediahub')"><i class="fa-solid fa-play"></i> MEDIA_HUB.DAT</button>
+      </li>
       <li class="nav-item" data-tab="spotlight">
         <button onclick="switchTab('spotlight')"><i class="fa-solid fa-crosshairs"></i> SPOTLIGHT.CFG</button>
       </li>
@@ -1042,6 +1045,64 @@
       </div>
       <div id="typingMessagesListContainer" class="data-list" style="margin-bottom: 30px;"></div>
     </section>
+
+    <!-- TAB: MEDIA HUB -->
+    <section id="tab-mediahub" class="cms-view">
+      <div class="cms-header">
+        <h2>MEDIA HUB SETTINGS</h2>
+        <button onclick="saveMediaHub()" class="btn-save"><i class="fa-solid fa-floppy-disk"></i> SAVE CHANGES</button>
+      </div>
+      <div class="cms-content">
+        
+        <div class="config-panel">
+          <h3 class="font-display font-bold text-lg mb-4 text-blue-400">Social & Cinema Configuration</h3>
+          
+          <div class="mb-4">
+            <label class="block text-xs font-bold opacity-60 mb-2">Instagram URL</label>
+            <input type="text" id="mhInputIg" class="cms-input w-full" placeholder="https://instagram.com/...">
+          </div>
+          
+          <div class="mb-4">
+            <label class="block text-xs font-bold opacity-60 mb-2">Cinema Video URL (Google Drive Preview)</label>
+            <input type="text" id="mhInputCinema" class="cms-input w-full" placeholder="https://drive.google.com/file/d/.../preview">
+          </div>
+        </div>
+
+        <div class="mt-8 flex justify-between items-end mb-4">
+          <h3 class="font-display font-bold text-lg text-purple-400">HARMATRA Shorts</h3>
+          <button onclick="openShortModal()" class="btn-save" style="background: rgba(168,85,247,0.2); border-color: rgba(168,85,247,0.5);"><i class="fa-solid fa-plus"></i> ADD SHORT</button>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="cmsShortsList">
+          <!-- Populated by JS -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SHORT MODAL -->
+    <div id="shortModal" class="modal-backdrop">
+      <div class="modal-box">
+        <h3 id="shortModalTitle" class="font-display font-bold text-xl mb-4">Add Short</h3>
+        <input type="hidden" id="shortId">
+        <div class="mb-4">
+          <label class="block text-xs font-bold opacity-60 mb-2">Video URL (Google Drive Preview)</label>
+          <input type="text" id="shortUrl" class="cms-input w-full">
+        </div>
+        <div class="mb-4">
+          <label class="block text-xs font-bold opacity-60 mb-2">Title</label>
+          <input type="text" id="shortTitle" class="cms-input w-full">
+        </div>
+        <div class="mb-6">
+          <label class="block text-xs font-bold opacity-60 mb-2">Description</label>
+          <textarea id="shortDesc" class="cms-input w-full h-20 resize-none"></textarea>
+        </div>
+        <div class="flex justify-end gap-3">
+          <button onclick="closeShortModal()" class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-sm font-bold">CANCEL</button>
+          <button onclick="saveShortItem()" class="px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors border border-blue-500/50 text-sm font-bold">SAVE</button>
+        </div>
+      </div>
+    </div>
 
     <!-- TAB: SPOTLIGHT -->
     <section id="tab-spotlight" class="cms-view">
@@ -2020,6 +2081,9 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
         timeline: "TIMELINE.DAT",
         gallery: "GALLERY.DAT",
         quotes: "QUOTES.DAT",
+        typing: "TYPING.DAT",
+        mediahub: "MEDIA_HUB.DAT",
+        spotlight: "SPOTLIGHT.CFG",
         settings: "SETTINGS.JSON",
         connection: "DEPLOYMENT.EXE"
       };
@@ -2065,6 +2129,7 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       loadTranslationsIntoForm();
       renderSpotlightConfig();
       renderTypingSettings();
+      renderMediaHubSettings();
     }
 
     // Close Modal helper
@@ -2634,6 +2699,156 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
           renderCMSLayout();
         }
       });
+    }
+
+    // ==========================================
+    // MEDIA HUB CMS LOGIC
+    // ==========================================
+    function renderMediaHubSettings() {
+      if(!websiteData.mediaHub) {
+        websiteData.mediaHub = {
+          instagramUrl: "",
+          cinema: { title: "", description: "", url: "" },
+          arcade: { enabled: false, title: "", description: "" },
+          shorts: []
+        };
+      }
+      
+      const hub = websiteData.mediaHub;
+      document.getElementById('mhInputIg').value = hub.instagramUrl || '';
+      if(hub.cinema) {
+        document.getElementById('mhInputCinema').value = hub.cinema.url || '';
+      }
+
+      renderShortsList();
+    }
+
+    function saveMediaHub() {
+      if(!websiteData.mediaHub) websiteData.mediaHub = { shorts: [] };
+      if(!websiteData.mediaHub.cinema) websiteData.mediaHub.cinema = {};
+
+      websiteData.mediaHub.instagramUrl = document.getElementById('mhInputIg').value;
+      websiteData.mediaHub.cinema.url = document.getElementById('mhInputCinema').value;
+
+      setChangesPending(true);
+      logTerminal('Save', 'Media Hub configuration updated.', 'success');
+      Swal.fire({
+        title: 'SAVED',
+        text: 'Media Hub config updated.',
+        icon: 'success',
+        background: '#07070a',
+        color: '#00ff88',
+        confirmButtonColor: '#00ff88',
+        customClass: { popup: 'border border-[#00ff88]' },
+        timer: 1500
+      });
+    }
+
+    function renderShortsList() {
+      const container = document.getElementById('cmsShortsList');
+      const list = websiteData.mediaHub?.shorts || [];
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1 / -1; text-align:center; color:var(--text-dim); padding:3rem 0;">No shorts found. Add one above.</div>`;
+        return;
+      }
+
+      list.forEach((short, idx) => {
+        const card = document.createElement('div');
+        card.className = 'data-item';
+        card.innerHTML = `
+          <div class="data-info">
+            <div class="data-title">${escapeHTML(short.title)}</div>
+            <div class="data-subtitle text-xs opacity-60 truncate">${escapeHTML(short.url)}</div>
+          </div>
+          <div class="data-actions mt-3">
+            <button onclick="reorderShort(${idx}, -1)" class="btn btn-icon btn-sm" title="Move Left"><i class="fa-solid fa-arrow-left"></i></button>
+            <button onclick="reorderShort(${idx}, 1)" class="btn btn-icon btn-sm" title="Move Right"><i class="fa-solid fa-arrow-right"></i></button>
+            <button onclick="openEditShortModal(${idx})" class="btn btn-icon btn-sm" style="color:var(--accent-cyan);" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="deleteShort(${idx})" class="btn btn-icon btn-sm btn-danger" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function reorderShort(idx, direction) {
+      const targetIdx = idx + direction;
+      if (targetIdx < 0 || targetIdx >= websiteData.mediaHub.shorts.length) return;
+      const temp = websiteData.mediaHub.shorts[idx];
+      websiteData.mediaHub.shorts[idx] = websiteData.mediaHub.shorts[targetIdx];
+      websiteData.mediaHub.shorts[targetIdx] = temp;
+      setChangesPending(true);
+      renderShortsList();
+    }
+
+    function openShortModal() {
+      document.getElementById('shortId').value = '';
+      document.getElementById('shortUrl').value = '';
+      document.getElementById('shortTitle').value = '';
+      document.getElementById('shortDesc').value = '';
+      document.getElementById('shortModalTitle').innerText = 'Add Short';
+      document.getElementById('shortModal').classList.add('active');
+    }
+
+    function openEditShortModal(idx) {
+      const short = websiteData.mediaHub.shorts[idx];
+      document.getElementById('shortId').value = idx; // store index here
+      document.getElementById('shortUrl').value = short.url || '';
+      document.getElementById('shortTitle').value = short.title || '';
+      document.getElementById('shortDesc').value = short.description || '';
+      document.getElementById('shortModalTitle').innerText = 'Edit Short';
+      document.getElementById('shortModal').classList.add('active');
+    }
+
+    function closeShortModal() {
+      document.getElementById('shortModal').classList.remove('active');
+    }
+
+    function saveShortItem() {
+      const idxStr = document.getElementById('shortId').value;
+      const url = document.getElementById('shortUrl').value;
+      const title = document.getElementById('shortTitle').value;
+      const desc = document.getElementById('shortDesc').value;
+
+      if(!url || !title) {
+        alert("URL and Title are required.");
+        return;
+      }
+
+      if(!websiteData.mediaHub) websiteData.mediaHub = { shorts: [] };
+      if(!websiteData.mediaHub.shorts) websiteData.mediaHub.shorts = [];
+
+      if(idxStr === '') {
+        // Add new
+        websiteData.mediaHub.shorts.push({
+          id: 'short_' + Date.now(),
+          url: url,
+          title: title,
+          description: desc
+        });
+        logTerminal('Create', `Added new Short: ${title}`, 'success');
+      } else {
+        // Edit
+        const idx = parseInt(idxStr);
+        websiteData.mediaHub.shorts[idx].url = url;
+        websiteData.mediaHub.shorts[idx].title = title;
+        websiteData.mediaHub.shorts[idx].description = desc;
+        logTerminal('Update', `Updated Short: ${title}`, 'success');
+      }
+
+      setChangesPending(true);
+      closeShortModal();
+      renderShortsList();
+    }
+
+    function deleteShort(idx) {
+      if(confirm('Are you sure you want to delete this short?')) {
+        websiteData.mediaHub.shorts.splice(idx, 1);
+        setChangesPending(true);
+        renderShortsList();
+      }
     }
 
     // ==========================================

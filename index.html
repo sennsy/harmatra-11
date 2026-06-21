@@ -1125,11 +1125,12 @@
         <div class="flex gap-2 border-t border-white/10 pt-3">
           <button onclick="focusSpotlightMember()"
             class="flex-1 text-[10px] font-semibold bg-white/5 hover:bg-white/10 transition-colors py-1.5 rounded-lg flex items-center justify-center gap-1 text-blue-300">
-            <i class="fa-solid fa-crosshairs"></i> View Profile
+            <i class="fa-solid fa-crosshairs"></i> <span data-i18n="spotlight_view">View Profile</span>
           </button>
           <button onclick="openSpotlightProfileDirect()"
-            class="flex-1 text-[10px] font-semibold bg-blue-600/20 hover:bg-blue-600/40 transition-colors py-1.5 rounded-lg flex items-center justify-center gap-1 text-blue-200">
-            <i class="fa-solid fa-id-card"></i> Full Profile
+            class="flex-1 text-[10px] font-semibold bg-blue-500/20 hover:bg-blue-500/40 transition-colors py-1.5 rounded-lg flex items-center justify-center gap-1 text-blue-600 dark:text-blue-200"
+            style="color: var(--text-main);">
+            <i class="fa-solid fa-id-card"></i> <span data-i18n="spotlight_full">Full Profile</span>
           </button>
         </div>
 
@@ -1333,54 +1334,121 @@
 
     </section>
 
-    <footer class="border-t border-white/10 pt-16 pb-8 px-6 mt-20 relative overflow-hidden">
+    <!-- Media Hub Section -->
+    <section class="py-24 px-6 relative z-10 border-t border-[var(--glass-border)] bg-[var(--glass-border)]"
+      id="mediaHub">
+      <div class="max-w-5xl mx-auto">
 
-      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-
-        <div class="font-display font-bold text-2xl tracking-widest">HARMATRA</div>
-
-        <div class="flex gap-6">
-
-          <a href="https://instagram.com/harmatra_id" target="_blank"
-            class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-blue-500 hover:text-white transition-colors">
-
-            <i class="fa-brands fa-instagram text-xl"></i>
-
-          </a>
-
+        <div class="text-center mb-16 gs-up">
+          <h2
+            class="font-display text-4xl md:text-5xl font-bold mb-3 tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[var(--text-main)] to-[var(--text-muted)]"
+            data-i18n="media_hub_title">
+            MEDIA HUB</h2>
+          <p class="opacity-60 tracking-widest text-sm uppercase" data-i18n="media_hub_sub">Stay connected with the
+            memories of HARMATRA.</p>
         </div>
 
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="mediaHubGrid">
+
+          <!-- Card 1: Contact -->
+          <a href="https://wa.me/6281586917099" target="_blank"
+            class="glass-card p-6 rounded-2xl group hover:border-green-500/30 hover:shadow-[0_0_20px_rgba(34,197,94,0.15)] transition-all duration-500 cursor-pointer gs-stagger flex flex-col items-center text-center">
+            <div
+              class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <i class="fa-brands fa-whatsapp text-2xl text-green-400"></i>
+            </div>
+            <h3 class="font-display text-xl font-bold mb-2">Hubungi Kami</h3>
+            <p class="text-sm opacity-60">Kirim pesan WhatsApp (081586917099).</p>
+          </a>
+
+          <!-- Card 2: Instagram -->
+          <a href="https://instagram.com/harmatra_id" id="mhInstagramBtn" target="_blank"
+            class="glass-card p-6 rounded-2xl group hover:border-pink-500/30 hover:shadow-[0_0_20px_rgba(236,72,153,0.15)] transition-all duration-500 cursor-pointer gs-stagger flex flex-col items-center text-center">
+            <div
+              class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <i class="fa-brands fa-instagram text-2xl text-pink-400"></i>
+            </div>
+            <h3 class="font-display text-xl font-bold mb-2" data-i18n="mh_instagram_title">Instagram</h3>
+            <p class="text-sm opacity-60" data-i18n="mh_instagram_desc">Follow the journey and memories of HARMATRA.</p>
+          </a>
+
+          <!-- Card 3: Shorts -->
+          <div onclick="window.openShortsModal()"
+            class="glass-card p-6 rounded-2xl group hover:border-purple-500/30 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)] transition-all duration-500 cursor-pointer gs-stagger flex flex-col items-center text-center lg:row-span-2 lg:justify-center relative overflow-hidden">
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            </div>
+            <div
+              class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 relative z-10">
+              <i class="fa-solid fa-play text-2xl text-purple-400 ml-1"></i>
+            </div>
+            <h3 class="font-display text-2xl font-bold mb-3 relative z-10" data-i18n="mh_shorts_title">HARMATRA Shorts
+            </h3>
+            <p class="text-sm opacity-60 relative z-10" data-i18n="mh_shorts_desc">Short moments and memories captured
+              during our journey.</p>
+          </div>
+
+          <!-- Card 4: Cinema -->
+          <div onclick="window.openCinemaModal()"
+            class="glass-card p-6 rounded-2xl group hover:border-amber-500/30 hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] transition-all duration-500 cursor-pointer gs-stagger flex flex-col items-center text-center lg:col-span-2">
+            <div
+              class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <i class="fa-solid fa-film text-2xl text-amber-400"></i>
+            </div>
+            <h3 class="font-display text-xl font-bold mb-2" id="mhCinemaTitle" data-i18n="mh_cinema_title">HARMATRA
+              Cinema</h3>
+            <p class="text-sm opacity-60" id="mhCinemaDesc" data-i18n="mh_cinema_desc">Watch the official graduation and
+              farewell film.</p>
+          </div>
+
+          <!-- Card 5: Arcade -->
+          <div onclick="openArcadeModal()"
+            class="glass-card p-6 rounded-2xl group hover:border-indigo-500/30 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] transition-all duration-500 cursor-pointer gs-stagger flex flex-col items-center text-center">
+            <div
+              class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <i class="fa-solid fa-gamepad text-2xl text-indigo-400"></i>
+            </div>
+            <h3 class="font-display text-xl font-bold mb-2" id="mhArcadeTitle" data-i18n="mh_arcade_title">HARMATRA
+              Arcade</h3>
+            <p class="text-sm opacity-60" id="mhArcadeDesc" data-i18n="mh_arcade_desc">Play mini games and challenge
+              your friends.</p>
+          </div>
+
+          <!-- Card 6: Developer -->
+          <div onclick="openDeveloperModal()"
+            class="glass-card p-6 rounded-2xl group hover:border-cyan-500/30 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] transition-all duration-500 cursor-pointer gs-stagger flex flex-col items-center text-center lg:col-span-2">
+            <div
+              class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+              <i class="fa-solid fa-code text-2xl text-cyan-400"></i>
+            </div>
+            <h3 class="font-display text-xl font-bold mb-1" data-i18n="mh_dev_title">Web Developer</h3>
+            <p class="text-sm opacity-80 mb-2"><span data-i18n="mh_dev_by">Developed by</span> <span
+                class="font-bold text-cyan-300">@immszkyy</span></p>
+            <p class="text-xs opacity-60 px-2 leading-relaxed" data-i18n="mh_dev_desc">Ketuk untuk melihat detail
+              selengkapnya tentang website ini dan pembuatnya.</p>
+          </div>
+
+        </div>
       </div>
+    </section>
 
-      <!-- Hubungi Kami Button -->
-      <div class="flex justify-center mt-12 mb-4">
-        <button onclick="openContactModal()"
-          class="contact-trigger-btn px-8 py-3.5 rounded-xl text-sm font-semibold tracking-widest uppercase flex items-center gap-3"
-          data-i18n="contact_btn">
-          <i class="fa-regular fa-envelope text-base opacity-90"></i> <span data-i18n="contact_btn">Hubungi Kami</span>
-        </button>
+    <!-- Minimal Footer -->
+    <footer class="border-t border-white/10 py-8 px-6 text-center">
+      <div class="text-xs opacity-50 uppercase tracking-widest mb-4" data-i18n="footer_copy">
+        © 2026 HARMATRA - Angkatan 11 SMA.
       </div>
-        <div class="text-center mt-8 text-xs opacity-50 uppercase tracking-widest">
-
-        © 2026 HARMATRA - Angkatan 11 SMA .
-
-      </div>
-
-      <footer class="text-center mt-4 mb-4">
-
-        <small class="text-xs font-medium opacity-40 transition-all duration-500 inline-block hover:opacity-100 hover:text-blue-400 hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.6)] hover:-translate-y-1 cursor-default tracking-wide" data-i18n="footer_note">
-
-          A digital home for HARMATRA, crafted by Immszkyy
-
-        </small>
-
-      </footer>
-
+      <small
+        class="text-xs font-medium opacity-40 transition-all duration-500 inline-block hover:opacity-100 hover:text-blue-400 hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.6)] hover:-translate-y-1 cursor-default tracking-wide"
+        data-i18n="footer_note">
+        A digital home for HARMATRA, crafted by Immszkyy
+      </small>
     </footer>
 
     <!-- Typing Signature Bar -->
-    <div id="typingSignatureContainer" class="w-full text-center py-6 pb-12 flex justify-center items-center font-display tracking-widest text-sm md:text-base opacity-70 transition-opacity duration-300 hover:opacity-100">
-      <span id="typingSignatureText" class="text-[var(--text-main)]"></span><span id="typingSignatureCursor" class="animate-pulse inline-block w-[2px] h-[1em] bg-[var(--text-main)] ml-1 align-middle"></span>
+    <div id="typingSignatureContainer"
+      class="w-full text-center py-6 pb-12 flex justify-center items-center font-display tracking-widest text-sm md:text-base opacity-70 transition-opacity duration-300 hover:opacity-100">
+      <span id="typingSignatureText" class="text-[var(--text-main)]"></span><span id="typingSignatureCursor"
+        class="animate-pulse inline-block w-[2px] h-[1em] bg-[var(--text-main)] ml-1 align-middle"></span>
     </div>
   </main>
 
@@ -1431,8 +1499,14 @@
     <!-- Chat Window -->
     <div id="chatWindow" class="chat-window-premium hidden">
       <!-- Chat Header -->
-      <div class="chat-header-premium">
-        <div class="chat-header-info">
+      <div class="chat-header-premium" style="position: relative; padding-top: 20px;">
+        <!-- Drag Handle -->
+        <div
+          class="chat-drag-handle flex justify-center w-full absolute top-1 left-0 cursor-grab opacity-50 hover:opacity-100"
+          title="Geser untuk memindah">
+          <i class="fa-solid fa-ellipsis text-white"></i>
+        </div>
+        <div class="chat-header-info mt-1">
           <div class="chat-avatar-container">
             <img src="matra ai.png" alt="Matra AI Avatar" class="chat-avatar-img">
             <span class="chat-avatar-status"></span>
@@ -2382,8 +2456,11 @@
             title_gallery: "Galeri Memori", sub_gallery: "Kumpulan momen yang tertangkap lensa.",
 
             spotlight: "Sorotan Hari Ini",
+            spotlight_view: "Lihat Profil",
+            spotlight_full: "Profil Lengkap",
 
             footer_note: "A digital home for HARMATRA, crafted by Immszkyy",
+            footer_copy: "© 2026 HARMATRA - Angkatan 11 SMA.",
 
             contact_btn: "Hubungi Kami",
             contact_title: "Hubungi Kami",
@@ -2394,7 +2471,48 @@
             contact_msg: "Pesan",
             contact_msg_ph: "Tulis pesan Anda...",
             contact_msg_err: "Pesan belum diisi",
-            contact_send: "Kirim Pesan"
+            contact_send: "Kirim Pesan",
+
+            media_hub_title: "PUSAT MEDIA",
+            media_hub_sub: "Tetap terhubung dengan kenangan HARMATRA.",
+            mh_contact_title: "Hubungi Kami",
+            mh_contact_desc: "Kirim pesan langsung ke HARMATRA.",
+            mh_instagram_title: "Instagram",
+            mh_instagram_desc: "Ikuti perjalanan dan kenangan HARMATRA.",
+            mh_shorts_title: "Video Singkat HARMATRA",
+            mh_shorts_desc: "Momen singkat yang tertangkap selama perjalanan kami.",
+            mh_cinema_title: "Bioskop HARMATRA",
+            mh_cinema_desc: "Tonton film perpisahan dan wisuda resmi.",
+            mh_arcade_title: "Game HARMATRA",
+            mh_arcade_desc: "Main mini game dan tantang temanmu.",
+            mh_arcade_coming: "Segera Hadir",
+
+            cinema_now_playing: "Sedang Diputar",
+            cinema_official_film: "Film Resmi",
+
+            short_like: "Suka",
+            short_comment: "Komentar",
+
+            role_ketua: "Ketua Kelas",
+            role_wakil: "Wakil Ketua",
+            role_sekretaris: "Sekretaris",
+            role_bendahara: "Bendahara",
+            role_siswa: "Siswa",
+            role_guru: "Guru",
+
+            mh_dev_title: "Web Developer",
+            mh_dev_by: "Dibuat oleh",
+            mh_dev_desc: "Ketuk untuk melihat detail selengkapnya tentang website ini dan pembuatnya.",
+            dev_title: "Tentang Developer",
+            dev_desc: "Website ini dirancang secara khusus dengan estetika premium untuk angkatan 11 HARMATRA.",
+            dev_f1_title: "Desain Glassmorphism:",
+            dev_f1_desc: "UI modern yang responsif dengan animasi mulus.",
+            dev_f2_title: "Performa Tinggi:",
+            dev_f2_desc: "Dioptimalkan menggunakan Tailwind CSS dan lazy loading.",
+            dev_f3_title: "Matra AI:",
+            dev_f3_desc: "Asisten AI terintegrasi yang cerdas mengenali anggota dan memori kelas.",
+            dev_f4_title: "Fitur Interaktif:",
+            dev_f4_desc: "Galeri memori yang imersif, pemutar musik, hingga sistem backroom yang aman."
 
           },
 
@@ -2421,8 +2539,11 @@
             title_gallery: "Memory Gallery", sub_gallery: "A collection of moments captured through the lens.",
 
             spotlight: "Today's Spotlight",
+            spotlight_view: "View Profile",
+            spotlight_full: "Full Profile",
 
             footer_note: "A digital home for HARMATRA, crafted by Immszkyy",
+            footer_copy: "© 2026 HARMATRA - Class of 11.",
 
             contact_btn: "Contact Us",
             contact_title: "Contact Us",
@@ -2433,7 +2554,48 @@
             contact_msg: "Message",
             contact_msg_ph: "Write your message...",
             contact_msg_err: "Message is required",
-            contact_send: "Send Message"
+            contact_send: "Send Message",
+
+            media_hub_title: "MEDIA HUB",
+            media_hub_sub: "Stay connected with the memories of HARMATRA.",
+            mh_contact_title: "Contact Us",
+            mh_contact_desc: "Send a message directly to HARMATRA.",
+            mh_instagram_title: "Instagram",
+            mh_instagram_desc: "Follow the journey and memories of HARMATRA.",
+            mh_shorts_title: "HARMATRA Shorts",
+            mh_shorts_desc: "Short moments and memories captured during our journey.",
+            mh_cinema_title: "HARMATRA Cinema",
+            mh_cinema_desc: "Watch the official graduation and farewell film.",
+            mh_arcade_title: "HARMATRA Arcade",
+            mh_arcade_desc: "Play mini games and challenge your friends.",
+            mh_arcade_coming: "Coming Soon",
+
+            cinema_now_playing: "Now Playing",
+            cinema_official_film: "Official Film",
+
+            short_like: "Like",
+            short_comment: "Comment",
+
+            role_ketua: "Class President",
+            role_wakil: "Vice President",
+            role_sekretaris: "Secretary",
+            role_bendahara: "Treasurer",
+            role_siswa: "Student",
+            role_guru: "Teacher",
+
+            mh_dev_title: "Web Developer",
+            mh_dev_by: "Developed by",
+            mh_dev_desc: "Tap to see full details about this website and its creator.",
+            dev_title: "About The Developer",
+            dev_desc: "This website is specially designed with premium aesthetics for the 11th generation of HARMATRA.",
+            dev_f1_title: "Glassmorphism Design:",
+            dev_f1_desc: "Modern responsive UI with smooth animations.",
+            dev_f2_title: "High Performance:",
+            dev_f2_desc: "Optimized using Tailwind CSS and lazy loading.",
+            dev_f3_title: "Matra AI:",
+            dev_f3_desc: "Smart integrated AI assistant that recognizes members and class memories.",
+            dev_f4_title: "Interactive Features:",
+            dev_f4_desc: "Immersive memory gallery, music player, and a secure backroom system."
 
           },
 
@@ -2460,8 +2622,11 @@
             title_gallery: "معرض الذكريات", sub_gallery: "مجموعة من اللحظات التي التقطتها العدسة.",
 
             spotlight: "أبرز أضواء اليوم",
+            spotlight_view: "عرض الملف الشخصي",
+            spotlight_full: "الملف الكامل",
 
             footer_note: "A digital home for HARMATRA, crafted by Immszkyy",
+            footer_copy: "© 2026 هارماترا - الدفعة 11.",
 
             contact_btn: "اتصل بنا",
             contact_title: "اتصل بنا",
@@ -2472,9 +2637,82 @@
             contact_msg: "الرسالة",
             contact_msg_ph: "اكتب رسالتك...",
             contact_msg_err: "الرسالة مطلوبة",
-            contact_send: "إرسال الرسالة"
+            contact_send: "إرسال الرسالة",
 
-          }
+            media_hub_title: "مركز الوسائط",
+            media_hub_sub: "ابقَ على تواصل مع ذكريات هارماترا.",
+            mh_contact_title: "تواصل معنا",
+            mh_contact_desc: "أرسل رسالة مباشرة إلى هارماترا.",
+            mh_instagram_title: "إنستغرام",
+            mh_instagram_desc: "تابع رحلة وذكريات هارماترا.",
+            mh_shorts_title: "مقاطع هارماترا القصيرة",
+            mh_shorts_desc: "لحظات قصيرة وذكريات التُقطت خلال رحلتنا.",
+            mh_cinema_title: "سينما هارماترا",
+            mh_cinema_desc: "شاهد فيلم التخرج والوداع الرسمي.",
+            mh_arcade_title: "ألعاب هارماترا",
+            mh_arcade_desc: "العب ألعاب صغيرة وتحدّ أصدقاءك.",
+            mh_arcade_coming: "قريباً",
+
+            cinema_now_playing: "يُعرض الآن",
+            cinema_official_film: "الفيلم الرسمي",
+
+            short_like: "إعجاب",
+            short_comment: "تعليق",
+
+            role_ketua: "رئيس الفصل",
+            role_wakil: "نائب الرئيس",
+            role_sekretaris: "أمين السر",
+            role_bendahara: "أمين الصندوق",
+            role_siswa: "طالب",
+            role_guru: "معلم",
+
+            mh_dev_title: "مطور الويب",
+            mh_dev_by: "تم التطوير بواسطة",
+            mh_dev_desc: "انقر لرؤية التفاصيل الكاملة حول هذا الموقع ومنشئه.",
+            dev_title: "عن المطور",
+            dev_desc: "تم تصميم هذا الموقع خصيصًا بجماليات فاخرة للدفعة الحادية عشرة من هارماترا.",
+            dev_f1_title: "تصميم Glassmorphism:",
+            dev_f1_desc: "واجهة حديثة متجاوبة مع رسوم متحركة سلسة.",
+            dev_f2_title: "أداء عالٍ:",
+            dev_f2_desc: "مُحسّن باستخدام Tailwind CSS والتحميل الكسول.",
+            dev_f3_title: "Matra AI:",
+            dev_f3_desc: "مساعد ذكاء اصطناعي مدمج يتعرف على الأعضاء وذكريات الصف.",
+            dev_f4_title: "ميزات تفاعلية:",
+            dev_f4_desc: "معرض ذكريات غامر، مشغل موسيقى، ونظام backroom آمن."
+
+          },
+          mediaHub: {
+            instagramUrl: "https://instagram.com/harmatra_id",
+            cinema: {
+              title: "HARMATRA Cinema",
+              description: "Watch the official graduation and farewell film.",
+              url: "https://drive.google.com/file/d/1gEbf1evmjuW-EwCCA4HdZjcPyEClv8CJ/preview"
+            },
+            arcade: {
+              enabled: false,
+              title: "HARMATRA Arcade",
+              description: "Coming Soon"
+            },
+            shorts: [
+              {
+                id: "short_1",
+                url: "https://drive.google.com/file/d/1zOWaW4epj5S80OWEPG9eXk0y0jzVhe7Q/preview",
+                title: "Memory 1",
+                description: "Our first memory."
+              },
+              {
+                id: "short_2",
+                url: "https://drive.google.com/file/d/1UfqucPB8m8NNnsRd47t3ki7lt0GyCbrp/preview",
+                title: "Memory 2",
+                description: "Unforgettable journey."
+              },
+              {
+                id: "short_3",
+                url: "https://drive.google.com/file/d/1USDpUV5XEkt9PVnCxvJpRKGz4icLb6od/preview",
+                title: "Memory 3",
+                description: "The story continues."
+              }
+            ]
           },
           typingSignature: {
             enabled: true,
@@ -2482,12 +2720,26 @@
             typeSpeed: 50,
             deleteSpeed: 30,
             pauseDuration: 2000,
-            messages: [
-              "A digital home for HARMATRA.",
-              "Preserving memories beyond graduation.",
-              "Every story deserves to be remembered.",
-              "Crafted with passion and purpose."
-            ]
+            messages: {
+              id: [
+                "Rumah digital untuk HARMATRA.",
+                "Menjaga kenangan melampaui kelulusan.",
+                "Setiap cerita berhak untuk dikenang.",
+                "Dibuat dengan penuh semangat dan tujuan."
+              ],
+              en: [
+                "A digital home for HARMATRA.",
+                "Preserving memories beyond graduation.",
+                "Every story deserves to be remembered.",
+                "Crafted with passion and purpose."
+              ],
+              ar: [
+                "بيت رقمي لهارماترا.",
+                "الحفاظ على الذكريات بعد التخرج.",
+                "كل قصة تستحق أن تُتذكر.",
+                "صُنع بشغف وهدف."
+              ]
+            }
           }
         };
 
@@ -2626,6 +2878,7 @@
               if (data.timeline) dbData.timeline = data.timeline;
               if (data.gallery) dbData.gallery = data.gallery;
               if (data.quotes) dbData.quotes = data.quotes;
+              if (data.mediaHub) dbData.mediaHub = data.mediaHub;
               if (data.translations) {
                 Object.keys(data.translations).forEach(lang => {
                   if (translations[lang]) {
@@ -2673,6 +2926,10 @@
           renderQuotes();
 
           refreshSpotlightText();
+
+          // Refresh media hub titles/descriptions & typing messages when language changes
+          if (typeof window.renderMediaHub === 'function') window.renderMediaHub();
+          restartTypingSignature();
 
         }
 
@@ -2829,17 +3086,42 @@
               bio = m.bio_id;
             } else if (currentLang === 'ar') {
               name = m.name_ar || m.name;
-              role = m.role_ar || m.role;
               bio = m.bio_ar || m.bio_en;
+              // Role: use role_ar field or lookup in translation table
+              const dict = translations['ar'];
+              const roleLower = (m.role || '').toLowerCase();
+              if (m.role_ar) {
+                role = m.role_ar;
+              } else if (roleLower.includes('ketua kelas') || roleLower.includes('ketua')) {
+                role = dict.role_ketua || 'رئيس الفصل';
+              } else if (roleLower.includes('wakil')) {
+                role = dict.role_wakil || 'نائب الرئيس';
+              } else if (roleLower.includes('sekretaris')) {
+                role = dict.role_sekretaris || 'أمين السر';
+              } else if (roleLower.includes('bendahara')) {
+                role = dict.role_bendahara || 'أمين الصندوق';
+              } else if (roleLower.includes('guru')) {
+                role = dict.role_guru || 'معلم';
+              } else {
+                role = dict.role_siswa || 'طالب';
+              }
             } else if (currentLang === 'en') {
-              if (role.toLowerCase().includes('ketua')) {
-                role = "Class President";
-              } else if (role.toLowerCase().includes('sekretaris')) {
-                role = "Secretary";
-              } else if (role.toLowerCase().includes('mas ketuu')) {
-                role = "Vice President";
-              } else if (role.toLowerCase() === 'siswa') {
-                role = "Student";
+              const dict = translations['en'];
+              const roleLower = (m.role || '').toLowerCase();
+              if (m.role_en) {
+                role = m.role_en;
+              } else if (roleLower.includes('ketua kelas') || (roleLower.includes('ketua') && !roleLower.includes('wakil'))) {
+                role = dict.role_ketua || 'Class President';
+              } else if (roleLower.includes('wakil')) {
+                role = dict.role_wakil || 'Vice President';
+              } else if (roleLower.includes('sekretaris')) {
+                role = dict.role_sekretaris || 'Secretary';
+              } else if (roleLower.includes('bendahara')) {
+                role = dict.role_bendahara || 'Treasurer';
+              } else if (roleLower.includes('guru')) {
+                role = dict.role_guru || 'Teacher';
+              } else {
+                role = dict.role_siswa || 'Student';
               }
             }
 
@@ -3224,21 +3506,36 @@
           const textEl = document.getElementById('typingSignatureText');
           const cursorEl = document.getElementById('typingSignatureCursor');
 
-          if (!config || !config.enabled || !config.messages || config.messages.length === 0) {
+          if (!config || !config.enabled || !config.messages) {
+            if (container) container.style.display = 'none';
+            return;
+          }
+
+          // Support multilingual messages object or legacy array
+          let messagesArr;
+          if (Array.isArray(config.messages)) {
+            messagesArr = config.messages;
+          } else if (typeof config.messages === 'object') {
+            messagesArr = config.messages[currentLang] || config.messages['en'] || config.messages['id'] || [];
+          } else {
+            messagesArr = [];
+          }
+
+          if (messagesArr.length === 0) {
             if (container) container.style.display = 'none';
             return;
           }
 
           if (container) container.style.display = 'flex';
-          
+          if (textEl) textEl.innerText = '';
+
           let messageIndex = 0;
           let charIndex = 0;
           let isDeleting = false;
-          let currentMessage = config.messages[messageIndex];
 
           function type() {
             clearTimeout(typingTimeoutId);
-            currentMessage = config.messages[messageIndex];
+            const currentMessage = messagesArr[messageIndex];
 
             if (isDeleting) {
               textEl.innerText = currentMessage.substring(0, charIndex - 1);
@@ -3259,24 +3556,30 @@
             }
 
             if (!isDeleting && charIndex === currentMessage.length) {
-              // Word is complete
-              if (!config.loop && messageIndex === config.messages.length - 1) {
-                cursorEl.style.animation = 'pulse 2s infinite';
-                return; // Stop here if no loop
+              if (!config.loop && messageIndex === messagesArr.length - 1) {
+                if (cursorEl) cursorEl.style.animation = 'pulse 2s infinite';
+                return;
               }
               typeSpeed = config.pauseDuration || 2000;
               isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
               isDeleting = false;
-              messageIndex = (messageIndex + 1) % config.messages.length;
-              typeSpeed = 500; // Pause before typing next string
+              messageIndex = (messageIndex + 1) % messagesArr.length;
+              typeSpeed = 500;
             }
 
             typingTimeoutId = setTimeout(type, typeSpeed);
           }
 
-          // Initialize
           type();
+        }
+
+        // Restart typing when language changes
+        function restartTypingSignature() {
+          clearTimeout(typingTimeoutId);
+          const textEl = document.getElementById('typingSignatureText');
+          if (textEl) textEl.innerText = '';
+          startTypingSignature();
         }
 
         function startSpotlightHook() {
@@ -3352,13 +3655,34 @@
 
         };
 
+        function typeWriterEffect(el, text, speed = 40) {
+          if (el.typewriterTimeout) clearTimeout(el.typewriterTimeout);
+          el.innerHTML = '<span class="typewriter-text"></span><span class="animate-pulse font-bold ml-1 text-[var(--text-main)] opacity-70">|</span>';
+          const textSpan = el.querySelector('.typewriter-text');
+          let i = 0;
+          function type() {
+            if (i < text.length) {
+              textSpan.innerHTML += text.charAt(i);
+              i++;
+              el.typewriterTimeout = setTimeout(type, speed);
+            }
+          }
+          type();
+        }
+
         function applyTranslation() {
 
           const dict = translations[currentLang];
 
           document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            if (dict[key]) el.innerText = dict[key];
+            if (dict[key]) {
+              if (key === 'hero_sub') {
+                typeWriterEffect(el, dict[key]);
+              } else {
+                el.innerText = dict[key];
+              }
+            }
           });
 
           document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
@@ -3554,6 +3878,7 @@
         window.harmatraData = {
           get dbData() { return dbData; },
           get currentLang() { return currentLang; },
+          get translations() { return translations; },
           convertDriveLink,
           safeDate
         };
@@ -3561,6 +3886,133 @@
       })();
 
   </script>
+
+  <!-- HARMATRA Cinema Modal - Premium Theater Experience -->
+  <div id="cinemaModal"
+    class="fixed inset-0 z-[120] hidden flex-col items-center justify-center opacity-0 transition-opacity duration-700"
+    onclick="closeCinemaModalOnBg(event)">
+
+    <!-- Cinematic dark backdrop -->
+    <div class="absolute inset-0" id="cinemaBg" style="background:#060606;">
+      <div
+        style="background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px);position:absolute;inset:0;pointer-events:none;z-index:1;">
+      </div>
+    </div>
+
+    <!-- Top bar -->
+    <div class="absolute top-0 left-0 w-full z-[135]"
+      style="background:linear-gradient(to bottom,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.7) 60%,transparent 100%);padding:16px 24px;">
+      <div class="flex items-center justify-between max-w-7xl mx-auto">
+        <div class="flex items-center gap-3">
+          <div style="display:flex;gap:2px;align-items:center;">
+            <div style="width:6px;height:24px;background:#d97706;border-radius:2px;box-shadow:0 0 8px #d97706;"></div>
+            <div style="width:6px;height:16px;background:#f59e0b;border-radius:2px;opacity:0.7;"></div>
+            <div style="width:6px;height:24px;background:#d97706;border-radius:2px;box-shadow:0 0 8px #d97706;"></div>
+          </div>
+          <div>
+            <div
+              style="color:#f59e0b;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;opacity:0.8;">
+              HARMATRA</div>
+            <div
+              style="color:#ffffff;font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;line-height:1;">
+              CINEMA</div>
+          </div>
+        </div>
+        <button onclick="window.closeCinemaModal()"
+          style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:white;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;backdrop-filter:blur(10px);"
+          onmouseover="this.style.background='rgba(217,119,6,0.3)';this.style.borderColor='#d97706';"
+          onmouseout="this.style.background='rgba(255,255,255,0.08)';this.style.borderColor='rgba(255,255,255,0.15)';">
+          <i class="fa-solid fa-xmark" style="font-size:16px;"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Cinema Content -->
+    <div class="relative w-full flex flex-col items-center justify-center"
+      style="height:100%;padding-top:70px;padding-bottom:60px;">
+      <div
+        style="position:absolute;width:60%;height:50%;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(217,119,6,0.15) 0%,transparent 70%);pointer-events:none;z-index:0;">
+      </div>
+
+      <div id="cinemaModalContent"
+        style="position:relative;width:100%;max-width:1100px;padding:0 24px;transform:scale(0.95);transition:transform 0.6s cubic-bezier(0.34,1.56,0.64,1);">
+        <!-- Aspect ratio wrapper -->
+        <div
+          style="position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,0.08),0 25px 80px rgba(0,0,0,0.9);">
+          <!-- Corner decorations -->
+          <div
+            style="position:absolute;top:0;left:0;width:40px;height:40px;border-top:2px solid rgba(217,119,6,0.6);border-left:2px solid rgba(217,119,6,0.6);z-index:12;border-radius:12px 0 0 0;pointer-events:none;">
+          </div>
+          <div
+            style="position:absolute;top:0;right:0;width:40px;height:40px;border-top:2px solid rgba(217,119,6,0.6);border-right:2px solid rgba(217,119,6,0.6);z-index:12;border-radius:0 12px 0 0;pointer-events:none;">
+          </div>
+          <div
+            style="position:absolute;bottom:0;left:0;width:40px;height:40px;border-bottom:2px solid rgba(217,119,6,0.6);border-left:2px solid rgba(217,119,6,0.6);z-index:12;border-radius:0 0 0 12px;pointer-events:none;">
+          </div>
+          <div
+            style="position:absolute;bottom:0;right:0;width:40px;height:40px;border-bottom:2px solid rgba(217,119,6,0.6);border-right:2px solid rgba(217,119,6,0.6);z-index:12;border-radius:0 0 12px 0;pointer-events:none;">
+          </div>
+          <iframe id="cinemaIframe"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;background:#000;z-index:10;"
+            allow="autoplay;encrypted-media;fullscreen;picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <!-- Cinema info bar -->
+        <div id="cinemaInfoBar"
+          style="margin-top:16px;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;backdrop-filter:blur(10px);">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div
+              style="width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e;animation:cinemaPulse 2s infinite;">
+            </div>
+            <span data-i18n="cinema_now_playing"
+              style="color:rgba(255,255,255,0.7);font-size:13px;font-family:'Space Grotesk',sans-serif;">Now
+              Playing</span>
+            <span id="cinemaFilmTitle"
+              style="color:white;font-size:13px;font-family:'Space Grotesk',sans-serif;font-weight:600;">HARMATRA
+              Cinema</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.4);font-size:12px;">
+            <i class="fa-solid fa-film" style="color:#d97706;"></i>
+            <span data-i18n="cinema_official_film">Official Film</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);pointer-events:none;z-index:133;">
+    </div>
+  </div>
+
+  <style>
+    @keyframes cinemaPulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+      }
+    }
+  </style>
+
+  <!-- HARMATRA Shorts Modal -->
+  <div id="shortsModal"
+    class="fixed inset-0 z-[130] bg-black hidden flex-col items-center justify-center opacity-0 transition-opacity duration-500">
+    <button onclick="closeShortsModal()"
+      class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white z-[140] transition-colors">
+      <i class="fa-solid fa-xmark text-lg"></i>
+    </button>
+    <!-- Shorts Swiper Container -->
+    <div
+      class="w-full h-full max-w-[500px] bg-black relative flex flex-col overflow-y-auto snap-y snap-mandatory hide-scrollbar"
+      id="shortsContainer">
+      <!-- Shorts items generated by JS -->
+    </div>
+  </div>
 
   <!-- Contact Modal & Logic -->
   <div id="contactModal"
@@ -3648,6 +4100,106 @@
     </div>
   </div>
 
+  <!-- Developer Modal -->
+  <div id="developerModal"
+    class="fixed inset-0 z-[110] bg-black/60 backdrop-blur-md hidden flex-col items-center justify-center opacity-0 transition-opacity duration-500"
+    onclick="closeDeveloperModalOnBg(event)">
+    <div
+      class="contact-modal-glass w-[90%] max-w-md p-8 transform scale-95 transition-all duration-500 relative pointer-events-auto"
+      id="developerModalContent">
+      <div class="contact-modal-inner-frame"></div>
+      <button onclick="closeDeveloperModal()"
+        class="contact-close-btn absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full z-[100] cursor-pointer text-[var(--text-main)] hover:bg-[var(--text-main)]/10"
+        aria-label="Close modal">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+      <div class="relative z-10 text-center">
+        <div
+          class="w-20 h-20 mx-auto rounded-full bg-[var(--text-main)]/5 flex items-center justify-center mb-4 border border-[var(--text-main)]/10 shadow-[0_0_20px_rgba(6,182,212,0.2)]">
+          <i class="fa-solid fa-code text-4xl text-cyan-400"></i>
+        </div>
+        <h3 class="font-display text-2xl font-bold mb-2 tracking-wide text-[var(--text-main)]" data-i18n="dev_title">
+          About The Developer</h3>
+        <a href="https://instagram.com/IZMedtzz" target="_blank"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--text-main)]/20 text-[var(--text-main)] hover:bg-[var(--text-main)]/5 transition-colors mb-6 font-medium">
+          <i class="fa-brands fa-instagram text-lg"></i> @immszkyy
+        </a>
+        <div
+          class="text-sm text-[var(--text-muted)] text-left space-y-4 leading-relaxed bg-[var(--text-main)]/5 p-5 rounded-xl border border-[var(--text-main)]/10">
+          <p data-i18n="dev_desc">Website ini dirancang secara khusus dengan estetika premium untuk angkatan 11
+            HARMATRA.</p>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong class="text-[var(--text-main)]" data-i18n="dev_f1_title">Desain Glassmorphism:</strong> <span
+                data-i18n="dev_f1_desc">UI modern yang responsif dengan animasi mulus.</span></li>
+            <li><strong class="text-[var(--text-main)]" data-i18n="dev_f2_title">Performa Tinggi:</strong> <span
+                data-i18n="dev_f2_desc">Dioptimalkan menggunakan Tailwind CSS dan lazy loading.</span></li>
+            <li><strong class="text-[var(--text-main)]" data-i18n="dev_f3_title">Matra AI:</strong> <span
+                data-i18n="dev_f3_desc">Asisten AI terintegrasi yang cerdas mengenali anggota dan memori kelas.</span>
+            </li>
+            <li><strong class="text-[var(--text-main)]" data-i18n="dev_f4_title">Fitur Interaktif:</strong> <span
+                data-i18n="dev_f4_desc">Galeri memori yang imersif, pemutar musik, hingga sistem backroom yang
+                aman.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arcade Modal -->
+  <div id="arcadeModal"
+    class="fixed inset-0 z-[110] bg-black/60 backdrop-blur-md hidden flex-col items-center justify-center opacity-0 transition-opacity duration-500"
+    onclick="closeArcadeModalOnBg(event)">
+    <div
+      class="contact-modal-glass w-[90%] max-w-lg p-8 transform scale-95 transition-all duration-500 relative pointer-events-auto"
+      id="arcadeModalContent">
+      <div class="contact-modal-inner-frame"></div>
+      <button onclick="closeArcadeModal()"
+        class="contact-close-btn absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full z-[100] cursor-pointer text-[var(--text-main)] hover:bg-[var(--text-main)]/10"
+        aria-label="Close modal">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+      <div class="relative z-10">
+        <div class="text-center mb-8">
+          <h3 class="font-display text-3xl font-bold mb-2 tracking-wide text-[var(--text-main)]">Game HARMATRA</h3>
+          <p class="text-sm text-[var(--text-muted)]">Pilih permainan yang ingin Anda mainkan</p>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Game 1: HTS -->
+          <a href="hts.html" target="_blank"
+            class="flex items-center gap-4 p-4 rounded-xl border border-[var(--text-main)]/10 bg-[var(--text-main)]/5 hover:bg-[var(--text-main)]/10 transition-colors group text-left">
+            <div class="w-12 h-12 rounded-lg bg-indigo-500/20 flex items-center justify-center shrink-0">
+              <i
+                class="fa-solid fa-person-running text-xl text-indigo-400 group-hover:scale-110 transition-transform"></i>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-bold text-[var(--text-main)] text-lg">HTS - Hari Tanpa Spek</h4>
+              <p class="text-xs text-[var(--text-muted)] line-clamp-1">Endless runner emosional tentang harapan yang tak
+                terbalas.</p>
+            </div>
+            <div class="shrink-0 text-[var(--text-main)] opacity-50 group-hover:opacity-100 transition-opacity">
+              <i class="fa-solid fa-play"></i>
+            </div>
+          </a>
+
+          <!-- Game 2: Gemme Wong Tulus -->
+          <div
+            class="flex items-center gap-4 p-4 rounded-xl border border-[var(--text-main)]/5 bg-[var(--text-main)]/5 opacity-70 cursor-not-allowed text-left">
+            <div class="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-heart text-xl text-emerald-400/50"></i>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-bold text-[var(--text-main)] text-lg flex items-center gap-2">Gemme Wong Tulus <span
+                  class="text-[9px] uppercase tracking-wider bg-[var(--text-main)]/10 px-2 py-0.5 rounded-full text-[var(--text-muted)]">Coming
+                  Soon</span></h4>
+              <p class="text-xs text-[var(--text-muted)]">Cinta itu murni, tapi gamenya belum jadi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const contactModal = document.getElementById('contactModal');
     const contactModalContent = document.getElementById('contactModalContent');
@@ -3693,6 +4245,58 @@
       if (e.target === contactModal) {
         closeContactModal();
       }
+    }
+
+    const developerModal = document.getElementById('developerModal');
+    const developerModalContent = document.getElementById('developerModalContent');
+
+    function openDeveloperModal() {
+      developerModal.classList.remove('hidden');
+      developerModal.classList.add('flex');
+      void developerModal.offsetWidth;
+      developerModal.classList.remove('opacity-0');
+      developerModalContent.classList.remove('scale-95');
+      developerModalContent.classList.add('scale-100');
+    }
+
+    function closeDeveloperModal() {
+      developerModal.classList.add('opacity-0');
+      developerModalContent.classList.remove('scale-100');
+      developerModalContent.classList.add('scale-95');
+      setTimeout(() => {
+        developerModal.classList.add('hidden');
+        developerModal.classList.remove('flex');
+      }, 500);
+    }
+
+    function closeDeveloperModalOnBg(e) {
+      if (e.target === developerModal) closeDeveloperModal();
+    }
+
+    const arcadeModal = document.getElementById('arcadeModal');
+    const arcadeModalContent = document.getElementById('arcadeModalContent');
+
+    function openArcadeModal() {
+      arcadeModal.classList.remove('hidden');
+      arcadeModal.classList.add('flex');
+      void arcadeModal.offsetWidth;
+      arcadeModal.classList.remove('opacity-0');
+      arcadeModalContent.classList.remove('scale-95');
+      arcadeModalContent.classList.add('scale-100');
+    }
+
+    function closeArcadeModal() {
+      arcadeModal.classList.add('opacity-0');
+      arcadeModalContent.classList.remove('scale-100');
+      arcadeModalContent.classList.add('scale-95');
+      setTimeout(() => {
+        arcadeModal.classList.add('hidden');
+        arcadeModal.classList.remove('flex');
+      }, 500);
+    }
+
+    function closeArcadeModalOnBg(e) {
+      if (e.target === arcadeModal) closeArcadeModal();
     }
 
     function sendContactEmail() {
@@ -3996,8 +4600,279 @@
     }
   </script>
 
-  <script src="chat.js" defer></script>
+  <script src="chat.js"></script>
 
+  <script>
+    (function () {
+      const chatWindow = document.getElementById('chatWindow');
+      const chatToggleButton = document.getElementById('chatToggleButton');
+      const closeChatBtn = document.getElementById('closeChatBtn');
+      const chatToggleAvatarWrapper = document.getElementById('chatToggleAvatarWrapper');
+      const chatToggleCloseIcon = document.querySelector('.chat-toggle-close-icon');
+
+      function setChatOpen(open) {
+        if (!chatWindow || !chatToggleButton) return;
+
+        const shouldOpen = Boolean(open);
+        chatWindow.classList.toggle('hidden', !shouldOpen);
+        chatWindow.classList.toggle('active', shouldOpen);
+        chatWindow.style.visibility = shouldOpen ? 'visible' : '';
+        chatWindow.style.opacity = shouldOpen ? '1' : '';
+        chatWindow.style.pointerEvents = shouldOpen ? 'auto' : '';
+        chatToggleButton.classList.toggle('active', shouldOpen);
+
+        if (chatToggleAvatarWrapper) {
+          chatToggleAvatarWrapper.classList.toggle('hidden', shouldOpen);
+          chatToggleAvatarWrapper.classList.toggle('scale-0', shouldOpen);
+          chatToggleAvatarWrapper.classList.toggle('opacity-0', shouldOpen);
+        }
+
+        if (chatToggleCloseIcon) {
+          chatToggleCloseIcon.classList.toggle('hidden', !shouldOpen);
+        }
+      }
+
+      function bindFallbackChat() {
+        if (!chatWindow || !chatToggleButton) return;
+
+        chatToggleButton.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          setChatOpen(chatWindow.classList.contains('hidden'));
+        });
+
+        if (closeChatBtn) {
+          closeChatBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            setChatOpen(false);
+          });
+        }
+
+        if (typeof window.toggleChat !== 'function') {
+          window.toggleChat = function (forceState) {
+            setChatOpen(typeof forceState === 'boolean' ? forceState : !chatWindow.classList.contains('hidden'));
+          };
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bindFallbackChat, { once: true });
+      } else {
+        bindFallbackChat();
+      }
+    })();
+
+    // --- MEDIA HUB LOGIC ---
+
+    // 1. Initial Render of Media Hub UI
+    window.renderMediaHub = function () {
+      const dbData = window.HARMATRA_DATA;
+      if (!dbData || !dbData.mediaHub) return;
+
+      const hub = dbData.mediaHub;
+
+      // Get current lang from harmatraData
+      const lang = (window.harmatraData && window.harmatraData.currentLang) || 'id';
+      const dict = (window.harmatraData && window.harmatraData.translations && window.harmatraData.translations[lang]) || {};
+
+      // Update Instagram URL
+      const igBtn = document.getElementById('mhInstagramBtn');
+      if (igBtn && hub.instagramUrl) igBtn.href = hub.instagramUrl;
+
+      // Cinema: prefer translations dict, fallback to data.json
+      const cinemaTitle = document.getElementById('mhCinemaTitle');
+      const cinemaDesc = document.getElementById('mhCinemaDesc');
+      if (cinemaTitle) cinemaTitle.innerText = dict.mh_cinema_title || (hub.cinema && hub.cinema.title) || 'HARMATRA Cinema';
+      if (cinemaDesc) cinemaDesc.innerText = dict.mh_cinema_desc || (hub.cinema && hub.cinema.description) || '';
+
+      // Arcade: prefer translations dict, fallback to data.json
+      const arcadeBtn = document.getElementById('mhArcadeBtn');
+      const arcadeTitle = document.getElementById('mhArcadeTitle');
+      const arcadeDesc = document.getElementById('mhArcadeDesc');
+      if (arcadeBtn && hub.arcade) {
+        if (arcadeTitle) arcadeTitle.innerText = dict.mh_arcade_title || hub.arcade.title || 'HARMATRA Arcade';
+        if (arcadeDesc) arcadeDesc.innerText = dict.mh_arcade_desc || hub.arcade.description || '';
+        const comingSoonBadge = arcadeBtn.querySelector('span[data-i18n="mh_arcade_coming"]') || arcadeBtn.querySelector('span:last-child');
+        if (comingSoonBadge && !hub.arcade.enabled) comingSoonBadge.innerText = dict.mh_arcade_coming || 'Coming Soon';
+        if (hub.arcade.enabled) {
+          arcadeBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+          arcadeBtn.classList.add('cursor-pointer', 'hover:border-green-500/30', 'hover:shadow-[0_0_20px_rgba(34,197,94,0.15)]');
+          if (comingSoonBadge) comingSoonBadge.classList.add('hidden');
+          arcadeBtn.onclick = () => window.location.href = hub.arcade.url || '#';
+        }
+      }
+    };
+
+    // Call it right after loading dbData
+    setTimeout(window.renderMediaHub, 500);
+
+    // 2. Cinema Logic
+    const cinemaModal = document.getElementById('cinemaModal');
+    const cinemaModalContent = document.getElementById('cinemaModalContent');
+    const cinemaIframe = document.getElementById('cinemaIframe');
+
+    window.openCinemaModal = function () {
+      const dbData = window.HARMATRA_DATA;
+      if (!dbData || !dbData.mediaHub || !dbData.mediaHub.cinema || !dbData.mediaHub.cinema.url) return;
+
+      cinemaModal.classList.remove('hidden');
+      cinemaModal.classList.add('flex');
+      void cinemaModal.offsetWidth;
+      setTimeout(() => {
+        cinemaModal.classList.remove('opacity-0');
+        cinemaModalContent.style.transform = 'scale(1)';
+      }, 80);
+
+      cinemaIframe.src = dbData.mediaHub.cinema.url;
+
+      // Update film title
+      const filmTitle = document.getElementById('cinemaFilmTitle');
+      if (filmTitle && dbData.mediaHub.cinema.title) {
+        filmTitle.innerText = dbData.mediaHub.cinema.title;
+      }
+    };
+
+    window.closeCinemaModal = function () {
+      cinemaModal.classList.add('opacity-0');
+      cinemaModalContent.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        cinemaModal.classList.add('hidden');
+        cinemaModal.classList.remove('flex');
+        cinemaIframe.src = ''; // Stop video
+      }, 700);
+    };
+
+    window.closeCinemaModalOnBg = function (e) {
+      if (e.target === cinemaModal || e.target === document.getElementById('cinemaBg')) window.closeCinemaModal();
+    };
+
+    // 3. Shorts Logic
+    const shortsModal = document.getElementById('shortsModal');
+    const shortsContainer = document.getElementById('shortsContainer');
+
+    window.openShortsModal = function () {
+      const dbData = window.HARMATRA_DATA;
+      if (!dbData || !dbData.mediaHub || !dbData.mediaHub.shorts || dbData.mediaHub.shorts.length === 0) return;
+
+      window.renderShorts();
+
+      shortsModal.classList.remove('hidden');
+      shortsModal.classList.add('flex');
+      void shortsModal.offsetWidth;
+      shortsModal.classList.remove('opacity-0');
+    };
+
+    window.closeShortsModal = function () {
+      shortsModal.classList.add('opacity-0');
+      setTimeout(() => {
+        shortsModal.classList.add('hidden');
+        shortsModal.classList.remove('flex');
+        shortsContainer.innerHTML = ''; // clear iframes to stop audio
+      }, 500);
+    };
+
+    window.renderShorts = function () {
+      const dbData = window.HARMATRA_DATA;
+      if (!dbData || !dbData.mediaHub || !dbData.mediaHub.shorts) return;
+      const shorts = dbData.mediaHub.shorts;
+
+      // Get lang for labels
+      const lang = (window.harmatraData && window.harmatraData.currentLang) || 'id';
+      const dict = (window.harmatraData && window.harmatraData.translations && window.harmatraData.translations[lang]) || {};
+      const likeLabel = dict.short_like || (lang === 'ar' ? 'إعجاب' : (lang === 'en' ? 'Like' : 'Suka'));
+      const commentLabel = dict.short_comment || (lang === 'ar' ? 'تعليق' : (lang === 'en' ? 'Comment' : 'Komentar'));
+
+      let html = '';
+
+      shorts.forEach((short) => {
+        const sTitle = short.title ? short.title.replace(/</g, "&lt;").replace(/>/g, "&gt;") : "";
+        const sDesc = short.description ? short.description.replace(/</g, "&lt;").replace(/>/g, "&gt;") : "";
+        let likesCount = localStorage.getItem(`harmatra_short_likes_${short.id}`) || Math.floor(Math.random() * 50) + 10;
+        let isLiked = localStorage.getItem(`harmatra_short_liked_${short.id}`) === 'true';
+
+        html += `
+          <div class="w-full h-full min-h-[100dvh] snap-start snap-always relative flex-shrink-0 bg-black group">
+            <iframe data-src="${short.url}" class="w-full h-full" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            
+            <!-- Bottom Info -->
+            <div class="absolute bottom-10 left-4 right-20 z-20 text-white pointer-events-none">
+              <h3 class="font-display font-bold text-lg mb-1 drop-shadow-md">@HARMATRA</h3>
+              <p class="text-sm opacity-90 drop-shadow-md">${sTitle}</p>
+              <p class="text-xs opacity-70 mt-1 line-clamp-2 drop-shadow-md">${sDesc}</p>
+            </div>
+
+            <!-- Right Actions -->
+            <div class="absolute bottom-12 right-4 z-30 flex flex-col items-center gap-6">
+              <!-- Like Btn -->
+              <button onclick="toggleShortLike('${short.id}', this)" class="flex flex-col items-center gap-1 hover:scale-110 transition-transform">
+                <div class="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center ${isLiked ? 'text-red-500' : 'text-white'}">
+                  <i class="fa-solid fa-heart text-2xl"></i>
+                </div>
+                <span class="text-xs font-bold text-white drop-shadow-md count">${likesCount}</span>
+              </button>
+              
+              <!-- Comment Btn -->
+              <button class="flex flex-col items-center gap-1 hover:scale-110 transition-transform cursor-pointer">
+                <div class="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white">
+                  <i class="fa-solid fa-comment-dots text-xl"></i>
+                </div>
+                <span class="text-xs font-bold text-white drop-shadow-md">${commentLabel}</span>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      shortsContainer.innerHTML = html;
+
+      // Setup IntersectionObserver to lazy load and stop out-of-view videos
+      if (window.shortsObserver) window.shortsObserver.disconnect();
+      window.shortsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const iframe = entry.target.querySelector('iframe');
+          if (!iframe) return;
+
+          if (entry.isIntersecting) {
+            if (iframe.getAttribute('src') !== iframe.dataset.src) {
+              iframe.setAttribute('src', iframe.dataset.src);
+            }
+          } else {
+            iframe.removeAttribute('src'); // Stop playing when scrolled out of view
+          }
+        });
+      }, {
+        root: shortsContainer,
+        threshold: 0.2
+      });
+
+      shortsContainer.querySelectorAll('.snap-start').forEach(el => {
+        window.shortsObserver.observe(el);
+      });
+
+    }
+
+    window.toggleShortLike = function (shortId, btnElement) {
+      let isLiked = localStorage.getItem(`harmatra_short_liked_${shortId}`) === 'true';
+      let countSpan = btnElement.querySelector('.count');
+      let currentCount = parseInt(countSpan.innerText);
+
+      if (isLiked) {
+        localStorage.setItem(`harmatra_short_liked_${shortId}`, 'false');
+        currentCount = Math.max(0, currentCount - 1);
+        btnElement.querySelector('div').classList.remove('text-red-500');
+        btnElement.querySelector('div').classList.add('text-white');
+      } else {
+        localStorage.setItem(`harmatra_short_liked_${shortId}`, 'true');
+        currentCount++;
+        btnElement.querySelector('div').classList.add('text-red-500');
+        btnElement.querySelector('div').classList.remove('text-white');
+      }
+
+      localStorage.setItem(`harmatra_short_likes_${shortId}`, currentCount);
+      countSpan.innerText = currentCount;
+    }
+  </script>
 </body>
 
 </html>
