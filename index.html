@@ -1332,6 +1332,15 @@
 
       <div class="masonry" id="galleryContainer"></div>
 
+      <div id="galleryViewMoreContainer" class="mt-12 text-center gs-up hidden">
+        <p id="galleryCounterText" class="text-sm opacity-60 mb-4 tracking-widest uppercase"></p>
+        <button onclick="openFullGallery()"
+          class="px-8 py-3 rounded-full glass hover:border-blue-500/30 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all duration-300 font-medium group">
+          <span data-i18n="gallery_view_more">Lihat Lainnya</span>
+          <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+        </button>
+      </div>
+
     </section>
 
     <!-- Media Hub Section -->
@@ -1450,7 +1459,53 @@
       <span id="typingSignatureText" class="text-[var(--text-main)]"></span><span id="typingSignatureCursor"
         class="animate-pulse inline-block w-[2px] h-[1em] bg-[var(--text-main)] ml-1 align-middle"></span>
     </div>
+    </div>
   </main>
+
+  <!-- FULL GALLERY VIEWER OVERLAY -->
+  <div id="fullGalleryViewer" data-lenis-prevent
+    class="fixed inset-0 z-[90] bg-[#050505] hidden flex flex-col opacity-0 transition-opacity duration-500 overflow-y-auto overflow-x-hidden">
+    <div class="sticky top-0 z-[95] bg-[#050505]/90 backdrop-blur-md border-b border-white/5 pt-6 pb-4 px-6">
+      <div class="flex justify-between items-center mb-4 max-w-[1600px] mx-auto w-full">
+        <h2 class="font-display text-2xl md:text-3xl font-bold text-[var(--text-main)]" data-i18n="full_gallery_title">
+          Koleksi Lengkap</h2>
+        <div class="flex items-center gap-4">
+          <div class="relative hidden md:block">
+            <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/40"></i>
+            <input type="text" id="gallerySearchInput" oninput="handleGallerySearch()"
+              class="pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-white focus:outline-none focus:border-blue-500/50 transition-all w-64"
+              placeholder="Cari memori..." data-i18n-placeholder="search_memory">
+          </div>
+          <button onclick="closeFullGallery()"
+            class="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-red-500/80 flex items-center justify-center transition-all hover:scale-110">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Search -->
+      <div class="relative md:hidden mb-4 max-w-[1600px] mx-auto w-full">
+        <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/40"></i>
+        <input type="text" id="gallerySearchInputMobile" oninput="handleGallerySearchMobile()"
+          class="pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-white w-full focus:outline-none focus:border-blue-500/50"
+          placeholder="Cari memori..." data-i18n-placeholder="search_memory">
+      </div>
+
+      <!-- Categories Scrollable Row -->
+      <div class="flex overflow-x-auto gap-2 pb-2 no-scrollbar max-w-[1600px] mx-auto w-full"
+        id="galleryFilterContainer">
+        <!-- populated by JS -->
+      </div>
+    </div>
+
+    <div class="px-6 py-8 max-w-[1600px] mx-auto w-full flex-grow">
+      <div class="masonry" id="fullGalleryContainer"></div>
+      <div id="galleryEmptyState" class="hidden text-center py-20">
+        <i class="fa-solid fa-image text-4xl text-white/20 mb-4 block"></i>
+        <p class="text-white/50 text-sm tracking-widest uppercase">Tidak ada foto ditemukan</p>
+      </div>
+    </div>
+  </div>
 
   <div id="lightbox"
     class="fixed inset-0 z-[100] bg-black/95 hidden flex flex-col items-center justify-center opacity-0 transition-opacity duration-300"
@@ -1731,7 +1786,7 @@
 
               bio_ar: "اكتبه بنفسك.",
 
-              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+              photo: "https://drive.google.com/file/d/1uJfjlmIAc2RdyjFdVljvzxiCJmdccJ-h/view?usp=drive_link"
 
             },
 
@@ -1863,7 +1918,7 @@
 
               bio_ar: "اكتبه بنفسك.",
 
-              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+              photo: "https://drive.google.com/file/d/1Pna6GTb3Dpr6fqNpQHKMObdRexqBGsSB/view?usp=drive_link"
 
             },
 
@@ -1995,7 +2050,7 @@
 
               bio_ar: "اكتبه بنفسك.",
 
-              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+              photo: "https://drive.google.com/file/d/1pYM0jdVnvEl2UW9fkL2WwgGtBaXJDSha/view?usp=drive_link"
 
             },
 
@@ -2083,7 +2138,7 @@
 
               bio_ar: "اكتبه بنفسك.",
 
-              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+              photo: "https://drive.google.com/file/d/12SvP2y355hwcvRxRMSP-D_mw8Rdp9zau/view?usp=drive_link"
 
             },
 
@@ -2143,13 +2198,13 @@
 
               role_ar: "طالب",
 
-              bio_id: "isi dewek.",
+              bio_id: "Menjadikan masalalu sebuah pembelajaran, melaju tanpa ragu kedepan. And that's how a bright star fly high",
 
-              bio_en: "yes or no?.",
+              bio_en: "Making the past a lesson, moving forward without hesitation. And that's how a bright star fly high",
 
               bio_ar: "اكتبه بنفسك.",
 
-              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+              photo: "https://drive.google.com/file/d/1V4JY1ob99jYeo5MZ3PrPF8zGK6sOpdjj/view?usp=drive_link"
 
             },
 
@@ -2171,7 +2226,7 @@
 
               bio_ar: "اكتبه بنفسك.",
 
-              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+              photo: "https://drive.google.com/file/d/1Ak3D0sUi0bG_aFYp_wgEAVVyjdSlm5Wm/view?usp=drive_link"
 
             },
 
@@ -2193,7 +2248,7 @@
 
               bio_ar: "اكتبه بنفسك.",
 
-              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+              photo: "https://drive.google.com/file/d/1ssnzIsQpt2Di0-qS4Zt5IGRtDEVD8Ru1/view?usp=drive_link"
 
             },
 
@@ -2259,7 +2314,7 @@
 
               bio_ar: "اكتبه بنفسك.",
 
-              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
+              photo: "https://drive.google.com/file/d/1Qfb7osAtebA1-xiM53FytdyXmVEiGHyr/view?usp=drive_link"
 
             },
 
@@ -2283,7 +2338,7 @@
 
               desc_ar: "اليوم الأول الذي تعارفنا فيه.",
 
-              photo: "https://drive.google.com/file/d/1BgfNYptDOop_BpHpgdPvK5lE2zr1LOVC/view?usp=drive_link"
+              photo: "https://drive.google.com/file/d/1QaOUgifO4TL0qoM0-kzxTt0oFgI06UXo/view?usp=drive_link"
 
             },
 
@@ -2323,7 +2378,7 @@
 
               desc_ar: "الفوز بالمركز الثاني في لعبة شد الحبل بين الصفوف.",
 
-              photo: "https://lh3.googleusercontent.com/u/0/d/1ZCAubvtGec2iPfw7ybA0uiz-dvqLWyCa"
+              photo: "https://drive.google.com/file/d/1NDbauh0G9LjRVB09f_8oV-3nCRc-Z2Vf/view?usp=drive_link"
 
             }
 
@@ -2349,7 +2404,7 @@
               caption_ar: "مناقشة جماعية وعمل جماعي"
             },
             {
-              url: "https://drive.google.com/file/d/1BgfNYptDOop_BpHpgdPvK5lE2zr1LOVC/view?usp=drive_link",
+              url: "https://drive.google.com/file/d/1QaOUgifO4TL0qoM0-kzxTt0oFgI06UXo/view?usp=drive_link",
               title_id: "Masa Orientasi (MPLS)",
               title_en: "School Orientation (MPLS)",
               title_ar: "توجيه الطلاب (MPLS)",
@@ -3155,23 +3210,157 @@
 
         function renderGallery() {
           const container = document.getElementById('galleryContainer');
-          container.innerHTML = '';
+          const viewMoreContainer = document.getElementById('galleryViewMoreContainer');
+          const counterText = document.getElementById('galleryCounterText');
 
-          dbData.gallery.forEach((img, i) => {
+          container.innerHTML = '';
+          const maxInitial = 9;
+          const displayItems = dbData.gallery.slice(0, maxInitial);
+
+          displayItems.forEach((img, i) => {
             const photoUrl = convertDriveLink(img.url);
 
             container.innerHTML += `
             <div class="masonry-item rounded-xl overflow-hidden gs-up relative group cursor-pointer" onclick="openLightbox('gallery', ${i})">
-              <div class="w-full overflow-hidden" style="aspect-ratio:16/9;">
-                <img src="${escapeHTML(photoUrl)}" onerror="this.src='https://via.placeholder.com/600?text=Error'" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
-              </div>
+              <img src="${escapeHTML(photoUrl)}" loading="lazy" onerror="this.src='https://via.placeholder.com/600?text=Error'" class="w-full h-auto block object-cover transform group-hover:scale-105 transition-transform duration-700">
               <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <i class="fa-solid fa-expand text-white text-2xl drop-shadow-lg"></i>
               </div>
             </div>
           `;
           });
+
+          if (dbData.gallery.length > maxInitial) {
+            viewMoreContainer.classList.remove('hidden');
+            const translationMap = {
+              'id': `Menampilkan ${maxInitial} dari ${dbData.gallery.length} foto`,
+              'en': `Showing ${maxInitial} of ${dbData.gallery.length} photos`,
+              'ar': `عرض ${maxInitial} من أصل ${dbData.gallery.length} صورة`
+            };
+            counterText.innerText = translationMap[currentLang] || translationMap['en'];
+          } else {
+            viewMoreContainer.classList.add('hidden');
+          }
         }
+
+        let activeGalleryCategory = 'All';
+        let activeGallerySearch = '';
+
+        function renderPinterestGallery() {
+          const fgContainer = document.getElementById('fullGalleryContainer');
+          const emptyState = document.getElementById('galleryEmptyState');
+          fgContainer.innerHTML = '';
+
+          let filtered = dbData.gallery.map((img, i) => ({ ...img, originalIndex: i }));
+
+          if (activeGalleryCategory !== 'All') {
+            filtered = filtered.filter(img => img.category === activeGalleryCategory);
+          }
+
+          if (activeGallerySearch.trim() !== '') {
+            const q = activeGallerySearch.toLowerCase();
+            filtered = filtered.filter(img => {
+              const text = [
+                img.title_en, img.title_id, img.title_ar,
+                img.caption?.en, img.caption?.id, img.caption?.ar,
+                img.category
+              ].join(' ').toLowerCase();
+              return text.includes(q);
+            });
+          }
+
+          if (filtered.length === 0) {
+            emptyState.classList.remove('hidden');
+          } else {
+            emptyState.classList.add('hidden');
+            filtered.forEach((img) => {
+              const photoUrl = convertDriveLink(img.url);
+              let captionText = img.caption ? img.caption.en : (img.caption_en || '');
+              if (currentLang === 'id') captionText = img.caption ? img.caption.id : (img.caption_id || '');
+              else if (currentLang === 'ar') captionText = img.caption ? img.caption.ar : (img.caption_ar || img.caption_en || '');
+
+              const category = img.category || 'Memories';
+
+              fgContainer.innerHTML += `
+              <div class="masonry-item rounded-2xl overflow-hidden relative group cursor-pointer transition-all duration-500 bg-white/5 border border-white/10 hover:border-white/20 hover:shadow-[0_8px_30px_rgb(0,0,0,0.5)]" onclick="openLightbox('gallery', ${img.originalIndex})">
+                <div class="relative overflow-hidden">
+                  <img src="${escapeHTML(photoUrl)}" loading="lazy" onerror="this.src='https://via.placeholder.com/600?text=Error'" class="w-full h-auto block object-cover transform group-hover:scale-105 transition-transform duration-700">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                <div class="p-4">
+                  <div class="flex justify-between items-start mb-2">
+                    <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-blue-500/20 text-blue-400 rounded-full">${escapeHTML(category)}</span>
+                  </div>
+                  <p class="text-sm text-white/80 line-clamp-2 leading-relaxed">${escapeHTML(captionText)}</p>
+                </div>
+              </div>
+              `;
+            });
+          }
+        }
+
+        window.openFullGallery = function () {
+          const fgViewer = document.getElementById('fullGalleryViewer');
+
+          activeGalleryCategory = 'All';
+          activeGallerySearch = '';
+          const searchInp = document.getElementById('gallerySearchInput');
+          const searchInpMob = document.getElementById('gallerySearchInputMobile');
+          if (searchInp) searchInp.value = '';
+          if (searchInpMob) searchInpMob.value = '';
+
+          renderGalleryFilters();
+          renderPinterestGallery();
+
+          document.body.style.overflow = 'hidden';
+          fgViewer.classList.remove('hidden');
+          void fgViewer.offsetWidth;
+          fgViewer.classList.remove('opacity-0');
+        };
+
+        function renderGalleryFilters() {
+          const container = document.getElementById('galleryFilterContainer');
+          if (!container) return;
+          const cats = ["All", "School Life", "Study Tour", "Sports", "Graduation", "Friends", "Events", "Memories"];
+
+          let html = '';
+          cats.forEach(cat => {
+            const isActive = cat === activeGalleryCategory;
+            const btnClass = isActive
+              ? 'px-4 py-1.5 rounded-full bg-blue-500 text-white text-sm font-medium whitespace-nowrap transition-all'
+              : 'px-4 py-1.5 rounded-full bg-white/10 text-white/70 hover:bg-white/20 hover:text-white text-sm font-medium whitespace-nowrap transition-all';
+
+            html += `<button onclick="filterFullGallery('${cat}')" class="${btnClass}">${cat}</button>`;
+          });
+          container.innerHTML = html;
+        }
+
+        window.filterFullGallery = function (cat) {
+          activeGalleryCategory = cat;
+          renderGalleryFilters();
+          renderPinterestGallery();
+        };
+
+        window.handleGallerySearch = function () {
+          activeGallerySearch = document.getElementById('gallerySearchInput').value;
+          document.getElementById('gallerySearchInputMobile').value = activeGallerySearch; // sync
+          renderPinterestGallery();
+        };
+
+        window.handleGallerySearchMobile = function () {
+          activeGallerySearch = document.getElementById('gallerySearchInputMobile').value;
+          document.getElementById('gallerySearchInput').value = activeGallerySearch; // sync
+          renderPinterestGallery();
+        };
+
+        window.closeFullGallery = function () {
+          const fgViewer = document.getElementById('fullGalleryViewer');
+          fgViewer.classList.add('opacity-0');
+          setTimeout(() => {
+            fgViewer.classList.add('hidden');
+            document.body.style.overflow = '';
+          }, 500);
+        };
 
         function renderQuotes() {
 
@@ -3291,13 +3480,13 @@
             lbImg.src = src;
 
             let titleText = img.title_en || '';
-            let captionText = img.caption_en || '';
+            let captionText = img.caption ? img.caption.en : (img.caption_en || '');
             if (currentLang === 'id') {
               titleText = img.title_id || '';
-              captionText = img.caption_id || '';
+              captionText = img.caption ? img.caption.id : (img.caption_id || '');
             } else if (currentLang === 'ar') {
               titleText = img.title_ar || img.title_en || '';
-              captionText = img.caption_ar || img.caption_en || '';
+              captionText = img.caption ? img.caption.ar : (img.caption_ar || img.caption_en || '');
             }
 
             lbName.innerText = titleText;
@@ -3388,13 +3577,13 @@
               lbImg.src = convertDriveLink(img.url);
 
               let titleText = img.title_en || '';
-              let captionText = img.caption_en || '';
+              let captionText = img.caption ? img.caption.en : (img.caption_en || '');
               if (currentLang === 'id') {
                 titleText = img.title_id || '';
-                captionText = img.caption_id || '';
+                captionText = img.caption ? img.caption.id : (img.caption_id || '');
               } else if (currentLang === 'ar') {
                 titleText = img.title_ar || img.title_en || '';
-                captionText = img.caption_ar || img.caption_en || '';
+                captionText = img.caption ? img.caption.ar : (img.caption_ar || img.caption_en || '');
               }
 
               lbName.innerText = titleText;
@@ -3422,7 +3611,7 @@
                 hasCaption = true;
               } else if (currentLightboxType === 'gallery') {
                 const img = dbData.gallery[currentLightboxIndex];
-                if (img.title_en || img.title_id || img.title_ar || img.caption_en || img.caption_id || img.caption_ar) {
+                if (img.title_en || img.title_id || img.title_ar || img.caption) {
                   hasCaption = true;
                 }
               }
@@ -3472,9 +3661,35 @@
           }
         });
 
+        // Swipe navigation support
+        let touchStartX = 0;
+        let touchEndX = 0;
 
+        const lightboxEl = document.getElementById('lightbox');
+        if (lightboxEl) {
+          lightboxEl.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+          }, { passive: true });
 
+          lightboxEl.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+          }, { passive: true });
+        }
 
+        function handleSwipe() {
+          const lb = document.getElementById('lightbox');
+          if (!lb || lb.classList.contains('hidden')) return;
+
+          const swipeThreshold = 50;
+          if (touchEndX < touchStartX - swipeThreshold) {
+            // Swiped left -> next
+            navigateLightbox(1);
+          } else if (touchEndX > touchStartX + swipeThreshold) {
+            // Swiped right -> prev
+            navigateLightbox(-1);
+          }
+        }
 
         // --- Hooks & Features ---
 
@@ -3501,6 +3716,7 @@
         // Typing Signature Logic
         let typingTimeoutId = null;
         function startTypingSignature() {
+          if (typingTimeoutId) clearTimeout(typingTimeoutId);
           const config = dbData.typingSignature;
           const container = document.getElementById('typingSignatureContainer');
           const textEl = document.getElementById('typingSignatureText');
@@ -3576,7 +3792,7 @@
 
         // Restart typing when language changes
         function restartTypingSignature() {
-          clearTimeout(typingTimeoutId);
+          if (typingTimeoutId) clearTimeout(typingTimeoutId);
           const textEl = document.getElementById('typingSignatureText');
           if (textEl) textEl.innerText = '';
           startTypingSignature();
@@ -3697,6 +3913,27 @@
           } else {
             document.documentElement.removeAttribute('dir');
             document.documentElement.classList.remove('rtl-layout');
+          }
+
+          // Update gallery counter if view more is visible
+          const viewMoreContainer = document.getElementById('galleryViewMoreContainer');
+          if (viewMoreContainer && !viewMoreContainer.classList.contains('hidden') && dbData && dbData.gallery) {
+            const counterText = document.getElementById('galleryCounterText');
+            const maxInitial = 10;
+            const translationMap = {
+              'id': `Menampilkan ${maxInitial} dari ${dbData.gallery.length} foto`,
+              'en': `Showing ${maxInitial} of ${dbData.gallery.length} photos`,
+              'ar': `عرض ${maxInitial} من أصل ${dbData.gallery.length} صورة`
+            };
+            if (counterText) counterText.innerText = translationMap[currentLang] || translationMap['en'];
+          }
+
+          // Update lightbox caption dynamically if open
+          const lb = document.getElementById('lightbox');
+          if (lb && !lb.classList.contains('hidden')) {
+            if (typeof updateLightboxContent === 'function') {
+              updateLightboxContent();
+            }
           }
 
         }

@@ -1537,9 +1537,31 @@
             <label class="form-label">Title (AR)</label>
             <input type="text" id="gallery_title_ar" class="form-control">
           </div>
-          <div class="form-group">
-            <label class="form-label">caption_id</label>
-            <input type="text" id="gallery_caption_id" class="form-control" required>
+          <div class="form-group" style="display:flex; justify-content:space-between; align-items:flex-end;">
+            <div style="flex: 1;">
+              <label class="form-label">Category</label>
+              <select id="gallery_category" class="form-control" required style="background:#020204; color:var(--text-main);">
+                <option value="School Life">School Life</option>
+                <option value="Study Tour">Study Tour</option>
+                <option value="Sports">Sports</option>
+                <option value="Graduation">Graduation</option>
+                <option value="Friends">Friends</option>
+                <option value="Events">Events</option>
+                <option value="Memories">Memories</option>
+              </select>
+            </div>
+            <button type="button" onclick="assignAICategory(event)" class="btn btn-sm btn-primary" style="margin-left: 10px; margin-bottom: 5px; background:var(--accent-purple);">
+              <i class="fa-solid fa-robot"></i> AI_ASSIGN()
+            </button>
+          </div>
+          <div class="form-group" style="display:flex; justify-content:space-between; align-items:flex-end;">
+            <div style="flex: 1;">
+              <label class="form-label">caption_id</label>
+              <input type="text" id="gallery_caption_id" class="form-control" required>
+            </div>
+            <button type="button" onclick="generateAICaption(event)" class="btn btn-sm btn-primary" style="margin-left: 10px; margin-bottom: 5px;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> AI_GENERATE()
+            </button>
           </div>
           <div class="form-group">
             <label class="form-label">caption_en</label>
@@ -2369,12 +2391,74 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       document.getElementById('gallery_title_id').value = img.title_id || '';
       document.getElementById('gallery_title_en').value = img.title_en || '';
       document.getElementById('gallery_title_ar').value = img.title_ar || '';
-      document.getElementById('gallery_caption_id').value = img.caption_id || '';
-      document.getElementById('gallery_caption_en').value = img.caption_en || '';
-      document.getElementById('gallery_caption_ar').value = img.caption_ar || '';
+      document.getElementById('gallery_category').value = img.category || 'Memories';
+      document.getElementById('gallery_caption_id').value = img.caption ? img.caption.id : (img.caption_id || '');
+      document.getElementById('gallery_caption_en').value = img.caption ? img.caption.en : (img.caption_en || '');
+      document.getElementById('gallery_caption_ar').value = img.caption ? img.caption.ar : (img.caption_ar || '');
       
       document.getElementById('galleryModalTitle').innerText = 'EDIT RECORD: GALLERY.DAT';
       document.getElementById('galleryModal').classList.add('active');
+    }
+
+    // MOCK AI CATEGORY
+    function assignAICategory(event) {
+      const url = document.getElementById('gallery_url').value;
+      if (!url) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'NO IMAGE',
+          text: 'Need an image URL first.',
+          background: '#07070a',
+          color: '#00ff88',
+          confirmButtonColor: '#00ff88'
+        });
+        return;
+      }
+      const btn = event.currentTarget;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> SYNCING...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        const cats = ["School Life", "Study Tour", "Sports", "Graduation", "Friends", "Events", "Memories"];
+        document.getElementById('gallery_category').value = cats[Math.floor(Math.random() * cats.length)];
+        playBeep(600, 0.1, 'square', 0.05);
+      }, 1000);
+    }
+
+    // MOCK AI CAPTION GENERATION
+    function generateAICaption(event) {
+      const url = document.getElementById('gallery_url').value;
+      if (!url) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'NO IMAGE DETECTED',
+          text: 'Please input a Photo Source URL first.',
+          background: '#07070a',
+          color: '#00ff88',
+          confirmButtonColor: '#00ff88'
+        });
+        return;
+      }
+      
+      const btn = event.currentTarget;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> GENERATING...';
+      btn.disabled = true;
+
+      // Simulate API call to Gemini / Vision model
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        
+        document.getElementById('gallery_caption_id').value = "Menangkap momen tak terlupakan, penuh semangat dan kebersamaan di HARMATRA.";
+        document.getElementById('gallery_caption_en').value = "Capturing an unforgettable moment, full of spirit and togetherness in HARMATRA.";
+        document.getElementById('gallery_caption_ar').value = "التقاط لحظة لا تُنسى، مليئة بالروح والعمل الجماعي في هارماترى.";
+        
+        playBeep(880, 0.1, 'sine', 0.05);
+      }, 1500);
     }
 
     function saveGallery(e) {
@@ -2385,9 +2469,12 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
         title_id: document.getElementById('gallery_title_id').value.trim(),
         title_en: document.getElementById('gallery_title_en').value.trim(),
         title_ar: document.getElementById('gallery_title_ar').value.trim(),
-        caption_id: document.getElementById('gallery_caption_id').value.trim(),
-        caption_en: document.getElementById('gallery_caption_en').value.trim(),
-        caption_ar: document.getElementById('gallery_caption_ar').value.trim()
+        category: document.getElementById('gallery_category').value,
+        caption: {
+          id: document.getElementById('gallery_caption_id').value.trim(),
+          en: document.getElementById('gallery_caption_en').value.trim(),
+          ar: document.getElementById('gallery_caption_ar').value.trim()
+        }
       };
 
       if (!websiteData.gallery) websiteData.gallery = [];

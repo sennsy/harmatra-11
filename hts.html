@@ -25,7 +25,16 @@
             color: #a0a0a0;
         }
 
+        #gameWrapper {
+            width: 800px;
+            height: 300px;
+            position: relative;
+            transform-origin: center center;
+        }
+
         #gameCanvas {
+            width: 100%;
+            height: 100%;
             display: block;
         }
 
@@ -170,21 +179,23 @@
 
     <a href="index.html" id="backToHubBtn">← Kembali ke Hub</a>
 
-    <canvas id="gameCanvas" width="800" height="300"></canvas>
+    <div id="gameWrapper">
+        <canvas id="gameCanvas" width="800" height="300"></canvas>
 
-    <div id="scoreDisplay">HI 00000 00000</div>
+        <div id="scoreDisplay">HI 00000 00000</div>
 
-    <div id="uiLayer">
-        <div id="messageText" class="hidden">Pencet untuk kembali atau menyerah</div>
-    </div>
-
-    <div id="gameOverScreen" class="hidden">
-        <div id="gameOverText">
-            "Pada akhirnya, sejauh apa pun kamu berlari dan sekeras apa pun kamu menghindar...<br>
-            Tidak Semua Orang yang Kamu Sukai Itu Menyukaimu Kembali."<br><br>
-            <i>Biarkan hujan menghapus jejak yang tak pernah bisa kau raih.</i>
+        <div id="uiLayer">
+            <div id="messageText" class="hidden">Pencet untuk kembali atau menyerah</div>
         </div>
-        <button id="restartBtn">Mulai Lagi</button>
+
+        <div id="gameOverScreen" class="hidden">
+            <div id="gameOverText">
+                "Pada akhirnya, sejauh apa pun kamu berlari dan sekeras apa pun kamu menghindar...<br>
+                Tidak Semua Orang yang Kamu Sukai Itu Menyukaimu Kembali."<br><br>
+                <i>Biarkan hujan menghapus jejak yang tak pernah bisa kau raih.</i>
+            </div>
+            <button id="restartBtn">Mulai Lagi</button>
+        </div>
     </div>
 
     <script>
@@ -196,18 +207,12 @@
         const restartBtn = document.getElementById('restartBtn');
 
         function resizeCanvas() {
-            const windowRatio = window.innerWidth / window.innerHeight;
-            const canvasRatio = 800 / 300;
-            let width, height;
-            if (windowRatio < canvasRatio) {
-                width = window.innerWidth * 0.95;
-                height = width / canvasRatio;
-            } else {
-                height = window.innerHeight * 0.95;
-                width = height * canvasRatio;
-            }
-            canvas.style.width = width + 'px';
-            canvas.style.height = height + 'px';
+            const wrapper = document.getElementById('gameWrapper');
+            const scaleX = window.innerWidth / 800;
+            const scaleY = window.innerHeight / 300;
+            const scale = Math.min(scaleX, scaleY) * 0.95;
+            
+            wrapper.style.transform = `scale(${scale})`;
         }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
