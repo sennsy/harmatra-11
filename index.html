@@ -1341,29 +1341,6 @@
       </div>
     </section>
 
-    <section class="py-40 px-6 max-w-7xl mx-auto" id="previous-members">
-      <div class="flex flex-col items-center text-center mb-16 gs-up">
-        <h2 class="font-display text-4xl md:text-5xl font-bold mb-4" data-i18n="nav_prev">Anggota Sebelumnya</h2>
-        <p class="opacity-70 max-w-md" data-i18n="sub_prev_members">Mengenang mereka yang pernah menjadi bagian dari cerita kita.</p>
-        
-        <div class="w-full max-w-2xl mt-12 flex flex-col md:flex-row gap-4">
-          <div class="relative w-full">
-            <i class="fa-solid fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-white/50"></i>
-            <input type="text" id="prevMemberSearch" data-i18n-placeholder="search_prev" placeholder="Search name..." oninput="handlePrevMemberSearch()" class="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-full text-white placeholder-white/50 focus:outline-none focus:border-purple-500/50 transition-colors">
-          </div>
-          <select id="prevMemberFilter" onchange="handlePrevMemberSearch()" class="w-full md:w-48 px-4 py-3 bg-white/5 border border-white/10 rounded-full text-white appearance-none focus:outline-none focus:border-purple-500/50 transition-colors" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right .7em top 50%; background-size: .65em auto;">
-            <option value="all" class="bg-gray-900" data-i18n="filter_all">All Roles</option>
-          </select>
-        </div>
-      </div>
-
-      <div id="prevMembersMasonry" class="masonry-grid w-full"></div>
-      
-      <div id="prevMembersEmptyState" class="hidden text-center py-20">
-        <i class="fa-solid fa-users-slash text-4xl text-white/20 mb-4 block"></i>
-        <p class="text-white/50 text-sm tracking-widest uppercase">No members found</p>
-      </div>
-    </section>
 
     <section class="py-40 px-6 max-w-7xl mx-auto" id="members">
 
@@ -1381,6 +1358,13 @@
 
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6" id="membersContainer"></div>
 
+      <div id="prevMembersViewMoreContainer" class="mt-12 text-center gs-up">
+        <button onclick="openFullPrevMembers()"
+          class="px-8 py-3 rounded-full glass hover:border-blue-500/30 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all duration-300 font-medium group">
+          <span data-i18n="nav_prev">Anggota Sebelumnya</span>
+          <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+        </button>
+      </div>
 
     </section>
 
@@ -1567,6 +1551,53 @@
       <div id="galleryEmptyState" class="hidden text-center py-20">
         <i class="fa-solid fa-image text-4xl text-white/20 mb-4 block"></i>
         <p class="text-white/50 text-sm tracking-widest uppercase">Tidak ada foto ditemukan</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="fullPrevMembersViewer" data-lenis-prevent
+    class="fixed inset-0 z-[90] bg-[#050505] hidden flex flex-col opacity-0 transition-opacity duration-500 overflow-y-auto overflow-x-hidden">
+    <div class="sticky top-0 z-[95] bg-[#050505]/90 backdrop-blur-md border-b border-white/5 pt-6 pb-4 px-6">
+      <div class="flex justify-between items-center mb-4 max-w-[1600px] mx-auto w-full">
+        <div class="flex items-center gap-4">
+          <h2 class="font-display text-2xl md:text-3xl font-bold text-[var(--text-main)]" data-i18n="nav_prev">Anggota Sebelumnya</h2>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="relative hidden md:block">
+            <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/40"></i>
+            <input type="text" id="prevMemberSearch" oninput="handlePrevMemberSearch()"
+              class="pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-white focus:outline-none focus:border-purple-500/50 transition-all w-64"
+              placeholder="Search name..." data-i18n-placeholder="search_prev">
+          </div>
+          <button onclick="closeFullPrevMembers()"
+            class="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-red-500/80 flex items-center justify-center transition-all hover:scale-110">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Search -->
+      <div class="relative md:hidden mb-4 max-w-[1600px] mx-auto w-full">
+        <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/40"></i>
+        <input type="text" id="prevMemberSearchMobile" oninput="handlePrevMemberSearchMobile()"
+          class="pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-white w-full focus:outline-none focus:border-purple-500/50"
+          placeholder="Search name..." data-i18n-placeholder="search_prev">
+      </div>
+
+      <!-- Filters Row -->
+      <div class="flex overflow-x-auto gap-2 pb-2 no-scrollbar max-w-[1600px] mx-auto w-full">
+         <select id="prevMemberFilter" onchange="handlePrevMemberSearch()" class="px-4 py-1.5 rounded-full bg-white/10 text-white/70 hover:bg-white/20 hover:text-white text-sm font-medium appearance-none focus:outline-none focus:border-purple-500/50 transition-all" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right .7em top 50%; background-size: .65em auto; padding-right: 2rem;">
+            <option value="all" class="bg-gray-900" data-i18n="filter_all">All Roles</option>
+         </select>
+      </div>
+    </div>
+
+    <div class="px-6 py-8 max-w-[1600px] mx-auto w-full flex-grow">
+      <div id="prevMembersMasonry" class="masonry-grid w-full"></div>
+      
+      <div id="prevMembersEmptyState" class="hidden text-center py-20">
+        <i class="fa-solid fa-users-slash text-4xl text-white/20 mb-4 block"></i>
+        <p class="text-white/50 text-sm tracking-widest uppercase">No members found</p>
       </div>
     </div>
   </div>
@@ -3244,8 +3275,62 @@
           select.innerHTML = optionsHtml;
         }
 
+        window.openFullPrevMembers = function () {
+          const viewer = document.getElementById('fullPrevMembersViewer');
+          
+          const searchInp = document.getElementById('prevMemberSearch');
+          const searchInpMob = document.getElementById('prevMemberSearchMobile');
+          if (searchInp) searchInp.value = '';
+          if (searchInpMob) searchInpMob.value = '';
+          const filter = document.getElementById('prevMemberFilter');
+          if (filter) filter.value = 'all';
+
+          renderPreviousMembersGallery();
+
+          document.body.style.overflow = 'hidden';
+          viewer.classList.remove('hidden');
+          void viewer.offsetWidth;
+          viewer.classList.remove('opacity-0');
+        };
+
+        window.closeFullPrevMembers = function () {
+          const viewer = document.getElementById('fullPrevMembersViewer');
+          viewer.classList.add('opacity-0');
+          setTimeout(() => {
+            viewer.classList.add('hidden');
+            document.body.style.overflow = '';
+          }, 500);
+        };
+
         window.handlePrevMemberSearch = function() {
-          const searchVal = (document.getElementById('prevMemberSearch').value || '').toLowerCase();
+          let searchVal = '';
+          const searchInp = document.getElementById('prevMemberSearch');
+          if (searchInp) searchVal = searchInp.value.toLowerCase();
+          
+          const searchInpMob = document.getElementById('prevMemberSearchMobile');
+          if (searchInpMob) searchInpMob.value = searchVal; // sync
+
+          const filterVal = document.getElementById('prevMemberFilter').value;
+          
+          const prevMembers = dbData.previous_members || [];
+          
+          filteredPrevMembers = prevMembers.filter(m => {
+            const nameMatch = (m.name || '').toLowerCase().includes(searchVal) || (m.full_name || '').toLowerCase().includes(searchVal);
+            const roleMatch = filterVal === 'all' || m.role === filterVal;
+            return nameMatch && roleMatch;
+          });
+          
+          drawPrevMembersMasonry();
+        };
+
+        window.handlePrevMemberSearchMobile = function() {
+          let searchVal = '';
+          const searchInpMob = document.getElementById('prevMemberSearchMobile');
+          if (searchInpMob) searchVal = searchInpMob.value.toLowerCase();
+          
+          const searchInp = document.getElementById('prevMemberSearch');
+          if (searchInp) searchInp.value = searchVal; // sync
+
           const filterVal = document.getElementById('prevMemberFilter').value;
           
           const prevMembers = dbData.previous_members || [];
