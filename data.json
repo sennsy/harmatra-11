@@ -1,4 +1,198 @@
 {
+  "previous_members": [
+    {
+      "id": "prev_1782881979421_0",
+      "name": "ABYAN",
+      "full_name": "ABYAN TSAQIB MUBAROK",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_1",
+      "name": "ANNAQI",
+      "full_name": "ANNAQI KHAIRULL AZZAM",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_2",
+      "name": "CHAIRUL",
+      "full_name": "CHAIRUL AZZAM RAMADHAN",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_3",
+      "name": "DEVARA",
+      "full_name": "DEVARA ABDILLAH GHANI",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_4",
+      "name": "FARDAN",
+      "full_name": "FARDAN ADITYA FAHRIZI",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_5",
+      "name": "FERY",
+      "full_name": "FERY FADLY",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_6",
+      "name": "HAFIDZ",
+      "full_name": "HAFIDZ RAFI RABBANI",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_7",
+      "name": "HAITSU",
+      "full_name": "HAITSU YASYA AL FIRDAUS",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_8",
+      "name": "IBRAHIM",
+      "full_name": "IBRAHIM MAJID",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_9",
+      "name": "KENZIE",
+      "full_name": "KENZIE ABHINAYA AL-HAFIZH",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_10",
+      "name": "MUH.",
+      "full_name": "MUH. ZAKI DZUMAYIL",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_11",
+      "name": "M.",
+      "full_name": "M. ARHAB FAIZ AZZAM",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_12",
+      "name": "M.",
+      "full_name": "M. NABHAN DZAKWAN",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_13",
+      "name": "MUHAMMAD",
+      "full_name": "MUHAMMAD NAZRIEL AR-RIJAL",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_14",
+      "name": "ARKANA",
+      "full_name": "ARKANA AESAR AULAYAIN",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_15",
+      "name": "AZKA",
+      "full_name": "AZKA AZHAR RASYID",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_16",
+      "name": "DZAKY",
+      "full_name": "DZAKY ABDUL HAFIZ",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_17",
+      "name": "FADHIL",
+      "full_name": "FADHIL MUHAMMAD ABID AL JABBAR",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_18",
+      "name": "GHOLIB",
+      "full_name": "GHOLIB AHMAD HARITSAH",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_19",
+      "name": "IZZAZ",
+      "full_name": "IZZAZ HABIBURROHMAN",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_20",
+      "name": "MOH.",
+      "full_name": "MOH. DANENDRA RAJWA ABITAH",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_21",
+      "name": "MUHAMAD",
+      "full_name": "MUHAMAD RIZQI AKBAR",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_22",
+      "name": "MUHAMMAD",
+      "full_name": "MUHAMMAD SEPTIAN RAMADHANI",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    },
+    {
+      "id": "prev_1782881979421_23",
+      "name": "UMAIR",
+      "full_name": "UMAIR ABDURROZZAq",
+      "role": "Siswa",
+      "bio": "Pindah / Logout",
+      "photo": ""
+    }
+  ],
   "members": [
     {
       "name": "kumis",
@@ -1181,7 +1375,11 @@
       "contact_msg_err": "Pesan belum diisi",
       "contact_send": "Kirim Pesan",
       "gallery_view_more": "Lihat Lainnya",
-      "full_gallery_title": "Koleksi Lengkap"
+      "full_gallery_title": "Koleksi Lengkap",
+      "nav_prev": "Anggota Sebelumnya",
+      "sub_prev_members": "Mengenang mereka yang pernah menjadi bagian dari cerita kita.",
+      "search_prev": "Cari nama...",
+      "filter_all": "Semua Peran"
     },
     "en": {
       "music": "SCHOOL VIBES",
@@ -1223,7 +1421,11 @@
       "contact_msg_err": "Message is required",
       "contact_send": "Send Message",
       "gallery_view_more": "View More",
-      "full_gallery_title": "Full Collection"
+      "full_gallery_title": "Full Collection",
+      "nav_prev": "Previous Members",
+      "sub_prev_members": "Remembering those who were once part of our story.",
+      "search_prev": "Search name...",
+      "filter_all": "All Roles"
     },
     "ar": {
       "music": "أجواء المدرسة",
@@ -1265,7 +1467,11 @@
       "contact_msg_err": "الرسالة مطلوبة",
       "contact_send": "إرسال الرسالة",
       "gallery_view_more": "عرض المزيد",
-      "full_gallery_title": "المجموعة الكاملة"
+      "full_gallery_title": "المجموعة الكاملة",
+      "nav_prev": "الأعضاء السابقون",
+      "sub_prev_members": "لنتذكر من كانوا ذات يوم جزءاً من قصتنا.",
+      "search_prev": "البحث عن اسم...",
+      "filter_all": "جميع الأدوار"
     }
   },
   "settings": {
@@ -1329,5 +1535,25 @@
       "Every story deserves to be remembered.",
       "Crafted with passion and purpose."
     ]
+  },
+  "website_metadata": {
+    "name": "HARMATRA",
+    "developer": "Immszkyy",
+    "organization": "HARMATRA Angkatan 11",
+    "version": "1.0.0",
+    "created_at": "2024",
+    "last_updated": "2026",
+    "description": {
+      "id": "HARMATRA adalah website resmi kelas 11.",
+      "en": "HARMATRA is the official website for class 11.",
+      "ar": "هارماترا هو الموقع الرسمي للدفعة 11."
+    }
+  },
+  "website_history": {
+    "purpose": "Menyimpan kenangan dan data kelas.",
+    "development_story": "Dikembangkan dengan penuh semangat untuk seluruh anggota.",
+    "project_goals": "Menjadi arsip digital permanen yang bisa diakses kapan saja.",
+    "future_plans": "Menambahkan fitur interaktif dan game multiplayer.",
+    "version_history": "v1.0 - Initial Release."
   }
 }

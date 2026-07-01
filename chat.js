@@ -9,7 +9,7 @@
 
   // Constants
   const STORAGE_KEY = 'harmatra_premium_chat_history';
-  const GEMINI_API_KEY = "AQ.Ab8RN6L-4Rhxtv0kHg_nOVef9NXzg2--QN3ysKPVzZ_-aC23mA";
+  const GEMINI_API_KEY = "YOUR_API_KEY_HERE";
   const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
   // State Management
@@ -78,12 +78,7 @@
 
   // Bind event listeners
   function bindEvents() {
-    // Open/Close toggle
-    elements.chatToggleButton.addEventListener('click', (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      toggleChat();
-    });
+    // Open/Close toggle (now handled in dragEnd to prevent double click bugs)
     elements.closeChatBtn.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
@@ -115,6 +110,8 @@
     let currentY = 0;
     let initialX = 0;
     let initialY = 0;
+    let startClickX = 0;
+    let startClickY = 0;
     let xOffset = parseFloat(localStorage.getItem('matra_ai_pos_x')) || 0;
     let yOffset = parseFloat(localStorage.getItem('matra_ai_pos_y')) || 0;
 
@@ -146,9 +143,13 @@
       if (e.type === 'touchstart') {
         initialX = e.touches[0].clientX - xOffset;
         initialY = e.touches[0].clientY - yOffset;
+        startClickX = e.touches[0].clientX;
+        startClickY = e.touches[0].clientY;
       } else {
         initialX = e.clientX - xOffset;
         initialY = e.clientY - yOffset;
+        startClickX = e.clientX;
+        startClickY = e.clientY;
       }
 
       isDragging = true;
@@ -158,6 +159,17 @@
 
     function dragEnd(e) {
       if (!isDragging) return;
+      
+      let endX, endY;
+      if (e.type === 'touchend' || e.type === 'touchcancel') {
+        endX = e.changedTouches ? e.changedTouches[0].clientX : startClickX;
+        endY = e.changedTouches ? e.changedTouches[0].clientY : startClickY;
+      } else {
+        endX = e.clientX;
+        endY = e.clientY;
+      }
+
+      const distance = Math.hypot(endX - startClickX, endY - startClickY);
       
       initialX = currentX;
       initialY = currentY;
@@ -172,12 +184,15 @@
       // Save position
       localStorage.setItem('matra_ai_pos_x', xOffset);
       localStorage.setItem('matra_ai_pos_y', yOffset);
+
+      // Trigger click if it was a tiny movement (a tap/click) on the toggle button
+      if (distance < 5 && e.target.closest('#chatToggleButton')) {
+        toggleChat();
+      }
     }
 
     function drag(e) {
       if (isDragging) {
-        e.preventDefault(); // Prevent scroll while dragging
-
         if (e.type === 'touchmove') {
           currentX = e.touches[0].clientX - initialX;
           currentY = e.touches[0].clientY - initialY;
@@ -205,23 +220,10 @@
       let adjustedX = xOffset;
       let adjustedY = yOffset;
 
-      // Ensure widget stays partially visible within viewport
-      // If widget goes too far left
-      if (rect.left < 0) {
-        adjustedX -= rect.left - 10;
-      }
-      // If widget goes too far right
-      if (rect.right > viewportW) {
-        adjustedX -= (rect.right - viewportW + 10);
-      }
-      // If widget goes too far top
-      if (rect.top < 0) {
-        adjustedY -= rect.top - 10;
-      }
-      // If widget goes too far bottom
-      if (rect.bottom > viewportH) {
-        adjustedY -= (rect.bottom - viewportH + 10);
-      }
+      if (rect.left < 0) adjustedX -= rect.left - 10;
+      if (rect.right > viewportW) adjustedX -= (rect.right - viewportW + 10);
+      if (rect.top < 0) adjustedY -= rect.top - 10;
+      if (rect.bottom > viewportH) adjustedY -= (rect.bottom - viewportH + 10);
 
       if (adjustedX !== xOffset || adjustedY !== yOffset) {
         xOffset = adjustedX;
@@ -230,24 +232,20 @@
         setTranslate(xOffset, yOffset, widget);
         
         setTimeout(() => {
-          widget.style.transition = ''; // Remove transition after snap completes
+          widget.style.transition = ''; 
         }, 300);
       }
     }
 
-    // Bind global events for move and end so drag isn't lost if cursor leaves element fast
-    widget.addEventListener('touchstart', dragStart, { passive: false });
+    widget.addEventListener('touchstart', dragStart, { passive: true });
     window.addEventListener('touchend', dragEnd);
-    window.addEventListener('touchmove', drag, { passive: false });
+    window.addEventListener('touchmove', (e) => { if (isDragging) e.preventDefault(); drag(e); }, { passive: false });
 
     widget.addEventListener('mousedown', dragStart);
     window.addEventListener('mouseup', dragEnd);
     window.addEventListener('mousemove', drag);
     
-    // Check boundaries on resize
     window.addEventListener('resize', snapToBoundaries);
-    
-    // Also bind to window object so toggleChat can call snapToBoundaries when size changes
     window.matraAiSnapBoundaries = snapToBoundaries;
   }
 
@@ -548,71 +546,17 @@
     let rawReply = "";
     const lowerPrompt = userPrompt.toLowerCase();
     
-    // 4. HYBRID AI LOGIC: Check Local Data
-    const harmatra = window.harmatraData || {};
-    const members = harmatra.dbData ? harmatra.dbData.members : [];
-    let localFound = false;
-
-    if (/anggota|member|siapa ketua|siapa sekretaris|timeline|event|gallery|quote|harmatra|who is|who are|members|class president/i.test(lowerPrompt)) {
-        const lang = getLang();
-        if (/siapa ketua|ketua kelas|class president|who is.*president|رئيس الفصل/i.test(lowerPrompt)) {
-            rawReply = lang === 'ar'
-              ? 'رئيس فصل هارماترا الدفعة 11 هو هانان. يقود فصلنا بتفانٍ كامل!'
-              : (lang === 'en'
-              ? 'The class president of HARMATRA Class 11 is Hanan. They lead our class with full dedication!'
-              : 'Ketua kelas HARMATRA Angkatan 11 adalah Hanan. Ia memimpin kelas kami dengan penuh dedikasi!');
-            localFound = true;
-        } else if (/siapa sekretaris|secretary|أمين السر/i.test(lowerPrompt)) {
-            rawReply = lang === 'ar'
-              ? 'سكرتير فصل هارماترا هو Immszkyy.'
-              : (lang === 'en'
-              ? 'The secretary of HARMATRA class is Immszkyy.'
-              : 'Sekretaris kelas HARMATRA adalah Immszkyy.');
-            localFound = true;
-        } else if (/anggota|member|members|أعضاء/i.test(lowerPrompt)) {
-            rawReply = lang === 'ar'
-              ? `إجمالي أعضاء هارماترا هو ${members.length || 29} عضواً. لكل منهم شخصية فريدة تجعل جو فصلنا متناغماً جداً!`
-              : (lang === 'en'
-              ? `HARMATRA has a total of ${members.length || 29} members. Each has unique traits that make our class atmosphere very harmonious!`
-              : `Total anggota HARMATRA adalah ${members.length || 29} orang. Semuanya memiliki karakteristik unik yang membuat suasana kelas kami sangat harmonis!`);
-            localFound = true;
-        } else if (/timeline|event|events|أحداث|جدول/i.test(lowerPrompt)) {
-            rawReply = lang === 'ar'
-              ? 'لدينا الكثير من الأحداث المهمة! من استقبال الطلاب الجدد إلى مسابقة الاستقلال وإفطار 2026. يمكنك الاطلاع على الجدول الزمني الكامل في قسم "مسيرتنا" في الموقع.'
-              : (lang === 'en'
-              ? 'We have many important events! From MPLS, Independence Competition, to the 2026 Bukber event. You can see the full timeline in the "Our Journey" section of this website.'
-              : 'Kami memiliki banyak event penting! Mulai dari MPLS, Lomba Kemerdekaan, hingga acara Bukber 2026. Kamu bisa melihat linimasa lengkap di bagian Jejak Langkah di website ini.');
-            localFound = true;
-        } else if (/gallery|galeri|معرض/i.test(lowerPrompt)) {
-            rawReply = lang === 'ar'
-              ? 'تم توثيق الكثير من اللحظات الجميلة في معرض الذكريات. مرر للأسفل في الصفحة الرئيسية لمشاهدتها!'
-              : (lang === 'en'
-              ? 'Many beautiful moments have been captured in the Memory Gallery. Scroll down the main page to see them!'
-              : 'Banyak momen indah yang diabadikan di Galeri Memori. Silakan gulir ke bawah di halaman utama untuk melihatnya!');
-            localFound = true;
-        } else if (/harmatra/i.test(lowerPrompt)) {
-            rawReply = lang === 'ar'
-              ? 'هارماترا هو اسم الدفعة 11 الفخور. يرمز هذا الاسم إلى الانسجام والتزامنا بحياكة ذكريات لا تُنسى معاً.'
-              : (lang === 'en'
-              ? 'HARMATRA is the proud name of Class 11. The name symbolizes Harmony and our commitment to weaving unforgettable memories together.'
-              : 'HARMATRA adalah nama kebanggaan dari Angkatan 11. Nama ini melambangkan Harmoni dan komitmen kami untuk merajut memori tak terlupakan bersama.');
-            localFound = true;
-        }
-    }
-
-    if (!localFound) {
-      try {
-        rawReply = await fetchAIResponse(userPrompt);
-      } catch (error) {
-        console.error("AI Response Error:", error);
-        const lang = getLang();
-        // 9. SAFE ERROR HANDLING (multilingual)
-        rawReply = lang === 'ar'
-          ? 'عذراً، Matra AI يواجه مشكلة في الاتصال. حاول مرة أخرى بعد قليل.'
-          : (lang === 'en'
-          ? 'Sorry, Matra AI is experiencing a connection issue. Error: ' + error.message
-          : 'Maaf, Matra AI sedang mengalami gangguan koneksi. Error: ' + error.message);
-      }
+    try {
+      rawReply = await fetchAIResponse(userPrompt);
+    } catch (error) {
+      console.error("AI Response Error:", error);
+      const lang = getLang();
+      // 9. SAFE ERROR HANDLING (multilingual)
+      rawReply = lang === 'ar'
+        ? 'عذراً، Matra AI يواجه مشكلة في الاتصال. حاول مرة أخرى بعد قليل.'
+        : (lang === 'en'
+        ? 'Sorry, Matra AI is experiencing a connection issue. Error: ' + error.message
+        : 'Maaf, Matra AI sedang mengalami gangguan koneksi. Error: ' + error.message);
     }
 
     if (!bubbleElement) return;
@@ -900,12 +844,16 @@
 
     // 5. GET HARMATRA DATA (if available)
     let harmatraContext = "";
-    if (window.HARMATRA_DATA) {
-      const db = window.HARMATRA_DATA;
+    if (window.harmatraData && window.harmatraData.dbData) {
+      const db = window.harmatraData.dbData;
       harmatraContext = `
 [HARMATRA DATABASE]
-Total Members: ${db.members ? db.members.length : 0}
-Members Data: ${JSON.stringify(db.members || [])}
+Website Metadata: ${JSON.stringify(db.website_metadata || {})}
+Website History: ${JSON.stringify(db.website_history || {})}
+Today's Spotlight: ${JSON.stringify(db.spotlight || {})}
+Total Active Members: ${db.members ? db.members.length : 0}
+Active Members Data: ${JSON.stringify((db.members || []).map(m => ({name: m.name, full_name: m.full_name, role: m.role})))}
+Total Previous Members: ${db.previous_members ? db.previous_members.length : 0}
 Timeline Events: ${JSON.stringify(db.timeline || [])}
 Total Gallery Items: ${db.gallery ? db.gallery.length : 0}
 Quotes: ${JSON.stringify(db.quotes || [])}
@@ -922,23 +870,25 @@ Quotes: ${JSON.stringify(db.quotes || [])}
       : 'CRITICAL LANGUAGE RULE: Kamu HARUS merespons HANYA dalam Bahasa Indonesia. Setiap kata harus dalam Bahasa Indonesia. Jangan campur dengan bahasa lain.');
 
     const systemInstruction = `You are MATRA AI.
-Official intelligent assistant of HARMATRA generation 11.
+Official digital intelligent assistant of the HARMATRA website.
 
-You are not a simple chatbot. You feel like a real AI assistant inside the Harmatra website.
+You are not a simple chatbot. You feel like a real AI assistant living inside the Harmatra website.
 
 Your behavior:
 - smart, natural, modern, helpful, warm, responsive, human-like.
+- Provide accurate, context-aware responses based on the latest available information.
 
 ${langInstruction}
 
 CRITICAL INSTRUCTION:
 You have direct access to the HARMATRA DATABASE below.
-Use this data to answer questions about Harmatra accurately and dynamically.
+Whenever a question relates to the website content (developers, members, history, gallery count, spotlight, etc.), you MUST search the database first.
 For example:
-If the requested data is truly not found in the HARMATRA DATABASE, reply naturally:
-“Maaf, aku belum menemukan data itu di arsip HARMATRA.”
+- If asked "Who built this website?", answer using the Developer information from Website Metadata.
+- If asked "Who is the secretary?", search Active Members Data for the role 'Secretary'.
+- If asked "How many gallery photos?", read the Total Gallery Items count.
 
-Never make up data about Harmatra members or events that are not in the database.
+If the requested data is truly not found in the HARMATRA DATABASE, reply naturally that you couldn't find the information in the archive. Do not invent facts or hallucinate.
 
 Outside Harmatra questions:
 act like smart AI (school help, study help, writing, ideas, motivation, productivity).

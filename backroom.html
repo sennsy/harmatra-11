@@ -782,42 +782,60 @@
     
     <nav class="nav-list">
       <li class="nav-item active" data-tab="dashboard">
-        <button onclick="switchTab('dashboard')"><i class="fa-solid fa-chart-line"></i> CORE_DATA.SYS</button>
+        <button onclick="switchTab('dashboard')"><i class="fa-solid fa-chart-line"></i> Dashboard</button>
       </li>
       <li class="nav-item" data-tab="members">
-        <button onclick="switchTab('members')"><i class="fa-solid fa-users"></i> MEMBERS.DAT</button>
+        <button onclick="switchTab('members')"><i class="fa-solid fa-users"></i> Active Members</button>
+      </li>
+      <li class="nav-item" data-tab="previous_members">
+        <button onclick="switchTab('previous_members')"><i class="fa-solid fa-user-graduate"></i> Previous Members</button>
       </li>
       <li class="nav-item" data-tab="timeline">
-        <button onclick="switchTab('timeline')"><i class="fa-solid fa-route"></i> TIMELINE.DAT</button>
+        <button onclick="switchTab('timeline')"><i class="fa-solid fa-route"></i> Timeline</button>
       </li>
       <li class="nav-item" data-tab="gallery">
-        <button onclick="switchTab('gallery')"><i class="fa-solid fa-images"></i> GALLERY.DAT</button>
+        <button onclick="switchTab('gallery')"><i class="fa-solid fa-images"></i> Gallery</button>
       </li>
       <li class="nav-item" data-tab="quotes">
-        <button onclick="switchTab('quotes')"><i class="fa-solid fa-quote-left"></i> QUOTES.DAT</button>
-      </li>
-      <li class="nav-item" data-tab="typing">
-        <button onclick="switchTab('typing')"><i class="fa-solid fa-keyboard"></i> TYPING.DAT</button>
-      </li>
-      <li class="nav-item" data-tab="mediahub">
-        <button onclick="switchTab('mediahub')"><i class="fa-solid fa-play"></i> MEDIA_HUB.DAT</button>
+        <button onclick="switchTab('quotes')"><i class="fa-solid fa-quote-left"></i> Quotes</button>
       </li>
       <li class="nav-item" data-tab="spotlight">
-        <button onclick="switchTab('spotlight')"><i class="fa-solid fa-crosshairs"></i> SPOTLIGHT.CFG</button>
+        <button onclick="switchTab('spotlight')"><i class="fa-solid fa-crosshairs"></i> Today's Spotlight</button>
+      </li>
+      <li class="nav-item" data-tab="mediahub">
+        <button onclick="switchTab('mediahub')"><i class="fa-solid fa-play"></i> Media Hub</button>
+      </li>
+      <li class="nav-item" data-tab="matra_ai">
+        <button onclick="switchTab('matra_ai')"><i class="fa-solid fa-robot"></i> Matra AI</button>
+      </li>
+      <li class="nav-item" data-tab="contact">
+        <button onclick="switchTab('contact')"><i class="fa-solid fa-envelope"></i> Contact</button>
+      </li>
+      <li class="nav-item" data-tab="website_metadata">
+        <button onclick="switchTab('website_metadata')"><i class="fa-solid fa-globe"></i> Website Info</button>
+      </li>
+      <li class="nav-item" data-tab="website_history">
+        <button onclick="switchTab('website_history')"><i class="fa-solid fa-clock-rotate-left"></i> Website History</button>
       </li>
       <li class="nav-item" data-tab="settings">
-        <button onclick="switchTab('settings')"><i class="fa-solid fa-sliders"></i> SETTINGS.JSON</button>
+        <button onclick="switchTab('settings')"><i class="fa-solid fa-sliders"></i> Website Settings</button>
+      </li>
+      <li class="nav-item" data-tab="language">
+        <button onclick="switchTab('language')"><i class="fa-solid fa-language"></i> Language Manager</button>
       </li>
       <li class="nav-item" data-tab="connection">
-        <button onclick="switchTab('connection')"><i class="fa-solid fa-link"></i> DEPLOYMENT.EXE</button>
+        <button onclick="switchTab('connection')"><i class="fa-solid fa-cloud-arrow-up"></i> Deployment</button>
+      </li>
+      <li class="nav-item" data-tab="logs">
+        <button onclick="switchTab('logs')"><i class="fa-solid fa-list-check"></i> Activity Logs</button>
       </li>
     </nav>
 
     <!-- Embedded CLI console shell (Easter Egg) -->
     <div class="cli-widget">
       <div class="cli-prompt">
-        <i class="fa-solid fa-terminal"></i>
-        <span>atmin@harmatra-core:~$</span>
+        <i class="fa-solid fa-server"></i>
+        <span>Administration Center</span>
       </div>
       <div class="cli-input-container">
         <input type="text" id="cliInputField" class="cli-input" placeholder="Type help..." autocomplete="off">
@@ -955,6 +973,18 @@
         <button onclick="openAddMemberModal()" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> ADD RECORD</button>
       </div>
       <div id="membersListContainer" class="data-list"></div>
+    </section>
+
+    <!-- TAB: PREVIOUS MEMBERS -->
+    <section id="tab-previous_members" class="cms-view">
+      <div class="collection-header">
+        <span style="color:var(--text-muted); font-size:0.8rem;" id="prevMembersListCount">Total records: 0</span>
+        <div style="display:flex; gap:10px;">
+          <input type="text" id="prevMembersSearch" placeholder="Search by name..." class="form-control" style="width:200px; padding:0.4rem 0.8rem; font-size:0.75rem;" oninput="renderPrevMembersList()">
+          <button onclick="openAddPrevMemberModal()" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> ADD PREVIOUS MEMBER</button>
+        </div>
+      </div>
+      <div id="prevMembersListContainer" class="data-list"></div>
     </section>
 
     <!-- TAB: TIMELINE -->
@@ -1133,6 +1163,97 @@
           </div>
 
           <div style="margin-top:2rem; display:flex; justify-content:flex-end;">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> BUFFER_CHANGES()</button>
+          </div>
+        </form>
+      </div>
+    </section>
+    <!-- TAB: WEBSITE METADATA -->
+    <section id="tab-website_metadata" class="cms-view">
+      <div class="glass-card">
+        <div class="card-corner corner-tl"></div>
+        <div class="card-corner corner-tr"></div>
+        <div class="card-corner corner-bl"></div>
+        <div class="card-corner corner-br"></div>
+        <h3 class="font-display text-base font-bold mb-6" style="color:var(--accent-green);"><i class="fa-solid fa-globe"></i> CONFIG: WEBSITE_METADATA</h3>
+        <form id="websiteMetadataForm" onsubmit="saveWebsiteMetadata(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Website Name</label>
+              <input type="text" id="metaName" required>
+            </div>
+            <div class="form-group">
+              <label>Developer</label>
+              <input type="text" id="metaDeveloper" required>
+            </div>
+            <div class="form-group">
+              <label>Organization</label>
+              <input type="text" id="metaOrg" required>
+            </div>
+            <div class="form-group">
+              <label>Version</label>
+              <input type="text" id="metaVersion" required>
+            </div>
+            <div class="form-group">
+              <label>Created At</label>
+              <input type="text" id="metaCreatedAt" required>
+            </div>
+            <div class="form-group">
+              <label>Last Updated</label>
+              <input type="text" id="metaLastUpdated" required>
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label>Description (ID)</label>
+              <textarea id="metaDescId" rows="2" required></textarea>
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label>Description (EN)</label>
+              <textarea id="metaDescEn" rows="2" required></textarea>
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label>Description (AR)</label>
+              <textarea id="metaDescAr" rows="2" required></textarea>
+            </div>
+          </div>
+          <div class="form-actions mt-6 text-right">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> BUFFER_CHANGES()</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- TAB: WEBSITE HISTORY -->
+    <section id="tab-website_history" class="cms-view">
+      <div class="glass-card">
+        <div class="card-corner corner-tl"></div>
+        <div class="card-corner corner-tr"></div>
+        <div class="card-corner corner-bl"></div>
+        <div class="card-corner corner-br"></div>
+        <h3 class="font-display text-base font-bold mb-6" style="color:var(--accent-green);"><i class="fa-solid fa-clock-rotate-left"></i> CONFIG: WEBSITE_HISTORY</h3>
+        <form id="websiteHistoryForm" onsubmit="saveWebsiteHistory(event)">
+          <div class="form-grid">
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label>Purpose</label>
+              <textarea id="histPurpose" rows="2" required></textarea>
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label>Development Story</label>
+              <textarea id="histStory" rows="3" required></textarea>
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label>Project Goals</label>
+              <textarea id="histGoals" rows="2" required></textarea>
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label>Future Plans</label>
+              <textarea id="histPlans" rows="2" required></textarea>
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label>Version History</label>
+              <textarea id="histVersion" rows="3" required></textarea>
+            </div>
+          </div>
+          <div class="form-actions mt-6 text-right">
             <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> BUFFER_CHANGES()</button>
           </div>
         </form>
@@ -1452,6 +1573,69 @@
         </div>
         <div class="modal-footer">
           <button type="button" onclick="closeModal('memberModal')" class="btn btn-sm">ABORT()</button>
+          <button type="submit" class="btn btn-primary btn-sm">WRITE_RECORD()</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD/EDIT PREVIOUS MEMBER -->
+  <div id="prevMemberModal" class="cms-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="prevMemberModalTitle" class="font-display text-base font-bold">EDIT_RECORD: PREVIOUS_MEMBERS.DAT</h4>
+        <button onclick="closeModal('prevMemberModal')" style="background:transparent; border:none; color:#ffffff; font-size:1.5rem; cursor:pointer;">×</button>
+      </div>
+      <form id="prevMemberForm" onsubmit="savePrevMember(event)">
+        <div class="modal-body">
+          <input type="hidden" id="prev_member_index">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Name (ID/EN)</label>
+              <input type="text" id="prev_member_name" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Name (AR)</label>
+              <input type="text" id="prev_member_name_ar" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Full Name Tag</label>
+            <input type="text" id="prev_member_full_name" class="form-control">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Role (ID/EN)</label>
+              <input type="text" id="prev_member_role" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Role (AR)</label>
+              <input type="text" id="prev_member_role_ar" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">IG handle (no @)</label>
+            <input type="text" id="prev_member_ig" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Google Drive Photo Path</label>
+            <input type="url" id="prev_member_photo" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">bio_indonesian</label>
+            <textarea id="prev_member_bio_id" class="form-control" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">bio_english</label>
+            <textarea id="prev_member_bio_en" class="form-control" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">bio_arabic</label>
+            <textarea id="prev_member_bio_ar" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="closeModal('prevMemberModal')" class="btn btn-sm">ABORT()</button>
           <button type="submit" class="btn btn-primary btn-sm">WRITE_RECORD()</button>
         </div>
       </form>
@@ -2106,6 +2290,8 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
         typing: "TYPING.DAT",
         mediahub: "MEDIA_HUB.DAT",
         spotlight: "SPOTLIGHT.CFG",
+        website_metadata: "WEBSITE_METADATA.JSON",
+        website_history: "WEBSITE_HISTORY.JSON",
         settings: "SETTINGS.JSON",
         connection: "DEPLOYMENT.EXE"
       };
@@ -2114,26 +2300,99 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       logTerminal('SYS_NAV', `Switched workspace module mapping to: ${titles[tabId]}`);
     }
 
-    // Set Change pending state
+    // Set Change pending state & Auto Deploy
+    let autoDeployTimeout = null;
     function setChangesPending(pending = true) {
       hasPendingChanges = pending;
       const dot = document.getElementById('deployStatusDot');
       const label = document.getElementById('deployStatusLabel');
       const changesText = document.getElementById('pendingChangesText');
+      
+      // Auto Deploy implementation
       if (pending) {
         dot.className = 'status-dot';
         dot.style.background = '#00ffff';
         dot.style.boxShadow = '0 0 6px #00ffff';
-        label.innerText = 'CHANGES_BUFFERED';
+        label.innerText = 'AUTO_DEPLOYING...';
         label.style.color = '#00ffff';
-        changesText.innerText = 'Memory edits uncommitted. Run DEPLOY_CHANGES() to publish.';
+        changesText.innerText = 'Changes detected. Pushing to GitHub...';
+        
+        clearTimeout(autoDeployTimeout);
+        autoDeployTimeout = setTimeout(() => {
+          silentDeploy('website data');
+        }, 1000);
       } else {
         dot.className = 'status-dot synced';
         dot.style.background = '';
         dot.style.boxShadow = '';
         label.innerText = 'SYSTEM_SYNCED';
         label.style.color = '';
-        changesText.innerText = 'Memory core is synced with files.';
+        changesText.innerText = 'Memory core is synced with files. Live on GitHub.';
+      }
+    }
+
+    // Silent Background Deploy Function
+    async function silentDeploy(moduleName) {
+      const credsRaw = localStorage.getItem(CREDENTIALS_KEY);
+      if (!credsRaw) return;
+      
+      const cred = JSON.parse(credsRaw);
+      if (!cred.owner || !cred.repo || !cred.token) return;
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        background: '#07070a',
+        color: '#00ff88',
+        customClass: { popup: 'border border-[#00ff88]/30' }
+      });
+
+      try {
+        const branch = cred.branch || 'main';
+        const filepath = 'data.json';
+        const fileResponse = await fetch(`https://api.github.com/repos/${cred.owner}/${cred.repo}/contents/${filepath}?ref=${branch}`, {
+          headers: { 'Authorization': `token ${cred.token}`, 'Accept': 'application/vnd.github.v3+json' }
+        });
+        
+        let previousSha = null;
+        if (fileResponse.ok) previousSha = (await fileResponse.json()).sha;
+
+        const jsonContent = JSON.stringify(websiteData, null, 2);
+        const utf8Bytes = new TextEncoder().encode(jsonContent);
+        const binString = Array.from(utf8Bytes, (byte) => String.fromCharCode(byte)).join("");
+        const b64Content = btoa(binString);
+
+        const putResponse = await fetch(`https://api.github.com/repos/${cred.owner}/${cred.repo}/contents/${filepath}`, {
+          method: 'PUT',
+          headers: { 'Authorization': `token ${cred.token}`, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' },
+          body: JSON.stringify({
+            message: `Auto-publish: updated ${moduleName} via Backroom`,
+            content: b64Content,
+            branch: branch,
+            sha: previousSha || undefined
+          })
+        });
+
+        if (!putResponse.ok) throw new Error('Push failed.');
+        
+        Toast.fire({ icon: 'success', title: 'Auto-Published to GitHub!' });
+        
+        // Reset UI to synced state without triggering a new auto deploy
+        hasPendingChanges = false;
+        const dot = document.getElementById('deployStatusDot');
+        const label = document.getElementById('deployStatusLabel');
+        const changesText = document.getElementById('pendingChangesText');
+        dot.className = 'status-dot synced';
+        dot.style.background = '';
+        dot.style.boxShadow = '';
+        label.innerText = 'SYSTEM_SYNCED';
+        label.style.color = '';
+        changesText.innerText = 'Memory core is synced with files. Live on GitHub.';
+        
+      } catch(err) {
+        Toast.fire({ icon: 'error', title: 'Auto-publish failed.', timer: 3000, color: '#ef4444' });
       }
     }
 
@@ -2145,6 +2404,7 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       document.getElementById('statCountQuotes').innerText = websiteData.quotes ? websiteData.quotes.length : 0;
 
       renderMembersList();
+      if (typeof renderPrevMembersList === 'function') renderPrevMembersList();
       renderTimelineList();
       renderGalleryList();
       renderQuotesList();
@@ -2152,6 +2412,8 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       renderSpotlightConfig();
       renderTypingSettings();
       renderMediaHubSettings();
+      renderWebsiteMetadata();
+      renderWebsiteHistory();
     }
 
     // Close Modal helper
@@ -2247,6 +2509,105 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       }
 
       closeModal('memberModal');
+      setChangesPending(true);
+      renderCMSLayout();
+    }
+
+
+    // ==========================================
+    // PREVIOUS MEMBERS CRUD
+    // ==========================================
+    function renderPrevMembersList() {
+      const container = document.getElementById('prevMembersListContainer');
+      const list = websiteData.previous_members || [];
+      const searchQuery = (document.getElementById('prevMembersSearch')?.value || '').toLowerCase();
+      
+      const filteredList = list.map((m, idx) => ({ ...m, originalIndex: idx }))
+        .filter(m => m.name.toLowerCase().includes(searchQuery) || (m.full_name && m.full_name.toLowerCase().includes(searchQuery)));
+      
+      document.getElementById('prevMembersListCount').innerText = `Total records: ${list.length} (Showing ${filteredList.length})`;
+      container.innerHTML = '';
+
+      if (filteredList.length === 0) {
+        container.innerHTML = `<div style="text-align:center; color:var(--text-dim); padding:3rem 0;">No previous members found.</div>`;
+        return;
+      }
+
+      filteredList.forEach((m) => {
+        const idx = m.originalIndex;
+        const card = document.createElement('div');
+        card.className = 'data-item';
+        card.innerHTML = `
+          <div class="data-info">
+            <img src="${getPhotoPreview(m.photo)}" onerror="this.src='./logo utama.png'" class="data-preview-img">
+            <div class="data-details">
+              <div class="data-title">${escapeHTML(m.name)} <span style="font-weight:normal; font-size:0.75rem; color:var(--text-dim);">(@${m.ig || 'unmapped'})</span></div>
+              <div class="data-sub">ROLE: ${escapeHTML(m.role || 'Member')} // FILE: ${escapeHTML(m.full_name || 'Generic')}</div>
+            </div>
+          </div>
+          <div class="data-actions">
+            <button onclick="reorderCollection('previous_members', ${idx}, -1)" class="btn btn-icon btn-sm" title="Move Up"><i class="fa-solid fa-arrow-up"></i></button>
+            <button onclick="reorderCollection('previous_members', ${idx}, 1)" class="btn btn-icon btn-sm" title="Move Down"><i class="fa-solid fa-arrow-down"></i></button>
+            <button onclick="openEditPrevMemberModal(${idx})" class="btn btn-icon btn-sm" style="color:var(--accent-cyan);" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button onclick="deleteFromCollection('previous_members', ${idx})" class="btn btn-icon btn-sm btn-danger" title="Delete"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openAddPrevMemberModal() {
+      document.getElementById('prevMemberForm').reset();
+      document.getElementById('prev_member_index').value = '';
+      document.getElementById('prevMemberModalTitle').innerText = 'ADD RECORD: PREVIOUS_MEMBERS.DAT';
+      document.getElementById('prevMemberModal').classList.add('active');
+    }
+
+    function openEditPrevMemberModal(idx) {
+      const m = websiteData.previous_members[idx];
+      document.getElementById('prev_member_index').value = idx;
+      document.getElementById('prev_member_name').value = m.name || '';
+      document.getElementById('prev_member_name_ar').value = m.name_ar || '';
+      document.getElementById('prev_member_full_name').value = m.full_name || '';
+      document.getElementById('prev_member_role').value = m.role || '';
+      document.getElementById('prev_member_role_ar').value = m.role_ar || '';
+      document.getElementById('prev_member_ig').value = m.ig || '';
+      document.getElementById('prev_member_photo').value = m.photo || '';
+      document.getElementById('prev_member_bio_id').value = m.bio_id || '';
+      document.getElementById('prev_member_bio_en').value = m.bio_en || '';
+      document.getElementById('prev_member_bio_ar').value = m.bio_ar || '';
+      
+      document.getElementById('prevMemberModalTitle').innerText = 'EDIT RECORD: PREVIOUS_MEMBERS.DAT';
+      document.getElementById('prevMemberModal').classList.add('active');
+    }
+
+    function savePrevMember(e) {
+      e.preventDefault();
+      const idx = document.getElementById('prev_member_index').value;
+      const member = {
+        name: document.getElementById('prev_member_name').value.trim(),
+        name_ar: document.getElementById('prev_member_name_ar').value.trim(),
+        full_name: document.getElementById('prev_member_full_name').value.trim(),
+        role: document.getElementById('prev_member_role').value.trim(),
+        role_ar: document.getElementById('prev_member_role_ar').value.trim(),
+        ig: document.getElementById('prev_member_ig').value.trim(),
+        photo: document.getElementById('prev_member_photo').value.trim(),
+        bio_id: document.getElementById('prev_member_bio_id').value.trim(),
+        bio_en: document.getElementById('prev_member_bio_en').value.trim(),
+        bio_ar: document.getElementById('prev_member_bio_ar').value.trim()
+      };
+
+      if (!websiteData.previous_members) websiteData.previous_members = [];
+
+      if (idx === '') {
+        websiteData.previous_members.push(member);
+        logTerminal('PrevMembers', `Appended new previous member record: ${member.name}`);
+      } else {
+        websiteData.previous_members[parseInt(idx)] = member;
+        logTerminal('PrevMembers', `Rewrote previous member record slot ${idx}: ${member.name}`);
+      }
+
+      closeModal('prevMemberModal');
       setChangesPending(true);
       renderCMSLayout();
     }
@@ -3274,6 +3635,66 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
         document.getElementById('btnCancelDeploy').style.display = 'inline-flex';
         logTerminal('Deploy', `Handshake deployment execution failed: ${err.message}`, 'error');
       }
+    }
+    function renderWebsiteMetadata() {
+      if (!websiteData.website_metadata) return;
+      const m = websiteData.website_metadata;
+      document.getElementById('metaName').value = m.name || '';
+      document.getElementById('metaDeveloper').value = m.developer || '';
+      document.getElementById('metaOrg').value = m.organization || '';
+      document.getElementById('metaVersion').value = m.version || '';
+      document.getElementById('metaCreatedAt').value = m.created_at || '';
+      document.getElementById('metaLastUpdated').value = m.last_updated || '';
+      if (m.description) {
+        document.getElementById('metaDescId').value = m.description.id || '';
+        document.getElementById('metaDescEn').value = m.description.en || '';
+        document.getElementById('metaDescAr').value = m.description.ar || '';
+      }
+    }
+
+    function saveWebsiteMetadata(e) {
+      e.preventDefault();
+      if (!websiteData.website_metadata) websiteData.website_metadata = { description: {} };
+      const m = websiteData.website_metadata;
+      m.name = document.getElementById('metaName').value.trim();
+      m.developer = document.getElementById('metaDeveloper').value.trim();
+      m.organization = document.getElementById('metaOrg').value.trim();
+      m.version = document.getElementById('metaVersion').value.trim();
+      m.created_at = document.getElementById('metaCreatedAt').value.trim();
+      m.last_updated = document.getElementById('metaLastUpdated').value.trim();
+      if (!m.description) m.description = {};
+      m.description.id = document.getElementById('metaDescId').value.trim();
+      m.description.en = document.getElementById('metaDescEn').value.trim();
+      m.description.ar = document.getElementById('metaDescAr').value.trim();
+      
+      setChangesPending(true);
+      logTerminal('SYS_UPDATE', 'Website Metadata buffered for commit.');
+      if(window.Swal) window.Swal.fire({ title: 'Config Saved', icon: 'success', customClass: { popup: 'border border-[#00ff88]' } });
+    }
+
+    function renderWebsiteHistory() {
+      if (!websiteData.website_history) return;
+      const h = websiteData.website_history;
+      document.getElementById('histPurpose').value = h.purpose || '';
+      document.getElementById('histStory').value = h.development_story || '';
+      document.getElementById('histGoals').value = h.project_goals || '';
+      document.getElementById('histPlans').value = h.future_plans || '';
+      document.getElementById('histVersion').value = h.version_history || '';
+    }
+
+    function saveWebsiteHistory(e) {
+      e.preventDefault();
+      if (!websiteData.website_history) websiteData.website_history = {};
+      const h = websiteData.website_history;
+      h.purpose = document.getElementById('histPurpose').value.trim();
+      h.development_story = document.getElementById('histStory').value.trim();
+      h.project_goals = document.getElementById('histGoals').value.trim();
+      h.future_plans = document.getElementById('histPlans').value.trim();
+      h.version_history = document.getElementById('histVersion').value.trim();
+      
+      setChangesPending(true);
+      logTerminal('SYS_UPDATE', 'Website History buffered for commit.');
+      if(window.Swal) window.Swal.fire({ title: 'History Saved', icon: 'success', customClass: { popup: 'border border-[#00ff88]' } });
     }
   </script>
 
