@@ -9,7 +9,7 @@
 
   // Constants
   const STORAGE_KEY = 'harmatra_premium_chat_history';
-  const AI_API_URL = "https://text.pollinations.ai/";
+  const AI_API_URL = "/.netlify/functions/openrouter";
 
   // State Management
   const state = {
@@ -915,7 +915,19 @@ ${harmatraContext}`;
       }
     }
     
-    const requestBody = { messages, model: "openai" };
+    
+    const aiConfig = db.settings && db.settings.ai ? db.settings.ai : { enabled: true, model: "google/gemini-2.5-flash", temperature: 0.7, max_tokens: 800 };
+    
+    if (!aiConfig.enabled) {
+      throw new Error("AI is currently disabled by administrator.");
+    }
+
+    const requestBody = { 
+      messages, 
+      model: aiConfig.model,
+      temperature: parseFloat(aiConfig.temperature),
+      max_tokens: parseInt(aiConfig.max_tokens)
+    };
 
     const response = await fetch(AI_API_URL, {
       method: "POST",
@@ -931,10 +943,10 @@ ${harmatraContext}`;
       throw new Error(`Status ${response.status} - ${errText}`);
     }
 
-    const data = await response.text();
+    const data = await response.json();
     
-    if (data) {
-      return data;
+    if (data && data.choices && data.choices.length > 0) {
+      return data.choices[0].message.content;
     }
     
     throw new Error("Empty response from AI.");

@@ -1474,6 +1474,12 @@
     "spotlight": {
       "mode": "daily",
       "fixed_id": null
+    },
+    "ai": {
+      "enabled": true,
+      "model": "google/gemini-2.5-flash",
+      "temperature": 0.7,
+      "max_tokens": 800
     }
   },
   "spotlight": {

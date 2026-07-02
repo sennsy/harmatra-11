@@ -1408,6 +1408,49 @@
       </div>
     </section>
 
+    <!-- TAB: AI SETTINGS -->
+    <section id="tab-ai" class="cms-view">
+      <div class="cms-header">
+        <h2>AI SETTINGS</h2>
+        <button onclick="saveAISettings()" class="btn-save"><i class="fa-solid fa-floppy-disk"></i> SAVE CHANGES</button>
+      </div>
+      <div class="cms-content">
+        <div class="config-panel">
+          <h3 class="font-display font-bold text-lg mb-4 text-[var(--accent-green)]">MATRA AI Configuration</h3>
+          
+          <div class="form-group" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:15px; margin-bottom:15px;">
+            <div>
+              <label style="margin-bottom:0; color:var(--text-main);">Enable AI Module</label>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:5px;">Toggle AI chat features globally.</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="cfgAiEnabled">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          
+          <div class="mb-4 mt-6">
+            <label class="block text-xs font-bold opacity-60 mb-2">OpenRouter Model ID</label>
+            <input type="text" id="cfgAiModel" class="cms-input w-full" placeholder="google/gemini-2.5-flash">
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:5px;">E.g. google/gemini-2.5-flash, openai/gpt-3.5-turbo</div>
+          </div>
+          
+          <div class="grid-2 mt-4">
+            <div class="form-group">
+              <label>Temperature (<span id="cfgAiTempValue">0.7</span>)</label>
+              <input type="range" id="cfgAiTemperature" class="w-full" min="0" max="2" step="0.1" oninput="document.getElementById('cfgAiTempValue').innerText=this.value">
+            </div>
+            
+            <div class="form-group">
+              <label>Max Tokens</label>
+              <input type="number" id="cfgAiMaxTokens" class="cms-input w-full" placeholder="800">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
     <!-- TAB: CONNECTION -->
     <section id="tab-connection" class="cms-view">
       <div class="glass-card" style="max-width:650px; margin:0 auto;">
@@ -3663,7 +3706,67 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       logTerminal('SYS_UPDATE', 'Website History buffered for commit.');
       if(window.Swal) window.Swal.fire({ title: 'History Saved', icon: 'success', customClass: { popup: 'border border-[#00ff88]' } });
     }
-  </script>
+  
+    // --- AI SETTINGS LOGIC ---
+    function loadAISettings() {
+      const aiSettings = (dbData.settings && dbData.settings.ai) || { enabled: true, model: "google/gemini-2.5-flash", temperature: 0.7, max_tokens: 800 };
+      document.getElementById('cfgAiEnabled').checked = aiSettings.enabled;
+      document.getElementById('cfgAiModel').value = aiSettings.model;
+      document.getElementById('cfgAiTemperature').value = aiSettings.temperature;
+      document.getElementById('cfgAiTempValue').innerText = aiSettings.temperature;
+      document.getElementById('cfgAiMaxTokens').value = aiSettings.max_tokens;
+    }
+
+    async function saveAISettings() {
+      if (!dbData.settings) dbData.settings = {};
+      
+      dbData.settings.ai = {
+        enabled: document.getElementById('cfgAiEnabled').checked,
+        model: document.getElementById('cfgAiModel').value.trim() || 'google/gemini-2.5-flash',
+        temperature: parseFloat(document.getElementById('cfgAiTemperature').value),
+        max_tokens: parseInt(document.getElementById('cfgAiMaxTokens').value) || 800
+      };
+
+      try {
+        const btn = document.querySelector('#tab-ai .btn-save');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> SAVING...';
+        
+        const res = await fetch('/data.json', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dbData)
+        });
+
+        if (res.ok) {
+          btn.innerHTML = '<i class="fa-solid fa-check"></i> SAVED!';
+          setTimeout(() => btn.innerHTML = orig, 2000);
+          showToast('AI settings saved successfully');
+        } else {
+          throw new Error('Failed to save');
+        }
+      } catch (err) {
+        alert('Error saving AI settings: ' + err.message);
+      }
+    }
+    
+    // Hook into global render
+    const origRenderGlobalData = window.renderGlobalData;
+    if (typeof origRenderGlobalData === 'function') {
+      window.renderGlobalData = function() {
+        origRenderGlobalData();
+        loadAISettings();
+      };
+    } else {
+      // If it doesn't exist yet, we will just call loadAISettings in initDashboard
+      const origInitDashboard = window.initDashboard;
+      window.initDashboard = function() {
+        if(origInitDashboard) origInitDashboard();
+        loadAISettings();
+      }
+    }
+
+</script>
 
 
 
