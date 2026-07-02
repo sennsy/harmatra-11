@@ -1353,7 +1353,8 @@
 
     <section class="py-40 px-6 max-w-7xl mx-auto" id="members">
 
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16 gs-up">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-16 gs-up">
+
         <div>
 
           <h2 class="font-display text-4xl md:text-5xl font-bold mb-4" data-i18n="title_members">Keluarga HARMATRA</h2>
@@ -1564,7 +1565,7 @@
   </div>
 
   <div id="fullPrevMembersViewer" data-lenis-prevent=""
-    class="fixed inset-0 z-[90] bg-[var(--glass-bg)] backdrop-blur-xl hidden flex flex-col opacity-0 transition-opacity duration-500 overflow-y-auto overflow-x-hidden text-[var(--text-main)]">
+    class="fixed inset-0 z-[90] bg-[var(--bg-color)] hidden flex flex-col opacity-0 transition-opacity duration-500 overflow-y-auto overflow-x-hidden text-[var(--text-main)]">
     <div
       class="sticky top-0 z-[95] bg-[var(--bg-color)]/90 backdrop-blur-md border-b border-[var(--text-main)]/5 pt-6 pb-4 px-6">
       <div class="flex justify-between items-center mb-4 max-w-[1600px] mx-auto w-full">
@@ -1573,7 +1574,13 @@
             Sebelumnya</h2>
         </div>
         <div class="flex items-center gap-4">
-
+          <div class="relative hidden md:block">
+            <i
+              class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-main)] opacity-40"></i>
+            <input type="text" id="prevMemberSearch" oninput="handlePrevMemberSearch()"
+              class="pl-10 pr-4 py-2 bg-[var(--text-main)]/5 border border-[var(--text-main)]/10 rounded-full text-sm text-[var(--text-main)] focus:outline-none focus:border-purple-500/50 transition-all w-64"
+              placeholder="Search name..." data-i18n-placeholder="search_prev">
+          </div>
           <button onclick="closeFullPrevMembers()"
             class="w-10 h-10 rounded-full bg-[var(--text-main)]/10 text-[var(--text-main)] hover:bg-red-500/80 flex items-center justify-center transition-all hover:scale-110">
             <i class="fa-solid fa-xmark"></i>
@@ -1581,7 +1588,13 @@
         </div>
       </div>
 
-
+      <!-- Mobile Search -->
+      <div class="relative md:hidden mb-4 max-w-[1600px] mx-auto w-full">
+        <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-main)] opacity-40"></i>
+        <input type="text" id="prevMemberSearchMobile" oninput="handlePrevMemberSearchMobile()"
+          class="pl-10 pr-4 py-2 bg-[var(--text-main)]/5 border border-[var(--text-main)]/10 rounded-full text-sm text-[var(--text-main)] w-full focus:outline-none focus:border-purple-500/50"
+          placeholder="Search name..." data-i18n-placeholder="search_prev">
+      </div>
 
       <!-- Filters Row -->
       <div class="flex overflow-x-auto gap-2 pb-2 no-scrollbar max-w-[1600px] mx-auto w-full">
@@ -3175,33 +3188,13 @@
           });
         }
 
-
-        let memberSearchQuery = '';
-        function handleMemberSearch() {
-          const el = document.getElementById('memberSearchInput');
-          if (el) {
-            memberSearchQuery = el.value.toLowerCase();
-            renderMembers();
-          }
-        }
-
         function renderMembers() {
 
           const container = document.getElementById('membersContainer');
 
           container.innerHTML = '';
 
-          const filteredMembers = dbData.members.filter(m => {
-            if (!memberSearchQuery) return true;
-            return (m.name || '').toLowerCase().includes(memberSearchQuery) || (m.full_name || '').toLowerCase().includes(memberSearchQuery);
-          });
-
-          if (filteredMembers.length === 0) {
-            container.innerHTML = '<div class="col-span-full text-center py-10 text-[var(--text-main)] opacity-50"><i class="fa-solid fa-users-slash text-4xl mb-3 block"></i><p class="tracking-widest uppercase text-sm">Tidak ada anggota ditemukan</p></div>';
-            return;
-          }
-
-          filteredMembers.forEach((m, i) => {
+          dbData.members.forEach((m, i) => {
 
             let name = m.name;
             let role = m.role;
