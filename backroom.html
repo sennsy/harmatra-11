@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+<!DOCTYPE html><html lang="id"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HARMATRA CORE | Administrative Matrix</title>
+  <title>Harmatra Backroom</title>
   
   <link rel="icon" type="image/png" href="./logo utama.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <style>
@@ -767,7 +765,7 @@
       <h2 class="lock-title">RESTRICTED ZONE</h2>
       <p class="lock-sub">SECURE MATRIX ADMINISTRATIVE PORTAL</p>
       <div class="lock-input-group">
-        <input type="password" id="passcodeInput" class="lock-input" placeholder="••••••" maxlength="20" autofocus>
+        <input type="password" id="passcodeInput" class="lock-input" placeholder="••••••" maxlength="20" autofocus="">
       </div>
       <button onclick="verifyPasscode()" class="lock-btn">DECRYPT_ACCESS()</button>
     </div>
@@ -780,56 +778,25 @@
       <span class="brand-name">HARMATRA_CORE</span>
     </a>
     
-    <nav class="nav-list">
-      <li class="nav-item active" data-tab="dashboard">
-        <button onclick="switchTab('dashboard')"><i class="fa-solid fa-chart-line"></i> Dashboard</button>
-      </li>
-      <li class="nav-item" data-tab="members">
-        <button onclick="switchTab('members')"><i class="fa-solid fa-users"></i> Active Members</button>
-      </li>
-      <li class="nav-item" data-tab="previous_members">
-        <button onclick="switchTab('previous_members')"><i class="fa-solid fa-user-graduate"></i> Previous Members</button>
-      </li>
-      <li class="nav-item" data-tab="timeline">
-        <button onclick="switchTab('timeline')"><i class="fa-solid fa-route"></i> Timeline</button>
-      </li>
-      <li class="nav-item" data-tab="gallery">
-        <button onclick="switchTab('gallery')"><i class="fa-solid fa-images"></i> Gallery</button>
-      </li>
-      <li class="nav-item" data-tab="quotes">
-        <button onclick="switchTab('quotes')"><i class="fa-solid fa-quote-left"></i> Quotes</button>
-      </li>
-      <li class="nav-item" data-tab="spotlight">
-        <button onclick="switchTab('spotlight')"><i class="fa-solid fa-crosshairs"></i> Today's Spotlight</button>
-      </li>
-      <li class="nav-item" data-tab="mediahub">
-        <button onclick="switchTab('mediahub')"><i class="fa-solid fa-play"></i> Media Hub</button>
-      </li>
-      <li class="nav-item" data-tab="matra_ai">
-        <button onclick="switchTab('matra_ai')"><i class="fa-solid fa-robot"></i> Matra AI</button>
-      </li>
-      <li class="nav-item" data-tab="contact">
-        <button onclick="switchTab('contact')"><i class="fa-solid fa-envelope"></i> Contact</button>
-      </li>
-      <li class="nav-item" data-tab="website_metadata">
-        <button onclick="switchTab('website_metadata')"><i class="fa-solid fa-globe"></i> Website Info</button>
-      </li>
-      <li class="nav-item" data-tab="website_history">
-        <button onclick="switchTab('website_history')"><i class="fa-solid fa-clock-rotate-left"></i> Website History</button>
-      </li>
-      <li class="nav-item" data-tab="settings">
-        <button onclick="switchTab('settings')"><i class="fa-solid fa-sliders"></i> Website Settings</button>
-      </li>
-      <li class="nav-item" data-tab="language">
-        <button onclick="switchTab('language')"><i class="fa-solid fa-language"></i> Language Manager</button>
-      </li>
-      <li class="nav-item" data-tab="connection">
-        <button onclick="switchTab('connection')"><i class="fa-solid fa-cloud-arrow-up"></i> Deployment</button>
-      </li>
-      <li class="nav-item" data-tab="logs">
-        <button onclick="switchTab('logs')"><i class="fa-solid fa-list-check"></i> Activity Logs</button>
-      </li>
-    </nav>
+    
+<nav class="nav-list">
+  <li class="nav-item active" data-tab="dashboard">
+    <button onclick="switchTab('dashboard')"><i class="fa-solid fa-home"></i> Beranda</button>
+  </li>
+  <li class="nav-item" data-tab="members">
+    <button onclick="switchTab('members')"><i class="fa-solid fa-users"></i> Anggota</button>
+  </li>
+  <li class="nav-item" data-tab="media">
+    <button onclick="switchTab('media')"><i class="fa-solid fa-photo-film"></i> Galeri &amp; Cerita</button>
+  </li>
+  <li class="nav-item" data-tab="ai">
+    <button onclick="switchTab('ai')"><i class="fa-solid fa-robot"></i> Asisten &amp; Pesan</button>
+  </li>
+  <li class="nav-item" data-tab="settings">
+    <button onclick="switchTab('settings')"><i class="fa-solid fa-gear"></i> Pengaturan</button>
+  </li>
+</nav>
+
 
     <!-- Embedded CLI console shell (Easter Egg) -->
     <div class="cli-widget">
@@ -1085,7 +1052,7 @@
       <div class="cms-content">
         
         <div class="config-panel">
-          <h3 class="font-display font-bold text-lg mb-4 text-blue-400">Social & Cinema Configuration</h3>
+          <h3 class="font-display font-bold text-lg mb-4 text-blue-400">Social &amp; Cinema Configuration</h3>
           
           <div class="mb-4">
             <label class="block text-xs font-bold opacity-60 mb-2">Instagram URL</label>
@@ -1180,39 +1147,39 @@
           <div class="form-grid">
             <div class="form-group">
               <label>Website Name</label>
-              <input type="text" id="metaName" required>
+              <input type="text" id="metaName" required="">
             </div>
             <div class="form-group">
               <label>Developer</label>
-              <input type="text" id="metaDeveloper" required>
+              <input type="text" id="metaDeveloper" required="">
             </div>
             <div class="form-group">
               <label>Organization</label>
-              <input type="text" id="metaOrg" required>
+              <input type="text" id="metaOrg" required="">
             </div>
             <div class="form-group">
               <label>Version</label>
-              <input type="text" id="metaVersion" required>
+              <input type="text" id="metaVersion" required="">
             </div>
             <div class="form-group">
               <label>Created At</label>
-              <input type="text" id="metaCreatedAt" required>
+              <input type="text" id="metaCreatedAt" required="">
             </div>
             <div class="form-group">
               <label>Last Updated</label>
-              <input type="text" id="metaLastUpdated" required>
+              <input type="text" id="metaLastUpdated" required="">
             </div>
             <div class="form-group" style="grid-column: 1 / -1;">
               <label>Description (ID)</label>
-              <textarea id="metaDescId" rows="2" required></textarea>
+              <textarea id="metaDescId" rows="2" required=""></textarea>
             </div>
             <div class="form-group" style="grid-column: 1 / -1;">
               <label>Description (EN)</label>
-              <textarea id="metaDescEn" rows="2" required></textarea>
+              <textarea id="metaDescEn" rows="2" required=""></textarea>
             </div>
             <div class="form-group" style="grid-column: 1 / -1;">
               <label>Description (AR)</label>
-              <textarea id="metaDescAr" rows="2" required></textarea>
+              <textarea id="metaDescAr" rows="2" required=""></textarea>
             </div>
           </div>
           <div class="form-actions mt-6 text-right">
@@ -1234,23 +1201,23 @@
           <div class="form-grid">
             <div class="form-group" style="grid-column: 1 / -1;">
               <label>Purpose</label>
-              <textarea id="histPurpose" rows="2" required></textarea>
+              <textarea id="histPurpose" rows="2" required=""></textarea>
             </div>
             <div class="form-group" style="grid-column: 1 / -1;">
               <label>Development Story</label>
-              <textarea id="histStory" rows="3" required></textarea>
+              <textarea id="histStory" rows="3" required=""></textarea>
             </div>
             <div class="form-group" style="grid-column: 1 / -1;">
               <label>Project Goals</label>
-              <textarea id="histGoals" rows="2" required></textarea>
+              <textarea id="histGoals" rows="2" required=""></textarea>
             </div>
             <div class="form-group" style="grid-column: 1 / -1;">
               <label>Future Plans</label>
-              <textarea id="histPlans" rows="2" required></textarea>
+              <textarea id="histPlans" rows="2" required=""></textarea>
             </div>
             <div class="form-group" style="grid-column: 1 / -1;">
               <label>Version History</label>
-              <textarea id="histVersion" rows="3" required></textarea>
+              <textarea id="histVersion" rows="3" required=""></textarea>
             </div>
           </div>
           <div class="form-actions mt-6 text-right">
@@ -1402,7 +1369,7 @@
             <input type="text" id="set_passcode" class="form-control" placeholder="askaryy" style="max-width:300px;">
           </div>
 
-          <div class="settings-group-title">Contact Form & EmailJS Configuration</div>
+          <div class="settings-group-title">Contact Form &amp; EmailJS Configuration</div>
           <div class="form-group">
             <label class="form-label">Recipient Email (Contact Form Dest)</label>
             <input type="email" id="set_contact_email" class="form-control" placeholder="izemsempay@gmail.com">
@@ -1453,19 +1420,19 @@
         <form id="connectionForm" onsubmit="saveConnectionConfig(event)">
           <div class="form-group">
             <label class="form-label">github_repository_owner</label>
-            <input type="text" id="git_owner" class="form-control" placeholder="e.g. your-github-name" required>
+            <input type="text" id="git_owner" class="form-control" placeholder="e.g. your-github-name" required="">
           </div>
           <div class="form-group">
             <label class="form-label">github_repository_name</label>
-            <input type="text" id="git_repo" class="form-control" placeholder="e.g. harmatra-web" required>
+            <input type="text" id="git_repo" class="form-control" placeholder="e.g. harmatra-web" required="">
           </div>
           <div class="form-group">
             <label class="form-label">target_branch</label>
-            <input type="text" id="git_branch" class="form-control" placeholder="main" required>
+            <input type="text" id="git_branch" class="form-control" placeholder="main" required="">
           </div>
           <div class="form-group">
             <label class="form-label">github_personal_access_token (pat)</label>
-            <input type="password" id="git_token" class="form-control" placeholder="ghp_••••••••••••••••••••••••••••••••••••" required>
+            <input type="password" id="git_token" class="form-control" placeholder="ghp_••••••••••••••••••••••••••••••••••••" required="">
           </div>
           <div class="form-group" style="margin-top:2rem; border-top:1px solid rgba(0,255,136,0.15); padding-top:1.5rem;">
             <label class="form-label">netlify_api_site_id</label>
@@ -1529,7 +1496,7 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Name (ID/EN)</label>
-              <input type="text" id="member_name" class="form-control" required>
+              <input type="text" id="member_name" class="form-control" required="">
             </div>
             <div class="form-group">
               <label class="form-label">Name (AR)</label>
@@ -1543,7 +1510,7 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Role (ID/EN)</label>
-              <input type="text" id="member_role" class="form-control" required>
+              <input type="text" id="member_role" class="form-control" required="">
             </div>
             <div class="form-group">
               <label class="form-label">Role (AR)</label>
@@ -1556,15 +1523,15 @@
           </div>
           <div class="form-group">
             <label class="form-label">Google Drive Photo Path</label>
-            <input type="url" id="member_photo" class="form-control" required>
+            <input type="url" id="member_photo" class="form-control" required="">
           </div>
           <div class="form-group">
             <label class="form-label">bio_indonesian</label>
-            <textarea id="member_bio_id" class="form-control" required></textarea>
+            <textarea id="member_bio_id" class="form-control" required=""></textarea>
           </div>
           <div class="form-group">
             <label class="form-label">bio_english</label>
-            <textarea id="member_bio_en" class="form-control" required></textarea>
+            <textarea id="member_bio_en" class="form-control" required=""></textarea>
           </div>
           <div class="form-group">
             <label class="form-label">bio_arabic</label>
@@ -1592,7 +1559,7 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Name (ID/EN)</label>
-              <input type="text" id="prev_member_name" class="form-control" required>
+              <input type="text" id="prev_member_name" class="form-control" required="">
             </div>
             <div class="form-group">
               <label class="form-label">Name (AR)</label>
@@ -1606,7 +1573,7 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Role (ID/EN)</label>
-              <input type="text" id="prev_member_role" class="form-control" required>
+              <input type="text" id="prev_member_role" class="form-control" required="">
             </div>
             <div class="form-group">
               <label class="form-label">Role (AR)</label>
@@ -1619,15 +1586,15 @@
           </div>
           <div class="form-group">
             <label class="form-label">Google Drive Photo Path</label>
-            <input type="url" id="prev_member_photo" class="form-control" required>
+            <input type="url" id="prev_member_photo" class="form-control" required="">
           </div>
           <div class="form-group">
             <label class="form-label">bio_indonesian</label>
-            <textarea id="prev_member_bio_id" class="form-control" required></textarea>
+            <textarea id="prev_member_bio_id" class="form-control" required=""></textarea>
           </div>
           <div class="form-group">
             <label class="form-label">bio_english</label>
-            <textarea id="prev_member_bio_en" class="form-control" required></textarea>
+            <textarea id="prev_member_bio_en" class="form-control" required=""></textarea>
           </div>
           <div class="form-group">
             <label class="form-label">bio_arabic</label>
@@ -1655,7 +1622,7 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Date String</label>
-              <input type="date" id="timeline_date" class="form-control" required>
+              <input type="date" id="timeline_date" class="form-control" required="">
             </div>
             <div class="form-group">
               <label class="form-label">Photo Path / Image URL</label>
@@ -1664,11 +1631,11 @@
           </div>
           <div class="form-group">
             <label class="form-label">Title (ID)</label>
-            <input type="text" id="timeline_title_id" class="form-control" required>
+            <input type="text" id="timeline_title_id" class="form-control" required="">
           </div>
           <div class="form-group">
             <label class="form-label">Title (EN)</label>
-            <input type="text" id="timeline_title_en" class="form-control" required>
+            <input type="text" id="timeline_title_en" class="form-control" required="">
           </div>
           <div class="form-group">
             <label class="form-label">Title (AR)</label>
@@ -1676,11 +1643,11 @@
           </div>
           <div class="form-group">
             <label class="form-label">desc_indonesian</label>
-            <textarea id="timeline_desc_id" class="form-control" required></textarea>
+            <textarea id="timeline_desc_id" class="form-control" required=""></textarea>
           </div>
           <div class="form-group">
             <label class="form-label">desc_english</label>
-            <textarea id="timeline_desc_en" class="form-control" required></textarea>
+            <textarea id="timeline_desc_en" class="form-control" required=""></textarea>
           </div>
           <div class="form-group">
             <label class="form-label">desc_arabic</label>
@@ -1707,15 +1674,15 @@
           <input type="hidden" id="gallery_index">
           <div class="form-group">
             <label class="form-label">Photo Source URL</label>
-            <input type="url" id="gallery_url" class="form-control" required>
+            <input type="url" id="gallery_url" class="form-control" required="">
           </div>
           <div class="form-group">
             <label class="form-label">Title (ID)</label>
-            <input type="text" id="gallery_title_id" class="form-control" required>
+            <input type="text" id="gallery_title_id" class="form-control" required="">
           </div>
           <div class="form-group">
             <label class="form-label">Title (EN)</label>
-            <input type="text" id="gallery_title_en" class="form-control" required>
+            <input type="text" id="gallery_title_en" class="form-control" required="">
           </div>
           <div class="form-group">
             <label class="form-label">Title (AR)</label>
@@ -1724,7 +1691,7 @@
           <div class="form-group" style="display:flex; justify-content:space-between; align-items:flex-end;">
             <div style="flex: 1;">
               <label class="form-label">Category</label>
-              <select id="gallery_category" class="form-control" required style="background:#020204; color:var(--text-main);">
+              <select id="gallery_category" class="form-control" required="" style="background:#020204; color:var(--text-main);">
                 <option value="School Life">School Life</option>
                 <option value="Study Tour">Study Tour</option>
                 <option value="Sports">Sports</option>
@@ -1741,7 +1708,7 @@
           <div class="form-group" style="display:flex; justify-content:space-between; align-items:flex-end;">
             <div style="flex: 1;">
               <label class="form-label">caption_id</label>
-              <input type="text" id="gallery_caption_id" class="form-control" required>
+              <input type="text" id="gallery_caption_id" class="form-control" required="">
             </div>
             <button type="button" onclick="generateAICaption(event)" class="btn btn-sm btn-primary" style="margin-left: 10px; margin-bottom: 5px;">
               <i class="fa-solid fa-wand-magic-sparkles"></i> AI_GENERATE()
@@ -1749,7 +1716,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">caption_en</label>
-            <input type="text" id="gallery_caption_en" class="form-control" required>
+            <input type="text" id="gallery_caption_en" class="form-control" required="">
           </div>
           <div class="form-group">
             <label class="form-label">caption_ar</label>
@@ -1776,11 +1743,11 @@
           <input type="hidden" id="quote_index">
           <div class="form-group">
             <label class="form-label">Quote String (ID)</label>
-            <textarea id="quote_text_id" class="form-control" required></textarea>
+            <textarea id="quote_text_id" class="form-control" required=""></textarea>
           </div>
           <div class="form-group">
             <label class="form-label">Quote String (EN)</label>
-            <textarea id="quote_text_en" class="form-control" required></textarea>
+            <textarea id="quote_text_en" class="form-control" required=""></textarea>
           </div>
           <div class="form-group">
             <label class="form-label">Quote String (AR)</label>
@@ -1788,7 +1755,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">quote_author</label>
-            <input type="text" id="quote_author" class="form-control" required>
+            <input type="text" id="quote_author" class="form-control" required="">
           </div>
         </div>
         <div class="modal-footer">
@@ -1810,7 +1777,7 @@
           <input type="hidden" id="typing_message_index">
           <div class="form-group">
             <label class="form-label">Message String</label>
-            <textarea id="typing_message_text" class="form-control" required rows="3"></textarea>
+            <textarea id="typing_message_text" class="form-control" required="" rows="3"></textarea>
           </div>
         </div>
         <div class="modal-footer">
@@ -3698,5 +3665,6 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
     }
   </script>
 
-</body>
-</html>
+
+
+</body></html>

@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<!-- Netlify Auto-Deploy Active -->
+<!DOCTYPE html><!-- Netlify Auto-Deploy Active -->
 <html lang="id">
 
 <head>
@@ -24,7 +23,7 @@
 
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap"
     rel="stylesheet">
 
   <link rel="stylesheet" href="chat.css">
@@ -962,6 +961,7 @@
         opacity: 0;
         transform: translate(-50%, 10px) scale(0.8);
       }
+
       100% {
         opacity: 1;
         transform: translate(-50%, 0) scale(1);
@@ -973,26 +973,31 @@
       column-count: 2;
       column-gap: 1.5rem;
     }
+
     @media (min-width: 768px) {
       .masonry-grid {
         column-count: 3;
       }
     }
+
     @media (min-width: 1024px) {
       .masonry-grid {
         column-count: 4;
       }
     }
+
     @media (min-width: 1280px) {
       .masonry-grid {
         column-count: 5;
       }
     }
+
     .masonry-item {
       break-inside: avoid;
       margin-bottom: 1.5rem;
       width: 100%;
     }
+
     .masonry-card {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1002,21 +1007,25 @@
       cursor: pointer;
       position: relative;
     }
+
     .masonry-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       background: rgba(255, 255, 255, 0.06);
       border-color: rgba(168, 85, 247, 0.3);
     }
+
     .avatar-placeholder {
       width: 100%;
-      padding-top: 120%; /* Portrait aspect ratio */
+      padding-top: 120%;
+      /* Portrait aspect ratio */
       position: relative;
-      background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
     }
+
     .avatar-placeholder i {
       position: absolute;
       top: 50%;
@@ -1060,7 +1069,7 @@
 
     <span class="text-xs font-medium tracking-widest uppercase opacity-80" data-i18n="music">SUASANA SEKOLAH</span>
 
-    <audio id="bgm" loop>
+    <audio id="bgm" loop="">
 
       <source src="./vibes school.mp3" type="audio/mpeg">
 
@@ -1344,8 +1353,7 @@
 
     <section class="py-40 px-6 max-w-7xl mx-auto" id="members">
 
-      <div class="flex flex-col md:flex-row justify-between items-end mb-16 gs-up">
-
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16 gs-up">
         <div>
 
           <h2 class="font-display text-4xl md:text-5xl font-bold mb-4" data-i18n="title_members">Keluarga HARMATRA</h2>
@@ -1507,11 +1515,11 @@
       <span id="typingSignatureText" class="text-[var(--text-main)]"></span><span id="typingSignatureCursor"
         class="animate-pulse inline-block w-[2px] h-[1em] bg-[var(--text-main)] ml-1 align-middle"></span>
     </div>
-    </div>
+
   </main>
 
   <!-- FULL GALLERY VIEWER OVERLAY -->
-  <div id="fullGalleryViewer" data-lenis-prevent
+  <div id="fullGalleryViewer" data-lenis-prevent=""
     class="fixed inset-0 z-[90] bg-[#050505] hidden flex flex-col opacity-0 transition-opacity duration-500 overflow-y-auto overflow-x-hidden">
     <div class="sticky top-0 z-[95] bg-[#050505]/90 backdrop-blur-md border-b border-white/5 pt-6 pb-4 px-6">
       <div class="flex justify-between items-center mb-4 max-w-[1600px] mx-auto w-full">
@@ -1555,49 +1563,42 @@
     </div>
   </div>
 
-  <div id="fullPrevMembersViewer" data-lenis-prevent
-    class="fixed inset-0 z-[90] bg-[#050505] hidden flex flex-col opacity-0 transition-opacity duration-500 overflow-y-auto overflow-x-hidden">
-    <div class="sticky top-0 z-[95] bg-[#050505]/90 backdrop-blur-md border-b border-white/5 pt-6 pb-4 px-6">
+  <div id="fullPrevMembersViewer" data-lenis-prevent=""
+    class="fixed inset-0 z-[90] bg-[var(--glass-bg)] backdrop-blur-xl hidden flex flex-col opacity-0 transition-opacity duration-500 overflow-y-auto overflow-x-hidden text-[var(--text-main)]">
+    <div
+      class="sticky top-0 z-[95] bg-[var(--bg-color)]/90 backdrop-blur-md border-b border-[var(--text-main)]/5 pt-6 pb-4 px-6">
       <div class="flex justify-between items-center mb-4 max-w-[1600px] mx-auto w-full">
         <div class="flex items-center gap-4">
-          <h2 class="font-display text-2xl md:text-3xl font-bold text-[var(--text-main)]" data-i18n="nav_prev">Anggota Sebelumnya</h2>
+          <h2 class="font-display text-2xl md:text-3xl font-bold text-[var(--text-main)]" data-i18n="nav_prev">Anggota
+            Sebelumnya</h2>
         </div>
         <div class="flex items-center gap-4">
-          <div class="relative hidden md:block">
-            <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/40"></i>
-            <input type="text" id="prevMemberSearch" oninput="handlePrevMemberSearch()"
-              class="pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-white focus:outline-none focus:border-purple-500/50 transition-all w-64"
-              placeholder="Search name..." data-i18n-placeholder="search_prev">
-          </div>
+
           <button onclick="closeFullPrevMembers()"
-            class="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-red-500/80 flex items-center justify-center transition-all hover:scale-110">
+            class="w-10 h-10 rounded-full bg-[var(--text-main)]/10 text-[var(--text-main)] hover:bg-red-500/80 flex items-center justify-center transition-all hover:scale-110">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
       </div>
 
-      <!-- Mobile Search -->
-      <div class="relative md:hidden mb-4 max-w-[1600px] mx-auto w-full">
-        <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/40"></i>
-        <input type="text" id="prevMemberSearchMobile" oninput="handlePrevMemberSearchMobile()"
-          class="pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-white w-full focus:outline-none focus:border-purple-500/50"
-          placeholder="Search name..." data-i18n-placeholder="search_prev">
-      </div>
+
 
       <!-- Filters Row -->
       <div class="flex overflow-x-auto gap-2 pb-2 no-scrollbar max-w-[1600px] mx-auto w-full">
-         <select id="prevMemberFilter" onchange="handlePrevMemberSearch()" class="px-4 py-1.5 rounded-full bg-white/10 text-white/70 hover:bg-white/20 hover:text-white text-sm font-medium appearance-none focus:outline-none focus:border-purple-500/50 transition-all" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right .7em top 50%; background-size: .65em auto; padding-right: 2rem;">
-            <option value="all" class="bg-gray-900" data-i18n="filter_all">All Roles</option>
-         </select>
+        <select id="prevMemberFilter" onchange="handlePrevMemberSearch()"
+          class="px-4 py-1.5 rounded-full bg-[var(--text-main)]/10 text-[var(--text-main)] opacity-70 hover:bg-[var(--text-main)]/20 hover:text-[var(--text-main)] text-sm font-medium appearance-none focus:outline-none focus:border-purple-500/50 transition-all"
+          style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right .7em top 50%; background-size: .65em auto; padding-right: 2rem;">
+          <option value="all" class="bg-gray-900" data-i18n="filter_all">All Roles</option>
+        </select>
       </div>
     </div>
 
     <div class="px-6 py-8 max-w-[1600px] mx-auto w-full flex-grow">
       <div id="prevMembersMasonry" class="masonry-grid w-full"></div>
-      
+
       <div id="prevMembersEmptyState" class="hidden text-center py-20">
-        <i class="fa-solid fa-users-slash text-4xl text-white/20 mb-4 block"></i>
-        <p class="text-white/50 text-sm tracking-widest uppercase">No members found</p>
+        <i class="fa-solid fa-users-slash text-4xl text-[var(--text-main)]/20 mb-4 block"></i>
+        <p class="text-[var(--text-main)] opacity-50 text-sm tracking-widest uppercase">No members found</p>
       </div>
     </div>
   </div>
@@ -1646,30 +1647,38 @@
   </div>
 
   <!-- PREVIOUS MEMBER PROFILE MODAL -->
-  <div id="prevMemberProfileModal" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300" onclick="closePrevMemberProfileModalBg(event)">
-    <div class="relative bg-[#11111a] border border-white/10 shadow-2xl rounded-3xl w-11/12 max-w-lg p-8 transform scale-95 transition-transform duration-300 pointer-events-auto" id="prevMemberProfileContent">
-      <button onclick="closePrevMemberProfileModal()" class="absolute top-4 right-4 text-white/50 hover:text-white transition-colors bg-white/5 hover:bg-white/10 rounded-full w-8 h-8 flex items-center justify-center">
+  <div id="prevMemberProfileModal"
+    class="fixed inset-0 z-[100] bg-black/60 backdrop-blur-md hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300 text-[var(--text-main)]"
+    onclick="closePrevMemberProfileModalBg(event)">
+    <div
+      class="relative bg-[var(--glass-bg)] shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-[var(--text-main)]/10 shadow-2xl rounded-3xl w-11/12 max-w-lg p-8 transform scale-95 transition-transform duration-300 pointer-events-auto"
+      id="prevMemberProfileContent">
+      <button onclick="closePrevMemberProfileModal()"
+        class="absolute top-4 right-4 text-[var(--text-main)] opacity-50 hover:text-[var(--text-main)] transition-colors bg-[var(--text-main)]/5 hover:bg-[var(--text-main)]/10 rounded-full w-8 h-8 flex items-center justify-center">
         <i class="fa-solid fa-times"></i>
       </button>
-      
+
       <div class="flex flex-col items-center mt-4">
-        <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-white/10 mb-6 relative">
+        <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-[var(--text-main)]/10 mb-6 relative">
           <img id="pmModalPhoto" src="" alt="Photo" class="w-full h-full object-cover">
         </div>
-        <h3 id="pmModalNickname" class="font-display text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-1"></h3>
+        <h3 id="pmModalNickname"
+          class="font-display text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-1">
+        </h3>
         <p id="pmModalFullName" class="text-sm opacity-60 mb-4 uppercase tracking-widest"></p>
-        
-        <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+
+        <div
+          class="inline-flex items-center px-4 py-1.5 rounded-full bg-[var(--text-main)]/5 border border-[var(--text-main)]/10 mb-6">
           <i class="fa-solid fa-star text-yellow-500 mr-2 text-sm"></i>
           <span id="pmModalRole" class="text-sm font-medium"></span>
         </div>
-        
+
         <p id="pmModalBio" class="text-center opacity-80 leading-relaxed italic"></p>
       </div>
     </div>
   </div>
 
-  <div id="chatWidget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3" data-lenis-prevent>
+  <div id="chatWidget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3" data-lenis-prevent="">
     <!-- Chat Window -->
     <div id="chatWindow" class="chat-window-premium hidden">
       <!-- Chat Header -->
@@ -1747,7 +1756,7 @@
             <textarea id="chatInput" placeholder="Tanya Matra AI..." rows="1" maxlength="1000"
               style="padding-right: 12px;"></textarea>
           </div>
-          <button id="sendChatBtn" disabled class="chat-send-btn flex-shrink-0" title="Kirim Pesan"
+          <button id="sendChatBtn" disabled="" class="chat-send-btn flex-shrink-0" title="Kirim Pesan"
             style="position: static; width: 44px; height: 44px; margin-bottom: 2px;">
             <i class="fa-solid fa-arrow-up"></i>
           </button>
@@ -3166,13 +3175,33 @@
           });
         }
 
+
+        let memberSearchQuery = '';
+        function handleMemberSearch() {
+          const el = document.getElementById('memberSearchInput');
+          if (el) {
+            memberSearchQuery = el.value.toLowerCase();
+            renderMembers();
+          }
+        }
+
         function renderMembers() {
 
           const container = document.getElementById('membersContainer');
 
           container.innerHTML = '';
 
-          dbData.members.forEach((m, i) => {
+          const filteredMembers = dbData.members.filter(m => {
+            if (!memberSearchQuery) return true;
+            return (m.name || '').toLowerCase().includes(memberSearchQuery) || (m.full_name || '').toLowerCase().includes(memberSearchQuery);
+          });
+
+          if (filteredMembers.length === 0) {
+            container.innerHTML = '<div class="col-span-full text-center py-10 text-[var(--text-main)] opacity-50"><i class="fa-solid fa-users-slash text-4xl mb-3 block"></i><p class="tracking-widest uppercase text-sm">Tidak ada anggota ditemukan</p></div>';
+            return;
+          }
+
+          filteredMembers.forEach((m, i) => {
 
             let name = m.name;
             let role = m.role;
@@ -3250,34 +3279,34 @@
         }
 
         let filteredPrevMembers = [];
-        
+
         function renderPreviousMembersGallery() {
           const prevMembers = dbData.previous_members || [];
           filteredPrevMembers = [...prevMembers];
-          
+
           populatePrevMemberFilters(prevMembers);
           drawPrevMembersMasonry();
         }
-        
+
         function populatePrevMemberFilters(members) {
           const select = document.getElementById('prevMemberFilter');
           if (!select) return;
-          
+
           const roles = new Set();
           members.forEach(m => {
             if (m.role) roles.add(m.role);
           });
-          
+
           let optionsHtml = `<option value="all" class="bg-gray-900" data-i18n="filter_all">All Roles</option>`;
           roles.forEach(r => {
-             optionsHtml += `<option value="${escapeHTML(r)}" class="bg-gray-900">${escapeHTML(r)}</option>`;
+            optionsHtml += `<option value="${escapeHTML(r)}" class="bg-gray-900">${escapeHTML(r)}</option>`;
           });
           select.innerHTML = optionsHtml;
         }
 
         window.openFullPrevMembers = function () {
           const viewer = document.getElementById('fullPrevMembersViewer');
-          
+
           const searchInp = document.getElementById('prevMemberSearch');
           const searchInpMob = document.getElementById('prevMemberSearchMobile');
           if (searchInp) searchInp.value = '';
@@ -3302,64 +3331,64 @@
           }, 500);
         };
 
-        window.handlePrevMemberSearch = function() {
+        window.handlePrevMemberSearch = function () {
           let searchVal = '';
           const searchInp = document.getElementById('prevMemberSearch');
           if (searchInp) searchVal = searchInp.value.toLowerCase();
-          
+
           const searchInpMob = document.getElementById('prevMemberSearchMobile');
           if (searchInpMob) searchInpMob.value = searchVal; // sync
 
           const filterVal = document.getElementById('prevMemberFilter').value;
-          
+
           const prevMembers = dbData.previous_members || [];
-          
+
           filteredPrevMembers = prevMembers.filter(m => {
             const nameMatch = (m.name || '').toLowerCase().includes(searchVal) || (m.full_name || '').toLowerCase().includes(searchVal);
             const roleMatch = filterVal === 'all' || m.role === filterVal;
             return nameMatch && roleMatch;
           });
-          
+
           drawPrevMembersMasonry();
         };
 
-        window.handlePrevMemberSearchMobile = function() {
+        window.handlePrevMemberSearchMobile = function () {
           let searchVal = '';
           const searchInpMob = document.getElementById('prevMemberSearchMobile');
           if (searchInpMob) searchVal = searchInpMob.value.toLowerCase();
-          
+
           const searchInp = document.getElementById('prevMemberSearch');
           if (searchInp) searchInp.value = searchVal; // sync
 
           const filterVal = document.getElementById('prevMemberFilter').value;
-          
+
           const prevMembers = dbData.previous_members || [];
-          
+
           filteredPrevMembers = prevMembers.filter(m => {
             const nameMatch = (m.name || '').toLowerCase().includes(searchVal) || (m.full_name || '').toLowerCase().includes(searchVal);
             const roleMatch = filterVal === 'all' || m.role === filterVal;
             return nameMatch && roleMatch;
           });
-          
+
           drawPrevMembersMasonry();
         };
-        
+
         function drawPrevMembersMasonry() {
           const container = document.getElementById('prevMembersMasonry');
           const emptyState = document.getElementById('prevMembersEmptyState');
           if (!container) return;
-          
+
           container.innerHTML = '';
-          
+
           if (filteredPrevMembers.length === 0) {
             emptyState.classList.remove('hidden');
           } else {
             emptyState.classList.add('hidden');
-            
+
             filteredPrevMembers.forEach((m, idx) => {
               let name = m.name;
               let role = m.role || '';
-              
+
               if (currentLang === 'ar') {
                 name = m.name_ar || m.name;
                 const dict = translations['ar'] || {};
@@ -3382,16 +3411,16 @@
                 else if (roleLower.includes('guru')) role = dict.role_guru || 'Teacher';
                 else role = dict.role_siswa || 'Student';
               }
-              
+
               const photoUrl = m.photo ? convertDriveLink(m.photo) : null;
-              
+
               let photoHtml = '';
               if (photoUrl) {
                 photoHtml = `<img src="${escapeHTML(photoUrl)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'avatar-placeholder\\'><i class=\\'fa-solid fa-user\\'></i></div>'" class="w-full h-auto block object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500">`;
               } else {
                 photoHtml = `<div class="avatar-placeholder"><i class="fa-solid fa-user"></i></div>`;
               }
-              
+
               const html = `
                 <div class="masonry-item">
                   <div class="masonry-card group" onclick="openPrevMemberProfileModal('${m.id}')">
@@ -3407,16 +3436,16 @@
             });
           }
         }
-        
-        window.openPrevMemberProfileModal = function(id) {
+
+        window.openPrevMemberProfileModal = function (id) {
           const prevMembers = dbData.previous_members || [];
           const m = prevMembers.find(x => x.id === id);
           if (!m) return;
-          
+
           let name = m.name;
           let role = m.role || '';
           let bio = m.bio_en || '';
-          
+
           if (currentLang === 'id') {
             bio = m.bio_id || '';
           } else if (currentLang === 'ar') {
@@ -3434,21 +3463,21 @@
             else if (roleLower.includes('ketua')) role = dict.role_ketua || 'Class President';
             else role = dict.role_siswa || 'Student';
           }
-          
+
           document.getElementById('pmModalNickname').innerText = name;
           document.getElementById('pmModalFullName').innerText = m.full_name || '';
           document.getElementById('pmModalRole').innerText = role;
           document.getElementById('pmModalBio').innerText = bio || '';
-          
+
           const imgEl = document.getElementById('pmModalPhoto');
           if (m.photo) {
-             imgEl.src = convertDriveLink(m.photo);
-             imgEl.style.display = 'block';
-             imgEl.onerror = () => { imgEl.src = 'https://via.placeholder.com/300x400?text=No+Photo'; };
+            imgEl.src = convertDriveLink(m.photo);
+            imgEl.style.display = 'block';
+            imgEl.onerror = () => { imgEl.src = 'https://via.placeholder.com/300x400?text=No+Photo'; };
           } else {
-             imgEl.src = 'https://via.placeholder.com/300x400?text=No+Photo';
+            imgEl.src = 'https://via.placeholder.com/300x400?text=No+Photo';
           }
-          
+
           const modal = document.getElementById('prevMemberProfileModal');
           const content = document.getElementById('prevMemberProfileContent');
           modal.classList.remove('hidden');
@@ -3459,24 +3488,24 @@
           content.classList.add('scale-100');
           document.body.style.overflow = 'hidden';
         };
-        
-        window.closePrevMemberProfileModal = function() {
+
+        window.closePrevMemberProfileModal = function () {
           const modal = document.getElementById('prevMemberProfileModal');
           const content = document.getElementById('prevMemberProfileContent');
           if (!modal) return;
-          
+
           modal.classList.add('opacity-0');
           content.classList.remove('scale-100');
           content.classList.add('scale-95');
-          
+
           setTimeout(() => {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
             document.body.style.overflow = '';
           }, 300);
         };
-        
-        window.closePrevMemberProfileModalBg = function(e) {
+
+        window.closePrevMemberProfileModalBg = function (e) {
           if (e.target === e.currentTarget) {
             closePrevMemberProfileModal();
           }
@@ -4466,7 +4495,7 @@
           </div>
           <iframe id="cinemaIframe"
             style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;background:#000;z-index:10;"
-            allow="autoplay;encrypted-media;fullscreen;picture-in-picture" allowfullscreen></iframe>
+            allow="autoplay;encrypted-media;fullscreen;picture-in-picture" allowfullscreen=""></iframe>
         </div>
 
         <!-- Cinema info bar -->
@@ -5385,6 +5414,8 @@
       countSpan.innerText = currentCount;
     }
   </script>
+
+
 </body>
 
 </html>

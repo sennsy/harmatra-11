@@ -9,7 +9,7 @@
 
   // Constants
   const STORAGE_KEY = 'harmatra_premium_chat_history';
-  const GEMINI_API_KEY = "YOUR_API_KEY_HERE";
+  const GEMINI_API_KEY = "AQ.Ab8RN6LANymz2ylNVYUfaYD9L8KZ_YMW3eDio9XbZvth1e7Kcg";
   const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
   // State Management
@@ -551,12 +551,19 @@
     } catch (error) {
       console.error("AI Response Error:", error);
       const lang = getLang();
-      // 9. SAFE ERROR HANDLING (multilingual)
-      rawReply = lang === 'ar'
-        ? 'عذراً، Matra AI يواجه مشكلة في الاتصال. حاول مرة أخرى بعد قليل.'
-        : (lang === 'en'
-        ? 'Sorry, Matra AI is experiencing a connection issue. Error: ' + error.message
-        : 'Maaf, Matra AI sedang mengalami gangguan koneksi. Error: ' + error.message);
+      if (error.message.includes('429_TOO_MANY_REQUESTS')) {
+        rawReply = lang === 'ar'
+          ? 'عذراً، أواجه ضغطاً كبيراً في الوقت الحالي. يرجى الانتظار بضع ثوانٍ ثم المحاولة مرة أخرى.'
+          : (lang === 'en'
+          ? 'I am receiving too many requests right now. Please wait a few seconds and try again.'
+          : 'Maaf, saya sedang melayani terlalu banyak permintaan saat ini. Mohon tunggu beberapa detik dan coba lagi ya.');
+      } else {
+        rawReply = lang === 'ar'
+          ? 'عذراً، Matra AI يواجه مشكلة في الاتصال. حاول مرة أخرى بعد قليل.'
+          : (lang === 'en'
+          ? 'Sorry, Matra AI is experiencing a connection issue. Error: ' + error.message
+          : 'Maaf, Matra AI sedang mengalami gangguan koneksi. Error: ' + error.message);
+      }
     }
 
     if (!bubbleElement) return;
@@ -844,11 +851,15 @@
 
     // 5. GET HARMATRA DATA (if available)
     let harmatraContext = "";
-    if (window.harmatraData && window.harmatraData.dbData) {
-      const db = window.harmatraData.dbData;
+    const rawDb = (window.harmatraData && window.harmatraData.dbData) || window.HARMATRA_DATA || {};
+    
+    // We check if data exists in rawDb, otherwise fallback to global variable if available
+    const db = Object.keys(rawDb).length > 0 ? rawDb : (window.localData || {});
+    
+    if (db) {
       harmatraContext = `
 [HARMATRA DATABASE]
-Website Metadata: ${JSON.stringify(db.website_metadata || {})}
+Website Metadata: ${JSON.stringify(db.website_metadata || { developer: "Immszkyy", name: "HARMATRA" })}
 Website History: ${JSON.stringify(db.website_history || {})}
 Today's Spotlight: ${JSON.stringify(db.spotlight || {})}
 Total Active Members: ${db.members ? db.members.length : 0}
@@ -925,6 +936,9 @@ ${harmatraContext}`;
 
     if (!response.ok) {
       const errText = await response.text();
+      if (response.status === 429) {
+        throw new Error(`429_TOO_MANY_REQUESTS`);
+      }
       throw new Error(`Status ${response.status} - ${errText}`);
     }
 
