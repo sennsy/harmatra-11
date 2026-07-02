@@ -9,8 +9,7 @@
 
   // Constants
   const STORAGE_KEY = 'harmatra_premium_chat_history';
-  const GEMINI_API_KEY = "AQ.Ab8RN6LANymz2ylNVYUfaYD9L8KZ_YMW3eDio9XbZvth1e7Kcg";
-  const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+  const AI_API_URL = "https://text.pollinations.ai/";
 
   // State Management
   const state = {
@@ -845,10 +844,6 @@
   // ==========================================
   
   async function fetchAIResponse(userPrompt) {
-    if (!GEMINI_API_KEY || GEMINI_API_KEY === "YOUR_GEMINI_API_KEY_HERE" || GEMINI_API_KEY === "PASTE_YOUR_KEY_HERE") {
-       throw new Error("API Key is missing.");
-    }
-
     // 5. GET HARMATRA DATA (if available)
     let harmatraContext = "";
     const rawDb = (window.harmatraData && window.harmatraData.dbData) || window.HARMATRA_DATA || {};
@@ -872,7 +867,7 @@ Quotes: ${JSON.stringify(db.quotes || [])}
 `;
     }
 
-    // 6. SYSTEM PROMPT FOR GEMINI — Language Aware
+    // 6. SYSTEM PROMPT FOR AI — Language Aware
     const lang = getLang();
     const langInstruction = lang === 'ar'
       ? 'CRITICAL LANGUAGE RULE: You MUST respond ONLY in Arabic (العربية). Every single word must be in Arabic. Never mix with Indonesian or English. Even if the question is in another language, respond in Arabic.'
@@ -907,28 +902,22 @@ Never say “I am demo” or robotic answers. Stay as MATRA AI.
 
 ${harmatraContext}`;
 
-    const contents = [];
+    const messages = [];
+    messages.push({ role: 'system', content: systemInstruction });
     
     // 8. CHAT HISTORY — exclude any loading placeholder messages
     const loadingPhrases = ['Matra AI sedang berpikir...', 'Matra AI is thinking...', 'Matra AI يفكر...'];
     for (let msg of state.messages) {
       if (msg.role === 'user') {
-         contents.push({ role: 'user', parts: [{ text: msg.content }] });
+         messages.push({ role: 'user', content: msg.content });
       } else if (msg.role === 'assistant' && !loadingPhrases.includes(msg.content)) {
-         contents.push({ role: 'model', parts: [{ text: msg.content }] });
+         messages.push({ role: 'assistant', content: msg.content });
       }
     }
     
-    // Inject system prompt into the first message
-    if (contents.length > 0) {
-       contents[0].parts[0].text = `System: ${systemInstruction}\n\n${contents[0].parts[0].text}`;
-    } else {
-       contents.push({ role: 'user', parts: [{ text: `System: ${systemInstruction}\n\n${userPrompt}` }]});
-    }
+    const requestBody = { messages, model: "openai" };
 
-    const requestBody = { contents };
-
-    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+    const response = await fetch(AI_API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestBody)
@@ -942,13 +931,13 @@ ${harmatraContext}`;
       throw new Error(`Status ${response.status} - ${errText}`);
     }
 
-    const data = await response.json();
+    const data = await response.text();
     
-    if (data.candidates && data.candidates.length > 0) {
-      return data.candidates[0].content.parts[0].text;
+    if (data) {
+      return data;
     }
     
-    throw new Error("Empty response from Gemini.");
+    throw new Error("Empty response from AI.");
   }
 
   function playSynthSound(freq, duration, type = 'sine', volume = 0.04) {
