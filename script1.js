@@ -56,7 +56,7 @@
 
               bio_ar: "يحب لعب كرة السلة في المساء.",
 
-              photo: "https://drive.google.com/file/d/1P3VlSXsJ65g7D7OaYZMrF1QoAC5XbHxk/view?usp=drive_link"
+              photo: "https://drive.google.com/file/d/1FxpUzZ738VPcd7rZJm5djQTOzLHa3XTR/view?usp=drive_link"
 
             },
 
