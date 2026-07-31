@@ -183,6 +183,20 @@
       "role": "Siswa",
       "bio": "Pindah / Logout",
       "photo": ""
+    },
+    {
+      "id": "rozan",
+      "name": "ROZAN",
+      "name_ar": "روزان",
+      "full_name": "Rozan seff",
+      "role": "Siswa",
+      "role_ar": "طالب",
+      "role_en": "Student",
+      "bio": "Pindah / Logout",
+      "bio_id": "Nabung bukan buat kita kaya tapi modal kita kaya",
+      "bio_en": "Saving doesnt make us rich, but its the capital to get rich.",
+      "bio_ar": "الادخار لا يجعلنا أغنياء، لكنه رأس المال لنصبح أغنياء.",
+      "photo": "https://drive.google.com/file/d/15YKHFmN4Qp6Ub_0GemlfNzctUxcgeaUI/view?usp=drive_link"
     }
   ],
   "members": [
@@ -203,14 +217,14 @@
       "name": "aden",
       "name_ar": "أدين",
       "full_name": "Faqihuddin rahman",
-      "role": "Wakil ketua angkatan",
-      "role_ar": "نائب رئيس الدفعة",
+      "role": "Wakil ketua angkatan & Ketua kelas",
+      "role_ar": "نائب رئيس الدفعة ورئيس الصف",
       "bio_id": "Tidak ada keberhasilan tanpa rasa sakit",
       "bio_en": "There is no success without pain.",
       "bio_ar": "لا يوجد نجاح بدون ألم.",
       "photo": "https://drive.google.com/file/d/1ZGyjtWir9-XEsbJRRy17cyN_4OZ_Jm_3/view?usp=drive_link",
       "id": "aden",
-      "role_en": "Vice President of Generation"
+      "role_en": "Vice President of Generation & Class Leader"
     },
     {
       "name": "immszkyy",
@@ -218,9 +232,9 @@
       "full_name": "Ibrahim Zaky maulana",
       "role": "Sekretaris angkatan",
       "role_ar": "سكرتير الدفعة",
-      "bio_id": "sebagus-bagusnya pelangi bakal kalah sama matahari karena yang indah sesaat akan kalah dengan yang ada setiap saat",
-      "bio_en": "The most beautiful rainbow will lose to the sun, because temporary beauty loses to constant presence.",
-      "bio_ar": "أجمل قوس قزح سيخسر أمام الشمس، لأن الجمال المؤقت يخسر أمام الحضور الدائم.",
+      "bio_id": "jika hujan turun tanpa diminta maka aku akan menahan luka sambil tertawa",
+      "bio_en": "If rain falls unasked, I will hold the pain while laughing.",
+      "bio_ar": "إذا نزل المطر دون طلب، فسوف أتحمل الألم وأنا أضحك.",
       "photo": "https://drive.google.com/file/d/1FxpUzZ738VPcd7rZJm5djQTOzLHa3XTR/view?usp=drive_link",
       "id": "immszkyy",
       "role_en": "Secretary of Generation"
@@ -239,107 +253,120 @@
       "role_en": "Treasurer of Generation"
     },
     {
-      "name": "darmoyy",
-      "name_ar": "دارمووي",
-      "full_name": "Dharma adhiyaksa",
-      "role": "Bendahara angkatan",
-      "role_ar": "أمين الصندوق",
-      "bio_id": "sedang sibuk",
-      "bio_en": "Currently busy.",
-      "bio_ar": "مشغول حالياً.",
-      "photo": "https://drive.google.com/file/d/1Bc48Unx0kQKUA8fjx3O0OMpRH9y22XNg/view?usp=drive_link",
-      "id": "darmoyy",
-      "role_en": "Treasurer of Generation"
-    },
-    {
-      "name": "hananda",
-      "name_ar": "حناندا",
-      "full_name": "Muhammad hanan",
-      "role": "Ketua kelas",
-      "role_ar": "رئيس الصف",
-      "bio_id": "innamal a'malu binniat",
-      "bio_en": "Indeed, deeds depend on intentions.",
-      "bio_ar": "إنما الأعمال بالنيات.",
-      "photo": "https://drive.google.com/file/d/1PVjRHSHzOxRu6zsb_QLTYGi5zDB5gz8q/view?usp=drive_link",
-      "id": "hananda",
-      "role_en": "Class Leader"
-    },
-    {
-      "name": "edarr",
-      "name_ar": "إيدار",
-      "full_name": "Haidar muafa",
-      "role": "Wakil ketua kelas",
-      "role_ar": "نائب رئيس الصف",
-      "bio_id": "Weh mass baimm",
-      "bio_en": "Hey bro Baim.",
-      "bio_ar": "أهلاً يا أخي بايم.",
-      "photo": "https://drive.google.com/file/d/1fAKsD4YD4tCuszBZU-A2CgCcjJC1VfTU/view?usp=drive_link",
-      "id": "edarr",
-      "role_en": "Vice Class Leader"
-    },
-    {
-      "name": "garr",
-      "name_ar": "غار",
-      "full_name": "Muhammad tegar Bimantoro",
+      "name": "jeker",
+      "name_ar": "جيكر",
+      "full_name": "Zakaria akhsya",
       "role": "Sekretaris kelas",
       "role_ar": "سكرتير الصف",
-      "bio_id": "mendaki dengan penuh luka",
-      "bio_en": "Climbing with full of wounds.",
-      "bio_ar": "أتسلق مليئاً بالجروح.",
-      "photo": "https://drive.google.com/file/d/1KjNfAPKhvDgDbEx8bFYhsVJt4945NJmp/view?usp=drive_link",
-      "id": "garr",
+      "bio_id": "Hentikan pembuktian dini, nikmati lah proses tanpa brisik, nikmatilah keheningan.... Hanya KAMU, TUHAN dan PROSES MU",
+      "bio_en": "Stop proving yourself early, enjoy the process without noise, enjoy the silence.... Just YOU, GOD, and YOUR PROCESS.",
+      "bio_ar": "توقف عن إثبات نفسك مبكراً، استمتع بالعملية بدون ضجيج، استمتع بالصمت.... فقط أنت، والله، وعمليتك.",
+      "photo": "https://drive.google.com/file/d/1DxqMfD7mujAkKna9cPpaaDnqA0mVhvez/view?usp=drive_link",
+      "id": "jeker",
       "role_en": "Class Secretary"
-    },
-    {
-      "name": "yahya",
-      "name_ar": "يحيى",
-      "full_name": "Yahya bin abu Muhammad",
-      "role": "Kebersihan 1",
-      "role_ar": "قسم النظافة 1",
-      "bio_id": "kelas harus bersih",
-      "bio_en": "The class must be clean.",
-      "bio_ar": "يجب أن يكون الصف نظيفاً.",
-      "photo": "https://drive.google.com/file/d/12SvP2y355hwcvRxRMSP-D_mw8Rdp9zau/view?usp=drive_link",
-      "id": "yahya",
-      "role_en": "Cleaning Section 1"
-    },
-    {
-      "name": "mimin",
-      "name_ar": "ميمين",
-      "full_name": "Abdul mumin",
-      "role": "Kebersihan 2",
-      "role_ar": "قسم النظافة 2",
-      "bio_id": "Ra butuh sing sempurna, cukup sempurnakan yang ada",
-      "bio_en": "Dont need someone perfect, just perfect what you have.",
-      "bio_ar": "لا أحتاج إلى شخص مثالي، فقط أكمل ما لديك.",
-      "photo": "https://drive.google.com/file/d/1uJfjlmIAc2RdyjFdVljvzxiCJmdccJ-h/view?usp=drive_link",
-      "id": "mimin",
-      "role_en": "Cleaning Section 2"
-    },
-    {
-      "name": "kadop dop",
-      "name_ar": "كادوب دوب",
-      "full_name": "Khadafi Agista musyaffa",
-      "role": "Keamanan",
-      "role_ar": "قسم الأمن",
-      "bio_id": "iyupp",
-      "bio_en": "Yup.",
-      "bio_ar": "نعم.",
-      "photo": "https://drive.google.com/file/d/1XYkeqQdUVTuicB3WT-t9XwUN1xwg0V8i/view?usp=drive_link",
-      "id": "kadop-dop",
-      "role_en": "Security Section"
     },
     {
       "name": "abill",
       "name_ar": "أبيل",
       "full_name": "Abdillah Muchsin al-ansyori",
-      "role": "Siswa",
-      "role_ar": "طالب",
+      "role": "Bendahara kelas",
+      "role_ar": "أمين صندوق الصف",
       "bio_id": "gak suka Ade²an sukanya abang-abangan",
       "bio_en": "I dont like playing younger brother, I prefer playing older brother.",
       "bio_ar": "لا أحب أن ألعب دور الأخ الأصغر، أفضل دور الأخ الأكبر.",
       "photo": "https://drive.google.com/file/d/1yn5xlFgrtZklRrE9JUJ6tF7EjS51-Juw/view?usp=drive_link",
       "id": "abill",
+      "role_en": "Class Treasurer"
+    },
+    {
+      "name": "darmoyy",
+      "name_ar": "دارمووي",
+      "full_name": "Dharma adhiyaksa",
+      "role": "Siswa",
+      "role_ar": "طالب",
+      "bio_id": "sedang sibuk",
+      "bio_en": "Currently busy.",
+      "bio_ar": "مشغول حالياً.",
+      "photo": "https://drive.google.com/file/d/1Bc48Unx0kQKUA8fjx3O0OMpRH9y22XNg/view?usp=drive_link",
+      "id": "darmoyy",
+      "role_en": "Student"
+    },
+    {
+      "name": "hananda",
+      "name_ar": "حناندا",
+      "full_name": "Muhammad hanan",
+      "role": "Siswa",
+      "role_ar": "طالب",
+      "bio_id": "innamal a'malu binniat",
+      "bio_en": "Indeed, deeds depend on intentions.",
+      "bio_ar": "إنما الأعمال بالنيات.",
+      "photo": "https://drive.google.com/file/d/1PVjRHSHzOxRu6zsb_QLTYGi5zDB5gz8q/view?usp=drive_link",
+      "id": "hananda",
+      "role_en": "Student"
+    },
+    {
+      "name": "edarr",
+      "name_ar": "إيدار",
+      "full_name": "Haidar muafa",
+      "role": "Siswa",
+      "role_ar": "طالب",
+      "bio_id": "Weh mass baimm",
+      "bio_en": "Hey bro Baim.",
+      "bio_ar": "أهلاً يا أخي بايم.",
+      "photo": "https://drive.google.com/file/d/1fAKsD4YD4tCuszBZU-A2CgCcjJC1VfTU/view?usp=drive_link",
+      "id": "edarr",
+      "role_en": "Student"
+    },
+    {
+      "name": "garr",
+      "name_ar": "غار",
+      "full_name": "Muhammad tegar Bimantoro",
+      "role": "Siswa",
+      "role_ar": "طالب",
+      "bio_id": "mendaki dengan penuh luka",
+      "bio_en": "Climbing with full of wounds.",
+      "bio_ar": "أتسلق مليئاً بالجروح.",
+      "photo": "https://drive.google.com/file/d/1KjNfAPKhvDgDbEx8bFYhsVJt4945NJmp/view?usp=drive_link",
+      "id": "garr",
+      "role_en": "Student"
+    },
+    {
+      "name": "yahya",
+      "name_ar": "يحيى",
+      "full_name": "Yahya bin abu Muhammad",
+      "role": "Siswa",
+      "role_ar": "طالب",
+      "bio_id": "kelas harus bersih",
+      "bio_en": "The class must be clean.",
+      "bio_ar": "يجب أن يكون الصف نظيفاً.",
+      "photo": "https://drive.google.com/file/d/12SvP2y355hwcvRxRMSP-D_mw8Rdp9zau/view?usp=drive_link",
+      "id": "yahya",
+      "role_en": "Student"
+    },
+    {
+      "name": "mimin",
+      "name_ar": "ميمين",
+      "full_name": "Abdul mumin",
+      "role": "Siswa",
+      "role_ar": "طالب",
+      "bio_id": "Ra butuh sing sempurna, cukup sempurnakan yang ada",
+      "bio_en": "Dont need someone perfect, just perfect what you have.",
+      "bio_ar": "لا أحتاج إلى شخص مثالي، فقط أكمل ما لديك.",
+      "photo": "https://drive.google.com/file/d/1uJfjlmIAc2RdyjFdVljvzxiCJmdccJ-h/view?usp=drive_link",
+      "id": "mimin",
+      "role_en": "Student"
+    },
+    {
+      "name": "kadop dop",
+      "name_ar": "كادوب دوب",
+      "full_name": "Khadafi Agista musyaffa",
+      "role": "Siswa",
+      "role_ar": "طالب",
+      "bio_id": "iyupp",
+      "bio_en": "Yup.",
+      "bio_ar": "نعم.",
+      "photo": "https://drive.google.com/file/d/1XYkeqQdUVTuicB3WT-t9XwUN1xwg0V8i/view?usp=drive_link",
+      "id": "kadop-dop",
       "role_en": "Student"
     },
     {
@@ -525,19 +552,6 @@
       "role_en": "Student"
     },
     {
-      "name": "rozan",
-      "name_ar": "روزان",
-      "full_name": "Rozan seff",
-      "role": "Siswa",
-      "role_ar": "طالب",
-      "bio_id": "Nabung bukan buat kita kaya tapi modal kita kaya",
-      "bio_en": "Saving doesnt make us rich, but its the capital to get rich.",
-      "bio_ar": "الادخار لا يجعلنا أغنياء، لكنه رأس المال لنصبح أغنياء.",
-      "photo": "https://drive.google.com/file/d/15YKHFmN4Qp6Ub_0GemlfNzctUxcgeaUI/view?usp=drive_link",
-      "id": "rozan",
-      "role_en": "Student"
-    },
-    {
       "name": "sim",
       "name_ar": "سيم",
       "full_name": "Simbian Mahesa naszhwi",
@@ -548,19 +562,6 @@
       "bio_ar": "سيم يحب فراشات الليل.",
       "photo": "https://drive.google.com/file/d/1PbXh1k0xwGEH1BCoKWTGYzFigKYrOXuy/view?usp=drive_link",
       "id": "sim",
-      "role_en": "Student"
-    },
-    {
-      "name": "jeker",
-      "name_ar": "جيكر",
-      "full_name": "Zakaria akhsya",
-      "role": "Siswa",
-      "role_ar": "طالب",
-      "bio_id": "Hentikan pembuktian dini, nikmati lah proses tanpa brisik, nikmatilah keheningan.... Hanya KAMU, TUHAN dan PROSES MU",
-      "bio_en": "Stop proving yourself early, enjoy the process without noise, enjoy the silence.... Just YOU, GOD, and YOUR PROCESS.",
-      "bio_ar": "توقف عن إثبات نفسك مبكراً، استمتع بالعملية بدون ضجيج، استمتع بالصمت.... فقط أنت، والله، وعمليتك.",
-      "photo": "https://drive.google.com/file/d/1DxqMfD7mujAkKna9cPpaaDnqA0mVhvez/view?usp=drive_link",
-      "id": "jeker",
       "role_en": "Student"
     }
   ],
@@ -598,712 +599,2536 @@
   ],
   "gallery": [
     {
-      "url": "https://drive.google.com/file/d/1NDbauh0G9LjRVB09f_8oV-3nCRc-Z2Vf/view?usp=drive_link",
-      "title_id": "Belajar Mandiri",
-      "title_en": "Independent Study",
-      "title_ar": "الدراسة الذاتية",
+      "url": "https://drive.google.com/file/d/1-bp6K5-FOi1cPmRQstFMokYOWdqzW67p/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #1",
+      "title_en": "Organization Inauguration #1",
+      "title_ar": "تنصيب المنظمة #1",
       "caption": {
-        "id": "Momen Belajar Bersama di Kelas",
-        "en": "Learning Together in Class",
-        "ar": "لحظات الدراسة معاً في الصف"
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (1)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (1)",
+        "ar": "توثيق لحظات تنصيب المنظمة (1)"
       },
-      "category": "Graduation"
+      "category": "Pelantikan Organisasi"
     },
     {
-      "url": "https://drive.google.com/file/d/119RjNKDfu8IttSIRhsACrUnxBkTZ2A-_/view?usp=sharing",
-      "title_id": "Kerja Kelompok",
-      "title_en": "Group Project",
-      "title_ar": "العمل الجماعي",
+      "url": "https://drive.google.com/file/d/12EvezDDBd1V8-8UWgj3U7wC3JEHla2Yh/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #2",
+      "title_en": "Organization Inauguration #2",
+      "title_ar": "تنصيب المنظمة #2",
       "caption": {
-        "id": "Diskusi dan Kerja Kelompok",
-        "en": "Group Discussion and Teamwork",
-        "ar": "مناقشة جماعية وعمل جماعي"
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (2)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (2)",
+        "ar": "توثيق لحظات تنصيب المنظمة (2)"
       },
-      "category": "Graduation"
+      "category": "Pelantikan Organisasi"
     },
     {
-      "url": "https://drive.google.com/file/d/1QaOUgifO4TL0qoM0-kzxTt0oFgI06UXo/view?usp=drive_link",
-      "title_id": "Masa Orientasi (MPLS)",
-      "title_en": "School Orientation (MPLS)",
-      "title_ar": "توجيه الطلاب (MPLS)",
+      "url": "https://drive.google.com/file/d/12s4sVbm5bDV2GnU9k1OzSIKsnSl3m0j0/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #3",
+      "title_en": "Organization Inauguration #3",
+      "title_ar": "تنصيب المنظمة #3",
       "caption": {
-        "id": "Keceriaan Selama Masa MPLS",
-        "en": "Fun Times During MPLS Orientation",
-        "ar": "أوقات ممتعة خلال فترة توجيه الطلاب"
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (3)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (3)",
+        "ar": "توثيق لحظات تنصيب المنظمة (3)"
       },
-      "category": "Graduation"
+      "category": "Pelantikan Organisasi"
     },
     {
-      "url": "https://drive.google.com/file/d/1MxM15ADNXNDKrjG7gbJcaC_3BqFyKdtT/view?usp=sharing",
-      "title_id": "Kebersamaan Harmatra",
-      "title_en": "Harmatra Togetherness",
-      "title_ar": "تضامن هارماترى",
+      "url": "https://drive.google.com/file/d/13KK98ncEcfhLwv8J_SenDaHCk46ANHxp/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #4",
+      "title_en": "Organization Inauguration #4",
+      "title_ar": "تنصيب المنظمة #4",
       "caption": {
-        "id": "Kebersamaan Anggota Harmatra",
-        "en": "Togetherness of Harmatra Family",
-        "ar": "تضامن عائلة هارماترى"
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (4)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (4)",
+        "ar": "توثيق لحظات تنصيب المنظمة (4)"
       },
-      "category": "Graduation"
+      "category": "Pelantikan Organisasi"
     },
     {
-      "url": "https://drive.google.com/file/d/1HgHHEQ6Ty1nIQJPlTCA4nvYsKt7atlU-/view?usp=sharing",
-      "title_id": "Senyum Persahabatan",
-      "title_en": "Smiles of Friendship",
-      "title_ar": "ابتسامات الصداقة",
+      "url": "https://drive.google.com/file/d/13tq40qClc_eNKS5zNQlBFnzbcHCwtB8B/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #5",
+      "title_en": "Organization Inauguration #5",
+      "title_ar": "تنصيب المنظمة #5",
       "caption": {
-        "id": "Senyuman dan Tawa Bersama",
-        "en": "Smiles and Shared Laughter",
-        "ar": "ابتسامات وضحكات مشتركة"
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (5)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (5)",
+        "ar": "توثيق لحظات تنصيب المنظمة (5)"
       },
-      "category": "Memories"
+      "category": "Pelantikan Organisasi"
     },
     {
-      "url": "https://drive.google.com/file/d/1xiA_Lr8q5Fv-PP--QPLrcsZvDspLS_1M/view?usp=sharing",
-      "title_id": "Momen Hangat",
-      "title_en": "Warm Moments",
-      "title_ar": "لحظات دافئة",
+      "url": "https://drive.google.com/file/d/13tw84BMg9nebqg15idMlvzRrnxy2qApB/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #6",
+      "title_en": "Organization Inauguration #6",
+      "title_ar": "تنصيب المنظمة #6",
       "caption": {
-        "id": "Momen Hangat Persahabatan",
-        "en": "Warm Moments of Friendship",
-        "ar": "لحظات الصداقة الدافئة"
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (6)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (6)",
+        "ar": "توثيق لحظات تنصيب المنظمة (6)"
       },
-      "category": "Memories"
+      "category": "Pelantikan Organisasi"
     },
     {
-      "url": "https://drive.google.com/file/d/1NRaPxxnpM64vayjoQiJ53dYdspDasOT6/view?usp=sharing",
-      "title_id": "Menggapai Impian",
-      "title_en": "Reaching Dreams",
-      "title_ar": "الوصول إلى الأحلام",
+      "url": "https://drive.google.com/file/d/14AEri6gIByMi1Zu2zoRoa9aU-N9D1Zbc/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #7",
+      "title_en": "Organization Inauguration #7",
+      "title_ar": "تنصيب المنظمة #7",
       "caption": {
-        "id": "Langkah Bersama Menggapai Impian",
-        "en": "Walking Together Towards Our Dreams",
-        "ar": "السير معاً نحو أحلامنا"
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (7)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (7)",
+        "ar": "توثيق لحظات تنصيب المنظمة (7)"
       },
-      "category": "Friends"
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/159ZaJ29Qmv5uvPtUFNQhO-4BU3eKJXLn/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #8",
+      "title_en": "Organization Inauguration #8",
+      "title_ar": "تنصيب المنظمة #8",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (8)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (8)",
+        "ar": "توثيق لحظات تنصيب المنظمة (8)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/15COpamJusLZrCxijUtxHjQGcyCoadxj4/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #9",
+      "title_en": "Organization Inauguration #9",
+      "title_ar": "تنصيب المنظمة #9",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (9)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (9)",
+        "ar": "توثيق لحظات تنصيب المنظمة (9)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/15vAj9WM9dNTjdfaVZIDKCpytOX__nXAU/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #10",
+      "title_en": "Organization Inauguration #10",
+      "title_ar": "تنصيب المنظمة #10",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (10)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (10)",
+        "ar": "توثيق لحظات تنصيب المنظمة (10)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/161Ea1i3DqRRjyJSF5cQlNSgiZypq6eEW/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #11",
+      "title_en": "Organization Inauguration #11",
+      "title_ar": "تنصيب المنظمة #11",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (11)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (11)",
+        "ar": "توثيق لحظات تنصيب المنظمة (11)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/16OJP4gi9UTC32WpvmMJCY76Qln2zkRgH/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #12",
+      "title_en": "Organization Inauguration #12",
+      "title_ar": "تنصيب المنظمة #12",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (12)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (12)",
+        "ar": "توثيق لحظات تنصيب المنظمة (12)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/16fmzPV1ehAy4eumSTTD1IQAu7FsSR2l-/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #13",
+      "title_en": "Organization Inauguration #13",
+      "title_ar": "تنصيب المنظمة #13",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (13)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (13)",
+        "ar": "توثيق لحظات تنصيب المنظمة (13)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/17OxaAH4MhzaFJfd2U-yoWHgB7qFnBM-H/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #14",
+      "title_en": "Organization Inauguration #14",
+      "title_ar": "تنصيب المنظمة #14",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (14)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (14)",
+        "ar": "توثيق لحظات تنصيب المنظمة (14)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/17bqb37ItdPLv7lg6zpzJKxlo2H0__dYR/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #15",
+      "title_en": "Organization Inauguration #15",
+      "title_ar": "تنصيب المنظمة #15",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (15)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (15)",
+        "ar": "توثيق لحظات تنصيب المنظمة (15)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/18UCUMhlqyO2b5bLhUeKDR5uXNrQaSbVT/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #16",
+      "title_en": "Organization Inauguration #16",
+      "title_ar": "تنصيب المنظمة #16",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (16)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (16)",
+        "ar": "توثيق لحظات تنصيب المنظمة (16)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/18gay7HY55JNmlkImSZAAu219KpiltNPT/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #17",
+      "title_en": "Organization Inauguration #17",
+      "title_ar": "تنصيب المنظمة #17",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (17)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (17)",
+        "ar": "توثيق لحظات تنصيب المنظمة (17)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/18ol09hlRPBHf9G113MxgfhbK3eyZR9is/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #18",
+      "title_en": "Organization Inauguration #18",
+      "title_ar": "تنصيب المنظمة #18",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (18)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (18)",
+        "ar": "توثيق لحظات تنصيب المنظمة (18)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/191ZlgqcrRnbDWlMAHr7L3M8fKSzGj006/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #19",
+      "title_en": "Organization Inauguration #19",
+      "title_ar": "تنصيب المنظمة #19",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (19)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (19)",
+        "ar": "توثيق لحظات تنصيب المنظمة (19)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/19FERLjnggdjz5bcFp5ZAl8VpIuszdTHl/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #20",
+      "title_en": "Organization Inauguration #20",
+      "title_ar": "تنصيب المنظمة #20",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (20)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (20)",
+        "ar": "توثيق لحظات تنصيب المنظمة (20)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1AJDh5DVUGSj0-Mt6ptMInxFzX5tVgvO0/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #21",
+      "title_en": "Organization Inauguration #21",
+      "title_ar": "تنصيب المنظمة #21",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (21)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (21)",
+        "ar": "توثيق لحظات تنصيب المنظمة (21)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1BRk8vgiiXnLF1ldr11SUpLdEYsIfhPGQ/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #22",
+      "title_en": "Organization Inauguration #22",
+      "title_ar": "تنصيب المنظمة #22",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (22)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (22)",
+        "ar": "توثيق لحظات تنصيب المنظمة (22)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1BYKG5k62UHulgXqNdgBz8sZou1djbTAn/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #23",
+      "title_en": "Organization Inauguration #23",
+      "title_ar": "تنصيب المنظمة #23",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (23)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (23)",
+        "ar": "توثيق لحظات تنصيب المنظمة (23)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1BfogYpm4mr8Tn6qBG35-_Hdjn_0dscIW/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #24",
+      "title_en": "Organization Inauguration #24",
+      "title_ar": "تنصيب المنظمة #24",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (24)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (24)",
+        "ar": "توثيق لحظات تنصيب المنظمة (24)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1Bxdj9ZI2Ic1hucSa2ntiZqSoYuif4UHv/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #25",
+      "title_en": "Organization Inauguration #25",
+      "title_ar": "تنصيب المنظمة #25",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (25)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (25)",
+        "ar": "توثيق لحظات تنصيب المنظمة (25)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1CNn0bCAD46RifhOybWy26iHl3-TxnEaN/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #26",
+      "title_en": "Organization Inauguration #26",
+      "title_ar": "تنصيب المنظمة #26",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (26)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (26)",
+        "ar": "توثيق لحظات تنصيب المنظمة (26)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1DDtzo2W10Oz9quxVGUrgkdHivLmJrYuQ/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #27",
+      "title_en": "Organization Inauguration #27",
+      "title_ar": "تنصيب المنظمة #27",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (27)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (27)",
+        "ar": "توثيق لحظات تنصيب المنظمة (27)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1DKvq3_KHnlki5uX3yn7vdBabTSavZHPV/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #28",
+      "title_en": "Organization Inauguration #28",
+      "title_ar": "تنصيب المنظمة #28",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (28)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (28)",
+        "ar": "توثيق لحظات تنصيب المنظمة (28)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1DRoFxAi2E3oNYWer3Dv3Zy4DDP6bUr72/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #29",
+      "title_en": "Organization Inauguration #29",
+      "title_ar": "تنصيب المنظمة #29",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (29)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (29)",
+        "ar": "توثيق لحظات تنصيب المنظمة (29)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1DYezheGcF2kx0uhLyi5SUpAvsOoIqACb/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #30",
+      "title_en": "Organization Inauguration #30",
+      "title_ar": "تنصيب المنظمة #30",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (30)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (30)",
+        "ar": "توثيق لحظات تنصيب المنظمة (30)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1Dv14HPr15vLfwDlsoh39y1DQEgFMACNA/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #31",
+      "title_en": "Organization Inauguration #31",
+      "title_ar": "تنصيب المنظمة #31",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (31)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (31)",
+        "ar": "توثيق لحظات تنصيب المنظمة (31)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1EnEZQCzgZpRFpsaBS9hScOYF3N2ghUq4/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #32",
+      "title_en": "Organization Inauguration #32",
+      "title_ar": "تنصيب المنظمة #32",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (32)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (32)",
+        "ar": "توثيق لحظات تنصيب المنظمة (32)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1Ewop48Y_6V85k_0c2L6wxYwtL0xmoe08/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #33",
+      "title_en": "Organization Inauguration #33",
+      "title_ar": "تنصيب المنظمة #33",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (33)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (33)",
+        "ar": "توثيق لحظات تنصيب المنظمة (33)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1FXxkv5Pv26_ptzElt1Z6c6pGD00MBcc5/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #34",
+      "title_en": "Organization Inauguration #34",
+      "title_ar": "تنصيب المنظمة #34",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (34)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (34)",
+        "ar": "توثيق لحظات تنصيب المنظمة (34)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1FaecvHKtGVn91MISiSdvfQKrqf6qXZYP/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #35",
+      "title_en": "Organization Inauguration #35",
+      "title_ar": "تنصيب المنظمة #35",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (35)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (35)",
+        "ar": "توثيق لحظات تنصيب المنظمة (35)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1Fw5oMoQC36Bzg6FN8G1c2a9K2mjGgoPM/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #36",
+      "title_en": "Organization Inauguration #36",
+      "title_ar": "تنصيب المنظمة #36",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (36)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (36)",
+        "ar": "توثيق لحظات تنصيب المنظمة (36)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1GHq8ihggzIxdXoTtFzStHeaG0n-nBsdC/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #37",
+      "title_en": "Organization Inauguration #37",
+      "title_ar": "تنصيب المنظمة #37",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (37)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (37)",
+        "ar": "توثيق لحظات تنصيب المنظمة (37)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1GNlqgfpXZZBadwhVTvFS9DP9xnFj8wM5/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #38",
+      "title_en": "Organization Inauguration #38",
+      "title_ar": "تنصيب المنظمة #38",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (38)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (38)",
+        "ar": "توثيق لحظات تنصيب المنظمة (38)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1H3vd1GaK5DxlwsVnR613TjW3Clv6RdeQ/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #39",
+      "title_en": "Organization Inauguration #39",
+      "title_ar": "تنصيب المنظمة #39",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (39)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (39)",
+        "ar": "توثيق لحظات تنصيب المنظمة (39)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1HzX4CWMFgM4wohEcsk8IzwwhgXcBMJfD/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #40",
+      "title_en": "Organization Inauguration #40",
+      "title_ar": "تنصيب المنظمة #40",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (40)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (40)",
+        "ar": "توثيق لحظات تنصيب المنظمة (40)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1I1Xr_3TyQaoEJ0yblQB2LKulBWg4tqp9/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #41",
+      "title_en": "Organization Inauguration #41",
+      "title_ar": "تنصيب المنظمة #41",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (41)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (41)",
+        "ar": "توثيق لحظات تنصيب المنظمة (41)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1IJ4cU67HriHWnL74u0LMse6hyTNyx8sn/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #42",
+      "title_en": "Organization Inauguration #42",
+      "title_ar": "تنصيب المنظمة #42",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (42)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (42)",
+        "ar": "توثيق لحظات تنصيب المنظمة (42)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1INMC4pjkoYSkhpTu934aq2aXvQ9TeUOU/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #43",
+      "title_en": "Organization Inauguration #43",
+      "title_ar": "تنصيب المنظمة #43",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (43)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (43)",
+        "ar": "توثيق لحظات تنصيب المنظمة (43)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1LAsLYkZUWyQnj-LqnxuPO1_pavJNqREQ/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #44",
+      "title_en": "Organization Inauguration #44",
+      "title_ar": "تنصيب المنظمة #44",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (44)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (44)",
+        "ar": "توثيق لحظات تنصيب المنظمة (44)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1LPePO_qiFHdIWG6QD4pn4INUZ-dOLk1p/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #45",
+      "title_en": "Organization Inauguration #45",
+      "title_ar": "تنصيب المنظمة #45",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (45)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (45)",
+        "ar": "توثيق لحظات تنصيب المنظمة (45)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1LphcgljNgB582riU-zBLx63nhe_Gdgeu/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #46",
+      "title_en": "Organization Inauguration #46",
+      "title_ar": "تنصيب المنظمة #46",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (46)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (46)",
+        "ar": "توثيق لحظات تنصيب المنظمة (46)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1MUTKBca67_TQ95bpOO9WcFynuLJAIlfe/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #47",
+      "title_en": "Organization Inauguration #47",
+      "title_ar": "تنصيب المنظمة #47",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (47)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (47)",
+        "ar": "توثيق لحظات تنصيب المنظمة (47)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1MqZk8Vb7qix4h5vQkrOyGaDqujC-3LeH/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #48",
+      "title_en": "Organization Inauguration #48",
+      "title_ar": "تنصيب المنظمة #48",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (48)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (48)",
+        "ar": "توثيق لحظات تنصيب المنظمة (48)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1NEEz5AxwUT91zw8Npvdtef067WR1F9Lc/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #49",
+      "title_en": "Organization Inauguration #49",
+      "title_ar": "تنصيب المنظمة #49",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (49)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (49)",
+        "ar": "توثيق لحظات تنصيب المنظمة (49)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1OkVf0R1Er9bcAA7-4WjWp3g77nYIymk_/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #50",
+      "title_en": "Organization Inauguration #50",
+      "title_ar": "تنصيب المنظمة #50",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (50)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (50)",
+        "ar": "توثيق لحظات تنصيب المنظمة (50)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1PX1Socad7SGcGWBsOoupbaHfGhT6Y0el/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #51",
+      "title_en": "Organization Inauguration #51",
+      "title_ar": "تنصيب المنظمة #51",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (51)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (51)",
+        "ar": "توثيق لحظات تنصيب المنظمة (51)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1Q9k6UdFoNq_QLByxyDCC5CDOhbUX81-f/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #52",
+      "title_en": "Organization Inauguration #52",
+      "title_ar": "تنصيب المنظمة #52",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (52)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (52)",
+        "ar": "توثيق لحظات تنصيب المنظمة (52)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1QBZ8fj3go1QuI-6PP7hoGss8G8mgDn8M/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #53",
+      "title_en": "Organization Inauguration #53",
+      "title_ar": "تنصيب المنظمة #53",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (53)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (53)",
+        "ar": "توثيق لحظات تنصيب المنظمة (53)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1QtFcoNY80sELzvxsbHYl02pb3O1bx59a/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #54",
+      "title_en": "Organization Inauguration #54",
+      "title_ar": "تنصيب المنظمة #54",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (54)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (54)",
+        "ar": "توثيق لحظات تنصيب المنظمة (54)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1S2TWvFX1Fdtg4W0Gx-tT2sWjgvHOODQ1/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #55",
+      "title_en": "Organization Inauguration #55",
+      "title_ar": "تنصيب المنظمة #55",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (55)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (55)",
+        "ar": "توثيق لحظات تنصيب المنظمة (55)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1T5aRWAkD3eMck_LOh3jZPugZY_07HAvm/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #56",
+      "title_en": "Organization Inauguration #56",
+      "title_ar": "تنصيب المنظمة #56",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (56)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (56)",
+        "ar": "توثيق لحظات تنصيب المنظمة (56)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1TLSvJB9mmIdaCfSQ356aL9g8xpk2T7jL/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #57",
+      "title_en": "Organization Inauguration #57",
+      "title_ar": "تنصيب المنظمة #57",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (57)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (57)",
+        "ar": "توثيق لحظات تنصيب المنظمة (57)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1U5hCVGfq2dS46VBq5hBu78iRRWb_rYYn/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #58",
+      "title_en": "Organization Inauguration #58",
+      "title_ar": "تنصيب المنظمة #58",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (58)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (58)",
+        "ar": "توثيق لحظات تنصيب المنظمة (58)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1WMT-Kq0Oj1GE4edwk0IjZV28u3YBYpM3/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #59",
+      "title_en": "Organization Inauguration #59",
+      "title_ar": "تنصيب المنظمة #59",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (59)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (59)",
+        "ar": "توثيق لحظات تنصيب المنظمة (59)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1XBVSlEfcjcWXHlZbnOLuxGZa5TAHzwL5/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #60",
+      "title_en": "Organization Inauguration #60",
+      "title_ar": "تنصيب المنظمة #60",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (60)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (60)",
+        "ar": "توثيق لحظات تنصيب المنظمة (60)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1XHS5i__1PKVC9sD-lCeiXp53xEC7xiMd/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #61",
+      "title_en": "Organization Inauguration #61",
+      "title_ar": "تنصيب المنظمة #61",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (61)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (61)",
+        "ar": "توثيق لحظات تنصيب المنظمة (61)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1XIz36lINqu7_d1j_THwoDLXMkvHKQs52/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #62",
+      "title_en": "Organization Inauguration #62",
+      "title_ar": "تنصيب المنظمة #62",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (62)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (62)",
+        "ar": "توثيق لحظات تنصيب المنظمة (62)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1XVsclrePiM1OFYjnkgKFkMJXLKqccA3-/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #63",
+      "title_en": "Organization Inauguration #63",
+      "title_ar": "تنصيب المنظمة #63",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (63)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (63)",
+        "ar": "توثيق لحظات تنصيب المنظمة (63)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1ZMRWN64HV0Xpl5BjAT_YnSLq4ypsn21o/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #64",
+      "title_en": "Organization Inauguration #64",
+      "title_ar": "تنصيب المنظمة #64",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (64)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (64)",
+        "ar": "توثيق لحظات تنصيب المنظمة (64)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1ZyaMwW_pj120FnRoZ0Y-EjRa9bkYxPIO/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #65",
+      "title_en": "Organization Inauguration #65",
+      "title_ar": "تنصيب المنظمة #65",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (65)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (65)",
+        "ar": "توثيق لحظات تنصيب المنظمة (65)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1a5FPNQZeuVBp9e_xiNBnVxbmPAVolADX/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #66",
+      "title_en": "Organization Inauguration #66",
+      "title_ar": "تنصيب المنظمة #66",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (66)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (66)",
+        "ar": "توثيق لحظات تنصيب المنظمة (66)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1aDqFfuwTEQVeHYZUx3bXUCNWUdk-nMXj/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #67",
+      "title_en": "Organization Inauguration #67",
+      "title_ar": "تنصيب المنظمة #67",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (67)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (67)",
+        "ar": "توثيق لحظات تنصيب المنظمة (67)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1aEUlG42pTh7dgx4Uz3H8ktTK4Bl7Ov9W/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #68",
+      "title_en": "Organization Inauguration #68",
+      "title_ar": "تنصيب المنظمة #68",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (68)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (68)",
+        "ar": "توثيق لحظات تنصيب المنظمة (68)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1a_iHM0QxMgjwSyK3vWlja6Yyoboi_ewS/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #69",
+      "title_en": "Organization Inauguration #69",
+      "title_ar": "تنصيب المنظمة #69",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (69)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (69)",
+        "ar": "توثيق لحظات تنصيب المنظمة (69)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1ag8KT0rn3hCeu-iJjthBUL4TiXPknqSE/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #70",
+      "title_en": "Organization Inauguration #70",
+      "title_ar": "تنصيب المنظمة #70",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (70)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (70)",
+        "ar": "توثيق لحظات تنصيب المنظمة (70)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1bToL7gQOzreXjtYE1C4dm-yKCxnlxQcf/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #71",
+      "title_en": "Organization Inauguration #71",
+      "title_ar": "تنصيب المنظمة #71",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (71)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (71)",
+        "ar": "توثيق لحظات تنصيب المنظمة (71)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1bcriZcL1rKqNeWZpctSAH2ups1p6FcEy/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #72",
+      "title_en": "Organization Inauguration #72",
+      "title_ar": "تنصيب المنظمة #72",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (72)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (72)",
+        "ar": "توثيق لحظات تنصيب المنظمة (72)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1bdIoSajYssE18yxPwQZYPZcsvreIWzkG/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #73",
+      "title_en": "Organization Inauguration #73",
+      "title_ar": "تنصيب المنظمة #73",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (73)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (73)",
+        "ar": "توثيق لحظات تنصيب المنظمة (73)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1cB0Q9oLHYxtJq5ekPxO2zBnUzPCaTvsm/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #74",
+      "title_en": "Organization Inauguration #74",
+      "title_ar": "تنصيب المنظمة #74",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (74)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (74)",
+        "ar": "توثيق لحظات تنصيب المنظمة (74)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1ebV7FDLUx948xR9rjLSAmZTI3lzcbiCf/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #75",
+      "title_en": "Organization Inauguration #75",
+      "title_ar": "تنصيب المنظمة #75",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (75)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (75)",
+        "ar": "توثيق لحظات تنصيب المنظمة (75)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1ex0Rf9PMIkN2oDXMif0T6Ii4sMwYl_Uo/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #76",
+      "title_en": "Organization Inauguration #76",
+      "title_ar": "تنصيب المنظمة #76",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (76)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (76)",
+        "ar": "توثيق لحظات تنصيب المنظمة (76)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1f1NTyis2eyPBP27dVYHGECVfFtpWqNqD/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #77",
+      "title_en": "Organization Inauguration #77",
+      "title_ar": "تنصيب المنظمة #77",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (77)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (77)",
+        "ar": "توثيق لحظات تنصيب المنظمة (77)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1fPPIqW5t_I62bcAMTY9_Hvq7_ZIjXHxB/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #78",
+      "title_en": "Organization Inauguration #78",
+      "title_ar": "تنصيب المنظمة #78",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (78)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (78)",
+        "ar": "توثيق لحظات تنصيب المنظمة (78)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1gAbUoByJOu0b3x8qQXp1EsIhwPubUkhX/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #79",
+      "title_en": "Organization Inauguration #79",
+      "title_ar": "تنصيب المنظمة #79",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (79)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (79)",
+        "ar": "توثيق لحظات تنصيب المنظمة (79)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1gpUcUqFNJ7EkhzfeEPkNY4JdrYErtBar/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #80",
+      "title_en": "Organization Inauguration #80",
+      "title_ar": "تنصيب المنظمة #80",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (80)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (80)",
+        "ar": "توثيق لحظات تنصيب المنظمة (80)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1hFZAtr1OqM8AZ9gCOpthp3OdZXOH25Vq/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #81",
+      "title_en": "Organization Inauguration #81",
+      "title_ar": "تنصيب المنظمة #81",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (81)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (81)",
+        "ar": "توثيق لحظات تنصيب المنظمة (81)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1hO_1f4uB3-BrmuV3z57BD-CgucjhTgbh/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #82",
+      "title_en": "Organization Inauguration #82",
+      "title_ar": "تنصيب المنظمة #82",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (82)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (82)",
+        "ar": "توثيق لحظات تنصيب المنظمة (82)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1ilfRIfi5NHWqjTV7jA-b3F8erpf98fck/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #83",
+      "title_en": "Organization Inauguration #83",
+      "title_ar": "تنصيب المنظمة #83",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (83)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (83)",
+        "ar": "توثيق لحظات تنصيب المنظمة (83)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1irFMQKeKA5RDVlR6AKHe2sA98C_3Qo_Z/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #84",
+      "title_en": "Organization Inauguration #84",
+      "title_ar": "تنصيب المنظمة #84",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (84)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (84)",
+        "ar": "توثيق لحظات تنصيب المنظمة (84)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1jSbRNB72QvJq9WdHWsvtDiCctB_xBHB1/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #85",
+      "title_en": "Organization Inauguration #85",
+      "title_ar": "تنصيب المنظمة #85",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (85)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (85)",
+        "ar": "توثيق لحظات تنصيب المنظمة (85)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1jhKAGufkTADOO-81-rsGaKnGl8j6ujM-/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #86",
+      "title_en": "Organization Inauguration #86",
+      "title_ar": "تنصيب المنظمة #86",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (86)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (86)",
+        "ar": "توثيق لحظات تنصيب المنظمة (86)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1l6Om2KRJertfx696hrlf3hrWzO7xmd_x/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #87",
+      "title_en": "Organization Inauguration #87",
+      "title_ar": "تنصيب المنظمة #87",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (87)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (87)",
+        "ar": "توثيق لحظات تنصيب المنظمة (87)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1leHNPLWv6iRyxm4ksbhlqEVnZDlcTdu0/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #88",
+      "title_en": "Organization Inauguration #88",
+      "title_ar": "تنصيب المنظمة #88",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (88)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (88)",
+        "ar": "توثيق لحظات تنصيب المنظمة (88)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1m4J4fKgXVxuIKUACNvHJgyGaMsH_rb8c/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #89",
+      "title_en": "Organization Inauguration #89",
+      "title_ar": "تنصيب المنظمة #89",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (89)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (89)",
+        "ar": "توثيق لحظات تنصيب المنظمة (89)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1poplQco8oSWjpMqYbNhUJ1l95qPk7i2x/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #90",
+      "title_en": "Organization Inauguration #90",
+      "title_ar": "تنصيب المنظمة #90",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (90)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (90)",
+        "ar": "توثيق لحظات تنصيب المنظمة (90)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1px9TC9VxbVtv7F51SJccwAnnDwCwu1ik/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #91",
+      "title_en": "Organization Inauguration #91",
+      "title_ar": "تنصيب المنظمة #91",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (91)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (91)",
+        "ar": "توثيق لحظات تنصيب المنظمة (91)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1q08vNrznoyXA8iSnTbxB19_6-CIWQTbG/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #92",
+      "title_en": "Organization Inauguration #92",
+      "title_ar": "تنصيب المنظمة #92",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (92)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (92)",
+        "ar": "توثيق لحظات تنصيب المنظمة (92)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1qd0ECfFFbLZUYeweHGnqjAAKBo6Jj1ZS/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #93",
+      "title_en": "Organization Inauguration #93",
+      "title_ar": "تنصيب المنظمة #93",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (93)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (93)",
+        "ar": "توثيق لحظات تنصيب المنظمة (93)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1r1fZMGR666D8iBduUyJ9N-3eo0-Bc_LC/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #94",
+      "title_en": "Organization Inauguration #94",
+      "title_ar": "تنصيب المنظمة #94",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (94)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (94)",
+        "ar": "توثيق لحظات تنصيب المنظمة (94)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1rSFDGwcvDxl79-aiescLGJsQJEHNtKTK/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #95",
+      "title_en": "Organization Inauguration #95",
+      "title_ar": "تنصيب المنظمة #95",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (95)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (95)",
+        "ar": "توثيق لحظات تنصيب المنظمة (95)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1rgc46JwKvsGNoplWGDJqfzW6h3ayc5sj/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #96",
+      "title_en": "Organization Inauguration #96",
+      "title_ar": "تنصيب المنظمة #96",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (96)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (96)",
+        "ar": "توثيق لحظات تنصيب المنظمة (96)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1rhwgmhrhdB_aIuyJw27Vmwb0ks07Ek5a/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #97",
+      "title_en": "Organization Inauguration #97",
+      "title_ar": "تنصيب المنظمة #97",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (97)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (97)",
+        "ar": "توثيق لحظات تنصيب المنظمة (97)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1ruIPZWYpbzbBFTG2RBOl1pDQFAjYhAC9/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #98",
+      "title_en": "Organization Inauguration #98",
+      "title_ar": "تنصيب المنظمة #98",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (98)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (98)",
+        "ar": "توثيق لحظات تنصيب المنظمة (98)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1st3dAC-Uh-Hs1klEDEVrG3gJSUIUYzXf/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #99",
+      "title_en": "Organization Inauguration #99",
+      "title_ar": "تنصيب المنظمة #99",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (99)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (99)",
+        "ar": "توثيق لحظات تنصيب المنظمة (99)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1u0ZZ4ZG_a-WI6NQpWX4P9-s7YMBmMuwH/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #100",
+      "title_en": "Organization Inauguration #100",
+      "title_ar": "تنصيب المنظمة #100",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (100)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (100)",
+        "ar": "توثيق لحظات تنصيب المنظمة (100)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1u5ApvRGy5jZGgaWShB4b6CZN8JmHO0Xb/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #101",
+      "title_en": "Organization Inauguration #101",
+      "title_ar": "تنصيب المنظمة #101",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (101)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (101)",
+        "ar": "توثيق لحظات تنصيب المنظمة (101)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1uvp6WmzeVpqZCw2zgI7JDkZL8NmRZknZ/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #102",
+      "title_en": "Organization Inauguration #102",
+      "title_ar": "تنصيب المنظمة #102",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (102)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (102)",
+        "ar": "توثيق لحظات تنصيب المنظمة (102)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1vf2XR5PViVRGjobR_YCwT1kcY4C4SNzH/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #103",
+      "title_en": "Organization Inauguration #103",
+      "title_ar": "تنصيب المنظمة #103",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (103)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (103)",
+        "ar": "توثيق لحظات تنصيب المنظمة (103)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1wctXeEplyeTn3GxP8i6iVYQEtyUf58Rl/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #104",
+      "title_en": "Organization Inauguration #104",
+      "title_ar": "تنصيب المنظمة #104",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (104)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (104)",
+        "ar": "توثيق لحظات تنصيب المنظمة (104)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1wmMmdvaQ-Q5KRVqeJQ3NxfnrBGZC_UjG/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #105",
+      "title_en": "Organization Inauguration #105",
+      "title_ar": "تنصيب المنظمة #105",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (105)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (105)",
+        "ar": "توثيق لحظات تنصيب المنظمة (105)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1xg8qaMKlXBdf3dGTFuK2kQmHdfBERHnS/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #106",
+      "title_en": "Organization Inauguration #106",
+      "title_ar": "تنصيب المنظمة #106",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (106)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (106)",
+        "ar": "توثيق لحظات تنصيب المنظمة (106)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1xh-1RSmnkxgz5bwdiBdmtFWONWdoCnqp/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #107",
+      "title_en": "Organization Inauguration #107",
+      "title_ar": "تنصيب المنظمة #107",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (107)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (107)",
+        "ar": "توثيق لحظات تنصيب المنظمة (107)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1xzk1le2_FJzvJ5SynPRyD7OyiBJsWF72/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #108",
+      "title_en": "Organization Inauguration #108",
+      "title_ar": "تنصيب المنظمة #108",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (108)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (108)",
+        "ar": "توثيق لحظات تنصيب المنظمة (108)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1yZzucRZDlVnD2bBE3OG97wVKFOlAymgr/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #109",
+      "title_en": "Organization Inauguration #109",
+      "title_ar": "تنصيب المنظمة #109",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (109)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (109)",
+        "ar": "توثيق لحظات تنصيب المنظمة (109)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1znAw6yI39O87NlxToiNc6VncX9lMWwCU/view?usp=sharing",
+      "title_id": "Pelantikan Organisasi #110",
+      "title_en": "Organization Inauguration #110",
+      "title_ar": "تنصيب المنظمة #110",
+      "caption": {
+        "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (110)",
+        "en": "HARMATRA Student Organization Inauguration Documentation (110)",
+        "ar": "توثيق لحظات تنصيب المنظمة (110)"
+      },
+      "category": "Pelantikan Organisasi"
+    },
+    {
+      "url": "https://drive.google.com/file/d/14hKMd9MGcJPGBms6NvZBGmJGQch4vvWV/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #1",
+      "title_en": "Soccer & Sports #1",
+      "title_ar": "كرة القدم والرياضة #1",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (1)",
+        "en": "HARMATRA Soccer Match Action and Excitement (1)",
+        "ar": "حماس مباراة كرة القدم (1)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/16kjfcyDEfd8IJ8rX5-9eN2U7BP_ZMZeX/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #2",
+      "title_en": "Soccer & Sports #2",
+      "title_ar": "كرة القدم والرياضة #2",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (2)",
+        "en": "HARMATRA Soccer Match Action and Excitement (2)",
+        "ar": "حماس مباراة كرة القدم (2)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/17B0U0FeYbE5poN5el0Dm1BO4uxBT4Adx/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #3",
+      "title_en": "Soccer & Sports #3",
+      "title_ar": "كرة القدم والرياضة #3",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (3)",
+        "en": "HARMATRA Soccer Match Action and Excitement (3)",
+        "ar": "حماس مباراة كرة القدم (3)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/17ai4IYe2buFdXgPN_y6MK1Wv4IIoWW_8/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #4",
+      "title_en": "Soccer & Sports #4",
+      "title_ar": "كرة القدم والرياضة #4",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (4)",
+        "en": "HARMATRA Soccer Match Action and Excitement (4)",
+        "ar": "حماس مباراة كرة القدم (4)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/17fy3nlhUtXzQ9EJbDV34YPXBwe9mv0Ug/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #5",
+      "title_en": "Soccer & Sports #5",
+      "title_ar": "كرة القدم والرياضة #5",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (5)",
+        "en": "HARMATRA Soccer Match Action and Excitement (5)",
+        "ar": "حماس مباراة كرة القدم (5)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/18s2eok9IoFDlFCotgdYr3QSvRnsnwO4e/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #6",
+      "title_en": "Soccer & Sports #6",
+      "title_ar": "كرة القدم والرياضة #6",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (6)",
+        "en": "HARMATRA Soccer Match Action and Excitement (6)",
+        "ar": "حماس مباراة كرة القدم (6)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1D_vz81jYx1SEe68Tp9hM5zh4Dm4eZgEv/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #7",
+      "title_en": "Soccer & Sports #7",
+      "title_ar": "كرة القدم والرياضة #7",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (7)",
+        "en": "HARMATRA Soccer Match Action and Excitement (7)",
+        "ar": "حماس مباراة كرة القدم (7)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1DsG_9wqjhvDfcj373XK5n4Pp6enw7gYX/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #8",
+      "title_en": "Soccer & Sports #8",
+      "title_ar": "كرة القدم والرياضة #8",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (8)",
+        "en": "HARMATRA Soccer Match Action and Excitement (8)",
+        "ar": "حماس مباراة كرة القدم (8)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1Ej5bmJvQX0XJ2EA1kGUE31ld6lLHHBWR/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #9",
+      "title_en": "Soccer & Sports #9",
+      "title_ar": "كرة القدم والرياضة #9",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (9)",
+        "en": "HARMATRA Soccer Match Action and Excitement (9)",
+        "ar": "حماس مباراة كرة القدم (9)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1GKmzh6drrbh-ZpjcVttjdZJWkfyhYoJx/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #10",
+      "title_en": "Soccer & Sports #10",
+      "title_ar": "كرة القدم والرياضة #10",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (10)",
+        "en": "HARMATRA Soccer Match Action and Excitement (10)",
+        "ar": "حماس مباراة كرة القدم (10)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1Gx_dDo3I_1yQcVE_2YFFjZDfhvRh5ivD/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #11",
+      "title_en": "Soccer & Sports #11",
+      "title_ar": "كرة القدم والرياضة #11",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (11)",
+        "en": "HARMATRA Soccer Match Action and Excitement (11)",
+        "ar": "حماس مباراة كرة القدم (11)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1Jiu4EUM6Yjew31-Y9SKaWeHjCtM20X9O/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #12",
+      "title_en": "Soccer & Sports #12",
+      "title_ar": "كرة القدم والرياضة #12",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (12)",
+        "en": "HARMATRA Soccer Match Action and Excitement (12)",
+        "ar": "حماس مباراة كرة القدم (12)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1MmALcIXiqpxS3OcE07SoETr-nw-bETKz/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #13",
+      "title_en": "Soccer & Sports #13",
+      "title_ar": "كرة القدم والرياضة #13",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (13)",
+        "en": "HARMATRA Soccer Match Action and Excitement (13)",
+        "ar": "حماس مباراة كرة القدم (13)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1P_fSFBT9uIcC-0ZXXMDS8p7TsezS22V5/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #14",
+      "title_en": "Soccer & Sports #14",
+      "title_ar": "كرة القدم والرياضة #14",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (14)",
+        "en": "HARMATRA Soccer Match Action and Excitement (14)",
+        "ar": "حماس مباراة كرة القدم (14)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1QTKwv6rzPOWP0KG7ykPtwhMgfH0XjSAl/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #15",
+      "title_en": "Soccer & Sports #15",
+      "title_ar": "كرة القدم والرياضة #15",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (15)",
+        "en": "HARMATRA Soccer Match Action and Excitement (15)",
+        "ar": "حماس مباراة كرة القدم (15)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1Qh0Kw30y2ycXCXpmRazxCA1s2t_e3ZvU/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #16",
+      "title_en": "Soccer & Sports #16",
+      "title_ar": "كرة القدم والرياضة #16",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (16)",
+        "en": "HARMATRA Soccer Match Action and Excitement (16)",
+        "ar": "حماس مباراة كرة القدم (16)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1Qvfj5aoQZkPP75gNil3y9cBVOUy60liQ/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #17",
+      "title_en": "Soccer & Sports #17",
+      "title_ar": "كرة القدم والرياضة #17",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (17)",
+        "en": "HARMATRA Soccer Match Action and Excitement (17)",
+        "ar": "حماس مباراة كرة القدم (17)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1RhUIen3J2yEWxF4HAVjPA4ZDq-mwje_Y/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #18",
+      "title_en": "Soccer & Sports #18",
+      "title_ar": "كرة القدم والرياضة #18",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (18)",
+        "en": "HARMATRA Soccer Match Action and Excitement (18)",
+        "ar": "حماس مباراة كرة القدم (18)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1RkpxM3hkWjHDgK-vLl4-b12rvbZ47U0b/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #19",
+      "title_en": "Soccer & Sports #19",
+      "title_ar": "كرة القدم والرياضة #19",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (19)",
+        "en": "HARMATRA Soccer Match Action and Excitement (19)",
+        "ar": "حماس مباراة كرة القدم (19)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1So_V5cjddZ-eygWA6Y7qvrhSB5w6nZYA/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #20",
+      "title_en": "Soccer & Sports #20",
+      "title_ar": "كرة القدم والرياضة #20",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (20)",
+        "en": "HARMATRA Soccer Match Action and Excitement (20)",
+        "ar": "حماس مباراة كرة القدم (20)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1TgMXP5ZAIGRsK5trwPg4AWjfknAcX4Xr/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #21",
+      "title_en": "Soccer & Sports #21",
+      "title_ar": "كرة القدم والرياضة #21",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (21)",
+        "en": "HARMATRA Soccer Match Action and Excitement (21)",
+        "ar": "حماس مباراة كرة القدم (21)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1Uyup9IGge8TuruxeRV_bxyjt2lEIVCKH/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #22",
+      "title_en": "Soccer & Sports #22",
+      "title_ar": "كرة القدم والرياضة #22",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (22)",
+        "en": "HARMATRA Soccer Match Action and Excitement (22)",
+        "ar": "حماس مباراة كرة القدم (22)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1XahpXb92tjSkDzbrw89xRQFoLCBJLEN-/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #23",
+      "title_en": "Soccer & Sports #23",
+      "title_ar": "كرة القدم والرياضة #23",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (23)",
+        "en": "HARMATRA Soccer Match Action and Excitement (23)",
+        "ar": "حماس مباراة كرة القدم (23)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1aX8t2gcMsCwdhfNdp955xz0Bvc-2bWl2/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #24",
+      "title_en": "Soccer & Sports #24",
+      "title_ar": "كرة القدم والرياضة #24",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (24)",
+        "en": "HARMATRA Soccer Match Action and Excitement (24)",
+        "ar": "حماس مباراة كرة القدم (24)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1dkMgHfMyuI6PMmBY0RcPL4q5hjTQXKK5/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #25",
+      "title_en": "Soccer & Sports #25",
+      "title_ar": "كرة القدم والرياضة #25",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (25)",
+        "en": "HARMATRA Soccer Match Action and Excitement (25)",
+        "ar": "حماس مباراة كرة القدم (25)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1e6lJbUPcid_s50o4pj-1FlKGhhXOlaR6/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #26",
+      "title_en": "Soccer & Sports #26",
+      "title_ar": "كرة القدم والرياضة #26",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (26)",
+        "en": "HARMATRA Soccer Match Action and Excitement (26)",
+        "ar": "حماس مباراة كرة القدم (26)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1eq7-9pZ2f_eMEhcNXuE2wn6Sua9Gqq9U/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #27",
+      "title_en": "Soccer & Sports #27",
+      "title_ar": "كرة القدم والرياضة #27",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (27)",
+        "en": "HARMATRA Soccer Match Action and Excitement (27)",
+        "ar": "حماس مباراة كرة القدم (27)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1gq3G86-J29hwbeS9XkmLw2i4OMBx5R8H/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #28",
+      "title_en": "Soccer & Sports #28",
+      "title_ar": "كرة القدم والرياضة #28",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (28)",
+        "en": "HARMATRA Soccer Match Action and Excitement (28)",
+        "ar": "حماس مباراة كرة القدم (28)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1h0TAvjytarnNhp0_iV4gHbhojf53u_Bj/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #29",
+      "title_en": "Soccer & Sports #29",
+      "title_ar": "كرة القدم والرياضة #29",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (29)",
+        "en": "HARMATRA Soccer Match Action and Excitement (29)",
+        "ar": "حماس مباراة كرة القدم (29)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1kecXdoZ3obWCVOf7ulmP4wYqflkEMyNn/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #30",
+      "title_en": "Soccer & Sports #30",
+      "title_ar": "كرة القدم والرياضة #30",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (30)",
+        "en": "HARMATRA Soccer Match Action and Excitement (30)",
+        "ar": "حماس مباراة كرة القدم (30)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1m9lGbAKmS6rH6gBgPHGTjfwzOpJVyI9e/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #31",
+      "title_en": "Soccer & Sports #31",
+      "title_ar": "كرة القدم والرياضة #31",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (31)",
+        "en": "HARMATRA Soccer Match Action and Excitement (31)",
+        "ar": "حماس مباراة كرة القدم (31)"
+      },
+      "category": "Soccer"
     },
     {
       "url": "https://drive.google.com/file/d/1pPAQCPD2E8CYvNcdJVLQLa5dJU1dDrbc/view?usp=sharing",
-      "title_id": "Kompak Selalu",
-      "title_en": "Always United",
-      "title_ar": "متحدون دائماً",
+      "title_id": "Soccer & Olahraga #32",
+      "title_en": "Soccer & Sports #32",
+      "title_ar": "كرة القدم والرياضة #32",
       "caption": {
-        "id": "Kompak dalam Setiap Kegiatan",
-        "en": "United in Every Activity",
-        "ar": "متحدون في كل نشاط"
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (32)",
+        "en": "HARMATRA Soccer Match Action and Excitement (32)",
+        "ar": "حماس مباراة كرة القدم (32)"
       },
-      "category": "Memories"
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1pyhVAvsXwOGxbns9BCC1PW-3dU_iAJPt/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #33",
+      "title_en": "Soccer & Sports #33",
+      "title_ar": "كرة القدم والرياضة #33",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (33)",
+        "en": "HARMATRA Soccer Match Action and Excitement (33)",
+        "ar": "حماس مباراة كرة القدم (33)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1tXhXp64Xz7SRE-E-NNfUqTAy9sX1wPMi/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #34",
+      "title_en": "Soccer & Sports #34",
+      "title_ar": "كرة القدم والرياضة #34",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (34)",
+        "en": "HARMATRA Soccer Match Action and Excitement (34)",
+        "ar": "حماس مباراة كرة القدم (34)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1w80DVA5cKC37zXxyIAS07nruKbwzARFs/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #35",
+      "title_en": "Soccer & Sports #35",
+      "title_ar": "كرة القدم والرياضة #35",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (35)",
+        "en": "HARMATRA Soccer Match Action and Excitement (35)",
+        "ar": "حماس مباراة كرة القدم (35)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1xiA_Lr8q5Fv-PP--QPLrcsZvDspLS_1M/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #36",
+      "title_en": "Soccer & Sports #36",
+      "title_ar": "كرة القدم والرياضة #36",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (36)",
+        "en": "HARMATRA Soccer Match Action and Excitement (36)",
+        "ar": "حماس مباراة كرة القدم (36)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1yWy4PTISRb-KIFTI7qMNT9iLAYFRdZWi/view?usp=sharing",
+      "title_id": "Soccer & Olahraga #37",
+      "title_en": "Soccer & Sports #37",
+      "title_ar": "كرة القدم والرياضة #37",
+      "caption": {
+        "id": "Aksi dan Keseruan Pertandingan Sepak Bola HARMATRA (37)",
+        "en": "HARMATRA Soccer Match Action and Excitement (37)",
+        "ar": "حماس مباراة كرة القدم (37)"
+      },
+      "category": "Soccer"
+    },
+    {
+      "url": "https://drive.google.com/file/d/119RjNKDfu8IttSIRhsACrUnxBkTZ2A-_/view?usp=sharing",
+      "title_id": "Mode Alim #1",
+      "title_en": "Devotional Mode #1",
+      "title_ar": "الوضع الإيماني #1",
+      "caption": {
+        "id": "Momen Kajian dan Kegiatan Keagamaan HARMATRA (1)",
+        "en": "HARMATRA Religious Study and Devotional Moments (1)",
+        "ar": "لحظات الأنشطة الدينية والروحانية (1)"
+      },
+      "category": "Mode Alim"
+    },
+    {
+      "url": "https://drive.google.com/file/d/14Zmk2_CBZsJHVXL5I76mv1nSJyEU-oeA/view?usp=sharing",
+      "title_id": "Mode Alim #2",
+      "title_en": "Devotional Mode #2",
+      "title_ar": "الوضع الإيماني #2",
+      "caption": {
+        "id": "Momen Kajian dan Kegiatan Keagamaan HARMATRA (2)",
+        "en": "HARMATRA Religious Study and Devotional Moments (2)",
+        "ar": "لحظات الأنشطة الدينية والروحانية (2)"
+      },
+      "category": "Mode Alim"
+    },
+    {
+      "url": "https://drive.google.com/file/d/168yDkyshZ_EN4fKxfXuCDWhFIj1vNQMe/view?usp=sharing",
+      "title_id": "Mode Alim #3",
+      "title_en": "Devotional Mode #3",
+      "title_ar": "الوضع الإيماني #3",
+      "caption": {
+        "id": "Momen Kajian dan Kegiatan Keagamaan HARMATRA (3)",
+        "en": "HARMATRA Religious Study and Devotional Moments (3)",
+        "ar": "لحظات الأنشطة الدينية والروحانية (3)"
+      },
+      "category": "Mode Alim"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1bHGQdNTfAecsGPrAnw3aj65aoPCLCh5b/view?usp=sharing",
+      "title_id": "Mode Alim #4",
+      "title_en": "Devotional Mode #4",
+      "title_ar": "الوضع الإيماني #4",
+      "caption": {
+        "id": "Momen Kajian dan Kegiatan Keagamaan HARMATRA (4)",
+        "en": "HARMATRA Religious Study and Devotional Moments (4)",
+        "ar": "لحظات الأنشطة الدينية والروحانية (4)"
+      },
+      "category": "Mode Alim"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1eMEEJs1MeqCZMZEHO3-0o634DLRZA_w7/view?usp=sharing",
+      "title_id": "Mode Alim #5",
+      "title_en": "Devotional Mode #5",
+      "title_ar": "الوضع الإيماني #5",
+      "caption": {
+        "id": "Momen Kajian dan Kegiatan Keagamaan HARMATRA (5)",
+        "en": "HARMATRA Religious Study and Devotional Moments (5)",
+        "ar": "لحظات الأنشطة الدينية والروحانية (5)"
+      },
+      "category": "Mode Alim"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1hDWnC-38DWVFZHj_iGJJ5mApx6VT0sTB/view?usp=sharing",
+      "title_id": "Mode Alim #6",
+      "title_en": "Devotional Mode #6",
+      "title_ar": "الوضع الإيماني #6",
+      "caption": {
+        "id": "Momen Kajian dan Kegiatan Keagamaan HARMATRA (6)",
+        "en": "HARMATRA Religious Study and Devotional Moments (6)",
+        "ar": "لحظات الأنشطة الدينية والروحانية (6)"
+      },
+      "category": "Mode Alim"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1ppYxf-qfkEzVhSItmXiKjhMWjDxjwJ-M/view?usp=sharing",
+      "title_id": "Mode Alim #7",
+      "title_en": "Devotional Mode #7",
+      "title_ar": "الوضع الإيماني #7",
+      "caption": {
+        "id": "Momen Kajian dan Kegiatan Keagamaan HARMATRA (7)",
+        "en": "HARMATRA Religious Study and Devotional Moments (7)",
+        "ar": "لحظات الأنشطة الدينية والروحانية (7)"
+      },
+      "category": "Mode Alim"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1qUpvmbt0fPa8m9rUDOfiAyGs0EYJRd6U/view?usp=sharing",
+      "title_id": "Mode Alim #8",
+      "title_en": "Devotional Mode #8",
+      "title_ar": "الوضع الإيماني #8",
+      "caption": {
+        "id": "Momen Kajian dan Kegiatan Keagamaan HARMATRA (8)",
+        "en": "HARMATRA Religious Study and Devotional Moments (8)",
+        "ar": "لحظات الأنشطة الدينية والروحانية (8)"
+      },
+      "category": "Mode Alim"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1ttsiwKHjSKkS3uIhuJPheeiWEaMOlUs3/view?usp=sharing",
+      "title_id": "Mode Alim #9",
+      "title_en": "Devotional Mode #9",
+      "title_ar": "الوضع الإيماني #9",
+      "caption": {
+        "id": "Momen Kajian dan Kegiatan Keagamaan HARMATRA (9)",
+        "en": "HARMATRA Religious Study and Devotional Moments (9)",
+        "ar": "لحظات الأنشطة الدينية والروحانية (9)"
+      },
+      "category": "Mode Alim"
     },
     {
       "url": "https://drive.google.com/file/d/1vg8EPI9Epany9JaLgyrNbj_kprjF8hLg/view?usp=sharing",
-      "title_id": "Memori Sekolah",
-      "title_en": "School Memories",
-      "title_ar": "ذكريات المدرسة",
+      "title_id": "Mode Alim #10",
+      "title_en": "Devotional Mode #10",
+      "title_ar": "الوضع الإيماني #10",
       "caption": {
-        "id": "Kenangan Indah Masa Sekolah",
-        "en": "Beautiful School Memories",
-        "ar": "ذكريات المدرسة الجميلة"
+        "id": "Momen Kajian dan Kegiatan Keagamaan HARMATRA (10)",
+        "en": "HARMATRA Religious Study and Devotional Moments (10)",
+        "ar": "لحظات الأنشطة الدينية والروحانية (10)"
       },
-      "category": "Sports"
+      "category": "Mode Alim"
     },
     {
-      "url": "https://drive.google.com/file/d/1RhUIen3J2yEWxF4HAVjPA4ZDq-mwje_Y/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 1",
-      "title_en": "HARMATRA Moment 1",
-      "title_ar": "لحظة هارماترى 1",
+      "url": "https://drive.google.com/file/d/195c5YrmNPKwWP2-UQxaGriAP6w7PEQjc/view?usp=sharing",
+      "title_id": "Kegiatan Mingguan #1",
+      "title_en": "Weekly Activity #1",
+      "title_ar": "الأنشطة الأسبوعية #1",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (1)",
+        "en": "HARMATRA Weekly Activity Routine Documentation (1)",
+        "ar": "توثيق الأنشطة الأسبوعية (1)"
       },
-      "category": "Memories"
+      "category": "Kegiatan Mingguan"
     },
     {
-      "url": "https://drive.google.com/file/d/1DsG_9wqjhvDfcj373XK5n4Pp6enw7gYX/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 2",
-      "title_en": "HARMATRA Moment 2",
-      "title_ar": "لحظة هارماترى 2",
+      "url": "https://drive.google.com/file/d/1CrASGZ3z5y4FRgkdQXERYeJY4RuLrFCS/view?usp=sharing",
+      "title_id": "Kegiatan Mingguan #2",
+      "title_en": "Weekly Activity #2",
+      "title_ar": "الأنشطة الأسبوعية #2",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (2)",
+        "en": "HARMATRA Weekly Activity Routine Documentation (2)",
+        "ar": "توثيق الأنشطة الأسبوعية (2)"
       },
-      "category": "Friends"
+      "category": "Kegiatan Mingguan"
     },
     {
-      "url": "https://drive.google.com/file/d/1tXhXp64Xz7SRE-E-NNfUqTAy9sX1wPMi/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 3",
-      "title_en": "HARMATRA Moment 3",
-      "title_ar": "لحظة هارماترى 3",
+      "url": "https://drive.google.com/file/d/1QaOUgifO4TL0qoM0-kzxTt0oFgI06UXo/view?usp=sharing",
+      "title_id": "Kegiatan Mingguan #3",
+      "title_en": "Weekly Activity #3",
+      "title_ar": "الأنشطة الأسبوعية #3",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (3)",
+        "en": "HARMATRA Weekly Activity Routine Documentation (3)",
+        "ar": "توثيق الأنشطة الأسبوعية (3)"
       },
-      "category": "Study Tour"
+      "category": "Kegiatan Mingguan"
     },
     {
-      "url": "https://drive.google.com/file/d/1h0TAvjytarnNhp0_iV4gHbhojf53u_Bj/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 4",
-      "title_en": "HARMATRA Moment 4",
-      "title_ar": "لحظة هارماترى 4",
+      "url": "https://drive.google.com/file/d/1tpavkGqPUpFPaLlcQpAnG7rWQO06M3fF/view?usp=sharing",
+      "title_id": "Kegiatan Mingguan #4",
+      "title_en": "Weekly Activity #4",
+      "title_ar": "الأنشطة الأسبوعية #4",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (4)",
+        "en": "HARMATRA Weekly Activity Routine Documentation (4)",
+        "ar": "توثيق الأنشطة الأسبوعية (4)"
       },
-      "category": "School Life"
+      "category": "Kegiatan Mingguan"
     },
     {
-      "url": "https://drive.google.com/file/d/1dkMgHfMyuI6PMmBY0RcPL4q5hjTQXKK5/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 5",
-      "title_en": "HARMATRA Moment 5",
-      "title_ar": "لحظة هارماترى 5",
+      "url": "https://drive.google.com/file/d/14YI8WgcZlsOau_5bgGMuWuO4MbnJ-KSW/view?usp=sharing",
+      "title_id": "LDKS HARMATRA #1",
+      "title_en": "LDKS Leadership Training #1",
+      "title_ar": "تدريب القيادة LDKS #1",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Latihan Dasar Kepemimpinan Siswa (LDKS) (1)",
+        "en": "HARMATRA Student Leadership Basic Training (LDKS) (1)",
+        "ar": "تدريب القيادة الطلابية (1)"
       },
-      "category": "Memories"
+      "category": "LDKS"
     },
     {
-      "url": "https://drive.google.com/file/d/1Ej5bmJvQX0XJ2EA1kGUE31ld6lLHHBWR/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 6",
-      "title_en": "HARMATRA Moment 6",
-      "title_ar": "لحظة هارماترى 6",
+      "url": "https://drive.google.com/file/d/1NRaPxxnpM64vayjoQiJ53dYdspDasOT6/view?usp=sharing",
+      "title_id": "LDKS HARMATRA #2",
+      "title_en": "LDKS Leadership Training #2",
+      "title_ar": "تدريب القيادة LDKS #2",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Latihan Dasar Kepemimpinan Siswa (LDKS) (2)",
+        "en": "HARMATRA Student Leadership Basic Training (LDKS) (2)",
+        "ar": "تدريب القيادة الطلابية (2)"
       },
-      "category": "Study Tour"
+      "category": "LDKS"
     },
     {
-      "url": "https://drive.google.com/file/d/17fy3nlhUtXzQ9EJbDV34YPXBwe9mv0Ug/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 7",
-      "title_en": "HARMATRA Moment 7",
-      "title_ar": "لحظة هارماترى 7",
+      "url": "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=sharing",
+      "title_id": "LDKS HARMATRA #3",
+      "title_en": "LDKS Leadership Training #3",
+      "title_ar": "تدريب القيادة LDKS #3",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Latihan Dasar Kepemimpinan Siswa (LDKS) (3)",
+        "en": "HARMATRA Student Leadership Basic Training (LDKS) (3)",
+        "ar": "تدريب القيادة الطلابية (3)"
       },
-      "category": "Sports"
+      "category": "LDKS"
     },
     {
-      "url": "https://drive.google.com/file/d/1e6lJbUPcid_s50o4pj-1FlKGhhXOlaR6/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 8",
-      "title_en": "HARMATRA Moment 8",
-      "title_ar": "لحظة هارماترى 8",
+      "url": "https://drive.google.com/file/d/114mCQb3t0EaXn74QRGWK-AQKCnq8uxmU/view?usp=sharing",
+      "title_id": "Classmeeting #1",
+      "title_en": "Class Meeting #1",
+      "title_ar": "مسابقات بين الصفوف #1",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (1)",
+        "en": "Fun and Exciting Class Meeting Competitions (1)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (1)"
       },
-      "category": "Sports"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/14hKMd9MGcJPGBms6NvZBGmJGQch4vvWV/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 9",
-      "title_en": "HARMATRA Moment 9",
-      "title_ar": "لحظة هارماترى 9",
+      "url": "https://drive.google.com/file/d/11jOhKnEm3zYo88_skBwrZ7jp_fl98_ld/view?usp=sharing",
+      "title_id": "Classmeeting #2",
+      "title_en": "Class Meeting #2",
+      "title_ar": "مسابقات بين الصفوف #2",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (2)",
+        "en": "Fun and Exciting Class Meeting Competitions (2)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (2)"
       },
-      "category": "Sports"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1GKmzh6drrbh-ZpjcVttjdZJWkfyhYoJx/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 10",
-      "title_en": "HARMATRA Moment 10",
-      "title_ar": "لحظة هارماترى 10",
+      "url": "https://drive.google.com/file/d/12CoDi5F5Ed9FAghr7yumjUG-JnQY9chS/view?usp=sharing",
+      "title_id": "Classmeeting #3",
+      "title_en": "Class Meeting #3",
+      "title_ar": "مسابقات بين الصفوف #3",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (3)",
+        "en": "Fun and Exciting Class Meeting Competitions (3)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (3)"
       },
-      "category": "Study Tour"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1TgMXP5ZAIGRsK5trwPg4AWjfknAcX4Xr/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 11",
-      "title_en": "HARMATRA Moment 11",
-      "title_ar": "لحظة هارماترى 11",
+      "url": "https://drive.google.com/file/d/12WZ8TlUcbIId_rDXYUJAHJn_CPVw6YxP/view?usp=sharing",
+      "title_id": "Classmeeting #4",
+      "title_en": "Class Meeting #4",
+      "title_ar": "مسابقات بين الصفوف #4",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (4)",
+        "en": "Fun and Exciting Class Meeting Competitions (4)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (4)"
       },
-      "category": "Graduation"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/17B0U0FeYbE5poN5el0Dm1BO4uxBT4Adx/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 12",
-      "title_en": "HARMATRA Moment 12",
-      "title_ar": "لحظة هارماترى 12",
+      "url": "https://drive.google.com/file/d/16xCrL023I8MEobeYijhua55vMWxvxqZ9/view?usp=sharing",
+      "title_id": "Classmeeting #5",
+      "title_en": "Class Meeting #5",
+      "title_ar": "مسابقات بين الصفوف #5",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (5)",
+        "en": "Fun and Exciting Class Meeting Competitions (5)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (5)"
       },
-      "category": "Sports"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1yWy4PTISRb-KIFTI7qMNT9iLAYFRdZWi/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 13",
-      "title_en": "HARMATRA Moment 13",
-      "title_ar": "لحظة هارماترى 13",
+      "url": "https://drive.google.com/file/d/1BAp11VesEO6TZkMCQWBOuXeDaebNGOio/view?usp=sharing",
+      "title_id": "Classmeeting #6",
+      "title_en": "Class Meeting #6",
+      "title_ar": "مسابقات بين الصفوف #6",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (6)",
+        "en": "Fun and Exciting Class Meeting Competitions (6)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (6)"
       },
-      "category": "Events"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1QTKwv6rzPOWP0KG7ykPtwhMgfH0XjSAl/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 14",
-      "title_en": "HARMATRA Moment 14",
-      "title_ar": "لحظة هارماترى 14",
+      "url": "https://drive.google.com/file/d/1BgfNYptDOop_BpHpgdPvK5lE2zr1LOVC/view?usp=sharing",
+      "title_id": "Classmeeting #7",
+      "title_en": "Class Meeting #7",
+      "title_ar": "مسابقات بين الصفوف #7",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (7)",
+        "en": "Fun and Exciting Class Meeting Competitions (7)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (7)"
       },
-      "category": "School Life"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1P_fSFBT9uIcC-0ZXXMDS8p7TsezS22V5/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 15",
-      "title_en": "HARMATRA Moment 15",
-      "title_ar": "لحظة هارماترى 15",
+      "url": "https://drive.google.com/file/d/1CYqpm_hCHI-alqkOHWbm0FuzCWftnzCH/view?usp=sharing",
+      "title_id": "Classmeeting #8",
+      "title_en": "Class Meeting #8",
+      "title_ar": "مسابقات بين الصفوف #8",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (8)",
+        "en": "Fun and Exciting Class Meeting Competitions (8)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (8)"
       },
-      "category": "Friends"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1D_vz81jYx1SEe68Tp9hM5zh4Dm4eZgEv/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 16",
-      "title_en": "HARMATRA Moment 16",
-      "title_ar": "لحظة هارماترى 16",
+      "url": "https://drive.google.com/file/d/1CkybTM3ERo4HSl1URfPR4BMWvsR-Oiwl/view?usp=sharing",
+      "title_id": "Classmeeting #9",
+      "title_en": "Class Meeting #9",
+      "title_ar": "مسابقات بين الصفوف #9",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (9)",
+        "en": "Fun and Exciting Class Meeting Competitions (9)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (9)"
       },
-      "category": "Memories"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/17ai4IYe2buFdXgPN_y6MK1Wv4IIoWW_8/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 17",
-      "title_en": "HARMATRA Moment 17",
-      "title_ar": "لحظة هارماترى 17",
+      "url": "https://drive.google.com/file/d/1D2VM16stM7wJ_42lFABp242-FOaIbllt/view?usp=sharing",
+      "title_id": "Classmeeting #10",
+      "title_en": "Class Meeting #10",
+      "title_ar": "مسابقات بين الصفوف #10",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (10)",
+        "en": "Fun and Exciting Class Meeting Competitions (10)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (10)"
       },
-      "category": "Sports"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1kecXdoZ3obWCVOf7ulmP4wYqflkEMyNn/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 18",
-      "title_en": "HARMATRA Moment 18",
-      "title_ar": "لحظة هارماترى 18",
+      "url": "https://drive.google.com/file/d/1DlDscSlgsUUlmTy0-trKA7u5ZzBMz_LV/view?usp=sharing",
+      "title_id": "Classmeeting #11",
+      "title_en": "Class Meeting #11",
+      "title_ar": "مسابقات بين الصفوف #11",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (11)",
+        "en": "Fun and Exciting Class Meeting Competitions (11)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (11)"
       },
-      "category": "Sports"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/18s2eok9IoFDlFCotgdYr3QSvRnsnwO4e/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 19",
-      "title_en": "HARMATRA Moment 19",
-      "title_ar": "لحظة هارماترى 19",
+      "url": "https://drive.google.com/file/d/1DpU2w55aMgERwwP6pm77blNlE7IsG6JD/view?usp=sharing",
+      "title_id": "Classmeeting #12",
+      "title_en": "Class Meeting #12",
+      "title_ar": "مسابقات بين الصفوف #12",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (12)",
+        "en": "Fun and Exciting Class Meeting Competitions (12)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (12)"
       },
-      "category": "Memories"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1w80DVA5cKC37zXxyIAS07nruKbwzARFs/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 20",
-      "title_en": "HARMATRA Moment 20",
-      "title_ar": "لحظة هارماترى 20",
+      "url": "https://drive.google.com/file/d/1EfH2h6IYoQ1kmNViA4e_2dlQxmgu1Qft/view?usp=sharing",
+      "title_id": "Classmeeting #13",
+      "title_en": "Class Meeting #13",
+      "title_ar": "مسابقات بين الصفوف #13",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (13)",
+        "en": "Fun and Exciting Class Meeting Competitions (13)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (13)"
       },
-      "category": "Study Tour"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1Qh0Kw30y2ycXCXpmRazxCA1s2t_e3ZvU/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 21",
-      "title_en": "HARMATRA Moment 21",
-      "title_ar": "لحظة هارماترى 21",
+      "url": "https://drive.google.com/file/d/1FZKvETriJHZa48rpBJt63osX8Eun0Wf0/view?usp=sharing",
+      "title_id": "Classmeeting #14",
+      "title_en": "Class Meeting #14",
+      "title_ar": "مسابقات بين الصفوف #14",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (14)",
+        "en": "Fun and Exciting Class Meeting Competitions (14)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (14)"
       },
-      "category": "Memories"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1XahpXb92tjSkDzbrw89xRQFoLCBJLEN-/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 22",
-      "title_en": "HARMATRA Moment 22",
-      "title_ar": "لحظة هارماترى 22",
+      "url": "https://drive.google.com/file/d/1G0KGl6SXrpnSNPWh5u_SIW41VMkl45C3/view?usp=sharing",
+      "title_id": "Classmeeting #15",
+      "title_en": "Class Meeting #15",
+      "title_ar": "مسابقات بين الصفوف #15",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (15)",
+        "en": "Fun and Exciting Class Meeting Competitions (15)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (15)"
       },
-      "category": "Friends"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/16kjfcyDEfd8IJ8rX5-9eN2U7BP_ZMZeX/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 23",
-      "title_en": "HARMATRA Moment 23",
-      "title_ar": "لحظة هارماترى 23",
+      "url": "https://drive.google.com/file/d/1ICBXzcu2UlSFGcADsEQSCqOZ4lMaP8Oq/view?usp=sharing",
+      "title_id": "Classmeeting #16",
+      "title_en": "Class Meeting #16",
+      "title_ar": "مسابقات بين الصفوف #16",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (16)",
+        "en": "Fun and Exciting Class Meeting Competitions (16)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (16)"
       },
-      "category": "Memories"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1eq7-9pZ2f_eMEhcNXuE2wn6Sua9Gqq9U/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 24",
-      "title_en": "HARMATRA Moment 24",
-      "title_ar": "لحظة هارماترى 24",
+      "url": "https://drive.google.com/file/d/1IKpbbSZWmgbaXZcec2JotcC00qpabzPu/view?usp=sharing",
+      "title_id": "Classmeeting #17",
+      "title_en": "Class Meeting #17",
+      "title_ar": "مسابقات بين الصفوف #17",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (17)",
+        "en": "Fun and Exciting Class Meeting Competitions (17)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (17)"
       },
-      "category": "Events"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1Jiu4EUM6Yjew31-Y9SKaWeHjCtM20X9O/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 25",
-      "title_en": "HARMATRA Moment 25",
-      "title_ar": "لحظة هارماترى 25",
+      "url": "https://drive.google.com/file/d/1KBBtfboSow8v4cQT7oh0GbJPkCR6i-2Z/view?usp=sharing",
+      "title_id": "Classmeeting #18",
+      "title_en": "Class Meeting #18",
+      "title_ar": "مسابقات بين الصفوف #18",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (18)",
+        "en": "Fun and Exciting Class Meeting Competitions (18)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (18)"
       },
-      "category": "Memories"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1MmALcIXiqpxS3OcE07SoETr-nw-bETKz/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 26",
-      "title_en": "HARMATRA Moment 26",
-      "title_ar": "لحظة هارماترى 26",
+      "url": "https://drive.google.com/file/d/1MxM15ADNXNDKrjG7gbJcaC_3BqFyKdtT/view?usp=sharing",
+      "title_id": "Classmeeting #19",
+      "title_en": "Class Meeting #19",
+      "title_ar": "مسابقات بين الصفوف #19",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (19)",
+        "en": "Fun and Exciting Class Meeting Competitions (19)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (19)"
       },
-      "category": "Memories"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1So_V5cjddZ-eygWA6Y7qvrhSB5w6nZYA/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 27",
-      "title_en": "HARMATRA Moment 27",
-      "title_ar": "لحظة هارماترى 27",
+      "url": "https://drive.google.com/file/d/1NDbauh0G9LjRVB09f_8oV-3nCRc-Z2Vf/view?usp=sharing",
+      "title_id": "Classmeeting #20",
+      "title_en": "Class Meeting #20",
+      "title_ar": "مسابقات بين الصفوف #20",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (20)",
+        "en": "Fun and Exciting Class Meeting Competitions (20)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (20)"
       },
-      "category": "School Life"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1m9lGbAKmS6rH6gBgPHGTjfwzOpJVyI9e/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 28",
-      "title_en": "HARMATRA Moment 28",
-      "title_ar": "لحظة هارماترى 28",
+      "url": "https://drive.google.com/file/d/1O_jWpoYbn7NS-aGkzrGn5-iNpLvRPSob/view?usp=sharing",
+      "title_id": "Classmeeting #21",
+      "title_en": "Class Meeting #21",
+      "title_ar": "مسابقات بين الصفوف #21",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (21)",
+        "en": "Fun and Exciting Class Meeting Competitions (21)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (21)"
       },
-      "category": "Events"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1Qvfj5aoQZkPP75gNil3y9cBVOUy60liQ/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 29",
-      "title_en": "HARMATRA Moment 29",
-      "title_ar": "لحظة هارماترى 29",
+      "url": "https://drive.google.com/file/d/1Oo-7S2piHzsUhYH1LLGHUAcWkAvkDgi8/view?usp=sharing",
+      "title_id": "Classmeeting #22",
+      "title_en": "Class Meeting #22",
+      "title_ar": "مسابقات بين الصفوف #22",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (22)",
+        "en": "Fun and Exciting Class Meeting Competitions (22)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (22)"
       },
-      "category": "Sports"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1pyhVAvsXwOGxbns9BCC1PW-3dU_iAJPt/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 30",
-      "title_en": "HARMATRA Moment 30",
-      "title_ar": "لحظة هارماترى 30",
+      "url": "https://drive.google.com/file/d/1QKPigMKlp7x38Qej8GeJZyQO0k8hTEUX/view?usp=sharing",
+      "title_id": "Classmeeting #23",
+      "title_en": "Class Meeting #23",
+      "title_ar": "مسابقات بين الصفوف #23",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (23)",
+        "en": "Fun and Exciting Class Meeting Competitions (23)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (23)"
       },
-      "category": "Events"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1gq3G86-J29hwbeS9XkmLw2i4OMBx5R8H/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 31",
-      "title_en": "HARMATRA Moment 31",
-      "title_ar": "لحظة هارماترى 31",
+      "url": "https://drive.google.com/file/d/1TJo50fOkr2J2dkkVMhf0RyZVJRV_S1AR/view?usp=sharing",
+      "title_id": "Classmeeting #24",
+      "title_en": "Class Meeting #24",
+      "title_ar": "مسابقات بين الصفوف #24",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (24)",
+        "en": "Fun and Exciting Class Meeting Competitions (24)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (24)"
       },
-      "category": "Graduation"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1Uyup9IGge8TuruxeRV_bxyjt2lEIVCKH/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 32",
-      "title_en": "HARMATRA Moment 32",
-      "title_ar": "لحظة هارماترى 32",
+      "url": "https://drive.google.com/file/d/1VRniVe2CYNA6yPO-9QjvvQ2pbYfdN5kn/view?usp=sharing",
+      "title_id": "Classmeeting #25",
+      "title_en": "Class Meeting #25",
+      "title_ar": "مسابقات بين الصفوف #25",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (25)",
+        "en": "Fun and Exciting Class Meeting Competitions (25)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (25)"
       },
-      "category": "Sports"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1RkpxM3hkWjHDgK-vLl4-b12rvbZ47U0b/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 33",
-      "title_en": "HARMATRA Moment 33",
-      "title_ar": "لحظة هارماترى 33",
+      "url": "https://drive.google.com/file/d/1YA4bQv1lKfYQ4R8V_xTMCutabJ4PR6_Y/view?usp=sharing",
+      "title_id": "Classmeeting #26",
+      "title_en": "Class Meeting #26",
+      "title_ar": "مسابقات بين الصفوف #26",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (26)",
+        "en": "Fun and Exciting Class Meeting Competitions (26)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (26)"
       },
-      "category": "Memories"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1aX8t2gcMsCwdhfNdp955xz0Bvc-2bWl2/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 34",
-      "title_en": "HARMATRA Moment 34",
-      "title_ar": "لحظة هارماترى 34",
+      "url": "https://drive.google.com/file/d/1YHgnG1tsav2-wlm7SktUvFY3oTaOUdyA/view?usp=sharing",
+      "title_id": "Classmeeting #27",
+      "title_en": "Class Meeting #27",
+      "title_ar": "مسابقات بين الصفوف #27",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (27)",
+        "en": "Fun and Exciting Class Meeting Competitions (27)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (27)"
       },
-      "category": "School Life"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1Gx_dDo3I_1yQcVE_2YFFjZDfhvRh5ivD/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 35",
-      "title_en": "HARMATRA Moment 35",
-      "title_ar": "لحظة هارماترى 35",
+      "url": "https://drive.google.com/file/d/1YzTTZGmUnW2hL2W0sLLCprrO8M7e7MND/view?usp=sharing",
+      "title_id": "Classmeeting #28",
+      "title_en": "Class Meeting #28",
+      "title_ar": "مسابقات بين الصفوف #28",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (28)",
+        "en": "Fun and Exciting Class Meeting Competitions (28)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (28)"
       },
-      "category": "Events"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1L2OdbM_EozKa1rfuSvwI1Q3J7ptSnNlo/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 36",
-      "title_en": "HARMATRA Moment 36",
-      "title_ar": "لحظة هارماترى 36",
+      "url": "https://drive.google.com/file/d/1Z3Y3T9Qo4k-M3PSetDFCcfHTfoMDQch-/view?usp=sharing",
+      "title_id": "Classmeeting #29",
+      "title_en": "Class Meeting #29",
+      "title_ar": "مسابقات بين الصفوف #29",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (29)",
+        "en": "Fun and Exciting Class Meeting Competitions (29)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (29)"
       },
-      "category": "Memories"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1YHgnG1tsav2-wlm7SktUvFY3oTaOUdyA/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 37",
-      "title_en": "HARMATRA Moment 37",
-      "title_ar": "لحظة هارماترى 37",
+      "url": "https://drive.google.com/file/d/1ZxYQ4iHTXPYf-rPyqwrQIYaQPWb0vvKp/view?usp=sharing",
+      "title_id": "Classmeeting #30",
+      "title_en": "Class Meeting #30",
+      "title_ar": "مسابقات بين الصفوف #30",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (30)",
+        "en": "Fun and Exciting Class Meeting Competitions (30)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (30)"
       },
-      "category": "Friends"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1mxZb5ZXt2F3xzHAc6FeV5lrZfC6JXuzj/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 38",
-      "title_en": "HARMATRA Moment 38",
-      "title_ar": "لحظة هارماترى 38",
+      "url": "https://drive.google.com/file/d/1bYoGSvlJPSnI4f4SNGimMXXGsJWqgN1v/view?usp=sharing",
+      "title_id": "Classmeeting #31",
+      "title_en": "Class Meeting #31",
+      "title_ar": "مسابقات بين الصفوف #31",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (31)",
+        "en": "Fun and Exciting Class Meeting Competitions (31)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (31)"
       },
-      "category": "Friends"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1IKpbbSZWmgbaXZcec2JotcC00qpabzPu/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 39",
-      "title_en": "HARMATRA Moment 39",
-      "title_ar": "لحظة هارماترى 39",
+      "url": "https://drive.google.com/file/d/1d1m5Bq2Soz3SquQsIq_98ImrK9CsQdmN/view?usp=sharing",
+      "title_id": "Classmeeting #32",
+      "title_en": "Class Meeting #32",
+      "title_ar": "مسابقات بين الصفوف #32",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (32)",
+        "en": "Fun and Exciting Class Meeting Competitions (32)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (32)"
       },
-      "category": "Graduation"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1VRniVe2CYNA6yPO-9QjvvQ2pbYfdN5kn/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 40",
-      "title_en": "HARMATRA Moment 40",
-      "title_ar": "لحظة هارماترى 40",
+      "url": "https://drive.google.com/file/d/1ffeU6MWuFxsJuXKv34YegMbocTN0XGf2/view?usp=sharing",
+      "title_id": "Classmeeting #33",
+      "title_en": "Class Meeting #33",
+      "title_ar": "مسابقات بين الصفوف #33",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (33)",
+        "en": "Fun and Exciting Class Meeting Competitions (33)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (33)"
       },
-      "category": "Sports"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1O_jWpoYbn7NS-aGkzrGn5-iNpLvRPSob/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 41",
-      "title_en": "HARMATRA Moment 41",
-      "title_ar": "لحظة هارماترى 41",
+      "url": "https://drive.google.com/file/d/1gy4RLbvvLgwdCJmukZOWbgsgZmcCmnYL/view?usp=sharing",
+      "title_id": "Classmeeting #34",
+      "title_en": "Class Meeting #34",
+      "title_ar": "مسابقات بين الصفوف #34",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (34)",
+        "en": "Fun and Exciting Class Meeting Competitions (34)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (34)"
       },
-      "category": "Friends"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1st4psoj99l_aFFDPafuHSRWMM_CiYpHK/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 42",
-      "title_en": "HARMATRA Moment 42",
-      "title_ar": "لحظة هارماترى 42",
+      "url": "https://drive.google.com/file/d/1mxZb5ZXt2F3xzHAc6FeV5lrZfC6JXuzj/view?usp=sharing",
+      "title_id": "Classmeeting #35",
+      "title_en": "Class Meeting #35",
+      "title_ar": "مسابقات بين الصفوف #35",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (35)",
+        "en": "Fun and Exciting Class Meeting Competitions (35)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (35)"
       },
-      "category": "Sports"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1YzTTZGmUnW2hL2W0sLLCprrO8M7e7MND/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 43",
-      "title_en": "HARMATRA Moment 43",
-      "title_ar": "لحظة هارماترى 43",
+      "url": "https://drive.google.com/file/d/1qZNE4Bw_YgSlZpV4J72YAUQC5ZAHV-I7/view?usp=sharing",
+      "title_id": "Classmeeting #36",
+      "title_en": "Class Meeting #36",
+      "title_ar": "مسابقات بين الصفوف #36",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (36)",
+        "en": "Fun and Exciting Class Meeting Competitions (36)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (36)"
       },
-      "category": "Sports"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1ffeU6MWuFxsJuXKv34YegMbocTN0XGf2/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 44",
-      "title_en": "HARMATRA Moment 44",
-      "title_ar": "لحظة هارماترى 44",
+      "url": "https://drive.google.com/file/d/1r31GifBlL6FkgKfvWVWNFLQSD8uYEMwU/view?usp=sharing",
+      "title_id": "Classmeeting #37",
+      "title_en": "Class Meeting #37",
+      "title_ar": "مسابقات بين الصفوف #37",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (37)",
+        "en": "Fun and Exciting Class Meeting Competitions (37)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (37)"
       },
-      "category": "Sports"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1BAp11VesEO6TZkMCQWBOuXeDaebNGOio/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 45",
-      "title_en": "HARMATRA Moment 45",
-      "title_ar": "لحظة هارماترى 45",
+      "url": "https://drive.google.com/file/d/1rT8_yQ9Yj44SpkmJJmMEzVK84AdNRoXx/view?usp=sharing",
+      "title_id": "Classmeeting #38",
+      "title_en": "Class Meeting #38",
+      "title_ar": "مسابقات بين الصفوف #38",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (38)",
+        "en": "Fun and Exciting Class Meeting Competitions (38)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (38)"
       },
-      "category": "Sports"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1FZKvETriJHZa48rpBJt63osX8Eun0Wf0/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 46",
-      "title_en": "HARMATRA Moment 46",
-      "title_ar": "لحظة هارماترى 46",
+      "url": "https://drive.google.com/file/d/1st4psoj99l_aFFDPafuHSRWMM_CiYpHK/view?usp=sharing",
+      "title_id": "Classmeeting #39",
+      "title_en": "Class Meeting #39",
+      "title_ar": "مسابقات بين الصفوف #39",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (39)",
+        "en": "Fun and Exciting Class Meeting Competitions (39)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (39)"
       },
-      "category": "Events"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/16xCrL023I8MEobeYijhua55vMWxvxqZ9/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 47",
-      "title_en": "HARMATRA Moment 47",
-      "title_ar": "لحظة هارماترى 47",
+      "url": "https://drive.google.com/file/d/1vx9DRjX3_GeIaEgAUpUA9vETKpXkdJjb/view?usp=sharing",
+      "title_id": "Classmeeting #40",
+      "title_en": "Class Meeting #40",
+      "title_ar": "مسابقات بين الصفوف #40",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (40)",
+        "en": "Fun and Exciting Class Meeting Competitions (40)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (40)"
       },
-      "category": "School Life"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1d1m5Bq2Soz3SquQsIq_98ImrK9CsQdmN/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 48",
-      "title_en": "HARMATRA Moment 48",
-      "title_ar": "لحظة هارماترى 48",
+      "url": "https://drive.google.com/file/d/1wyV1lLX5Bwp-LAtLSnYOuOY6rY1uBdxs/view?usp=sharing",
+      "title_id": "Classmeeting #41",
+      "title_en": "Class Meeting #41",
+      "title_ar": "مسابقات بين الصفوف #41",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (41)",
+        "en": "Fun and Exciting Class Meeting Competitions (41)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (41)"
       },
-      "category": "Events"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1QKPigMKlp7x38Qej8GeJZyQO0k8hTEUX/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 49",
-      "title_en": "HARMATRA Moment 49",
-      "title_ar": "لحظة هارماترى 49",
+      "url": "https://drive.google.com/file/d/1x-4aNaQcV6v0xUmtt-o0_Cp6hRX8YDK0/view?usp=sharing",
+      "title_id": "Classmeeting #42",
+      "title_en": "Class Meeting #42",
+      "title_ar": "مسابقات بين الصفوف #42",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Keseruan Perjuangan dan Lomba Classmeeting (42)",
+        "en": "Fun and Exciting Class Meeting Competitions (42)",
+        "ar": "فعاليات ومسابقات الكلاس ميتينج (42)"
       },
-      "category": "Friends"
+      "category": "Classmeeting"
     },
     {
-      "url": "https://drive.google.com/file/d/1wyV1lLX5Bwp-LAtLSnYOuOY6rY1uBdxs/view?usp=drive_link",
-      "title_id": "Momen HARMATRA 50",
-      "title_en": "HARMATRA Moment 50",
-      "title_ar": "لحظة هارماترى 50",
+      "url": "https://drive.google.com/file/d/1HgHHEQ6Ty1nIQJPlTCA4nvYsKt7atlU-/view?usp=sharing",
+      "title_id": "Bukber 2025 #1",
+      "title_en": "2025 Iftar Gathering #1",
+      "title_ar": "إفطار جماعي ٢٠٢٥ #1",
       "caption": {
-        "id": "Salah satu momen yang susah dilupain. Seru banget meski sederhana.",
-        "en": "One of the best moments of our journey. A memory worth remembering.",
-        "ar": "واحدة من أفضل اللحظات في رحلتنا. ذكرى تستحق التذكر."
+        "id": "Momen Kebersamaan Buka Puasa Bersama HARMATRA 2025 (1)",
+        "en": "HARMATRA 2025 Iftar Gathering Togetherness (1)",
+        "ar": "لحظات الإفطار الجماعي لهارماترى ٢٠٢٥ (1)"
       },
-      "category": "Friends"
+      "category": "Bukber 2025"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1OkGgSyNbXlNfe7TgqYyekwXfrrjskmhA/view?usp=sharing",
+      "title_id": "Bukber 2025 #2",
+      "title_en": "2025 Iftar Gathering #2",
+      "title_ar": "إفطار جماعي ٢٠٢٥ #2",
+      "caption": {
+        "id": "Momen Kebersamaan Buka Puasa Bersama HARMATRA 2025 (2)",
+        "en": "HARMATRA 2025 Iftar Gathering Togetherness (2)",
+        "ar": "لحظات الإفطار الجماعي لهارماترى ٢٠٢٥ (2)"
+      },
+      "category": "Bukber 2025"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1ZHYENi6Bnm0O4Z_X45HgQ1EMYl0sREOS/view?usp=sharing",
+      "title_id": "Bukber 2025 #3",
+      "title_en": "2025 Iftar Gathering #3",
+      "title_ar": "إفطار جماعي ٢٠٢٥ #3",
+      "caption": {
+        "id": "Momen Kebersamaan Buka Puasa Bersama HARMATRA 2025 (3)",
+        "en": "HARMATRA 2025 Iftar Gathering Togetherness (3)",
+        "ar": "لحظات الإفطار الجماعي لهارماترى ٢٠٢٥ (3)"
+      },
+      "category": "Bukber 2025"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1j7gtIOLs1KwdD2XkEvko0A7Lo5RDjUzj/view?usp=sharing",
+      "title_id": "Bukber 2025 #4",
+      "title_en": "2025 Iftar Gathering #4",
+      "title_ar": "إفطار جماعي ٢٠٢٥ #4",
+      "caption": {
+        "id": "Momen Kebersamaan Buka Puasa Bersama HARMATRA 2025 (4)",
+        "en": "HARMATRA 2025 Iftar Gathering Togetherness (4)",
+        "ar": "لحظات الإفطار الجماعي لهارماترى ٢٠٢٥ (4)"
+      },
+      "category": "Bukber 2025"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1sZAOMUiwcF-eXenvJcbb_p7xK9gg8jFR/view?usp=sharing",
+      "title_id": "Bukber 2025 #5",
+      "title_en": "2025 Iftar Gathering #5",
+      "title_ar": "إفطار جماعي ٢٠٢٥ #5",
+      "caption": {
+        "id": "Momen Kebersamaan Buka Puasa Bersama HARMATRA 2025 (5)",
+        "en": "HARMATRA 2025 Iftar Gathering Togetherness (5)",
+        "ar": "لحظات الإفطار الجماعي لهارماترى ٢٠٢٥ (5)"
+      },
+      "category": "Bukber 2025"
     }
   ],
   "quotes": [
@@ -1317,12 +3142,12 @@
       "text_id": "Bukan sekadar kelas, tapi keluarga.",
       "text_en": "Not just a class, but a family.",
       "text_ar": "ليس مجرد صف، بل عائلة.",
-      "author": "Andi Saputra"
+      "author": "Fulan"
     },
     {
-      "text_id": "jika hujan turun",
-      "text_en": "rain",
-      "text_ar": "mator",
+      "text_id": "jika hujan turun tanpa diminta maka aku akan menahan luka sambil tertawa",
+      "text_en": "If rain falls unasked, I will hold the pain while laughing.",
+      "text_ar": "إذا نزل المطر دون طلب، فسوف أتحمل الألم وأنا أضحك.",
       "author": "immm"
     }
   ],
@@ -1355,7 +3180,7 @@
       "title_gallery": "Galeri Memori",
       "sub_gallery": "Kumpulan momen yang tertangkap lensa.",
       "spotlight": "Sorotan Hari Ini",
-      "footer_note": "Website resmi HARMATRA Angkatan 11 - SMA 1. Dibuat dengan ❤️ oleh siswa, untuk siswa. Semua data bersifat fiktif dan hanya untuk tujuan demonstrasi.",
+      "footer_note": "Website resmi HARMATRA Angkatan 11 - 2 SMA. Dibuat dengan ❤️ oleh siswa, untuk siswa. Semua data bersifat fiktif dan hanya untuk tujuan demonstrasi.",
       "contact_btn": "Hubungi Kami",
       "contact_title": "Hubungi Kami",
       "contact_desc": "Kirim pesan untuk HARMATRA",
@@ -1401,7 +3226,7 @@
       "title_gallery": "Memory Gallery",
       "sub_gallery": "A collection of moments captured through the lens.",
       "spotlight": "Today's Spotlight",
-      "footer_note": "Official website of HARMATRA Class 11 - SMA 1. Crafted with ❤️ by the students, for the students. All data is fictional and for demonstration purposes only.",
+      "footer_note": "Official website of HARMATRA Class 11 - 2 SMA. Crafted with ❤️ by the students, for the students. All data is fictional and for demonstration purposes only.",
       "contact_btn": "Contact Us",
       "contact_title": "Contact Us",
       "contact_desc": "Send a message to HARMATRA",
@@ -1477,9 +3302,12 @@
     },
     "ai": {
       "enabled": true,
-      "model": "google/gemini-2.5-flash",
-      "temperature": 0.7,
-      "max_tokens": 800
+      "streaming": true,
+      "provider": "Groq Official API",
+      "model": "llama-3.3-70b-versatile",
+      "temperature": 0.6,
+      "max_tokens": 1024,
+      "apiKey": ""
     }
   },
   "spotlight": {

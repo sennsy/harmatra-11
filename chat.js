@@ -546,7 +546,13 @@
     const lowerPrompt = userPrompt.toLowerCase();
     
     try {
-      rawReply = await fetchAIResponse(userPrompt);
+      rawReply = await fetchAIResponse(userPrompt, (partialText) => {
+        if (bubbleElement) {
+          botMessage.content = partialText;
+          bubbleElement.innerHTML = formatMessage(partialText);
+          if (elements.chatBody) elements.chatBody.scrollTop = elements.chatBody.scrollHeight;
+        }
+      });
     } catch (error) {
       console.error("AI Response Error:", error);
       const lang = getLang();
@@ -556,12 +562,18 @@
           : (lang === 'en'
           ? 'I am receiving too many requests right now. Please wait a few seconds and try again.'
           : 'Maaf, saya sedang melayani terlalu banyak permintaan saat ini. Mohon tunggu beberapa detik dan coba lagi ya.');
+      } else if (error.message.includes('402') || error.message.includes('Payment Required')) {
+        rawReply = lang === 'ar'
+          ? 'عذراً، وصل حد الاستخدام المجاني حالياً. يرجى المحاولة لاحقاً.'
+          : (lang === 'en'
+          ? 'Sorry, the free rate limit was reached. Please wait a moment and try again.'
+          : 'Maaf, batas penggunaan gratis AI saat ini sedang penuh. Mohon tunggu beberapa saat dan coba lagi ya.');
       } else {
         rawReply = lang === 'ar'
           ? 'عذراً، Matra AI يواجه مشكلة في الاتصال. حاول مرة أخرى بعد قليل.'
           : (lang === 'en'
-          ? 'Sorry, Matra AI is experiencing a connection issue. Error: ' + error.message
-          : 'Maaf, Matra AI sedang mengalami gangguan koneksi. Error: ' + error.message);
+          ? 'Sorry, Matra AI is experiencing a temporary connection issue. Please try again.'
+          : 'Maaf, Matra AI sedang mengalami gangguan koneksi sementara. Silakan coba beberapa saat lagi.');
       }
     }
 
@@ -840,106 +852,430 @@
   }
 
   // ==========================================
-  // INTELLECTUAL RESPONSE GENERATOR
+  // LOCAL KNOWLEDGE ENGINE & INTELLIGENT FALLBACK
   // ==========================================
   
-  async function fetchAIResponse(userPrompt) {
-    // 5. GET HARMATRA DATA (if available)
-    let harmatraContext = "";
-    const rawDb = (window.harmatraData && window.harmatraData.dbData) || window.HARMATRA_DATA || {};
-    
-    // We check if data exists in rawDb, otherwise fallback to global variable if available
-    const db = Object.keys(rawDb).length > 0 ? rawDb : (window.localData || {});
-    
-    if (db) {
-      harmatraContext = `
-[HARMATRA DATABASE]
-Website Metadata: ${JSON.stringify(db.website_metadata || { developer: "Immszkyy", name: "HARMATRA" })}
-Website History: ${JSON.stringify(db.website_history || {})}
-Today's Spotlight: ${JSON.stringify(db.spotlight || {})}
-Total Active Members: ${db.members ? db.members.length : 0}
-Active Members Data: ${JSON.stringify((db.members || []).map(m => ({name: m.name, full_name: m.full_name, role: m.role})))}
-Total Previous Members: ${db.previous_members ? db.previous_members.length : 0}
-Timeline Events: ${JSON.stringify(db.timeline || [])}
-Total Gallery Items: ${db.gallery ? db.gallery.length : 0}
-Quotes: ${JSON.stringify(db.quotes || [])}
-[END OF DATABASE]
-`;
+  
+  // ==========================================
+  // HYBRID RETRIEVAL SYSTEM & GROQ ENGINE
+  // ==========================================
+
+  function buildHybridContext(userPrompt, db, lang) {
+    const contextSections = [];
+
+    // Priority 1: Website Metadata
+    const meta = (db && db.website_metadata) || {
+      name: "HARMATRA",
+      developer: "Immszkyy",
+      version: "11.0",
+      description: "HARMATRA - Generasi 11 SMA 2"
+    };
+    contextSections.push(`[1. WEBSITE METADATA]
+Name: ${meta.name || 'HARMATRA'}
+Developer / Creator: ${meta.developer || 'Immszkyy'}
+School: GEN 11 • 2 SMA
+Tagline: ${meta.tagline || 'Harmonis, Ma\'an, Tragen'}
+Description: ${meta.description || 'Situs Resmi Kelas HARMATRA'}`);
+
+    // Priority 2: Active Members
+    const members = (db && db.members) || [];
+    if (members.length > 0) {
+      const memberLines = members.map((m, i) => `${i + 1}. ${m.full_name || m.name} (${m.name}) | Jabatan: ${m.role || 'Siswa'}${m.bio_id ? ' | Bio: "' + m.bio_id + '"' : ''}`).join('\n');
+      contextSections.push(`[2. ACTIVE MEMBERS (${members.length} Total)]\n${memberLines}`);
     }
 
-    // 6. SYSTEM PROMPT FOR AI — Language Aware
-    const lang = getLang();
-    const langInstruction = lang === 'ar'
-      ? 'CRITICAL LANGUAGE RULE: You MUST respond ONLY in Arabic (العربية). Every single word must be in Arabic. Never mix with Indonesian or English. Even if the question is in another language, respond in Arabic.'
+    // Priority 3: Previous Members
+    const prevMembers = (db && db.previous_members) || [];
+    if (prevMembers.length > 0) {
+      const prevLines = prevMembers.map((m, i) => `${i + 1}. ${m.full_name || m.name} | Catatan: ${m.note || m.bio || ''}`).join('\n');
+      contextSections.push(`[3. PREVIOUS MEMBERS (${prevMembers.length} Total)]\n${prevLines}`);
+    }
+
+    // Priority 4: Timeline
+    const timeline = (db && db.timeline) || [];
+    if (timeline.length > 0) {
+      const timeLines = timeline.map((t, i) => `${i + 1}. [${t.date || 'TBA'}] ${t.title_id || t.title_en || ''} - ${t.desc_id || t.desc_en || ''}`).join('\n');
+      contextSections.push(`[4. TIMELINE EVENTS]\n${timeLines}`);
+    }
+
+    // Priority 5: Gallery
+    const gallery = (db && db.gallery) || [];
+    if (gallery.length > 0) {
+      const categories = [...new Set(gallery.map(g => g.category).filter(Boolean))];
+      contextSections.push(`[5. GALLERY MEMORIES]
+Total Photos: ${gallery.length}
+Categories Available: ${categories.join(', ')}`);
+    }
+
+    // Priority 6: Quotes
+    const quotes = (db && db.quotes) || [];
+    if (quotes.length > 0) {
+      const quoteLines = quotes.map(q => `"${q.text_id || q.text_en || ''}" - ${q.author || 'Anonim'}`).join('\n');
+      contextSections.push(`[6. QUOTES & MOTTO]\n${quoteLines}`);
+    }
+
+    // Priority 7: Spotlight
+    if (db && db.spotlight) {
+      contextSections.push(`[7. TODAY'S SPOTLIGHT]
+Title: ${db.spotlight.title_id || db.spotlight.title_en || ''}
+Description: ${db.spotlight.desc_id || db.spotlight.desc_en || ''}`);
+    }
+
+    // Priority 8: Media Hub
+    if (db && db.mediaHub) {
+      contextSections.push(`[8. MEDIA HUB & MUSIC]
+BGM Track: ${db.mediaHub.bgmTitle || 'HARMATRA Theme'}`);
+    }
+
+    // Priority 9: Contact Information
+    contextSections.push(`[9. CONTACT INFORMATION]
+Developer Contact: izemsempay@gmail.com
+Location: HARMATRA Headquarters`);
+
+    // Priority 10: Website Settings
+    if (db && db.settings) {
+      contextSections.push(`[10. WEBSITE SETTINGS]
+Admin Passcode Configured: ${Boolean(db.settings.adminPasscode)}`);
+    }
+
+    // Priority 11: AI Knowledge Base
+    contextSections.push(`[11. AI KNOWLEDGE BASE]
+HARMATRA Meaning: Harmonika, Ma'an (Kebersamaan), dan Tragen (Generasi Mandiri 11 2 SMA).
+Developer: Immszkyy is the lead creator, software architect, and web designer of HARMATRA.
+Class Officers (Struktur Pengurus):
+- Ketua Angkatan: Kumis
+- Wakil Ketua Angkatan & Ketua Kelas: Aden
+- Sekretaris Angkatan: Immszkyy
+- Bendahara Angkatan: Adz
+- Sekretaris Kelas: Jeker
+- Bendahara Kelas: Abill`);
+
+    // Priority 12: Dynamic Local Data (Current Active View / Modal Context)
+    let activeViewContext = "";
+    if (window.currentLightboxType && window.currentLightboxIndex !== undefined) {
+      if (window.currentLightboxType === 'gallery' && gallery[window.currentLightboxIndex]) {
+        const item = gallery[window.currentLightboxIndex];
+        activeViewContext = `Active Lightbox Photo: Category "${item.category}", Title "${item.title_id || item.title_en || ''}", Caption "${item.caption?.id || item.caption_id || ''}"`;
+      } else if (window.currentLightboxType === 'members' && members[window.currentLightboxIndex]) {
+        const item = members[window.currentLightboxIndex];
+        activeViewContext = `Active Member Profile Modal: ${item.full_name || item.name} (Role: ${item.role || 'Siswa'})`;
+      }
+    }
+
+    if (activeViewContext) {
+      contextSections.push(`[12. DYNAMIC LOCAL DATA (CURRENT ACTIVE VIEW)]\n${activeViewContext}`);
+    }
+
+    // Smart Semantic Keyword Matcher
+    const pLow = (userPrompt || '').toLowerCase().trim();
+    const smartMatches = [];
+
+    members.forEach(m => {
+      const matchKey = `${m.name} ${m.full_name} ${m.role} ${m.bio_id}`.toLowerCase();
+      if (pLow && (pLow.includes(m.name.toLowerCase()) || (m.role && pLow.includes(m.role.toLowerCase())))) {
+        smartMatches.push(`MEMBER MATCH: ${m.full_name || m.name} (Role: ${m.role}, Bio: "${m.bio_id || ''}")`);
+      }
+    });
+
+    if (pLow.includes('pembuat') || pLow.includes('developer') || pLow.includes('bikin') || pLow.includes('built') || pLow.includes('creator')) {
+      smartMatches.push(`DEVELOPER MATCH: Developed and designed by Immszkyy.`);
+    }
+
+    let searchBlock = "";
+    if (smartMatches.length > 0) {
+      searchBlock = `=== SMART SEARCH HIGH RELEVANCE MATCHES ===\n${smartMatches.join('\n')}\n===========================================\n\n`;
+    }
+
+    return searchBlock + contextSections.join('\n\n');
+  }
+
+    function generateLocalKnowledgeResponse(prompt, db, lang) {
+    if (!prompt) return null;
+    const p = prompt.toLowerCase().trim();
+    const devName = (db.website_metadata && db.website_metadata.developer) || 'Immszkyy';
+    const siteName = (db.website_metadata && db.website_metadata.name) || 'HARMATRA';
+    const members = (db && db.members) || [];
+
+    // 1. Pembuat / Developer
+    if (p.includes('pembuat') || p.includes('developer') || p.includes('siapa bikin') || p.includes('bikin web') || p.includes('who built') || p.includes('who created')) {
+      return lang === 'ar'
+        ? `تم تطوير موقع ${siteName} بواسطة **${devName}**.`
+        : (lang === 'en'
+        ? `The ${siteName} website was developed and created by **${devName}**.`
+        : `Website ${siteName} ini dikembangkan dan dibuat oleh **${devName}**.`);
+    }
+
+    // 2. Identitas MATRA AI
+    if (p.includes('siapa kamu') || p.includes('kamu siapa') || p.includes('apa itu matra ai') || p.includes('matra ai itu apa') || p.includes('who are you')) {
+      return lang === 'ar'
+        ? `أنا **Matra AI**، المساعد الرقمي الذكي الرسمي لموقع ${siteName}.`
+        : (lang === 'en'
+        ? `I am **Matra AI**, the official intelligent digital assistant for the ${siteName} website.`
+        : `Saya adalah **Matra AI**, asisten cerdas digital resmi untuk website **${siteName}**. Ada yang bisa saya bantu seputar anggota, galeri, atau riwayat kelas?`);
+    }
+
+    // 3. Ketua Kelas
+    if (p.includes('ketua kelas') || (p.includes('ketua') && p.includes('kelas'))) {
+      const ketua = members.find(m => m.role && m.role.toLowerCase().includes('ketua kelas'));
+      const name = ketua ? (ketua.full_name || ketua.name) : 'Aden';
+      return lang === 'ar'
+        ? `رئيس الصف في ${siteName} هو **${name}**.`
+        : (lang === 'en'
+        ? `The Class Leader for ${siteName} is **${name}**.`
+        : `Ketua kelas ${siteName} adalah **${name}** (${ketua ? ketua.role : 'Wakil ketua angkatan & Ketua kelas'}).`);
+    }
+
+    // 4. Ketua Angkatan
+    if (p.includes('ketua angkatan')) {
+      const ketuaAng = members.find(m => m.role && m.role.toLowerCase().includes('ketua angkatan'));
+      const name = ketuaAng ? (ketuaAng.full_name || ketuaAng.name) : 'Kumis';
+      return lang === 'ar'
+        ? `رئيس الدفعة في ${siteName} هو **${name}**.`
+        : (lang === 'en'
+        ? `The Generation Leader for ${siteName} is **${name}**.`
+        : `Ketua angkatan ${siteName} adalah **${name}**.`);
+    }
+
+    // 5. Sekretaris
+    if (p.includes('sekretaris')) {
+      const sek = members.filter(m => m.role && m.role.toLowerCase().includes('sekretaris'));
+      if (sek.length > 0) {
+        const list = sek.map(m => `• **${m.role}**: ${m.full_name || m.name}`).join('\n');
+        return lang === 'ar'
+          ? `إليك قائمة السكرتارية في ${siteName}:
+${list}`
+          : (lang === 'en'
+          ? `Here are the secretaries for ${siteName}:
+${list}`
+          : `Berikut adalah sekretaris di ${siteName}:
+${list}`);
+      }
+    }
+
+    // 6. Bendahara
+    if (p.includes('bendahara')) {
+      const ben = members.filter(m => m.role && m.role.toLowerCase().includes('bendahara'));
+      if (ben.length > 0) {
+        const list = ben.map(m => `• **${m.role}**: ${m.full_name || m.name}`).join('\n');
+        return lang === 'ar'
+          ? `إليك قائمة أمناء الصندوق في ${siteName}:
+${list}`
+          : (lang === 'en'
+          ? `Here are the treasurers for ${siteName}:
+${list}`
+          : `Berikut adalah bendahara di ${siteName}:
+${list}`);
+      }
+    }
+
+    // 7. Pengurus / Struktur
+    if (p.includes('pengurus') || p.includes('struktur')) {
+      const roles = members.filter(m => m.role && m.role.trim() !== '' && !m.role.toLowerCase().includes('siswa'));
+      if (roles.length > 0) {
+        const list = roles.map(m => `• **${m.role}**: ${m.full_name || m.name}`).join('\n');
+        return lang === 'ar'
+          ? `إليك قائمة الهيئة الإدارية لموقع ${siteName}:
+${list}`
+          : (lang === 'en'
+          ? `Here are the class officers for ${siteName}:
+${list}`
+          : `Berikut adalah struktur pengurus di ${siteName}:
+${list}`);
+      }
+    }
+
+    // 8. Jumlah Anggota
+    if (p.includes('berapa anggota') || p.includes('jumlah anggota') || p.includes('total anggota') || p.includes('member count')) {
+      const count = members.length;
+      return lang === 'ar'
+        ? `يضم موقع ${siteName} حالياً **${count} عضواً نشطاً**.`
+        : (lang === 'en'
+        ? `The ${siteName} website currently has **${count} active members**.`
+        : `Website ${siteName} saat ini mencatat total **${count} anggota aktif**.`);
+    }
+
+    // 9. Salam / Greetings
+    if (p === 'halo' || p === 'hai' || p === 'halo matra' || p === 'hello' || p === 'hi' || p === 'pagi' || p === 'siang' || p === 'malam') {
+      return lang === 'ar'
+        ? 'مرحباً! 👋 كيف يمكنني مساعدتك اليوم؟'
+        : (lang === 'en'
+        ? 'Hello! 👋 How can I help you today?'
+        : 'Halo! 👋 Ada yang bisa saya bantu seputar kelas HARMATRA hari ini?');
+    }
+
+    return null;
+  }
+
+  function generateFallbackResponse(prompt, db, lang) {
+    const instantMatch = generateLocalKnowledgeResponse(prompt, db, lang);
+    if (instantMatch) return instantMatch;
+
+    return lang === 'ar'
+      ? 'لم أتمكن من العثور على تلك المعلومات في أرشيف HARMATRA حتى الآن.'
       : (lang === 'en'
-      ? 'CRITICAL LANGUAGE RULE: You MUST respond ONLY in English. Every single word must be in English. Never mix with Indonesian or Arabic. Even if the question is in another language, respond in English.'
+      ? 'I couldn\'t find that information in the HARMATRA archive yet.'
+      : 'Saya tidak dapat menemukan informasi tersebut di dalam arsip HARMATRA saat ini.');
+  }
+
+  async function fetchAIResponse(userPrompt, onChunk = null) {
+    const rawDb = (window.harmatraData && window.harmatraData.dbData) || window.HARMATRA_DATA || {};
+    const db = Object.keys(rawDb).length > 0 ? rawDb : (window.localData || {});
+    const lang = getLang();
+
+    // Fast local matcher check
+    const localMatch = generateLocalKnowledgeResponse(userPrompt, db, lang);
+    if (localMatch) {
+      if (onChunk) onChunk(localMatch);
+      return localMatch;
+    }
+
+    // Build Hybrid Retrieval Context
+    const hybridContext = buildHybridContext(userPrompt, db, lang);
+
+        // Language Instruction
+    const langInstruction = lang === 'ar'
+      ? 'CRITICAL LANGUAGE RULE: You MUST respond ONLY in Arabic (العربية). Every single word must be in Arabic. Never mix with Indonesian or English. Even if asked in another language, reply strictly in Arabic.'
+      : (lang === 'en'
+      ? 'CRITICAL LANGUAGE RULE: You MUST respond ONLY in English. Every single word must be in English. Never mix with Indonesian or Arabic. Even if asked in another language, reply strictly in English.'
       : 'CRITICAL LANGUAGE RULE: Kamu HARUS merespons HANYA dalam Bahasa Indonesia. Setiap kata harus dalam Bahasa Indonesia. Jangan campur dengan bahasa lain.');
 
-    const systemInstruction = `You are MATRA AI.
-Official digital intelligent assistant of the HARMATRA website.
+    const systemInstruction = `You are MATRA AI, the official intelligent digital assistant of the HARMATRA website.
 
-You are not a simple chatbot. You feel like a real AI assistant living inside the Harmatra website.
-
-Your behavior:
-- smart, natural, modern, helpful, warm, responsive, human-like.
-- Provide accurate, context-aware responses based on the latest available information.
+Personality & Tone:
+- Friendly, natural, helpful, intelligent, human-like, warm, and highly context-aware.
+- Always stay as MATRA AI.
 
 ${langInstruction}
 
-CRITICAL INSTRUCTION:
-You have direct access to the HARMATRA DATABASE below.
-Whenever a question relates to the website content (developers, members, history, gallery count, spotlight, etc.), you MUST search the database first.
-For example:
-- If asked "Who built this website?", answer using the Developer information from Website Metadata.
-- If asked "Who is the secretary?", search Active Members Data for the role 'Secretary'.
-- If asked "How many gallery photos?", read the Total Gallery Items count.
+HOW TO ANSWER USER QUESTIONS:
 
-If the requested data is truly not found in the HARMATRA DATABASE, reply naturally that you couldn't find the information in the archive. Do not invent facts or hallucinate.
+1. HARMATRA WEBSITE & CLASS SPECIFIC QUESTIONS:
+- For questions regarding HARMATRA website, developers, members, class structure, history, gallery photos, quotes, spotlight, or timeline: Search the HYBRID RETRIEVAL CONTEXT ARCHIVE below first.
+- If specific HARMATRA class data is asked but truly not present in the archive, respond politely that the information is not found in the HARMATRA archive yet.
+- NEVER invent or hallucinate fake facts about HARMATRA members or class history.
 
-Outside Harmatra questions:
-act like smart AI (school help, study help, writing, ideas, motivation, productivity).
-Never say “I am demo” or robotic answers. Stay as MATRA AI.
+2. GENERAL KNOWLEDGE & OUTSIDE QUESTIONS (Religion, School help, Science, Study tips, Writing, Motivation, Daily advice):
+- For general knowledge questions outside HARMATRA (such as "apa hukum shalat", religion, math, science, study help, general advice, etc.), use your full general intelligence to provide a helpful, accurate, respectful, and natural answer as MATRA AI.
+- Do NOT say "information not found in archive" for general knowledge topics like religion or science. Answer them accurately and intelligently!
 
-${harmatraContext}`;
+HYBRID RETRIEVAL CONTEXT ARCHIVE:
+${hybridContext}`;
 
     const messages = [];
     messages.push({ role: 'system', content: systemInstruction });
-    
-    // 8. CHAT HISTORY — exclude any loading placeholder messages
+
     const loadingPhrases = ['Matra AI sedang berpikir...', 'Matra AI is thinking...', 'Matra AI يفكر...'];
     for (let msg of state.messages) {
       if (msg.role === 'user') {
-         messages.push({ role: 'user', content: msg.content });
+        messages.push({ role: 'user', content: msg.content });
       } else if (msg.role === 'assistant' && !loadingPhrases.includes(msg.content)) {
-         messages.push({ role: 'assistant', content: msg.content });
+        messages.push({ role: 'assistant', content: msg.content });
       }
     }
-    
-    
-    const requestBody = { messages, model: "openai" };
 
-    const response = await fetch(AI_API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestBody)
-    });
+        // Groq AI Settings & Key Resolution
+    const aiConfig = (db.settings && db.settings.ai) || {};
+    const model = aiConfig.model || 'llama-3.3-70b-versatile';
+    const temperature = typeof aiConfig.temperature === 'number' ? aiConfig.temperature : 0.6;
+    const max_tokens = typeof aiConfig.max_tokens === 'number' ? aiConfig.max_tokens : 1024;
+    const isStream = aiConfig.streaming !== false;
+    const groqKey = aiConfig.apiKey || localStorage.getItem('groq_api_key') || '';
+    
+    const origin = (typeof window !== 'undefined' && window.location && window.location.origin && window.location.origin !== 'null' && !window.location.origin.startsWith('file'))
+      ? window.location.origin
+      : '';
 
-    if (!response.ok) {
-      const errText = await response.text();
-      if (response.status === 429) {
-        throw new Error(`429_TOO_MANY_REQUESTS`);
+    // Prioritize Backend Serverless proxy, then direct Groq API Endpoint
+    const candidateEndpoints = [];
+    if (origin) {
+      candidateEndpoints.push({ url: origin + '/api/groq', isDirect: false });
+      candidateEndpoints.push({ url: origin + '/.netlify/functions/groq', isDirect: false });
+    }
+    candidateEndpoints.push({ url: 'https://api.groq.com/openai/v1/chat/completions', isDirect: true });
+
+    let fullResponseText = "";
+
+    for (const ep of candidateEndpoints) {
+      try {
+        const headers = { 'Content-Type': 'application/json' };
+        if (groqKey) {
+          headers['Authorization'] = `Bearer ${groqKey}`;
+        }
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+        const requestPayload = {
+          model: model || 'llama-3.3-70b-versatile',
+          messages,
+          temperature,
+          max_tokens,
+          stream: isStream && !ep.isDirect // Stream via proxy or JSON via direct
+        };
+
+        const response = await fetch(ep.url, {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify(requestPayload),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        if (response.ok) {
+          if (isStream && !ep.isDirect && response.body && typeof response.body.getReader === 'function') {
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder('utf-8');
+            let done = false;
+
+            while (!done) {
+              const { value, done: doneReading } = await reader.read();
+              done = doneReading;
+              if (value) {
+                const chunkStr = decoder.decode(value, { stream: true });
+                const lines = chunkStr.split('\n');
+                for (const line of lines) {
+                  const trimmed = line.trim();
+                  if (trimmed.startsWith('data: ')) {
+                    const jsonStr = trimmed.substring(6).trim();
+                    if (jsonStr === '[DONE]') break;
+                    try {
+                      const parsed = JSON.parse(jsonStr);
+                      const delta = parsed.choices?.[0]?.delta?.content || '';
+                      if (delta) {
+                        fullResponseText += delta;
+                        if (onChunk) onChunk(fullResponseText);
+                      }
+                    } catch(e) {}
+                  }
+                }
+              }
+            }
+            if (fullResponseText.trim().length > 0) {
+              return fullResponseText;
+            }
+          }
+
+          // Parse JSON Response
+          const data = await response.json();
+          if (data && data.choices && data.choices[0] && data.choices[0].message) {
+            fullResponseText = data.choices[0].message.content || '';
+            if (fullResponseText.trim().length > 0) {
+              if (onChunk) onChunk(fullResponseText);
+              return fullResponseText;
+            }
+          }
+        }
+      } catch (err) {
+        console.warn(`Endpoint ${ep.url} failed:`, err.message);
       }
-      throw new Error(`Status ${response.status} - ${errText}`);
     }
 
-    const data = await response.text();
-    
-    if (data) {
-      return data;
-    }
-    
-    throw new Error("Empty response from AI.");
+    // Ultimate fallback if backend is unreachable / unconfigured
+    const fallbackAnswer = generateFallbackResponse(userPrompt, db, lang);
+    if (onChunk) onChunk(fallbackAnswer);
+    return fallbackAnswer;
   }
+
 
   function playSynthSound(freq, duration, type = 'sine', volume = 0.04) {
     try {

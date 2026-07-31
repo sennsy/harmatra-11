@@ -10,7 +10,7 @@
   <title>HARMATRA | Angkatan 11</title>
 
   <meta name="description"
-    content="Website Resmi Angkatan 11 HARMATRA SMA 1. Wadah digital untuk melangkah bersama, merajut memori, dan menciptakan harmoni tak terlupakan.">
+    content="Website Resmi Angkatan 11 HARMATRA 2 SMA. Wadah digital untuk melangkah bersama, merajut memori, dan menciptakan harmoni tak terlupakan.">
 
 
 
@@ -811,6 +811,62 @@
       box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
     }
 
+    
+    /* Dynamic Gallery Filter Button Styles (Dark & Light Theme Support) */
+    .gallery-filter-btn {
+      padding: 0.5rem 1.1rem;
+      border-radius: 9999px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-filter-btn:hover {
+      background-color: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .gallery-filter-btn.active {
+      background: linear-gradient(135deg, #2563eb, #4f46e5) !important;
+      color: #ffffff !important;
+      border-color: transparent !important;
+      font-weight: 600;
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.45);
+      transform: scale(1.04);
+    }
+
+    /* Light Theme (theme-glow) Overrides for High Contrast */
+    .theme-glow .gallery-filter-btn {
+      background-color: rgba(15, 23, 42, 0.08);
+      border-color: rgba(15, 23, 42, 0.16);
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    .theme-glow .gallery-filter-btn:hover {
+      background-color: rgba(15, 23, 42, 0.16);
+      color: #020617;
+      border-color: rgba(15, 23, 42, 0.25);
+    }
+
+    .theme-glow .gallery-filter-btn.active {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+      color: #ffffff !important;
+      border-color: transparent !important;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    }
+
     /* Close Button Custom styling */
     .contact-close-btn {
       color: rgba(255, 255, 255, 0.4);
@@ -1208,7 +1264,7 @@
           class="inline-block py-1 px-3 rounded-full glass text-xs font-medium tracking-widest mb-6 opacity-0 translate-y-4"
           id="heroBadge">
 
-          GEN 11 • SMA 1
+          GEN 11 • 2 SMA
 
         </div>
 
@@ -1247,7 +1303,7 @@
 
         <div class="glass-card p-8 text-center gs-up">
 
-          <div class="font-display text-4xl font-bold text-blue-400 mb-2 counter" data-target="29" id="statMembers">0
+          <div class="font-display text-4xl font-bold text-blue-400 mb-2 counter" data-target="28" id="statMembers">0
           </div>
 
           <div class="text-xs uppercase tracking-widest opacity-70" data-i18n="stat_members">Anggota</div>
@@ -1256,7 +1312,7 @@
 
         <div class="glass-card p-8 text-center gs-up" style="transition-delay: 0.1s">
 
-          <div class="font-display text-4xl font-bold text-purple-400 mb-2 counter" data-target="10" id="statClass">0
+          <div class="font-display text-4xl font-bold text-purple-400 mb-2 counter" data-target="11" id="statClass">0
           </div>
 
           <div class="text-xs uppercase tracking-widest opacity-70" data-i18n="stat_class">Kelas</div>
@@ -1379,11 +1435,14 @@
 
     <section class="py-40 px-6 max-w-7xl mx-auto" id="gallery">
 
-      <div class="text-center mb-16 gs-up">
+      <div class="text-center mb-10 gs-up">
 
         <h2 class="font-display text-4xl md:text-5xl font-bold mb-4" data-i18n="title_gallery">Galeri Memori</h2>
 
         <p class="opacity-70" data-i18n="sub_gallery">Kumpulan momen yang tertangkap lensa.</p>
+
+        <!-- Dynamic Category Filters for Main Gallery -->
+        <div class="flex flex-wrap justify-center gap-2 mt-8 max-w-4xl mx-auto" id="mainGalleryFilterContainer"></div>
 
       </div>
 
@@ -2307,28 +2366,6 @@
 
             {
 
-              name: "rozan",
-
-              name_ar: "روزان",
-
-              full_name: "selain nawwaf",
-
-              role: "siswa",
-
-              role_ar: "طالب",
-
-              bio_id: "isi dewek.",
-
-              bio_en: "yes or no?.",
-
-              bio_ar: "اكتبه بنفسك.",
-
-              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
-
-            },
-
-            {
-
               name: "jarir",
 
               name_ar: "جرير",
@@ -2526,94 +2563,49 @@
           ],
 
           gallery: [
-            {
-              url: "https://drive.google.com/file/d/1NDbauh0G9LjRVB09f_8oV-3nCRc-Z2Vf/view?usp=drive_link",
-              title_id: "Belajar Mandiri",
-              title_en: "Independent Study",
-              title_ar: "الدراسة الذاتية",
-              caption_id: "Momen Belajar Bersama di Kelas",
-              caption_en: "Learning Together in Class",
-              caption_ar: "لحظات الدراسة معاً في الصف"
-            },
-            {
-              url: "https://drive.google.com/file/d/119RjNKDfu8IttSIRhsACrUnxBkTZ2A-_/view?usp=sharing",
-              title_id: "Kerja Kelompok",
-              title_en: "Group Project",
-              title_ar: "العمل الجماعي",
-              caption_id: "Diskusi dan Kerja Kelompok",
-              caption_en: "Group Discussion and Teamwork",
-              caption_ar: "مناقشة جماعية وعمل جماعي"
-            },
-            {
-              url: "https://drive.google.com/file/d/1QaOUgifO4TL0qoM0-kzxTt0oFgI06UXo/view?usp=drive_link",
-              title_id: "Masa Orientasi (MPLS)",
-              title_en: "School Orientation (MPLS)",
-              title_ar: "توجيه الطلاب (MPLS)",
-              caption_id: "Keceriaan Selama Masa MPLS",
-              caption_en: "Fun Times During MPLS Orientation",
-              caption_ar: "أوقات ممتعة خلال فترة توجيه الطلاب"
-            },
-            {
-              url: "https://drive.google.com/file/d/1MxM15ADNXNDKrjG7gbJcaC_3BqFyKdtT/view?usp=sharing",
-              title_id: "Kebersamaan Harmatra",
-              title_en: "Harmatra Togetherness",
-              title_ar: "تضامن هارماترى",
-              caption_id: "Kebersamaan Anggota Harmatra",
-              caption_en: "Togetherness of Harmatra Family",
-              caption_ar: "تضامن عائلة هارماترى"
-            },
-            {
-              url: "https://drive.google.com/file/d/1HgHHEQ6Ty1nIQJPlTCA4nvYsKt7atlU-/view?usp=sharing",
-              title_id: "Senyum Persahabatan",
-              title_en: "Smiles of Friendship",
-              title_ar: "ابتسامات الصداقة",
-              caption_id: "Senyuman dan Tawa Bersama",
-              caption_en: "Smiles and Shared Laughter",
-              caption_ar: "ابتسامات وضحكات مشتركة"
-            },
-            {
-              url: "https://drive.google.com/file/d/1xiA_Lr8q5Fv-PP--QPLrcsZvDspLS_1M/view?usp=sharing",
-              title_id: "Momen Hangat",
-              title_en: "Warm Moments",
-              title_ar: "لحظات دافئة",
-              caption_id: "Momen Hangat Persahabatan",
-              caption_en: "Warm Moments of Friendship",
-              caption_ar: "لحظات الصداقة الدافئة"
-            },
-            {
-              url: "https://drive.google.com/file/d/1NRaPxxnpM64vayjoQiJ53dYdspDasOT6/view?usp=sharing",
-              title_id: "Menggapai Impian",
-              title_en: "Reaching Dreams",
-              title_ar: "الوصول إلى الأحلام",
-              caption_id: "Langkah Bersama Menggapai Impian",
-              caption_en: "Walking Together Towards Our Dreams",
-              caption_ar: "السير معاً نحو أحلامنا"
-            },
-            {
-              url: "https://drive.google.com/file/d/1pPAQCPD2E8CYvNcdJVLQLa5dJU1dDrbc/view?usp=sharing",
-              title_id: "Kompak Selalu",
-              title_en: "Always United",
-              title_ar: "متحدون دائماً",
-              caption_id: "Kompak dalam Setiap Kegiatan",
-              caption_en: "United in Every Activity",
-              caption_ar: "متحدون في كل نشاط"
-            },
-            {
-              url: "https://drive.google.com/file/d/1vg8EPI9Epany9JaLgyrNbj_kprjF8hLg/view?usp=sharing",
-              title_id: "Memori Sekolah",
-              title_en: "School Memories",
-              title_ar: "ذكريات المدرسة",
-              caption_id: "Kenangan Indah Masa Sekolah",
-              caption_en: "Beautiful School Memories",
-              caption_ar: "ذكريات المدرسة الجميلة"
-            }
-          ],
+          {
+                    "url": "https://drive.google.com/file/d/1-bp6K5-FOi1cPmRQstFMokYOWdqzW67p/view?usp=sharing",
+                    "title_id": "Pelantikan Organisasi #1",
+                    "title_en": "Organization Inauguration #1",
+                    "title_ar": "تنصيب المنظمة #1",
+                    "caption": {
+                              "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (1)",
+                              "en": "HARMATRA Student Organization Inauguration Documentation (1)",
+                              "ar": "توثيق لحظات تنصيب المنظمة (1)"
+                    },
+                    "category": "Pelantikan Organisasi"
+          },
+          {
+                    "url": "https://drive.google.com/file/d/12EvezDDBd1V8-8UWgj3U7wC3JEHla2Yh/view?usp=sharing",
+                    "title_id": "Pelantikan Organisasi #2",
+                    "title_en": "Organization Inauguration #2",
+                    "title_ar": "تنصيب المنظمة #2",
+                    "caption": {
+                              "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (2)",
+                              "en": "HARMATRA Student Organization Inauguration Documentation (2)",
+                              "ar": "توثيق لحظات تنصيب المنظمة (2)"
+                    },
+                    "category": "Pelantikan Organisasi"
+          },
+          {
+                    "url": "https://drive.google.com/file/d/12s4sVbm5bDV2GnU9k1OzSIKsnSl3m0j0/view?usp=sharing",
+                    "title_id": "Pelantikan Organisasi #3",
+                    "title_en": "Organization Inauguration #3",
+                    "title_ar": "تنصيب المنظمة #3",
+                    "caption": {
+                              "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (3)",
+                              "en": "HARMATRA Student Organization Inauguration Documentation (3)",
+                              "ar": "توثيق لحظات تنصيب المنظمة (3)"
+                    },
+                    "category": "Pelantikan Organisasi"
+          }
+],
 
           quotes: [
 
             { text_id: "Kisah kita baru saja dimulai.", text_en: "Our story has just begun.", text_ar: "قصتنا بدأت للتو.", author: "Harmatra" },
 
-            { text_id: "Bukan sekadar kelas, tapi keluarga.", text_en: "Not just a class, but a family.", text_ar: "ليس مجرد صف، بل عائلة.", author: "Andi Saputra" }
+            { text_id: "Bukan sekadar kelas, tapi keluarga.", text_en: "Not just a class, but a family.", text_ar: "ليس مجرد صف، بل عائلة.", author: "Fulan" }
 
           ]
 
@@ -3505,34 +3497,78 @@
         };
 
 
+        let mainPageGalleryCategory = 'All';
+
+        function renderMainGalleryFilters() {
+          const container = document.getElementById('mainGalleryFilterContainer');
+          if (!container || !dbData.gallery) return;
+
+          const categoriesInDb = [...new Set(dbData.gallery.map(img => img.category).filter(Boolean))];
+          const cats = ["All", ...categoriesInDb];
+
+          let html = '';
+          cats.forEach(cat => {
+            const isActive = cat === mainPageGalleryCategory;
+            const label = cat === 'All' ? (currentLang === 'id' ? 'Semua' : currentLang === 'ar' ? 'الكل' : 'All') : cat;
+            const btnClass = isActive
+              ? 'gallery-filter-btn active' : 'gallery-filter-btn';
+
+            html += `<button onclick="filterMainGallery('${escapeHTML(cat)}')" class="${btnClass}">${escapeHTML(label)}</button>`;
+          });
+          container.innerHTML = html;
+        }
+
+        window.filterMainGallery = function(cat) {
+          mainPageGalleryCategory = cat;
+          renderMainGalleryFilters();
+          renderGallery();
+        };
+
         function renderGallery() {
           const container = document.getElementById('galleryContainer');
           const viewMoreContainer = document.getElementById('galleryViewMoreContainer');
           const counterText = document.getElementById('galleryCounterText');
 
-          container.innerHTML = '';
-          const maxInitial = 9;
-          const displayItems = dbData.gallery.slice(0, maxInitial);
+          renderMainGalleryFilters();
 
-          displayItems.forEach((img, i) => {
+          container.innerHTML = '';
+
+          let items = dbData.gallery.map((img, i) => ({ ...img, originalIndex: i }));
+          if (mainPageGalleryCategory !== 'All') {
+            items = items.filter(img => img.category === mainPageGalleryCategory);
+          }
+
+          const maxInitial = 12;
+          const displayItems = items.slice(0, maxInitial);
+
+          displayItems.forEach((img) => {
             const photoUrl = convertDriveLink(img.url);
+            const category = img.category || 'Memories';
 
             container.innerHTML += `
-            <div class="masonry-item rounded-xl overflow-hidden gs-up relative group cursor-pointer" onclick="openLightbox('gallery', ${i})">
-              <img src="${escapeHTML(photoUrl)}" loading="lazy" onerror="this.src='https://via.placeholder.com/600?text=Error'" class="w-full h-auto block object-cover transform group-hover:scale-105 transition-transform duration-700">
-              <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <i class="fa-solid fa-expand text-white text-2xl drop-shadow-lg"></i>
+            <div class="masonry-item rounded-2xl overflow-hidden gs-up relative group cursor-pointer border border-white/10 hover:border-blue-500/50 transition-all duration-500 shadow-lg" onclick="openLightbox('gallery', ${img.originalIndex})">
+              <div class="relative overflow-hidden">
+                <img src="${escapeHTML(photoUrl)}" loading="lazy" onerror="this.src='https://via.placeholder.com/600?text=Error'" class="w-full h-auto block object-cover transform group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4">
+                  <div class="flex justify-start">
+                    <span class="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 bg-blue-600/80 text-white rounded-full backdrop-blur-md shadow-md">${escapeHTML(category)}</span>
+                  </div>
+                  <div class="flex items-center justify-between text-white mt-auto">
+                    <span class="text-xs font-medium truncate">${escapeHTML(img.title_id || '')}</span>
+                    <i class="fa-solid fa-expand text-lg"></i>
+                  </div>
+                </div>
               </div>
             </div>
           `;
           });
 
-          if (dbData.gallery.length > maxInitial) {
+          if (items.length > maxInitial || dbData.gallery.length > maxInitial) {
             viewMoreContainer.classList.remove('hidden');
             const translationMap = {
-              'id': `Menampilkan ${maxInitial} dari ${dbData.gallery.length} foto`,
-              'en': `Showing ${maxInitial} of ${dbData.gallery.length} photos`,
-              'ar': `عرض ${maxInitial} من أصل ${dbData.gallery.length} صورة`
+              'id': `Menampilkan ${displayItems.length} dari ${items.length} foto ${mainPageGalleryCategory === 'All' ? '' : '(' + mainPageGalleryCategory + ')'}`,
+              'en': `Showing ${displayItems.length} of ${items.length} photos ${mainPageGalleryCategory === 'All' ? '' : '(' + mainPageGalleryCategory + ')'}`,
+              'ar': `عرض ${displayItems.length} من أصل ${items.length} صورة`
             };
             counterText.innerText = translationMap[currentLang] || translationMap['en'];
           } else {
@@ -3599,7 +3635,7 @@
         window.openFullGallery = function () {
           const fgViewer = document.getElementById('fullGalleryViewer');
 
-          activeGalleryCategory = 'All';
+          activeGalleryCategory = mainPageGalleryCategory !== 'All' ? mainPageGalleryCategory : 'All';
           activeGallerySearch = '';
           const searchInp = document.getElementById('gallerySearchInput');
           const searchInpMob = document.getElementById('gallerySearchInputMobile');
@@ -3617,17 +3653,19 @@
 
         function renderGalleryFilters() {
           const container = document.getElementById('galleryFilterContainer');
-          if (!container) return;
-          const cats = ["All", "School Life", "Study Tour", "Sports", "Graduation", "Friends", "Events", "Memories"];
+          if (!container || !dbData.gallery) return;
+
+          const categoriesInDb = [...new Set(dbData.gallery.map(img => img.category).filter(Boolean))];
+          const cats = ["All", ...categoriesInDb];
 
           let html = '';
           cats.forEach(cat => {
             const isActive = cat === activeGalleryCategory;
+            const label = cat === 'All' ? (currentLang === 'id' ? 'Semua' : currentLang === 'ar' ? 'الكل' : 'All') : cat;
             const btnClass = isActive
-              ? 'px-4 py-1.5 rounded-full bg-blue-500 text-white text-sm font-medium whitespace-nowrap transition-all'
-              : 'px-4 py-1.5 rounded-full bg-white/10 text-white/70 hover:bg-white/20 hover:text-white text-sm font-medium whitespace-nowrap transition-all';
+              ? 'gallery-filter-btn active' : 'gallery-filter-btn';
 
-            html += `<button onclick="filterFullGallery('${cat}')" class="${btnClass}">${cat}</button>`;
+            html += `<button onclick="filterFullGallery('${escapeHTML(cat)}')" class="${btnClass}">${escapeHTML(label)}</button>`;
           });
           container.innerHTML = html;
         }

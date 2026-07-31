@@ -1,5 +1,5 @@
 const fs = require('fs');
-const file = 'c:/Users/izm/OneDrive/ドキュメント/alhazen/html/alhazen/kelas 10/angkatan/index.html';
+const file = 'c:/Users/izm/OneDrive/ドキュメント/alhazen/html/alhazen/kelas 11/angkatan/index.html';
 let content = fs.readFileSync(file, 'utf8');
 
 // Match any name_ar: "...", followed by some spacing, followed by role: "..."

@@ -502,28 +502,6 @@
 
             {
 
-              name: "rozan",
-
-              name_ar: "روزان",
-
-              full_name: "selain nawwaf",
-
-              role: "siswa",
-
-              role_ar: "طالب",
-
-              bio_id: "isi dewek.",
-
-              bio_en: "yes or no?.",
-
-              bio_ar: "اكتبه بنفسك.",
-
-              photo: "https://drive.google.com/file/d/1mVdpU0hSTBqcQjCd-GcsP_0JcdrE9_pB/view?usp=drive_link"
-
-            },
-
-            {
-
               name: "jarir",
 
               name_ar: "جرير",
@@ -721,94 +699,49 @@
           ],
 
           gallery: [
-            {
-              url: "https://drive.google.com/file/d/1NDbauh0G9LjRVB09f_8oV-3nCRc-Z2Vf/view?usp=drive_link",
-              title_id: "Belajar Mandiri",
-              title_en: "Independent Study",
-              title_ar: "الدراسة الذاتية",
-              caption_id: "Momen Belajar Bersama di Kelas",
-              caption_en: "Learning Together in Class",
-              caption_ar: "لحظات الدراسة معاً في الصف"
-            },
-            {
-              url: "https://drive.google.com/file/d/119RjNKDfu8IttSIRhsACrUnxBkTZ2A-_/view?usp=sharing",
-              title_id: "Kerja Kelompok",
-              title_en: "Group Project",
-              title_ar: "العمل الجماعي",
-              caption_id: "Diskusi dan Kerja Kelompok",
-              caption_en: "Group Discussion and Teamwork",
-              caption_ar: "مناقشة جماعية وعمل جماعي"
-            },
-            {
-              url: "https://drive.google.com/file/d/1BgfNYptDOop_BpHpgdPvK5lE2zr1LOVC/view?usp=drive_link",
-              title_id: "Masa Orientasi (MPLS)",
-              title_en: "School Orientation (MPLS)",
-              title_ar: "توجيه الطلاب (MPLS)",
-              caption_id: "Keceriaan Selama Masa MPLS",
-              caption_en: "Fun Times During MPLS Orientation",
-              caption_ar: "أوقات ممتعة خلال فترة توجيه الطلاب"
-            },
-            {
-              url: "https://drive.google.com/file/d/1MxM15ADNXNDKrjG7gbJcaC_3BqFyKdtT/view?usp=sharing",
-              title_id: "Kebersamaan Harmatra",
-              title_en: "Harmatra Togetherness",
-              title_ar: "تضامن هارماترى",
-              caption_id: "Kebersamaan Anggota Harmatra",
-              caption_en: "Togetherness of Harmatra Family",
-              caption_ar: "تضامن عائلة هارماترى"
-            },
-            {
-              url: "https://drive.google.com/file/d/1HgHHEQ6Ty1nIQJPlTCA4nvYsKt7atlU-/view?usp=sharing",
-              title_id: "Senyum Persahabatan",
-              title_en: "Smiles of Friendship",
-              title_ar: "ابتسامات الصداقة",
-              caption_id: "Senyuman dan Tawa Bersama",
-              caption_en: "Smiles and Shared Laughter",
-              caption_ar: "ابتسامات وضحكات مشتركة"
-            },
-            {
-              url: "https://drive.google.com/file/d/1xiA_Lr8q5Fv-PP--QPLrcsZvDspLS_1M/view?usp=sharing",
-              title_id: "Momen Hangat",
-              title_en: "Warm Moments",
-              title_ar: "لحظات دافئة",
-              caption_id: "Momen Hangat Persahabatan",
-              caption_en: "Warm Moments of Friendship",
-              caption_ar: "لحظات الصداقة الدافئة"
-            },
-            {
-              url: "https://drive.google.com/file/d/1NRaPxxnpM64vayjoQiJ53dYdspDasOT6/view?usp=sharing",
-              title_id: "Menggapai Impian",
-              title_en: "Reaching Dreams",
-              title_ar: "الوصول إلى الأحلام",
-              caption_id: "Langkah Bersama Menggapai Impian",
-              caption_en: "Walking Together Towards Our Dreams",
-              caption_ar: "السير معاً نحو أحلامنا"
-            },
-            {
-              url: "https://drive.google.com/file/d/1pPAQCPD2E8CYvNcdJVLQLa5dJU1dDrbc/view?usp=sharing",
-              title_id: "Kompak Selalu",
-              title_en: "Always United",
-              title_ar: "متحدون دائماً",
-              caption_id: "Kompak dalam Setiap Kegiatan",
-              caption_en: "United in Every Activity",
-              caption_ar: "متحدون في كل نشاط"
-            },
-            {
-              url: "https://drive.google.com/file/d/1vg8EPI9Epany9JaLgyrNbj_kprjF8hLg/view?usp=sharing",
-              title_id: "Memori Sekolah",
-              title_en: "School Memories",
-              title_ar: "ذكريات المدرسة",
-              caption_id: "Kenangan Indah Masa Sekolah",
-              caption_en: "Beautiful School Memories",
-              caption_ar: "ذكريات المدرسة الجميلة"
-            }
-          ],
+          {
+                    "url": "https://drive.google.com/file/d/1-bp6K5-FOi1cPmRQstFMokYOWdqzW67p/view?usp=sharing",
+                    "title_id": "Pelantikan Organisasi #1",
+                    "title_en": "Organization Inauguration #1",
+                    "title_ar": "تنصيب المنظمة #1",
+                    "caption": {
+                              "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (1)",
+                              "en": "HARMATRA Student Organization Inauguration Documentation (1)",
+                              "ar": "توثيق لحظات تنصيب المنظمة (1)"
+                    },
+                    "category": "Pelantikan Organisasi"
+          },
+          {
+                    "url": "https://drive.google.com/file/d/12EvezDDBd1V8-8UWgj3U7wC3JEHla2Yh/view?usp=sharing",
+                    "title_id": "Pelantikan Organisasi #2",
+                    "title_en": "Organization Inauguration #2",
+                    "title_ar": "تنصيب المنظمة #2",
+                    "caption": {
+                              "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (2)",
+                              "en": "HARMATRA Student Organization Inauguration Documentation (2)",
+                              "ar": "توثيق لحظات تنصيب المنظمة (2)"
+                    },
+                    "category": "Pelantikan Organisasi"
+          },
+          {
+                    "url": "https://drive.google.com/file/d/12s4sVbm5bDV2GnU9k1OzSIKsnSl3m0j0/view?usp=sharing",
+                    "title_id": "Pelantikan Organisasi #3",
+                    "title_en": "Organization Inauguration #3",
+                    "title_ar": "تنصيب المنظمة #3",
+                    "caption": {
+                              "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (3)",
+                              "en": "HARMATRA Student Organization Inauguration Documentation (3)",
+                              "ar": "توثيق لحظات تنصيب المنظمة (3)"
+                    },
+                    "category": "Pelantikan Organisasi"
+          }
+],
 
           quotes: [
 
             { text_id: "Kisah kita baru saja dimulai.", text_en: "Our story has just begun.", text_ar: "قصتنا بدأت للتو.", author: "Harmatra" },
 
-            { text_id: "Bukan sekadar kelas, tapi keluarga.", text_en: "Not just a class, but a family.", text_ar: "ليس مجرد صف، بل عائلة.", author: "Andi Saputra" }
+            { text_id: "Bukan sekadar kelas, tapi keluarga.", text_en: "Not just a class, but a family.", text_ar: "ليس مجرد صف، بل عائلة.", author: "Fulan" }
 
           ]
 
@@ -848,7 +781,7 @@
 
             spotlight: "Sorotan Hari Ini",
 
-            footer_note: "Website resmi HARMATRA Angkatan 11 - SMA 1. Dibuat dengan ❤️ oleh siswa, untuk siswa. Semua data bersifat fiktif dan hanya untuk tujuan demonstrasi.",
+            footer_note: "Website resmi HARMATRA Angkatan 11 - 2 SMA. Dibuat dengan ❤️ oleh siswa, untuk siswa. Semua data bersifat fiktif dan hanya untuk tujuan demonstrasi.",
 
             contact_btn: "Hubungi Kami",
             contact_title: "Hubungi Kami",
@@ -887,7 +820,7 @@
 
             spotlight: "Today's Spotlight",
 
-            footer_note: "Official website of HARMATRA Class 11 - SMA 1. Crafted with ❤️ by the students, for the students. All data is fictional and for demonstration purposes only.",
+            footer_note: "Official website of HARMATRA Class 11 - 2 SMA. Crafted with ❤️ by the students, for the students. All data is fictional and for demonstration purposes only.",
 
             contact_btn: "Contact Us",
             contact_title: "Contact Us",
