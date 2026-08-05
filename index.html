@@ -811,7 +811,7 @@
       box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
     }
 
-    
+
     /* Dynamic Gallery Filter Button Styles (Dark & Light Theme Support) */
     .gallery-filter-btn {
       padding: 0.5rem 1.1rem;
@@ -1580,20 +1580,22 @@
 
   <!-- FULL GALLERY VIEWER OVERLAY -->
   <div id="fullGalleryViewer" data-lenis-prevent=""
-    class="fixed inset-0 z-[90] bg-[#050505] hidden flex flex-col opacity-0 transition-opacity duration-500 overflow-y-auto overflow-x-hidden">
-    <div class="sticky top-0 z-[95] bg-[#050505]/90 backdrop-blur-md border-b border-white/5 pt-6 pb-4 px-6">
+    class="fixed inset-0 z-[90] bg-[var(--bg-color)] hidden flex flex-col opacity-0 transition-opacity duration-500 overflow-y-auto overflow-x-hidden text-[var(--text-main)]">
+    <div
+      class="sticky top-0 z-[95] bg-[var(--bg-color)]/90 backdrop-blur-md border-b border-[var(--text-main)]/5 pt-6 pb-4 px-6">
       <div class="flex justify-between items-center mb-4 max-w-[1600px] mx-auto w-full">
         <h2 class="font-display text-2xl md:text-3xl font-bold text-[var(--text-main)]" data-i18n="full_gallery_title">
           Koleksi Lengkap</h2>
         <div class="flex items-center gap-4">
           <div class="relative hidden md:block">
-            <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/40"></i>
+            <i
+              class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-main)] opacity-40"></i>
             <input type="text" id="gallerySearchInput" oninput="handleGallerySearch()"
-              class="pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-white focus:outline-none focus:border-blue-500/50 transition-all w-64"
+              class="pl-10 pr-4 py-2 bg-[var(--text-main)]/5 border border-[var(--text-main)]/10 rounded-full text-sm text-[var(--text-main)] focus:outline-none focus:border-blue-500/50 transition-all w-64"
               placeholder="Cari memori..." data-i18n-placeholder="search_memory">
           </div>
           <button onclick="closeFullGallery()"
-            class="w-10 h-10 rounded-full bg-white/10 text-white hover:bg-red-500/80 flex items-center justify-center transition-all hover:scale-110">
+            class="w-10 h-10 rounded-full bg-[var(--text-main)]/10 text-[var(--text-main)] hover:bg-red-500/80 hover:text-white flex items-center justify-center transition-all hover:scale-110">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
@@ -1601,9 +1603,9 @@
 
       <!-- Mobile Search -->
       <div class="relative md:hidden mb-4 max-w-[1600px] mx-auto w-full">
-        <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/40"></i>
+        <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-main)] opacity-40"></i>
         <input type="text" id="gallerySearchInputMobile" oninput="handleGallerySearchMobile()"
-          class="pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-full text-sm text-white w-full focus:outline-none focus:border-blue-500/50"
+          class="pl-10 pr-4 py-2 bg-[var(--text-main)]/5 border border-[var(--text-main)]/10 rounded-full text-sm text-[var(--text-main)] w-full focus:outline-none focus:border-blue-500/50"
           placeholder="Cari memori..." data-i18n-placeholder="search_memory">
       </div>
 
@@ -1617,8 +1619,8 @@
     <div class="px-6 py-8 max-w-[1600px] mx-auto w-full flex-grow">
       <div class="masonry" id="fullGalleryContainer"></div>
       <div id="galleryEmptyState" class="hidden text-center py-20">
-        <i class="fa-solid fa-image text-4xl text-white/20 mb-4 block"></i>
-        <p class="text-white/50 text-sm tracking-widest uppercase">Tidak ada foto ditemukan</p>
+        <i class="fa-solid fa-image text-4xl text-[var(--text-main)] opacity-20 mb-4 block"></i>
+        <p class="text-[var(--text-main)] opacity-50 text-sm tracking-widest uppercase">Tidak ada foto ditemukan</p>
       </div>
     </div>
   </div>
@@ -1877,371 +1879,371 @@
         const localData = {
 
           members: [
-          {
-                    "name": "kumis",
-                    "name_ar": "كوميس",
-                    "full_name": "Khoirul azzam",
-                    "role": "Ketua angkatan",
-                    "role_ar": "رئيس الدفعة",
-                    "bio_id": "Kurangi ekspektasi, lipat gandakan aksi.",
-                    "bio_en": "Lower your expectations, double your actions.",
-                    "bio_ar": "قلل من توقعاتك، وضاعف من أفعالك.",
-                    "photo": "https://drive.google.com/file/d/1ZuAv8hE-1AgNbCn9oXQlw6_GuAA1EWfi/view?usp=drive_link",
-                    "id": "kumis",
-                    "role_en": "President of Generation"
-          },
-          {
-                    "name": "aden",
-                    "name_ar": "أدين",
-                    "full_name": "Faqihuddin rahman",
-                    "role": "Wakil ketua angkatan & Ketua kelas",
-                    "role_ar": "نائب رئيس الدفعة ورئيس الصف",
-                    "bio_id": "Tidak ada keberhasilan tanpa rasa sakit",
-                    "bio_en": "There is no success without pain.",
-                    "bio_ar": "لا يوجد نجاح بدون ألم.",
-                    "photo": "https://drive.google.com/file/d/1ZGyjtWir9-XEsbJRRy17cyN_4OZ_Jm_3/view?usp=drive_link",
-                    "id": "aden",
-                    "role_en": "Vice President of Generation & Class Leader"
-          },
-          {
-                    "name": "immszkyy",
-                    "name_ar": "إيمسكي",
-                    "full_name": "Ibrahim Zaky maulana",
-                    "role": "Sekretaris angkatan",
-                    "role_ar": "سكرتير الدفعة",
-                    "bio_id": "jika hujan turun tanpa diminta maka aku akan menahan luka sambil tertawa",
-                    "bio_en": "If rain falls unasked, I will hold the pain while laughing.",
-                    "bio_ar": "إذا نزل المطر دون طلب، فسوف أتحمل الألم وأنا أضحك.",
-                    "photo": "https://drive.google.com/file/d/1FxpUzZ738VPcd7rZJm5djQTOzLHa3XTR/view?usp=drive_link",
-                    "id": "immszkyy",
-                    "role_en": "Secretary of Generation"
-          },
-          {
-                    "name": "adz",
-                    "name_ar": "آدز",
-                    "full_name": "Abdullah muadz",
-                    "role": "Bendahara angkatan",
-                    "role_ar": "أمين الصندوق",
-                    "bio_id": "sesungguhnya amal itu tergantung pada niatnya",
-                    "bio_en": "Indeed, deeds depend on intentions.",
-                    "bio_ar": "إنما الأعمال بالنيات.",
-                    "photo": "https://drive.google.com/file/d/1HxPeVWB9JC0Ne-RjpcZ5pupDUdw1g2WG/view?usp=drive_link",
-                    "id": "adz",
-                    "role_en": "Treasurer of Generation"
-          },
-          {
-                    "name": "jeker",
-                    "name_ar": "جيكر",
-                    "full_name": "Zakaria akhsya",
-                    "role": "Sekretaris kelas",
-                    "role_ar": "سكرتير الصف",
-                    "bio_id": "Hentikan pembuktian dini, nikmati lah proses tanpa brisik, nikmatilah keheningan.... Hanya KAMU, TUHAN dan PROSES MU",
-                    "bio_en": "Stop proving yourself early, enjoy the process without noise, enjoy the silence.... Just YOU, GOD, and YOUR PROCESS.",
-                    "bio_ar": "توقف عن إثبات نفسك مبكراً، استمتع بالعملية بدون ضجيج، استمتع بالصمت.... فقط أنت، والله، وعمليتك.",
-                    "photo": "https://drive.google.com/file/d/1DxqMfD7mujAkKna9cPpaaDnqA0mVhvez/view?usp=drive_link",
-                    "id": "jeker",
-                    "role_en": "Class Secretary"
-          },
-          {
-                    "name": "abill",
-                    "name_ar": "أبيل",
-                    "full_name": "Abdillah Muchsin al-ansyori",
-                    "role": "Bendahara kelas",
-                    "role_ar": "أمين صندوق الصف",
-                    "bio_id": "gak suka Ade²an sukanya abang-abangan",
-                    "bio_en": "I dont like playing younger brother, I prefer playing older brother.",
-                    "bio_ar": "لا أحب أن ألعب دور الأخ الأصغر، أفضل دور الأخ الأكبر.",
-                    "photo": "https://drive.google.com/file/d/1yn5xlFgrtZklRrE9JUJ6tF7EjS51-Juw/view?usp=drive_link",
-                    "id": "abill",
-                    "role_en": "Class Treasurer"
-          },
-          {
-                    "name": "darmoyy",
-                    "name_ar": "دارمووي",
-                    "full_name": "Dharma adhiyaksa",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "sedang sibuk",
-                    "bio_en": "Currently busy.",
-                    "bio_ar": "مشغول حالياً.",
-                    "photo": "https://drive.google.com/file/d/1Bc48Unx0kQKUA8fjx3O0OMpRH9y22XNg/view?usp=drive_link",
-                    "id": "darmoyy",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "hananda",
-                    "name_ar": "حناندا",
-                    "full_name": "Muhammad hanan",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "innamal a'malu binniat",
-                    "bio_en": "Indeed, deeds depend on intentions.",
-                    "bio_ar": "إنما الأعمال بالنيات.",
-                    "photo": "https://drive.google.com/file/d/1PVjRHSHzOxRu6zsb_QLTYGi5zDB5gz8q/view?usp=drive_link",
-                    "id": "hananda",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "edarr",
-                    "name_ar": "إيدار",
-                    "full_name": "Haidar muafa",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "Weh mass baimm",
-                    "bio_en": "Hey bro Baim.",
-                    "bio_ar": "أهلاً يا أخي بايم.",
-                    "photo": "https://drive.google.com/file/d/1fAKsD4YD4tCuszBZU-A2CgCcjJC1VfTU/view?usp=drive_link",
-                    "id": "edarr",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "garr",
-                    "name_ar": "غار",
-                    "full_name": "Muhammad tegar Bimantoro",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "mendaki dengan penuh luka",
-                    "bio_en": "Climbing with full of wounds.",
-                    "bio_ar": "أتسلق مليئاً بالجروح.",
-                    "photo": "https://drive.google.com/file/d/1KjNfAPKhvDgDbEx8bFYhsVJt4945NJmp/view?usp=drive_link",
-                    "id": "garr",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "yahya",
-                    "name_ar": "يحيى",
-                    "full_name": "Yahya bin abu Muhammad",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "kelas harus bersih",
-                    "bio_en": "The class must be clean.",
-                    "bio_ar": "يجب أن يكون الصف نظيفاً.",
-                    "photo": "https://drive.google.com/file/d/12SvP2y355hwcvRxRMSP-D_mw8Rdp9zau/view?usp=drive_link",
-                    "id": "yahya",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "mimin",
-                    "name_ar": "ميمين",
-                    "full_name": "Abdul mumin",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "Ra butuh sing sempurna, cukup sempurnakan yang ada",
-                    "bio_en": "Dont need someone perfect, just perfect what you have.",
-                    "bio_ar": "لا أحتاج إلى شخص مثالي، فقط أكمل ما لديك.",
-                    "photo": "https://drive.google.com/file/d/1uJfjlmIAc2RdyjFdVljvzxiCJmdccJ-h/view?usp=drive_link",
-                    "id": "mimin",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "kadop dop",
-                    "name_ar": "كادوب دوب",
-                    "full_name": "Khadafi Agista musyaffa",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "iyupp",
-                    "bio_en": "Yup.",
-                    "bio_ar": "نعم.",
-                    "photo": "https://drive.google.com/file/d/1XYkeqQdUVTuicB3WT-t9XwUN1xwg0V8i/view?usp=drive_link",
-                    "id": "kadop-dop",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "fajar",
-                    "name_ar": "فجر",
-                    "full_name": "Al fajar Maulana aris",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "belum ada kata²",
-                    "bio_en": "No words yet.",
-                    "bio_ar": "لا توجد كلمات بعد.",
-                    "photo": "https://drive.google.com/file/d/1yjxQ3LLX46fm7oeDnDI2_nDssHl6DtKC/view?usp=drive_link",
-                    "id": "fajar",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "pesol",
-                    "name_ar": "بيسول",
-                    "full_name": "Faishal Syarif putra aji",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "sedang mencari nafkah",
-                    "bio_en": "Currently looking for a living.",
-                    "bio_ar": "أبحث عن لقمة العيش حالياً.",
-                    "photo": "https://drive.google.com/file/d/1SvpCqsyzNFcr4IzQSobtbuF4aBkhMvmJ/view?usp=drive_link",
-                    "id": "pesol",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "mail",
-                    "name_ar": "مايل",
-                    "full_name": "Farhan ismail",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "tidak butuh yang tulus butuhnya yg 30 juz",
-                    "bio_en": "Dont need someone sincere, need someone who memorized 30 juz.",
-                    "bio_ar": "لا أحتاج إلى شخص مخلص، أحتاج إلى شخص يحفظ 30 جزءاً.",
-                    "photo": "https://drive.google.com/file/d/1ssnzIsQpt2Di0-qS4Zt5IGRtDEVD8Ru1/view?usp=drive_link",
-                    "id": "mail",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "dipan",
-                    "name_ar": "ديبان",
-                    "full_name": "Fathlih dhifan",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "Aku berhasil menaklukkan gunung tapi aku gagal menaklukkan mu",
-                    "bio_en": "I succeeded in conquering the mountain, but I failed to conquer you.",
-                    "bio_ar": "نجحت في قهر الجبل، لكنني فشلت في قهرك.",
-                    "photo": "https://drive.google.com/file/d/1nVOiGGTk2aLT0XjgoFLCdZqyQIsN6PW4/view?usp=drive_link",
-                    "id": "dipan",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "haris",
-                    "name_ar": "حارث",
-                    "full_name": "Hariz Al atsary",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "tetap semangat",
-                    "bio_en": "Keep the spirit up.",
-                    "bio_ar": "ابق متحمساً.",
-                    "photo": "https://drive.google.com/file/d/196BoKe-Z9TkkF9lu5L_A3ivM6O-BVzF7/view?usp=drive_link",
-                    "id": "haris",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "jawir",
-                    "name_ar": "جاوير",
-                    "full_name": "Jarir",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "Menjadikan masalalu sebuah pembelajaran, melaju tanpa ragu kedepan. And that's how a bright star fly high",
-                    "bio_en": "Making the past a lesson, moving forward without hesitation. And that's how a bright star fly high",
-                    "bio_ar": "أعتقد أنني ممسوس يا نداه.",
-                    "photo": "https://drive.google.com/file/d/1V4JY1ob99jYeo5MZ3PrPF8zGK6sOpdjj/view?usp=drive_link",
-                    "id": "jawir",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "doyok",
-                    "name_ar": "دويوك",
-                    "full_name": "Luqman athaillah artundaya",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "tak perlu kata²",
-                    "bio_en": "No words needed.",
-                    "bio_ar": "لا حاجة للكلمات.",
-                    "photo": "https://drive.google.com/file/d/1Pna6GTb3Dpr6fqNpQHKMObdRexqBGsSB/view?usp=drive_link",
-                    "id": "doyok",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "mauly",
-                    "name_ar": "مولي",
-                    "full_name": "Maula Ali hudzaifah",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "suara termantap di kelas",
-                    "bio_en": "The best voice in the class.",
-                    "bio_ar": "أفضل صوت في الصف.",
-                    "photo": "https://drive.google.com/file/d/1Ak3D0sUi0bG_aFYp_wgEAVVyjdSlm5Wm/view?usp=drive_link",
-                    "id": "mauly",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "abit",
-                    "name_ar": "أبيت",
-                    "full_name": "Muhammad Azzam tsabit",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "nanti kata²ne",
-                    "bio_en": "Words will come later.",
-                    "bio_ar": "الكلمات ستأتي لاحقاً.",
-                    "photo": "https://drive.google.com/file/d/1-vM0157DKr_FiPQUSKxrleGznh-shJoE/view?usp=drive_link",
-                    "id": "abit",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "memet",
-                    "name_ar": "ميميت",
-                    "full_name": "Muhammad said Mahfudz",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "Kamu gak harus sempurna buat di sayang cukup jadi versi dirimu yg paling jujur",
-                    "bio_en": "You dont have to be perfect to be loved, just be your most honest self.",
-                    "bio_ar": "ليس عليك أن تكون مثالياً لكي تُحب، فقط كن النسخة الأكثر صدقاً من نفسك.",
-                    "photo": "https://drive.google.com/file/d/1Zi0n8IsEHqbAzapp-tbEiYn_gVbhbgai/view?usp=drive_link",
-                    "id": "memet",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "jedenn",
-                    "name_ar": "جيدين",
-                    "full_name": "Muhammad Zaidan nugroho",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "gx mau alay",
-                    "bio_en": "Dont want to be cringe.",
-                    "bio_ar": "لا أريد أن أكون سخيفاً.",
-                    "photo": "https://drive.google.com/file/d/1pYM0jdVnvEl2UW9fkL2WwgGtBaXJDSha/view?usp=drive_link",
-                    "id": "jedenn",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "mustop",
-                    "name_ar": "مصطوب",
-                    "full_name": "Mustofa Al Ghifari",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "Biar diam di anggap mati, dari pada bising menyakitkan hati",
-                    "bio_en": "Better to be silent and considered dead, than to be noisy and break hearts.",
-                    "bio_ar": "خير لك أن تصمت وتعتبر ميتاً، من أن تكون مزعجاً وتكسر القلوب.",
-                    "photo": "https://drive.google.com/file/d/1ZCLd73_I14gGEjbdVxFSgNQNz5to94PZ/view?usp=drive_link",
-                    "id": "mustop",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "nawap",
-                    "name_ar": "نواب",
-                    "full_name": "Nawwaf hafidz kautsar",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "orang yang berani nantang baim",
-                    "bio_en": "The person who dares to challenge Baim.",
-                    "bio_ar": "الشخص الذي يجرؤ على تحدي بايم.",
-                    "photo": "https://drive.google.com/file/d/1Qfb7osAtebA1-xiM53FytdyXmVEiGHyr/view?usp=drive_link",
-                    "id": "nawap",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "bintang",
-                    "name_ar": "بنتانغ",
-                    "full_name": "Raikhan Dwi fardani",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "jangan karena kita harmatra cinta kita mudah sirna",
-                    "bio_en": "Just because we are Harmatra, doesnt mean our love fades easily.",
-                    "bio_ar": "لمجرد أننا هرمترى، لا يعني أن حبنا يتلاشى بسهولة.",
-                    "photo": "https://drive.google.com/file/d/1f-_IpxkIpI_v5Dx3oqmi2U7AWzYphdJr/view?usp=drive_link",
-                    "id": "bintang",
-                    "role_en": "Student"
-          },
-          {
-                    "name": "sim",
-                    "name_ar": "سيم",
-                    "full_name": "Simbian Mahesa naszhwi",
-                    "role": "Siswa",
-                    "role_ar": "طالب",
-                    "bio_id": "sim suka kupu kupu malam",
-                    "bio_en": "Sim likes night butterflies.",
-                    "bio_ar": "سيم يحب فراشات الليل.",
-                    "photo": "https://drive.google.com/file/d/1PbXh1k0xwGEH1BCoKWTGYzFigKYrOXuy/view?usp=drive_link",
-                    "id": "sim",
-                    "role_en": "Student"
-          }
-],
+            {
+              "name": "kumis",
+              "name_ar": "كوميس",
+              "full_name": "Khoirul azzam",
+              "role": "Ketua angkatan",
+              "role_ar": "رئيس الدفعة",
+              "bio_id": "Kurangi ekspektasi, lipat gandakan aksi.",
+              "bio_en": "Lower your expectations, double your actions.",
+              "bio_ar": "قلل من توقعاتك، وضاعف من أفعالك.",
+              "photo": "https://drive.google.com/file/d/1ZuAv8hE-1AgNbCn9oXQlw6_GuAA1EWfi/view?usp=drive_link",
+              "id": "kumis",
+              "role_en": "President of Generation"
+            },
+            {
+              "name": "aden",
+              "name_ar": "أدين",
+              "full_name": "Faqihuddin rahman",
+              "role": "Wakil ketua angkatan & Ketua kelas",
+              "role_ar": "نائب رئيس الدفعة ورئيس الصف",
+              "bio_id": "Tidak ada keberhasilan tanpa rasa sakit",
+              "bio_en": "There is no success without pain.",
+              "bio_ar": "لا يوجد نجاح بدون ألم.",
+              "photo": "https://drive.google.com/file/d/1ZGyjtWir9-XEsbJRRy17cyN_4OZ_Jm_3/view?usp=drive_link",
+              "id": "aden",
+              "role_en": "Vice President of Generation & Class Leader"
+            },
+            {
+              "name": "immszkyy",
+              "name_ar": "إيمسكي",
+              "full_name": "Ibrahim Zaky maulana",
+              "role": "Sekretaris angkatan",
+              "role_ar": "سكرتير الدفعة",
+              "bio_id": "jika hujan turun tanpa diminta maka aku akan menahan luka sambil tertawa",
+              "bio_en": "If rain falls unasked, I will hold the pain while laughing.",
+              "bio_ar": "إذا نزل المطر دون طلب، فسوف أتحمل الألم وأنا أضحك.",
+              "photo": "https://drive.google.com/file/d/1FxpUzZ738VPcd7rZJm5djQTOzLHa3XTR/view?usp=drive_link",
+              "id": "immszkyy",
+              "role_en": "Secretary of Generation"
+            },
+            {
+              "name": "adz",
+              "name_ar": "آدز",
+              "full_name": "Abdullah muadz",
+              "role": "Bendahara angkatan",
+              "role_ar": "أمين الصندوق",
+              "bio_id": "sesungguhnya amal itu tergantung pada niatnya",
+              "bio_en": "Indeed, deeds depend on intentions.",
+              "bio_ar": "إنما الأعمال بالنيات.",
+              "photo": "https://drive.google.com/file/d/1HxPeVWB9JC0Ne-RjpcZ5pupDUdw1g2WG/view?usp=drive_link",
+              "id": "adz",
+              "role_en": "Treasurer of Generation"
+            },
+            {
+              "name": "jeker",
+              "name_ar": "جيكر",
+              "full_name": "Zakaria akhsya",
+              "role": "Sekretaris kelas",
+              "role_ar": "سكرتير الصف",
+              "bio_id": "Hentikan pembuktian dini, nikmati lah proses tanpa brisik, nikmatilah keheningan.... Hanya KAMU, TUHAN dan PROSES MU",
+              "bio_en": "Stop proving yourself early, enjoy the process without noise, enjoy the silence.... Just YOU, GOD, and YOUR PROCESS.",
+              "bio_ar": "توقف عن إثبات نفسك مبكراً، استمتع بالعملية بدون ضجيج، استمتع بالصمت.... فقط أنت، والله، وعمليتك.",
+              "photo": "https://drive.google.com/file/d/1DxqMfD7mujAkKna9cPpaaDnqA0mVhvez/view?usp=drive_link",
+              "id": "jeker",
+              "role_en": "Class Secretary"
+            },
+            {
+              "name": "abill",
+              "name_ar": "أبيل",
+              "full_name": "Abdillah Muchsin al-ansyori",
+              "role": "Bendahara kelas",
+              "role_ar": "أمين صندوق الصف",
+              "bio_id": "gak suka Ade²an sukanya abang-abangan",
+              "bio_en": "I dont like playing younger brother, I prefer playing older brother.",
+              "bio_ar": "لا أحب أن ألعب دور الأخ الأصغر، أفضل دور الأخ الأكبر.",
+              "photo": "https://drive.google.com/file/d/1yn5xlFgrtZklRrE9JUJ6tF7EjS51-Juw/view?usp=drive_link",
+              "id": "abill",
+              "role_en": "Class Treasurer"
+            },
+            {
+              "name": "darmoyy",
+              "name_ar": "دارمووي",
+              "full_name": "Dharma adhiyaksa",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "sedang sibuk",
+              "bio_en": "Currently busy.",
+              "bio_ar": "مشغول حالياً.",
+              "photo": "https://drive.google.com/file/d/1Bc48Unx0kQKUA8fjx3O0OMpRH9y22XNg/view?usp=drive_link",
+              "id": "darmoyy",
+              "role_en": "Student"
+            },
+            {
+              "name": "hananda",
+              "name_ar": "حناندا",
+              "full_name": "Muhammad hanan",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "innamal a'malu binniat",
+              "bio_en": "Indeed, deeds depend on intentions.",
+              "bio_ar": "إنما الأعمال بالنيات.",
+              "photo": "https://drive.google.com/file/d/1PVjRHSHzOxRu6zsb_QLTYGi5zDB5gz8q/view?usp=drive_link",
+              "id": "hananda",
+              "role_en": "Student"
+            },
+            {
+              "name": "edarr",
+              "name_ar": "إيدار",
+              "full_name": "Haidar muafa",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "Weh mass baimm",
+              "bio_en": "Hey bro Baim.",
+              "bio_ar": "أهلاً يا أخي بايم.",
+              "photo": "https://drive.google.com/file/d/1fAKsD4YD4tCuszBZU-A2CgCcjJC1VfTU/view?usp=drive_link",
+              "id": "edarr",
+              "role_en": "Student"
+            },
+            {
+              "name": "garr",
+              "name_ar": "غار",
+              "full_name": "Muhammad tegar Bimantoro",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "mendaki dengan penuh luka",
+              "bio_en": "Climbing with full of wounds.",
+              "bio_ar": "أتسلق مليئاً بالجروح.",
+              "photo": "https://drive.google.com/file/d/1KjNfAPKhvDgDbEx8bFYhsVJt4945NJmp/view?usp=drive_link",
+              "id": "garr",
+              "role_en": "Student"
+            },
+            {
+              "name": "yahya",
+              "name_ar": "يحيى",
+              "full_name": "Yahya bin abu Muhammad",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "kelas harus bersih",
+              "bio_en": "The class must be clean.",
+              "bio_ar": "يجب أن يكون الصف نظيفاً.",
+              "photo": "https://drive.google.com/file/d/12SvP2y355hwcvRxRMSP-D_mw8Rdp9zau/view?usp=drive_link",
+              "id": "yahya",
+              "role_en": "Student"
+            },
+            {
+              "name": "mimin",
+              "name_ar": "ميمين",
+              "full_name": "Abdul mumin",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "Ra butuh sing sempurna, cukup sempurnakan yang ada",
+              "bio_en": "Dont need someone perfect, just perfect what you have.",
+              "bio_ar": "لا أحتاج إلى شخص مثالي، فقط أكمل ما لديك.",
+              "photo": "https://drive.google.com/file/d/1uJfjlmIAc2RdyjFdVljvzxiCJmdccJ-h/view?usp=drive_link",
+              "id": "mimin",
+              "role_en": "Student"
+            },
+            {
+              "name": "kadop dop",
+              "name_ar": "كادوب دوب",
+              "full_name": "Khadafi Agista musyaffa",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "iyupp",
+              "bio_en": "Yup.",
+              "bio_ar": "نعم.",
+              "photo": "https://drive.google.com/file/d/1XYkeqQdUVTuicB3WT-t9XwUN1xwg0V8i/view?usp=drive_link",
+              "id": "kadop-dop",
+              "role_en": "Student"
+            },
+            {
+              "name": "fajar",
+              "name_ar": "فجر",
+              "full_name": "Al fajar Maulana aris",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "belum ada kata²",
+              "bio_en": "No words yet.",
+              "bio_ar": "لا توجد كلمات بعد.",
+              "photo": "https://drive.google.com/file/d/1yjxQ3LLX46fm7oeDnDI2_nDssHl6DtKC/view?usp=drive_link",
+              "id": "fajar",
+              "role_en": "Student"
+            },
+            {
+              "name": "pesol",
+              "name_ar": "بيسول",
+              "full_name": "Faishal Syarif putra aji",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "sedang mencari nafkah",
+              "bio_en": "Currently looking for a living.",
+              "bio_ar": "أبحث عن لقمة العيش حالياً.",
+              "photo": "https://drive.google.com/file/d/1SvpCqsyzNFcr4IzQSobtbuF4aBkhMvmJ/view?usp=drive_link",
+              "id": "pesol",
+              "role_en": "Student"
+            },
+            {
+              "name": "mail",
+              "name_ar": "مايل",
+              "full_name": "Farhan ismail",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "tidak butuh yang tulus butuhnya yg 30 juz",
+              "bio_en": "Dont need someone sincere, need someone who memorized 30 juz.",
+              "bio_ar": "لا أحتاج إلى شخص مخلص، أحتاج إلى شخص يحفظ 30 جزءاً.",
+              "photo": "https://drive.google.com/file/d/1ssnzIsQpt2Di0-qS4Zt5IGRtDEVD8Ru1/view?usp=drive_link",
+              "id": "mail",
+              "role_en": "Student"
+            },
+            {
+              "name": "dipan",
+              "name_ar": "ديبان",
+              "full_name": "Fathlih dhifan",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "Aku berhasil menaklukkan gunung tapi aku gagal menaklukkan mu",
+              "bio_en": "I succeeded in conquering the mountain, but I failed to conquer you.",
+              "bio_ar": "نجحت في قهر الجبل، لكنني فشلت في قهرك.",
+              "photo": "https://drive.google.com/file/d/1nVOiGGTk2aLT0XjgoFLCdZqyQIsN6PW4/view?usp=drive_link",
+              "id": "dipan",
+              "role_en": "Student"
+            },
+            {
+              "name": "haris",
+              "name_ar": "حارث",
+              "full_name": "Hariz Al atsary",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "tetap semangat",
+              "bio_en": "Keep the spirit up.",
+              "bio_ar": "ابق متحمساً.",
+              "photo": "https://drive.google.com/file/d/196BoKe-Z9TkkF9lu5L_A3ivM6O-BVzF7/view?usp=drive_link",
+              "id": "haris",
+              "role_en": "Student"
+            },
+            {
+              "name": "jawir",
+              "name_ar": "جاوير",
+              "full_name": "Jarir",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "Menjadikan masalalu sebuah pembelajaran, melaju tanpa ragu kedepan. And that's how a bright star fly high",
+              "bio_en": "Making the past a lesson, moving forward without hesitation. And that's how a bright star fly high",
+              "bio_ar": "أعتقد أنني ممسوس يا نداه.",
+              "photo": "https://drive.google.com/file/d/1V4JY1ob99jYeo5MZ3PrPF8zGK6sOpdjj/view?usp=drive_link",
+              "id": "jawir",
+              "role_en": "Student"
+            },
+            {
+              "name": "doyok",
+              "name_ar": "دويوك",
+              "full_name": "Luqman athaillah artundaya",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "tak perlu kata²",
+              "bio_en": "No words needed.",
+              "bio_ar": "لا حاجة للكلمات.",
+              "photo": "https://drive.google.com/file/d/1Pna6GTb3Dpr6fqNpQHKMObdRexqBGsSB/view?usp=drive_link",
+              "id": "doyok",
+              "role_en": "Student"
+            },
+            {
+              "name": "mauly",
+              "name_ar": "مولي",
+              "full_name": "Maula Ali hudzaifah",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "suara termantap di kelas",
+              "bio_en": "The best voice in the class.",
+              "bio_ar": "أفضل صوت في الصف.",
+              "photo": "https://drive.google.com/file/d/1Ak3D0sUi0bG_aFYp_wgEAVVyjdSlm5Wm/view?usp=drive_link",
+              "id": "mauly",
+              "role_en": "Student"
+            },
+            {
+              "name": "abit",
+              "name_ar": "أبيت",
+              "full_name": "Muhammad Azzam tsabit",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "nanti kata²ne",
+              "bio_en": "Words will come later.",
+              "bio_ar": "الكلمات ستأتي لاحقاً.",
+              "photo": "https://drive.google.com/file/d/1-vM0157DKr_FiPQUSKxrleGznh-shJoE/view?usp=drive_link",
+              "id": "abit",
+              "role_en": "Student"
+            },
+            {
+              "name": "memet",
+              "name_ar": "ميميت",
+              "full_name": "Muhammad said Mahfudz",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "Kamu gak harus sempurna buat di sayang cukup jadi versi dirimu yg paling jujur",
+              "bio_en": "You dont have to be perfect to be loved, just be your most honest self.",
+              "bio_ar": "ليس عليك أن تكون مثالياً لكي تُحب، فقط كن النسخة الأكثر صدقاً من نفسك.",
+              "photo": "https://drive.google.com/file/d/1Zi0n8IsEHqbAzapp-tbEiYn_gVbhbgai/view?usp=drive_link",
+              "id": "memet",
+              "role_en": "Student"
+            },
+            {
+              "name": "jedenn",
+              "name_ar": "جيدين",
+              "full_name": "Muhammad Zaidan nugroho",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "gx mau alay",
+              "bio_en": "Dont want to be cringe.",
+              "bio_ar": "لا أريد أن أكون سخيفاً.",
+              "photo": "https://drive.google.com/file/d/1pYM0jdVnvEl2UW9fkL2WwgGtBaXJDSha/view?usp=drive_link",
+              "id": "jedenn",
+              "role_en": "Student"
+            },
+            {
+              "name": "mustop",
+              "name_ar": "مصطوب",
+              "full_name": "Mustofa Al Ghifari",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "Biar diam di anggap mati, dari pada bising menyakitkan hati",
+              "bio_en": "Better to be silent and considered dead, than to be noisy and break hearts.",
+              "bio_ar": "خير لك أن تصمت وتعتبر ميتاً، من أن تكون مزعجاً وتكسر القلوب.",
+              "photo": "https://drive.google.com/file/d/1ZCLd73_I14gGEjbdVxFSgNQNz5to94PZ/view?usp=drive_link",
+              "id": "mustop",
+              "role_en": "Student"
+            },
+            {
+              "name": "nawap",
+              "name_ar": "نواب",
+              "full_name": "Nawwaf hafidz kautsar",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "orang yang berani nantang baim",
+              "bio_en": "The person who dares to challenge Baim.",
+              "bio_ar": "الشخص الذي يجرؤ على تحدي بايم.",
+              "photo": "https://drive.google.com/file/d/1Qfb7osAtebA1-xiM53FytdyXmVEiGHyr/view?usp=drive_link",
+              "id": "nawap",
+              "role_en": "Student"
+            },
+            {
+              "name": "bintang",
+              "name_ar": "بنتانغ",
+              "full_name": "Raikhan Dwi fardani",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "jangan karena kita harmatra cinta kita mudah sirna",
+              "bio_en": "Just because we are Harmatra, doesnt mean our love fades easily.",
+              "bio_ar": "لمجرد أننا هرمترى، لا يعني أن حبنا يتلاشى بسهولة.",
+              "photo": "https://drive.google.com/file/d/1f-_IpxkIpI_v5Dx3oqmi2U7AWzYphdJr/view?usp=drive_link",
+              "id": "bintang",
+              "role_en": "Student"
+            },
+            {
+              "name": "sim",
+              "name_ar": "سيم",
+              "full_name": "Simbian Mahesa naszhwi",
+              "role": "Siswa",
+              "role_ar": "طالب",
+              "bio_id": "sim suka kupu kupu malam",
+              "bio_en": "Sim likes night butterflies.",
+              "bio_ar": "سيم يحب فراشات الليل.",
+              "photo": "https://drive.google.com/file/d/1PbXh1k0xwGEH1BCoKWTGYzFigKYrOXuy/view?usp=drive_link",
+              "id": "sim",
+              "role_en": "Student"
+            }
+          ],
 
           timeline: [
 
@@ -2308,43 +2310,43 @@
           ],
 
           gallery: [
-          {
-                    "url": "https://drive.google.com/file/d/1-bp6K5-FOi1cPmRQstFMokYOWdqzW67p/view?usp=sharing",
-                    "title_id": "Pelantikan Organisasi #1",
-                    "title_en": "Organization Inauguration #1",
-                    "title_ar": "تنصيب المنظمة #1",
-                    "caption": {
-                              "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (1)",
-                              "en": "HARMATRA Student Organization Inauguration Documentation (1)",
-                              "ar": "توثيق لحظات تنصيب المنظمة (1)"
-                    },
-                    "category": "Pelantikan Organisasi"
-          },
-          {
-                    "url": "https://drive.google.com/file/d/12EvezDDBd1V8-8UWgj3U7wC3JEHla2Yh/view?usp=sharing",
-                    "title_id": "Pelantikan Organisasi #2",
-                    "title_en": "Organization Inauguration #2",
-                    "title_ar": "تنصيب المنظمة #2",
-                    "caption": {
-                              "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (2)",
-                              "en": "HARMATRA Student Organization Inauguration Documentation (2)",
-                              "ar": "توثيق لحظات تنصيب المنظمة (2)"
-                    },
-                    "category": "Pelantikan Organisasi"
-          },
-          {
-                    "url": "https://drive.google.com/file/d/12s4sVbm5bDV2GnU9k1OzSIKsnSl3m0j0/view?usp=sharing",
-                    "title_id": "Pelantikan Organisasi #3",
-                    "title_en": "Organization Inauguration #3",
-                    "title_ar": "تنصيب المنظمة #3",
-                    "caption": {
-                              "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (3)",
-                              "en": "HARMATRA Student Organization Inauguration Documentation (3)",
-                              "ar": "توثيق لحظات تنصيب المنظمة (3)"
-                    },
-                    "category": "Pelantikan Organisasi"
-          }
-],
+            {
+              "url": "https://drive.google.com/file/d/1-bp6K5-FOi1cPmRQstFMokYOWdqzW67p/view?usp=sharing",
+              "title_id": "Pelantikan Organisasi #1",
+              "title_en": "Organization Inauguration #1",
+              "title_ar": "تنصيب المنظمة #1",
+              "caption": {
+                "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (1)",
+                "en": "HARMATRA Student Organization Inauguration Documentation (1)",
+                "ar": "توثيق لحظات تنصيب المنظمة (1)"
+              },
+              "category": "Pelantikan Organisasi"
+            },
+            {
+              "url": "https://drive.google.com/file/d/12EvezDDBd1V8-8UWgj3U7wC3JEHla2Yh/view?usp=sharing",
+              "title_id": "Pelantikan Organisasi #2",
+              "title_en": "Organization Inauguration #2",
+              "title_ar": "تنصيب المنظمة #2",
+              "caption": {
+                "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (2)",
+                "en": "HARMATRA Student Organization Inauguration Documentation (2)",
+                "ar": "توثيق لحظات تنصيب المنظمة (2)"
+              },
+              "category": "Pelantikan Organisasi"
+            },
+            {
+              "url": "https://drive.google.com/file/d/12s4sVbm5bDV2GnU9k1OzSIKsnSl3m0j0/view?usp=sharing",
+              "title_id": "Pelantikan Organisasi #3",
+              "title_en": "Organization Inauguration #3",
+              "title_ar": "تنصيب المنظمة #3",
+              "caption": {
+                "id": "Dokumentasi Momen Pelantikan Organisasi HARMATRA (3)",
+                "en": "HARMATRA Student Organization Inauguration Documentation (3)",
+                "ar": "توثيق لحظات تنصيب المنظمة (3)"
+              },
+              "category": "Pelantikan Organisasi"
+            }
+          ],
 
           quotes: [
 
@@ -3263,7 +3265,7 @@
           container.innerHTML = html;
         }
 
-        window.filterMainGallery = function(cat) {
+        window.filterMainGallery = function (cat) {
           mainPageGalleryCategory = cat;
           renderMainGalleryFilters();
           renderGallery();

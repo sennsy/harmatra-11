@@ -2483,7 +2483,7 @@
       "category": "Mode Alim"
     },
     {
-      "url": "https://drive.google.com/file/d/195c5YrmNPKwWP2-UQxaGriAP6w7PEQjc/view?usp=sharing",
+      "url": "https://drive.google.com/file/d/10_bcEXmj86x7ieQVXwv-BpHEQ7DDY8vO/view?usp=sharing",
       "title_id": "Kegiatan Mingguan #1",
       "title_en": "Weekly Activity #1",
       "title_ar": "الأنشطة الأسبوعية #1",
@@ -2495,7 +2495,7 @@
       "category": "Kegiatan Mingguan"
     },
     {
-      "url": "https://drive.google.com/file/d/1CrASGZ3z5y4FRgkdQXERYeJY4RuLrFCS/view?usp=sharing",
+      "url": "https://drive.google.com/file/d/17olSFI-WNWmAzxDrU6F01cWBxjaaee5b/view?usp=sharing",
       "title_id": "Kegiatan Mingguan #2",
       "title_en": "Weekly Activity #2",
       "title_ar": "الأنشطة الأسبوعية #2",
@@ -2507,7 +2507,7 @@
       "category": "Kegiatan Mingguan"
     },
     {
-      "url": "https://drive.google.com/file/d/1QaOUgifO4TL0qoM0-kzxTt0oFgI06UXo/view?usp=sharing",
+      "url": "https://drive.google.com/file/d/195c5YrmNPKwWP2-UQxaGriAP6w7PEQjc/view?usp=sharing",
       "title_id": "Kegiatan Mingguan #3",
       "title_en": "Weekly Activity #3",
       "title_ar": "الأنشطة الأسبوعية #3",
@@ -2519,7 +2519,7 @@
       "category": "Kegiatan Mingguan"
     },
     {
-      "url": "https://drive.google.com/file/d/1tpavkGqPUpFPaLlcQpAnG7rWQO06M3fF/view?usp=sharing",
+      "url": "https://drive.google.com/file/d/1CrASGZ3z5y4FRgkdQXERYeJY4RuLrFCS/view?usp=sharing",
       "title_id": "Kegiatan Mingguan #4",
       "title_en": "Weekly Activity #4",
       "title_ar": "الأنشطة الأسبوعية #4",
@@ -2527,6 +2527,126 @@
         "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (4)",
         "en": "HARMATRA Weekly Activity Routine Documentation (4)",
         "ar": "توثيق الأنشطة الأسبوعية (4)"
+      },
+      "category": "Kegiatan Mingguan"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1QaOUgifO4TL0qoM0-kzxTt0oFgI06UXo/view?usp=sharing",
+      "title_id": "Kegiatan Mingguan #5",
+      "title_en": "Weekly Activity #5",
+      "title_ar": "الأنشطة الأسبوعية #5",
+      "caption": {
+        "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (5)",
+        "en": "HARMATRA Weekly Activity Routine Documentation (5)",
+        "ar": "توثيق الأنشطة الأسبوعية (5)"
+      },
+      "category": "Kegiatan Mingguan"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1U4R-wnVD_pP9o-0_9ruqKKQAag7je_jU/view?usp=sharing",
+      "title_id": "Kegiatan Mingguan #6",
+      "title_en": "Weekly Activity #6",
+      "title_ar": "الأنشطة الأسبوعية #6",
+      "caption": {
+        "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (6)",
+        "en": "HARMATRA Weekly Activity Routine Documentation (6)",
+        "ar": "توثيق الأنشطة الأسبوعية (6)"
+      },
+      "category": "Kegiatan Mingguan"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1Zy66Wk_fjrWjKCbkPKqhDov5BYJLB0K3/view?usp=sharing",
+      "title_id": "Kegiatan Mingguan #7",
+      "title_en": "Weekly Activity #7",
+      "title_ar": "الأنشطة الأسبوعية #7",
+      "caption": {
+        "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (7)",
+        "en": "HARMATRA Weekly Activity Routine Documentation (7)",
+        "ar": "توثيق الأنشطة الأسبوعية (7)"
+      },
+      "category": "Kegiatan Mingguan"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1fbFEFThXoONTvUAtodZGhvx6awdj2TSi/view?usp=sharing",
+      "title_id": "Kegiatan Mingguan #8",
+      "title_en": "Weekly Activity #8",
+      "title_ar": "الأنشطة الأسبوعية #8",
+      "caption": {
+        "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (8)",
+        "en": "HARMATRA Weekly Activity Routine Documentation (8)",
+        "ar": "توثيق الأنشطة الأسبوعية (8)"
+      },
+      "category": "Kegiatan Mingguan"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1mK25Bwo74bXx0I_l-BMbsbtsQd4O0Wae/view?usp=sharing",
+      "title_id": "Kegiatan Mingguan #9",
+      "title_en": "Weekly Activity #9",
+      "title_ar": "الأنشطة الأسبوعية #9",
+      "caption": {
+        "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (9)",
+        "en": "HARMATRA Weekly Activity Routine Documentation (9)",
+        "ar": "توثيق الأنشطة الأسبوعية (9)"
+      },
+      "category": "Kegiatan Mingguan"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1nSskJvWjBtq_7xBLfsCj6pC083UM36JO/view?usp=sharing",
+      "title_id": "Kegiatan Mingguan #10",
+      "title_en": "Weekly Activity #10",
+      "title_ar": "الأنشطة الأسبوعية #10",
+      "caption": {
+        "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (10)",
+        "en": "HARMATRA Weekly Activity Routine Documentation (10)",
+        "ar": "توثيق الأنشطة الأسبوعية (10)"
+      },
+      "category": "Kegiatan Mingguan"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1qghl-r_YCTsYBCklDZ95caJt8P6YKZbM/view?usp=sharing",
+      "title_id": "Kegiatan Mingguan #11",
+      "title_en": "Weekly Activity #11",
+      "title_ar": "الأنشطة الأسبوعية #11",
+      "caption": {
+        "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (11)",
+        "en": "HARMATRA Weekly Activity Routine Documentation (11)",
+        "ar": "توثيق الأنشطة الأسبوعية (11)"
+      },
+      "category": "Kegiatan Mingguan"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1tpavkGqPUpFPaLlcQpAnG7rWQO06M3fF/view?usp=sharing",
+      "title_id": "Kegiatan Mingguan #12",
+      "title_en": "Weekly Activity #12",
+      "title_ar": "الأنشطة الأسبوعية #12",
+      "caption": {
+        "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (12)",
+        "en": "HARMATRA Weekly Activity Routine Documentation (12)",
+        "ar": "توثيق الأنشطة الأسبوعية (12)"
+      },
+      "category": "Kegiatan Mingguan"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1uoa8vyWyueTJC5kfp8b_2b9G08BOSvf9/view?usp=sharing",
+      "title_id": "Kegiatan Mingguan #13",
+      "title_en": "Weekly Activity #13",
+      "title_ar": "الأنشطة الأسبوعية #13",
+      "caption": {
+        "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (13)",
+        "en": "HARMATRA Weekly Activity Routine Documentation (13)",
+        "ar": "توثيق الأنشطة الأسبوعية (13)"
+      },
+      "category": "Kegiatan Mingguan"
+    },
+    {
+      "url": "https://drive.google.com/file/d/1upSpKWgfDqHerQ9J7nZO9Z00AbFaX089/view?usp=sharing",
+      "title_id": "Kegiatan Mingguan #14",
+      "title_en": "Weekly Activity #14",
+      "title_ar": "الأنشطة الأسبوعية #14",
+      "caption": {
+        "id": "Dokumentasi Rutin Kegiatan Mingguan HARMATRA (14)",
+        "en": "HARMATRA Weekly Activity Routine Documentation (14)",
+        "ar": "توثيق الأنشطة الأسبوعية (14)"
       },
       "category": "Kegiatan Mingguan"
     },
