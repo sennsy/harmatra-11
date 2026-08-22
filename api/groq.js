@@ -15,8 +15,7 @@ export default async function handler(req) {
   }
 
   const authHeader = req.headers.get('authorization') || '';
-  // Check OPENAI_API_KEY first, fallback to GROQ_API_KEY if they didn't change it yet
-  let apiKey = process.env.OPENAI_API_KEY || process.env.GROQ_API_KEY || '';
+  let apiKey = process.env.GROQ_API_KEY || '';
   
   if (authHeader) {
     const bearerKey = authHeader.replace(/^Bearer\s+/i, '').trim();
@@ -29,13 +28,14 @@ export default async function handler(req) {
     const hasKey = Boolean(apiKey && apiKey.trim().length > 0);
     return new Response(JSON.stringify({
       status: 'online',
-      provider: 'OpenAI GPT API',
+      provider: 'Groq Official API',
       configured: hasKey,
-      default_model: 'gpt-4o-mini',
+      default_model: 'llama-3.3-70b-versatile',
       available_models: [
-        'gpt-4o',
-        'gpt-4o-mini',
-        'gpt-3.5-turbo'
+        'llama-3.3-70b-versatile',
+        'llama-3.1-8b-instant',
+        'mixtral-8x7b-32768',
+        'gemma2-9b-it'
       ]
     }), { status: 200, headers });
   }
@@ -49,16 +49,12 @@ export default async function handler(req) {
 
     if (!apiKey) {
       return new Response(JSON.stringify({
-        error: 'OPENAI_API_KEY environment variable is not configured on the server.',
-        message_id: 'OpenAI API Key is missing. Please configure OPENAI_API_KEY in Vercel settings.'
+        error: 'GROQ_API_KEY environment variable is not configured on the server.',
+        message_id: 'Groq API Key is missing. Please configure GROQ_API_KEY in Vercel settings.'
       }), { status: 401, headers });
     }
 
-    // Force model to a valid OpenAI model if a Groq model is still passed
-    let model = body.model || 'gpt-4o-mini';
-    if (model.includes('llama') || model.includes('mixtral') || model.includes('gemma')) {
-      model = 'gpt-4o-mini';
-    }
+    const model = body.model || 'llama-3.3-70b-versatile';
 
     const messages = body.messages || [];
     const temperature = typeof body.temperature === 'number' ? body.temperature : 0.6;
@@ -73,8 +69,8 @@ export default async function handler(req) {
       stream: isStream
     };
 
-    // Use OpenAI Endpoint
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    // Use Groq Endpoint
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
