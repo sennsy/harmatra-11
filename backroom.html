@@ -812,10 +812,10 @@
     <!-- Connection Widget -->
     <div class="widget-box" style="margin-top: 1rem;">
       <div class="widget-title">
-        <span>GIT_CONNECTION</span>
-        <span id="githubIndicator" class="status-led"></span>
+        <span>VERCEL_API</span>
+        <span class="status-led active"></span>
       </div>
-      <div id="repoNameDisplay" style="color:var(--text-muted); font-size:0.7rem; font-family:monospace; word-break:break-all;">Not Connected</div>
+      <div style="color:var(--text-muted); font-size:0.7rem; font-family:monospace; word-break:break-all;">Serverless Connected</div>
     </div>
   </aside>
 
@@ -897,7 +897,7 @@
           <div style="display:flex; flex-direction:column; gap:1rem; font-size:0.8rem;">
             <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(0,255,136,0.1); padding-bottom:0.5rem;">
               <span class="con-info-label">DEPLOY_NODE</span>
-              <strong id="deployEnvText">Standalone Console</strong>
+              <strong id="deployEnvText">VERCEL_SERVERLESS</strong>
             </div>
             <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(0,255,136,0.1); padding-bottom:0.5rem;">
               <span class="con-info-label">TARGET_BRANCH</span>
@@ -2105,19 +2105,7 @@
     }
 
     function updateConnectionStatusDisplay(connected, repoName = '') {
-      const ind = document.getElementById('githubIndicator');
-      const text = document.getElementById('repoNameDisplay');
-      if (connected) {
-        ind.className = 'status-led active';
-        text.innerText = repoName;
-        document.getElementById('deployEnvText').innerText = 'LINKED_NODE';
-        document.getElementById('deployBranchText').innerText = document.getElementById('git_branch').value || 'main';
-      } else {
-        ind.className = 'status-led';
-        text.innerText = 'OFFLINE_STANDALONE';
-        document.getElementById('deployEnvText').innerText = 'Local Sandbox';
-        document.getElementById('deployBranchText').innerText = 'LOCAL';
-      }
+      // Vercel Serverless automatically connected, no frontend UI to update
     }
 
     function updateNetlifyBadge(siteId) {
@@ -2402,11 +2390,7 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
 
     // Silent Background Deploy Function
     async function silentDeploy(moduleName) {
-      const credsRaw = localStorage.getItem(CREDENTIALS_KEY);
-      if (!credsRaw) return;
-      
-      const cred = JSON.parse(credsRaw);
-      if (!cred.owner || !cred.repo || !cred.token) return;
+      const passcode = (websiteData.settings && websiteData.settings.adminPasscode) || 'askaryy';
 
       const Toast = Swal.mixin({
         toast: true,
@@ -2419,32 +2403,23 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       });
 
       try {
-        const branch = cred.branch || 'main';
-        const filepath = 'data.json';
-        const fileResponse = await fetch(`https://api.github.com/repos/${cred.owner}/${cred.repo}/contents/${filepath}?ref=${branch}`, {
-          headers: { 'Authorization': `token ${cred.token}`, 'Accept': 'application/vnd.github.v3+json' }
-        });
-        
-        let previousSha = null;
-        if (fileResponse.ok) previousSha = (await fileResponse.json()).sha;
-
         const jsonContent = JSON.stringify(websiteData, null, 2);
         const utf8Bytes = new TextEncoder().encode(jsonContent);
         const binString = Array.from(utf8Bytes, (byte) => String.fromCharCode(byte)).join("");
         const b64Content = btoa(binString);
 
-        const putResponse = await fetch(`https://api.github.com/repos/${cred.owner}/${cred.repo}/contents/${filepath}`, {
-          method: 'PUT',
-          headers: { 'Authorization': `token ${cred.token}`, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' },
+        const deployRes = await fetch('/api/deploy', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            message: `Auto-publish: updated ${moduleName} via Backroom`,
             content: b64Content,
-            branch: branch,
-            sha: previousSha || undefined
+            passcode: passcode,
+            filename: 'data.json',
+            message: `Auto-publish: updated ${moduleName} via Backroom`
           })
         });
 
-        if (!putResponse.ok) throw new Error('Push failed.');
+        if (!deployRes.ok) throw new Error('Push failed.');
         
         Toast.fire({ icon: 'success', title: 'Auto-Published to GitHub!' });
         
@@ -3568,36 +3543,6 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
     }
 
     async function triggerDeployment() {
-      const credsRaw = localStorage.getItem(CREDENTIALS_KEY);
-      if (!credsRaw) {
-        Swal.fire({
-          icon: 'error',
-          title: 'GIT ACCESS UNMAPPED',
-          text: 'GitHub credentials unmapped. Configure Deployment credentials first.',
-          background: '#07070a',
-          color: '#ef4444',
-          confirmButtonColor: '#ef4444',
-          customClass: { popup: 'border border-[#ef4444]' }
-        });
-        switchTab('connection');
-        return;
-      }
-
-      const cred = JSON.parse(credsRaw);
-      if (!cred.owner || !cred.repo || !cred.token) {
-        Swal.fire({
-          icon: 'error',
-          title: 'ACCESS PARAMS INVALID',
-          text: 'Handshake credentials variables unmapped.',
-          background: '#07070a',
-          color: '#ef4444',
-          confirmButtonColor: '#ef4444',
-          customClass: { popup: 'border border-[#ef4444]' }
-        });
-        switchTab('connection');
-        return;
-      }
-
       const { value: commitMsg } = await Swal.fire({
         title: 'INITIATING DEPLOYMENT.EXE',
         input: 'text',
@@ -3618,69 +3563,42 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       modal.classList.add('active');
       document.getElementById('deployConsole').innerHTML = '';
       
-      logDeployConsole('Initializing Matrix build loader...', 'info');
-      updateDeployProgress('CONNECTING TO GITHUB API...', 15, 15);
+      logDeployConsole('Initializing Vercel Backend Link...', 'info');
+      updateDeployProgress('CONNECTING TO SERVERLESS API...', 15, 15);
 
       try {
-        const owner = cred.owner;
-        const repo = cred.repo;
-        const branch = cred.branch || 'main';
-        const token = cred.token;
-        const filepath = 'data.json';
-
-        logDeployConsole(`Connecting to repos/${owner}/${repo}/contents/${filepath} ...`);
-        updateDeployProgress('UPLOADING BINARY DATA.JSON...', 35, 35);
-        
-        let previousSha = null;
-        const fileResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filepath}?ref=${branch}`, {
-          headers: {
-            'Authorization': `token ${token}`,
-            'Accept': 'application/vnd.github.v3+json'
-          }
-        });
-
-        if (fileResponse.ok) {
-          const fileData = await fileResponse.json();
-          previousSha = fileData.sha;
-          logDeployConsole(`SHA checksum parsed: ${previousSha}. Preparing file compile.`, 'success');
-        } else if (fileResponse.status === 404) {
-          logDeployConsole('No file checksum matched. Compiling fresh data.json database.', 'info');
-        } else {
-          const errData = await fileResponse.json();
-          throw new Error(`Checksum fetch failure: ${errData.message}`);
-        }
-
-        updateDeployProgress('COMMITTING CHANGES...', 65, 65);
         logDeployConsole('Assembling UTF-8 memory block to base64 binary package...');
+        updateDeployProgress('PREPARING DATA.JSON PAYLOAD...', 35, 35);
         
         const jsonContent = JSON.stringify(websiteData, null, 2);
         const utf8Bytes = new TextEncoder().encode(jsonContent);
         const binString = Array.from(utf8Bytes, (byte) => String.fromCharCode(byte)).join("");
         const b64Content = btoa(binString);
 
-        logDeployConsole(`Uploading data.json commit payload to git-node branch: [${branch}]`);
-        const putResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filepath}`, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `token ${token}`,
-            'Content-Type': 'application/json',
-            'Accept': 'application/vnd.github.v3+json'
-          },
+        updateDeployProgress('UPLOADING TO VERCEL ENGINE...', 65, 65);
+        logDeployConsole('Transmitting secured payload via POST /api/deploy...');
+
+        const passcode = (websiteData.settings && websiteData.settings.adminPasscode) || 'askaryy';
+
+        const deployRes = await fetch('/api/deploy', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            message: commitMsg.trim() || 'chore(cms): compile data.json database',
             content: b64Content,
-            branch: branch,
-            sha: previousSha || undefined
+            passcode: passcode,
+            filename: 'data.json',
+            message: commitMsg.trim()
           })
         });
 
-        if (!putResponse.ok) {
-          const errData = await putResponse.json();
-          throw new Error(`Git commit execution failed: ${errData.message}`);
+        if (!deployRes.ok) {
+          const errData = await deployRes.json().catch(() => ({}));
+          throw new Error(`Deployment API failed: ${errData.error || deployRes.statusText} - ${errData.details || ''}`);
         }
 
-        const commitResult = await putResponse.json();
-        const shortSha = commitResult.commit.sha.substring(0, 7);
+        const commitResult = await deployRes.json();
+        const shortSha = commitResult.commit ? commitResult.commit.substring(0, 7) : 'VERCEL';
+        
         logDeployConsole(`PUSHING CHANGES... [SUCCESS] Hash payload committed: ${shortSha}`, 'success');
         document.getElementById('deployLastCommitText').innerText = shortSha;
 
@@ -3693,16 +3611,16 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
           logDeployConsole('DEPLOYMENT PIPELINE COMPLETED SUCCESSFULLY.', 'success');
           document.getElementById('btnFinishedDeploy').style.display = 'inline-flex';
           setChangesPending(false);
-          logTerminal('Deploy', `Successfully compiled and deployed database commit ${shortSha} to node branch '${branch}'.`);
-          updateNetlifyBadge(cred.netlifySiteId);
-        }, 1500);
+          logTerminal('Deploy', `Successfully compiled and deployed database commit ${shortSha}.`);
+          updateVercelBadge();
+        }, 1000);
 
       } catch (err) {
         logDeployConsole(`ERROR PIPELINE INTERRUPTED: ${err.message}`, 'error');
         updateDeployProgress('DEPLOYMENT INTERRUPTED', 100, 100);
         document.getElementById('deployProgressBar').style.backgroundColor = 'var(--error)';
         document.getElementById('btnCancelDeploy').style.display = 'inline-flex';
-        logTerminal('Deploy', `Handshake deployment execution failed: ${err.message}`, 'error');
+        logTerminal('Deploy', `Serverless deployment failed: ${err.message}`, 'error');
       }
     }
     function renderWebsiteMetadata() {
