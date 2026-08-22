@@ -1856,6 +1856,10 @@
             <label class="form-label">quote_author</label>
             <input type="text" id="quote_author" class="form-control" required="">
           </div>
+          <div class="form-group">
+            <label class="form-label">quote_date (optional)</label>
+            <input type="text" id="quote_date" class="form-control" placeholder="e.g. 2026-08-22">
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" onclick="closeModal('quoteModal')" class="btn btn-sm">ABORT()</button>
@@ -2919,7 +2923,7 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
           <div class="data-info">
             <div class="data-details">
               <div class="data-title">"${escapeHTML(q.text_id)}"</div>
-              <div class="data-sub">AUTHOR: ${escapeHTML(q.author)}</div>
+              <div class="data-sub">AUTHOR: ${escapeHTML(q.author)} ${q.date ? `| DATE: ${escapeHTML(q.date)}` : ''}</div>
             </div>
           </div>
           <div class="data-actions">
@@ -2936,6 +2940,7 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
     function openAddQuoteModal() {
       document.getElementById('quoteForm').reset();
       document.getElementById('quote_index').value = '';
+      document.getElementById('quote_date').value = '';
       document.getElementById('quoteModalTitle').innerText = 'ADD RECORD: QUOTES.DAT';
       document.getElementById('quoteModal').classList.add('active');
     }
@@ -2947,6 +2952,7 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       document.getElementById('quote_text_en').value = q.text_en || '';
       document.getElementById('quote_text_ar').value = q.text_ar || '';
       document.getElementById('quote_author').value = q.author || '';
+      document.getElementById('quote_date').value = q.date || '';
       
       document.getElementById('quoteModalTitle').innerText = 'EDIT RECORD: QUOTES.DAT';
       document.getElementById('quoteModal').classList.add('active');
@@ -2959,8 +2965,11 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
         text_id: document.getElementById('quote_text_id').value.trim(),
         text_en: document.getElementById('quote_text_en').value.trim(),
         text_ar: document.getElementById('quote_text_ar').value.trim(),
-        author: document.getElementById('quote_author').value.trim()
+        author: document.getElementById('quote_author').value.trim(),
       };
+      
+      const qDate = document.getElementById('quote_date').value.trim();
+      if (qDate) quote.date = qDate;
 
       if (!websiteData.quotes) websiteData.quotes = [];
 
