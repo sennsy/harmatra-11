@@ -1111,10 +1111,10 @@ ${list}`);
     if (instantMatch) return instantMatch;
 
     return lang === 'ar'
-      ? 'لم أتمكن من العثور على تلك المعلومات في أرشيف HARMATRA حتى الآن.'
+      ? 'عذرًا، نظام الذكاء الاصطناعي غير متصل بالإنترنت حاليًا. يرجى سؤال Immszkyy مباشرة!'
       : (lang === 'en'
-      ? 'I couldn\'t find that information in the HARMATRA archive yet.'
-      : 'Saya tidak dapat menemukan informasi tersebut di dalam arsip HARMATRA saat ini.');
+      ? 'Sorry, the AI system is currently offline or unreachable. Please ask Immszkyy directly!'
+      : 'Maaf, sistem otak Matra AI sedang gangguan atau offline. Untuk sementara, mending kamu tanya langsung aja ke Immszkyy ya!');
   }
 
   async function fetchAIResponse(userPrompt, onChunk = null) {
@@ -1266,6 +1266,19 @@ ${hybridContext}`;
               if (onChunk) onChunk(fullResponseText);
               return fullResponseText;
             }
+          }
+        } else {
+          // If response is NOT ok, try to get the error message from the server
+          try {
+            const errData = await response.json();
+            const errMsg = errData.error || errData.message_id || errData.message || response.statusText;
+            console.error(`Endpoint ${ep.url} failed with ${response.status}:`, errMsg);
+            // We return the error so the user knows what's wrong (e.g. invalid key or model)
+            const failText = `[SYSTEM ERROR] API Request Failed: ${errMsg}. Silakan cek pengaturan API Key atau Model di Backroom.`;
+            if (onChunk) onChunk(failText);
+            return failText;
+          } catch(e) {
+            console.error(`Endpoint ${ep.url} failed with ${response.status}`);
           }
         }
       } catch (err) {
