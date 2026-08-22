@@ -4954,6 +4954,10 @@
       function bindFallbackChat() {
         if (!chatWindow || !chatToggleButton) return;
 
+        // If chat.js is loaded, it handles the drag-and-click logic itself.
+        // We do not want to attach a duplicate click listener that causes double-toggling.
+        if (typeof window.toggleChat === 'function') return;
+
         chatToggleButton.addEventListener('click', (event) => {
           event.preventDefault();
           event.stopPropagation();
@@ -4968,11 +4972,9 @@
           });
         }
 
-        if (typeof window.toggleChat !== 'function') {
-          window.toggleChat = function (forceState) {
-            setChatOpen(typeof forceState === 'boolean' ? forceState : !chatWindow.classList.contains('hidden'));
-          };
-        }
+        window.toggleChat = function (forceState) {
+          setChatOpen(typeof forceState === 'boolean' ? forceState : !chatWindow.classList.contains('hidden'));
+        };
       }
 
       if (document.readyState === 'loading') {
