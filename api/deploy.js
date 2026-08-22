@@ -29,6 +29,7 @@ export default async function handler(req) {
     
     // 1. Get file SHA
     const fileRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filepath}?ref=${branch}`, {
+      cache: 'no-store',
       headers: {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/vnd.github.v3+json',

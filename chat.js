@@ -1178,7 +1178,7 @@ ${hybridContext}`;
 
         // Groq AI Settings & Key Resolution
     const aiConfig = (db.settings && db.settings.ai) || {};
-    const model = aiConfig.model || 'llama-3.3-70b-versatile';
+    const model = aiConfig.model || 'gpt-4o-mini';
     const temperature = typeof aiConfig.temperature === 'number' ? aiConfig.temperature : 0.6;
     const max_tokens = typeof aiConfig.max_tokens === 'number' ? aiConfig.max_tokens : 1024;
     const isStream = aiConfig.streaming !== false;

@@ -15,7 +15,9 @@ export default async function handler(req) {
   }
 
   const authHeader = req.headers.get('authorization') || '';
-  let apiKey = process.env.GROQ_API_KEY || '';
+  // Check OPENAI_API_KEY first, fallback to GROQ_API_KEY if they didn't change it yet
+  let apiKey = process.env.OPENAI_API_KEY || process.env.GROQ_API_KEY || '';
+  
   if (authHeader) {
     const bearerKey = authHeader.replace(/^Bearer\s+/i, '').trim();
     if (bearerKey && bearerKey.length > 5) {
@@ -27,15 +29,13 @@ export default async function handler(req) {
     const hasKey = Boolean(apiKey && apiKey.trim().length > 0);
     return new Response(JSON.stringify({
       status: 'online',
-      provider: 'Groq Official API',
+      provider: 'OpenAI GPT API',
       configured: hasKey,
-      default_model: 'llama-3.3-70b-versatile',
+      default_model: 'gpt-4o-mini',
       available_models: [
-        'llama-3.3-70b-versatile',
-        'llama-3.1-70b-versatile',
-        'llama-3.1-8b-instant',
-        'mixtral-8x7b-32768',
-        'gemma2-9b-it'
+        'gpt-4o',
+        'gpt-4o-mini',
+        'gpt-3.5-turbo'
       ]
     }), { status: 200, headers });
   }
@@ -49,18 +49,23 @@ export default async function handler(req) {
 
     if (!apiKey) {
       return new Response(JSON.stringify({
-        error: 'GROQ_API_KEY environment variable is not configured on the server.',
-        message_id: 'Groq API Key is missing. Please configure GROQ_API_KEY in Netlify settings or Admin Backroom.'
+        error: 'OPENAI_API_KEY environment variable is not configured on the server.',
+        message_id: 'OpenAI API Key is missing. Please configure OPENAI_API_KEY in Vercel settings.'
       }), { status: 401, headers });
     }
 
-    const model = body.model || 'llama-3.3-70b-versatile';
+    // Force model to a valid OpenAI model if a Groq model is still passed
+    let model = body.model || 'gpt-4o-mini';
+    if (model.includes('llama') || model.includes('mixtral') || model.includes('gemma')) {
+      model = 'gpt-4o-mini';
+    }
+
     const messages = body.messages || [];
     const temperature = typeof body.temperature === 'number' ? body.temperature : 0.6;
     const max_tokens = typeof body.max_tokens === 'number' ? body.max_tokens : 1024;
     const isStream = Boolean(body.stream);
 
-    const groqPayload = {
+    const payload = {
       model,
       messages,
       temperature,
@@ -68,20 +73,21 @@ export default async function handler(req) {
       stream: isStream
     };
 
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    // Use OpenAI Endpoint
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(groqPayload)
+      body: JSON.stringify(payload)
     });
 
     if (!response.ok) {
       const errText = await response.text();
-      console.error('Groq API Error Response:', response.status, errText);
+      console.error('OpenAI API Error Response:', response.status, errText);
       return new Response(JSON.stringify({
-        error: `Groq API Error (${response.status})`,
+        error: `OpenAI API Error (${response.status})`,
         details: errText
       }), { status: response.status, headers });
     }
