@@ -1475,6 +1475,7 @@
           <div class="mb-4">
             <label class="block text-xs font-bold uppercase tracking-wider opacity-70 mb-2">Groq AI Model Selection</label>
             <select id="cfgAiModelSelect" class="cms-input w-full" onchange="document.getElementById('cfgAiModel').value=this.value" style="background:#0f172a; color:#fff; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.15); margin-bottom:8px;">
+              <option value="openai/gpt-oss-120b">openai/gpt-oss-120b (Requested Open Source 120B Model)</option>
               <option value="llama-3.3-70b-versatile">llama-3.3-70b-versatile (Recommended • Ultra Fast 70B Model)</option>
               <option value="llama-3.1-70b-versatile">llama-3.1-70b-versatile (Stable 70B Model)</option>
               <option value="llama-3.1-8b-instant">llama-3.1-8b-instant (Lightning Fast 8B Model)</option>
@@ -3723,7 +3724,7 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
         enabled: true,
         streaming: true,
         apiKey: "",
-        model: "llama-3.3-70b-versatile",
+        model: "openai/gpt-oss-120b",
         temperature: 0.6,
         max_tokens: 1024
       };
@@ -3732,7 +3733,7 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       document.getElementById('cfgAiStreaming').checked = aiSettings.streaming !== false;
       if (document.getElementById('cfgAiApiKey')) document.getElementById('cfgAiApiKey').value = aiSettings.apiKey || '';
       
-      const modelVal = aiSettings.model || 'llama-3.3-70b-versatile';
+      const modelVal = aiSettings.model || 'openai/gpt-oss-120b';
       document.getElementById('cfgAiModel').value = modelVal;
       if (document.getElementById('cfgAiModelSelect')) {
         document.getElementById('cfgAiModelSelect').value = modelVal;

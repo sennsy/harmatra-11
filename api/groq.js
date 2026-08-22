@@ -30,8 +30,9 @@ export default async function handler(req) {
       status: 'online',
       provider: 'Groq Official API',
       configured: hasKey,
-      default_model: 'llama-3.3-70b-versatile',
+      default_model: 'openai/gpt-oss-120b',
       available_models: [
+        'openai/gpt-oss-120b',
         'llama-3.3-70b-versatile',
         'llama-3.1-8b-instant',
         'mixtral-8x7b-32768',
@@ -54,7 +55,7 @@ export default async function handler(req) {
       }), { status: 401, headers });
     }
 
-    const model = body.model || 'llama-3.3-70b-versatile';
+    const model = body.model || 'openai/gpt-oss-120b';
 
     const messages = body.messages || [];
     const temperature = typeof body.temperature === 'number' ? body.temperature : 0.6;
