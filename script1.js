@@ -999,7 +999,7 @@
 
               <p class="font-display font-medium text-lg mb-4">"${escapeHTML(text)}"</p>
 
-              <div class="text-xs uppercase tracking-widest opacity-60">— ${escapeHTML(q.author)}</div>
+              <div class="text-xs uppercase tracking-widest opacity-60">- ${escapeHTML(q.author)}${q.date ? ` • ${escapeHTML(q.date)}` : ''}</div>
 
             </div>
 
