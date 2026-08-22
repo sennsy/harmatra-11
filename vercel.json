@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/backroom",
+      "destination": "/backroom.html"
+    },
+    {
+      "source": "/.netlify/functions/groq",
+      "destination": "/api/groq"
+    }
+  ]
+}
