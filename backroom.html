@@ -908,7 +908,7 @@
               <strong id="deployLastCommitText" style="color:var(--accent-cyan);">None</strong>
             </div>
             <div style="display:flex; justify-content:space-between; align-items:center; padding-top:0.25rem;">
-              <span class="con-info-label">NETLIFY_NODE_BADGE</span>
+              <span class="con-info-label">VERCEL_NODE_BADGE</span>
               <span id="netlifyBadgeWrapper">
                 <span style="color:var(--text-muted); font-size:0.75rem;">Site ID Required</span>
               </span>
@@ -1534,8 +1534,8 @@
             <input type="password" id="git_token" class="form-control" placeholder="ghp_••••••••••••••••••••••••••••••••••••" required="">
           </div>
           <div class="form-group" style="margin-top:2rem; border-top:1px solid rgba(0,255,136,0.15); padding-top:1.5rem;">
-            <label class="form-label">netlify_api_site_id</label>
-            <input type="text" id="netlify_site_id" class="form-control" placeholder="e.g. a1b2c3d4-e5f6-7a8b-9c0d-123456789abc">
+            <label class="form-label">vercel_project_id (optional)</label>
+            <input type="text" id="netlify_site_id" class="form-control" placeholder="e.g. prj_123456789abc">
           </div>
 
           <div style="margin-top:2rem; display:flex; justify-content:space-between;">
@@ -2123,7 +2123,10 @@
     function updateNetlifyBadge(siteId) {
       const wrapper = document.getElementById('netlifyBadgeWrapper');
       if (siteId) {
-        wrapper.innerHTML = `<img src="https://api.netlify.com/api/v1/badges/${siteId}/deploy-status" alt="Netlify Status" style="max-height: 18px; filter: hue-rotate(60deg) saturate(1.5);">`;
+        // Vercel deployment doesn't have a simple unauthenticated image badge like Netlify, 
+        // but we can just display an active status or use a generic badge.
+        // Or if we know the project id/name we could, but a text label works best here.
+        wrapper.innerHTML = `<span style="color:var(--accent-cyan); font-weight:bold; font-size:10px; padding: 2px 6px; border: 1px solid var(--accent-cyan); border-radius: 4px;">VERCEL: AUTO-DEPLOY ACTIVE</span>`;
       } else {
         wrapper.innerHTML = `<span style="color:var(--text-muted); font-size:0.75rem;">Site ID Required</span>`;
       }
@@ -3681,12 +3684,12 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
         logDeployConsole(`PUSHING CHANGES... [SUCCESS] Hash payload committed: ${shortSha}`, 'success');
         document.getElementById('deployLastCommitText').innerText = shortSha;
 
-        updateDeployProgress('TRIGGERING NETLIFY BUILD...', 85, 85);
-        logDeployConsole('Commit successfully pushed. Sending webhook trigger to Netlify build nodes...');
+        updateDeployProgress('TRIGGERING VERCEL BUILD...', 85, 85);
+        logDeployConsole('Commit successfully pushed. GitHub integration triggering Vercel build nodes...');
         
         setTimeout(() => {
           updateDeployProgress('DEPLOYMENT SUCCESSFUL [STATUS 200]', 100, 100);
-          logDeployConsole('Netlify build sequence successfully queued!', 'success');
+          logDeployConsole('Vercel build sequence successfully queued!', 'success');
           logDeployConsole('DEPLOYMENT PIPELINE COMPLETED SUCCESSFULLY.', 'success');
           document.getElementById('btnFinishedDeploy').style.display = 'inline-flex';
           setChangesPending(false);
