@@ -2344,8 +2344,27 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       });
       document.querySelectorAll('.cms-view').forEach(el => {
         el.classList.remove('active');
+        el.style.display = 'none'; // Ensure they are hidden
       });
-      document.getElementById(`tab-${tabId}`).classList.add('active');
+      
+      // Define tab groups
+      const tabGroups = {
+        'dashboard': ['tab-dashboard'],
+        'members': ['tab-members', 'tab-previous_members'],
+        'media': ['tab-timeline', 'tab-gallery', 'tab-quotes', 'tab-typing', 'tab-mediahub'],
+        'ai': ['tab-ai'],
+        'settings': ['tab-settings', 'tab-spotlight', 'tab-website_metadata', 'tab-website_history', 'tab-connection']
+      };
+
+      const tabsToShow = tabGroups[tabId] || [`tab-${tabId}`];
+      
+      tabsToShow.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.classList.add('active');
+          el.style.display = 'block'; // Make it visible sequentially
+        }
+      });
       
       const titles = {
         dashboard: "CORE_DATA.SYS",
