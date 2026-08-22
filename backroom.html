@@ -1077,29 +1077,34 @@
       </div>
     </section>
 
-    <!-- SHORT MODAL -->
-    <div id="shortModal" class="modal-backdrop">
-      <div class="modal-box">
-        <h3 id="shortModalTitle" class="font-display font-bold text-xl mb-4">Add Short</h3>
+  <!-- SHORT MODAL -->
+  <div id="shortModal" class="cms-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="shortModalTitle" class="font-display text-base font-bold">ADD RECORD: SHORTS.DAT</h4>
+        <button onclick="closeShortModal()" style="background:transparent; border:none; color:#ffffff; font-size:1.5rem; cursor:pointer;">×</button>
+      </div>
+      <div class="modal-body">
         <input type="hidden" id="shortId">
-        <div class="mb-4">
-          <label class="block text-xs font-bold opacity-60 mb-2">Video URL (Google Drive Preview)</label>
-          <input type="text" id="shortUrl" class="cms-input w-full">
+        <div class="form-group">
+          <label class="form-label">Video URL (Google Drive Preview)</label>
+          <input type="text" id="shortUrl" class="form-control">
         </div>
-        <div class="mb-4">
-          <label class="block text-xs font-bold opacity-60 mb-2">Title</label>
-          <input type="text" id="shortTitle" class="cms-input w-full">
+        <div class="form-group">
+          <label class="form-label">Title</label>
+          <input type="text" id="shortTitle" class="form-control">
         </div>
-        <div class="mb-6">
-          <label class="block text-xs font-bold opacity-60 mb-2">Description</label>
-          <textarea id="shortDesc" class="cms-input w-full h-20 resize-none"></textarea>
-        </div>
-        <div class="flex justify-end gap-3">
-          <button onclick="closeShortModal()" class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-sm font-bold">CANCEL</button>
-          <button onclick="saveShortItem()" class="px-4 py-2 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors border border-blue-500/50 text-sm font-bold">SAVE</button>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea id="shortDesc" class="form-control" rows="3"></textarea>
         </div>
       </div>
+      <div class="modal-footer">
+        <button type="button" onclick="closeShortModal()" class="btn btn-sm">ABORT()</button>
+        <button type="button" onclick="saveShortItem()" class="btn btn-primary btn-sm">WRITE_RECORD()</button>
+      </div>
     </div>
+  </div>
 
     <!-- TAB: SPOTLIGHT -->
     <section id="tab-spotlight" class="cms-view">
