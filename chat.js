@@ -1275,9 +1275,10 @@ ${hybridContext}`;
           try {
             const errData = await response.json();
             const errMsg = errData.error || errData.message_id || errData.message || response.statusText;
-            console.error(`Endpoint ${ep.url} failed with ${response.status}:`, errMsg);
+            const errDetails = errData.details ? (typeof errData.details === 'string' ? errData.details : JSON.stringify(errData.details)) : '';
+            console.error(`Endpoint ${ep.url} failed with ${response.status}:`, errMsg, errDetails);
             // We return the error so the user knows what's wrong (e.g. invalid key or model)
-            const failText = `[SYSTEM ERROR] API Request Failed: ${errMsg}. Silakan cek pengaturan API Key atau Model di Backroom.`;
+            const failText = `[SYSTEM ERROR] API Request Failed: ${errMsg}. Detail: ${errDetails}. Silakan cek pengaturan API Key atau Model di Backroom.`;
             if (onChunk) onChunk(failText);
             return failText;
           } catch(e) {
