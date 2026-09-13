@@ -54,7 +54,10 @@ export default async function handler(req) {
       }), { status: 401, headers });
     }
 
-    const model = body.model || 'llama-3.3-70b-versatile';
+    let model = body.model || 'llama-3.3-70b-versatile';
+    if (model === 'openai/gpt-oss-120b') {
+      model = 'llama-3.3-70b-versatile';
+    }
 
     const messages = body.messages || [];
     const temperature = typeof body.temperature === 'number' ? body.temperature : 0.6;
