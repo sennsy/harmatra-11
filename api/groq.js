@@ -30,9 +30,9 @@ export default async function handler(req) {
       status: 'online',
       provider: 'Groq Official API',
       configured: hasKey,
-      default_model: 'llama-3.3-70b-versatile',
+      default_model: 'llama3-70b-8192',
       available_models: [
-        'llama-3.3-70b-versatile',
+        'llama3-70b-8192',
         'llama-3.1-8b-instant',
         'mixtral-8x7b-32768',
         'gemma2-9b-it'
@@ -54,9 +54,9 @@ export default async function handler(req) {
       }), { status: 401, headers });
     }
 
-    let model = body.model || 'llama-3.3-70b-versatile';
+    let model = body.model || 'llama3-70b-8192';
     if (model === 'openai/gpt-oss-120b') {
-      model = 'llama-3.3-70b-versatile';
+      model = 'llama3-70b-8192';
     }
 
     const messages = body.messages || [];

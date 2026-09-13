@@ -1178,9 +1178,9 @@ ${hybridContext}`;
 
         // Groq AI Settings & Key Resolution
     const aiConfig = (db.settings && db.settings.ai) || {};
-    let model = aiConfig.model || 'llama-3.3-70b-versatile';
+    let model = aiConfig.model || 'llama3-70b-8192';
     if (model === 'openai/gpt-oss-120b') {
-      model = 'llama-3.3-70b-versatile';
+      model = 'llama3-70b-8192';
     }
     const temperature = typeof aiConfig.temperature === 'number' ? aiConfig.temperature : 0.6;
     const max_tokens = typeof aiConfig.max_tokens === 'number' ? aiConfig.max_tokens : 1024;
@@ -1212,7 +1212,7 @@ ${hybridContext}`;
         const timeoutId = setTimeout(() => controller.abort(), 10000);
 
         const requestPayload = {
-          model: model || 'llama-3.3-70b-versatile',
+          model: model || 'llama3-70b-8192',
           messages,
           temperature,
           max_tokens,

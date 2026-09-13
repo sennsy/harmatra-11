@@ -1475,14 +1475,14 @@
           <div class="mb-4">
             <label class="block text-xs font-bold uppercase tracking-wider opacity-70 mb-2">Groq AI Model Selection</label>
             <select id="cfgAiModelSelect" class="cms-input w-full" onchange="document.getElementById('cfgAiModel').value=this.value" style="background:#0f172a; color:#fff; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.15); margin-bottom:8px;">
-              <option value="llama-3.3-70b-versatile">llama-3.3-70b-versatile (Requested Open Source 120B Model)</option>
-              <option value="llama-3.3-70b-versatile">llama-3.3-70b-versatile (Recommended • Ultra Fast 70B Model)</option>
+              <option value="llama3-70b-8192">llama3-70b-8192 (Requested Open Source 120B Model)</option>
+              <option value="llama3-70b-8192">llama3-70b-8192 (Recommended • Ultra Fast 70B Model)</option>
               <option value="llama-3.1-70b-versatile">llama-3.1-70b-versatile (Stable 70B Model)</option>
               <option value="llama-3.1-8b-instant">llama-3.1-8b-instant (Lightning Fast 8B Model)</option>
               <option value="mixtral-8x7b-32768">mixtral-8x7b-32768 (High Context MoE Architecture)</option>
               <option value="gemma2-9b-it">gemma2-9b-it (Google Gemma 2 9B Model)</option>
             </select>
-            <input type="text" id="cfgAiModel" class="cms-input w-full" placeholder="llama-3.3-70b-versatile" style="background:#090d16; color:#a7f3d0;">
+            <input type="text" id="cfgAiModel" class="cms-input w-full" placeholder="llama3-70b-8192" style="background:#090d16; color:#a7f3d0;">
             <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">You can select from the preset list or specify a custom Groq model ID.</div>
           </div>
 
@@ -3724,7 +3724,7 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
         enabled: true,
         streaming: true,
         apiKey: "",
-        model: "llama-3.3-70b-versatile",
+        model: "llama3-70b-8192",
         temperature: 0.6,
         max_tokens: 1024
       };
@@ -3733,7 +3733,7 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
       document.getElementById('cfgAiStreaming').checked = aiSettings.streaming !== false;
       if (document.getElementById('cfgAiApiKey')) document.getElementById('cfgAiApiKey').value = aiSettings.apiKey || '';
       
-      const modelVal = aiSettings.model || 'llama-3.3-70b-versatile';
+      const modelVal = aiSettings.model || 'llama3-70b-8192';
       document.getElementById('cfgAiModel').value = modelVal;
       if (document.getElementById('cfgAiModelSelect')) {
         document.getElementById('cfgAiModelSelect').value = modelVal;
@@ -3753,7 +3753,7 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
         enabled: document.getElementById('cfgAiEnabled').checked,
         streaming: document.getElementById('cfgAiStreaming').checked,
         apiKey: document.getElementById('cfgAiApiKey') ? document.getElementById('cfgAiApiKey').value.trim() : '',
-        model: document.getElementById('cfgAiModel').value.trim() || 'llama-3.3-70b-versatile',
+        model: document.getElementById('cfgAiModel').value.trim() || 'llama3-70b-8192',
         temperature: parseFloat(document.getElementById('cfgAiTemperature').value),
         max_tokens: parseInt(document.getElementById('cfgAiMaxTokens').value) || 1024
       };
@@ -3800,7 +3800,7 @@ CPU_LOAD: 8.4% // MEM_TOTAL: 8192 MB // SECURE_PORTAL: askaryy`;
           const data = await res.json();
           statusText.style.color = '#10b981';
           statusText.innerHTML = `<i class="fa-solid fa-circle-check"></i> Connected Successfully (${latency}ms)`;
-          detailsText.innerHTML = `Provider: ${data.provider || 'Groq API'}<br>Configured GROQ_API_KEY: ${data.configured ? 'YES (Environment Variable Active)' : 'NO (Missing GROQ_API_KEY)'}<br>Default Model: ${data.default_model || 'llama-3.3-70b-versatile'}`;
+          detailsText.innerHTML = `Provider: ${data.provider || 'Groq API'}<br>Configured GROQ_API_KEY: ${data.configured ? 'YES (Environment Variable Active)' : 'NO (Missing GROQ_API_KEY)'}<br>Default Model: ${data.default_model || 'llama3-70b-8192'}`;
         } else {
           statusText.style.color = '#f59e0b';
           statusText.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Proxy Endpoint Status ${res.status} (${latency}ms)`;
