@@ -1179,7 +1179,7 @@ ${hybridContext}`;
         // Groq AI Settings & Key Resolution
     const aiConfig = (db.settings && db.settings.ai) || {};
     let model = aiConfig.model || 'llama3-70b-8192';
-    if (model === 'openai/gpt-oss-120b') {
+    if (model === 'openai/gpt-oss-120b' || model === 'llama-3.3-70b-versatile') {
       model = 'llama3-70b-8192';
     }
     const temperature = typeof aiConfig.temperature === 'number' ? aiConfig.temperature : 0.6;

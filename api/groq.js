@@ -55,7 +55,7 @@ export default async function handler(req) {
     }
 
     let model = body.model || 'llama3-70b-8192';
-    if (model === 'openai/gpt-oss-120b') {
+    if (model === 'openai/gpt-oss-120b' || model === 'llama-3.3-70b-versatile') {
       model = 'llama3-70b-8192';
     }
 
